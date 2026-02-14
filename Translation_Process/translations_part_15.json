@@ -1,0 +1,802 @@
+[
+    {
+        "original": "uniform   mat4 proj;\t\t//射影変換行列",
+        "translated": "uniform   mat4 proj;\t\t// Projection transformation matrix"
+    },
+    {
+        "original": "uniform   mat4 view;\t\t//ビュー変換行列",
+        "translated": "uniform   mat4 view;\t\t// View transformation matrix"
+    },
+    {
+        "original": "uniform   vec3 light_dir;\t//光源の方向(正規化済み)",
+        "translated": "uniform   vec3 light_dir;\t// Light source direction (normalized)"
+    },
+    {
+        "original": "uniform float C_a;\t\t\t//固定パラメータa",
+        "translated": "uniform float C_a;\t\t\t// Fixed parameter a"
+    },
+    {
+        "original": "uniform float C_b;\t\t\t//固定パラメータb",
+        "translated": "uniform float C_b;\t\t\t// Fixed parameter b"
+    },
+    {
+        "original": "uniform float jl_left;\t\t//複素平面の",
+        "translated": "uniform float jl_left;\t\t// Of complex plane"
+    },
+    {
+        "original": "uniform float jl_top;\t\t//左上座標",
+        "translated": "uniform float jl_top;\t\t// Top-left coordinates"
+    },
+    {
+        "original": "uniform float md_left;\t\t//複素平面の",
+        "translated": "uniform float md_left;\t\t// Of complex plane"
+    },
+    {
+        "original": "uniform float md_top;\t\t//左上座標",
+        "translated": "uniform float md_top;\t\t// Top-left coordinates"
+    },
+    {
+        "original": "uniform float offset_i;\t\t//オフセット量",
+        "translated": "uniform float offset_i;\t\t// Offset amount"
+    },
+    {
+        "original": "uniform float offset_r;\t\t//注目画素への",
+        "translated": "uniform float offset_r;\t\t// To target pixel"
+    },
+    {
+        "original": "uniform float sc_h_ratio;\t//1.0 / sc_h が入ってる",
+        "translated": "uniform float sc_h_ratio;\t// Contains 1.0 / sc_h"
+    },
+    {
+        "original": "uniform float sc_w_ratio;\t//1.0 / sc_w が入ってる",
+        "translated": "uniform float sc_w_ratio;\t// Contains 1.0 / sc_w"
+    },
+    {
+        "original": "uniform float step_i;\t\t//現在の拡大率での縦方向移動量",
+        "translated": "uniform float step_i;\t\t// Vertical movement amount at current scale"
+    },
+    {
+        "original": "uniform float step_r;\t\t//現在の拡大率での横方向移動量",
+        "translated": "uniform float step_r;\t\t// Horizontal movement amount at current scale"
+    },
+    {
+        "original": "uniform float x_div_num;\t//横方向の分割数",
+        "translated": "uniform float x_div_num;\t// Horizontal division count"
+    },
+    {
+        "original": "uniform float zoom_ratio;\t//1.0 / zoom が入ってる",
+        "translated": "uniform float zoom_ratio;\t// Contains 1.0 / zoom"
+    },
+    {
+        "original": "uniform mat4 proj;\t\t\t//射影変換行列",
+        "translated": "uniform mat4 proj;\t\t\t// Projection transformation matrix"
+    },
+    {
+        "original": "uniform mat4 view;\t\t\t//ビュー変換行列",
+        "translated": "uniform mat4 view;\t\t\t// View transformation matrix"
+    },
+    {
+        "original": "uniform sampler2D tex1;\t\t//元画面テクスチャ",
+        "translated": "uniform sampler2D tex1;\t\t// Original screen texture"
+    },
+    {
+        "original": "uniform sampler2D tex2;\t\t//ぼかし1/2画面テクスチャ",
+        "translated": "uniform sampler2D tex2;\t\t// Blur 1/2 screen texture"
+    },
+    {
+        "original": "uniform sampler2D tex3;\t\t//ぼかし1/4画面テクスチャ",
+        "translated": "uniform sampler2D tex3;\t\t// Blur 1/4 screen texture"
+    },
+    {
+        "original": "uniform sampler2D tex4;\t\t//ぼかし1/8画面テクスチャ",
+        "translated": "uniform sampler2D tex4;\t\t// Blur 1/8 screen texture"
+    },
+    {
+        "original": "uniform sampler2D tex;\t\t//参照するテクスチャ",
+        "translated": "uniform sampler2D tex;\t\t// Texture to reference"
+    },
+    {
+        "original": "uniform sampler2DArray atex;\t//テクスチャ配列",
+        "translated": "uniform sampler2DArray atex;\t// Texture array"
+    },
+    {
+        "original": "uniform vec3 col1;\t\t\t//色１",
+        "translated": "uniform vec3 col1;\t\t\t// Color 1"
+    },
+    {
+        "original": "uniform vec3 col2;\t\t\t//色２",
+        "translated": "uniform vec3 col2;\t\t\t// Color 2"
+    },
+    {
+        "original": "uniform vec3 col3;\t\t\t//色３",
+        "translated": "uniform vec3 col3;\t\t\t// Color 3"
+    },
+    {
+        "original": "uniform vec3 col4;\t\t\t//色４",
+        "translated": "uniform vec3 col4;\t\t\t// Color 4"
+    },
+    {
+        "original": "uniform vec3 col5;\t\t\t//色５",
+        "translated": "uniform vec3 col5;\t\t\t// Color 5"
+    },
+    {
+        "original": "v1.5はぼいちの古いスマホでもなめらかに表示されるようにリファクタリング",
+        "translated": "v1.5 was refactored to display smoothly even on Voich's old smartphone"
+    },
+    {
+        "original": "v2.5ではポイントのキラキラを同期させずにバラバラにしてみたらどうなる",
+        "translated": "In v2.5, seeing what happens if point sparkles are desynchronized and scattered"
+    },
+    {
+        "original": "v2では、キラキラロープで取り入れた方法を使って、回転を増やしたり",
+        "translated": "In v2, using the method adopted in Sparkling Rope to increase rotations"
+    },
+    {
+        "original": "v2では、ブラー用のバッファを数フレーム分用意して、半透明で毎回",
+        "translated": "In v2, preparing buffers for blur for several frames and rendering semi-transparently each time"
+    },
+    {
+        "original": "v2ではランダムですがまともな形の四角錐が２つ反対で重なった",
+        "translated": "In v2, it's random but two decent-shaped pyramids overlap in opposite directions"
+    },
+    {
+        "original": "v3では、螺旋ベースの構成から、ノイズでのランダムプロットに",
+        "translated": "In v3, changing from spiral-based composition to random plotting with noise"
+    },
+    {
+        "original": "var aa_chip = document.getElementById(\"aa-chip\");\t\t//スプライト用canvas",
+        "translated": "var aa_chip = document.getElementById(\"aa-chip\");\t\t// Canvas for sprite"
+    },
+    {
+        "original": "var aa_star = document.getElementById(\"aa-star\");\t\t//星空用canvas",
+        "translated": "var aa_star = document.getElementById(\"aa-star\");\t\t// Canvas for starry sky"
+    },
+    {
+        "original": "var ar    = sc_h / sc_w;\t\t//スクリーン幅を高さと1:1にするための係数",
+        "translated": "var ar    = sc_h / sc_w;\t\t// Coefficient to make screen width 1:1 with height"
+    },
+    {
+        "original": "var cy     = 150;\t//ちょっと上から眺める",
+        "translated": "var cy     = 150;\t// View from slightly above"
+    },
+    {
+        "original": "var data = g_offsc.data;\t//いったんローカル変数に参照を移す",
+        "translated": "var data = g_offsc.data;\t// Move reference to local variable temporarily"
+    },
+    {
+        "original": "var e,n,nn; //eは蓄積誤差値",
+        "translated": "var e,n,nn; // e is accumulated error value"
+    },
+    {
+        "original": "var f = (!(i % 15) ? 1 : 0);\t//左右の端のラインを上に上げるためのフラグ",
+        "translated": "var f = (!(i % 15) ? 1 : 0);\t// Flag to raise the left and right edge lines"
+    },
+    {
+        "original": "var g_color;\t\t\t\t\t//自力直線描画の色オブジェクト",
+        "translated": "var g_color;\t\t\t\t\t// Color object for manual line drawing"
+    },
+    {
+        "original": "var g_funcDrawBegin;\t\t\t//描画前処理関数オブジェクト",
+        "translated": "var g_funcDrawBegin;\t\t\t// Pre-drawing processing function object"
+    },
+    {
+        "original": "var g_funcDrawEnd;\t\t\t\t//描画後処理関数オブジェクト",
+        "translated": "var g_funcDrawEnd;\t\t\t\t// Post-drawing processing function object"
+    },
+    {
+        "original": "var g_funcDrawLine;\t\t\t\t//Line描画処理関数オブジェクト",
+        "translated": "var g_funcDrawLine;\t\t\t\t// Line drawing processing function object"
+    },
+    {
+        "original": "var g_funcDrawPoint;\t\t\t//点描画処理関数オブジェクト",
+        "translated": "var g_funcDrawPoint;\t\t\t// Point drawing processing function object"
+    },
+    {
+        "original": "var g_line_algo;\t\t\t\t//選択中のLine描画アルゴリズムインデックス",
+        "translated": "var g_line_algo;\t\t\t\t// Index of currently selected Line drawing algorithm"
+    },
+    {
+        "original": "var g_offsc;\t\t\t\t\t//自力直線描画用オフスクリーン",
+        "translated": "var g_offsc;\t\t\t\t\t// Off-screen for manual line drawing"
+    },
+    {
+        "original": "var screen  = document.getElementById(\"game-screen\");\t//描画先canvas",
+        "translated": "var screen  = document.getElementById(\"game-screen\");\t// Drawing destination canvas"
+    },
+    {
+        "original": "var screen = document.getElementById(\"game-screen\");\t//描画先canvas",
+        "translated": "var screen = document.getElementById(\"game-screen\");\t// Drawing destination canvas"
+    },
+    {
+        "original": "var va     = rad(110);\t\t\t//視野角",
+        "translated": "var va     = rad(110);\t\t\t// Field of View"
+    },
+    {
+        "original": "vecX.CrossProduct(v3up,vecZ);\t//外積",
+        "translated": "vecX.CrossProduct(v3up,vecZ);\t// Cross product"
+    },
+    {
+        "original": "vecX.crossProduct(v3up,vecZ);\t//外積",
+        "translated": "vecX.crossProduct(v3up,vecZ);\t// Cross product"
+    },
+    {
+        "original": "vecX.normalize();\t\t\t\t//単位ベクトル化",
+        "translated": "vecX.normalize();\t\t\t\t// Normalization"
+    },
+    {
+        "original": "vecY.CrossProduct(vecZ,vecX);\t//外積",
+        "translated": "vecY.CrossProduct(vecZ,vecX);\t// Cross product"
+    },
+    {
+        "original": "vecY.crossProduct(vecZ,vecX);\t//外積",
+        "translated": "vecY.crossProduct(vecZ,vecX);\t// Cross product"
+    },
+    {
+        "original": "vecY.normalize();\t\t\t\t//単位ベクトル化",
+        "translated": "vecY.normalize();\t\t\t\t// Normalization"
+    },
+    {
+        "original": "vecZ.copy(v3from);\t\t//vecZ = v3from - v3to の",
+        "translated": "vecZ.copy(v3from);\t\t// of vecZ = v3from - v3to"
+    },
+    {
+        "original": "vecZ.copy(v3to);\t\t//vecZ = v3to - v3from の",
+        "translated": "vecZ.copy(v3to);\t\t// of vecZ = v3to - v3from"
+    },
+    {
+        "original": "vecZ.normalize();\t\t//単位ベクトル化",
+        "translated": "vecZ.normalize();\t\t// Normalization"
+    },
+    {
+        "original": "vecZ.sub(v3from);\t\t//ベクトル計算",
+        "translated": "vecZ.sub(v3from);\t\t// Vector calculation"
+    },
+    {
+        "original": "vecZ.sub(v3to)\t;\t\t//ベクトル計算(右手座標系用)",
+        "translated": "vecZ.sub(v3to)\t;\t\t// Vector calculation (for right-handed coordinate system)"
+    },
+    {
+        "original": "ver.2では、新しく三角形や半透明を加えて、また、全部の枠がランダムパレットの",
+        "translated": "In ver.2, added triangles and semi-transparency, and also all frames are from random palette"
+    },
+    {
+        "original": "ver.2は高速化とパラメータの微調整を行ったバージョンです。",
+        "translated": "ver.2 is a version with speed improvements and fine-tuned parameters."
+    },
+    {
+        "original": "ver.3は行列演算クラスを2次元座標用のものに置き換えて更なる高速化を図ったものです。",
+        "translated": "ver.3 attempts further speed improvements by replacing the matrix operation class with one for 2D coordinates."
+    },
+    {
+        "original": "ver.4は半透明ライントーラストンネルで使った簡易bloomを適用しました。魔法陣みたい",
+        "translated": "ver.4 applied the simple bloom used in the translucent line torus tunnel. Like a magic circle"
+    },
+    {
+        "original": "ver.5はv4ですごく綺麗になったので、せっかくだからと前から気になってた補間移動",
+        "translated": "ver.5 became very beautiful in v4, so I implemented interpolated movement which I had been interested in for a while"
+    },
+    {
+        "original": "ver.800x80では、800x80のサイズで出力するチャレンジをします。",
+        "translated": "In ver.800x80, I am challenging to output in 800x80 size."
+    },
+    {
+        "original": "ver.800x80では、v2の状態で、800x80のサイズで出力するチャレンジをします。",
+        "translated": "In ver.800x80, I am challenging to output in 800x80 size in the state of v2."
+    },
+    {
+        "original": "vertex_list[i3].vv,\t//←ここ",
+        "translated": "vertex_list[i3].vv,\t// <- Here"
+    },
+    {
+        "original": "z, h, z, z,-h, z, h,h, r, h,h, r, z,-h, z, h,-h, r, \t//左前面",
+        "translated": "z, h, z, z,-h, z, h,h, r, h,h, r, z,-h, z, h,-h, r, \t//Front Left"
+    },
+    {
+        "original": "{ r: 0.5, g: 0.5, b: 0.5 }\t//床",
+        "translated": "{ r: 0.5, g: 0.5, b: 0.5 }\t// Floor"
+    },
+    {
+        "original": "{ r: 0.7, g: 0.7, b: 0.7 },\t//迷路の壁",
+        "translated": "{ r: 0.7, g: 0.7, b: 0.7 },\t// Maze Wall"
+    },
+    {
+        "original": "{ u:0.0  ,v:0.5   },{ u:0.0  ,v:0.0  },\t//正面(下)",
+        "translated": "{ u:0.0  ,v:0.5   },{ u:0.0  ,v:0.0  },\t// Front (Bottom)"
+    },
+    {
+        "original": "{ u:0.0  ,v:1.0   },{ u:0.0  ,v:0.5  },\t//正面(上)",
+        "translated": "{ u:0.0  ,v:1.0   },{ u:0.0  ,v:0.5  },\t// Front (Top)"
+    },
+    {
+        "original": "{ u:0.143,v:1.0   },{ u:0.143,v:0.0  },\t//背面",
+        "translated": "{ u:0.143,v:1.0   },{ u:0.143,v:0.0  },\t// Back Face"
+    },
+    {
+        "original": "{ u:0.286,v:0.5   },{ u:0.286,v:0.0  },\t//左面(前)",
+        "translated": "{ u:0.286,v:0.5   },{ u:0.286,v:0.0  },\t// Left Side (Front)"
+    },
+    {
+        "original": "{ u:0.429,v:1.0   },{ u:0.429,v:0.0  },\t//右面(前)",
+        "translated": "{ u:0.429,v:1.0   },{ u:0.429,v:0.0  },\t// Right Side (Front)"
+    },
+    {
+        "original": "{ u:0.429,v:1.0   },{ u:0.429,v:0.0  },\t//左面(後)",
+        "translated": "{ u:0.429,v:1.0   },{ u:0.429,v:0.0  },\t// Left Side (Rear)"
+    },
+    {
+        "original": "{ u:0.714,v:1.0   },{ u:0.714,v:0.0  },\t//右面(後)",
+        "translated": "{ u:0.714,v:1.0   },{ u:0.714,v:0.0  },\t// Right Side (Rear)"
+    },
+    {
+        "original": "{ u:0.714,v:1.0   },{ u:0.714,v:0.0  },\t//天面",
+        "translated": "{ u:0.714,v:1.0   },{ u:0.714,v:0.0  },\t// Top Face"
+    },
+    {
+        "original": "{ u:0.857,v:1.0   },{ u:0.857,v:0.5  },\t//タイヤの表面",
+        "translated": "{ u:0.857,v:1.0   },{ u:0.857,v:0.5  },\t// Tire Surface"
+    },
+    {
+        "original": "{ u:0.857,v:1.0   },{ u:0.857,v:0.5  },\t//底面",
+        "translated": "{ u:0.857,v:1.0   },{ u:0.857,v:0.5  },\t// Bottom Face"
+    },
+    {
+        "original": "※ここには漸化式載っていない…",
+        "translated": "* recurrence formula is not listed here..."
+    },
+    {
+        "original": "→ `LICENSE` ファイルを参照してください。",
+        "translated": "-> Please refer to `LICENSE` file."
+    },
+    {
+        "original": "│   └── prac2/    ← 作品2（今後追加予定）",
+        "translated": "│   └── prac2/    <- Work 2 (Planned to be added in future)"
+    },
+    {
+        "original": "│   ├── prac1/    ← 作品1（例：円弧の華 スクロール版）",
+        "translated": "│   ├── prac1/    <- Work 1 (e.g., Flower of Arcs Scroll Version)"
+    },
+    {
+        "original": "│   ├── vlib/     ← 共通ライブラリ",
+        "translated": "│   ├── vlib/     <- Common Library"
+    },
+    {
+        "original": "「Processingでスリットアニメーションを作ってみたよ」を参考に、ぼいちも",
+        "translated": "Referencing \"I tried making slit animation in Processing\", Voich also"
+    },
+    {
+        "original": "「Sprott のコードとストレンジアトラクタ探索機」を参考に、J.C.Sprott氏の",
+        "translated": "Referencing \"Sprott's Code and Strange Attractor Explorer\", J.C. Sprott's"
+    },
+    {
+        "original": "「p5.jsで作品を額縁にかざる方法」を参考にさせて頂きました。",
+        "translated": "I referenced \"How to display works in a frame with p5.js\"."
+    },
+    {
+        "original": "「【p5.js】L-systemで木を描く」を参考にさせて頂きました。",
+        "translated": "I referenced \"[p5.js] Drawing trees with L-system\"."
+    },
+    {
+        "original": "「いまどきのアルゴリズムを使いこなす PHPプログラミング開発テクニック」",
+        "translated": "\"PHP Programming Development Techniques for Mastering Modern Algorithms\""
+    },
+    {
+        "original": "「バラ曲線」に挑戦してみました。",
+        "translated": "I tried the \"Rose Curve\"."
+    },
+    {
+        "original": "「左右で違う絵柄が見える巻きダンボール」と同じものになると思います。",
+        "translated": "I think it will be the same thing as \"Rolled cardboard that shows different pictures on left and right\"."
+    },
+    {
+        "original": "「文字を使ったグラフィックを作成してください。",
+        "translated": "\"Please create a graphic using text."
+    },
+    {
+        "original": "あと、チルトシフトの効果でミニチュアっぽく見えるか？の実験です。",
+        "translated": "Also, an experiment to see if it looks like a miniature with tilt-shift effect."
+    },
+    {
+        "original": "あと、パラメータ微調整してバリエーションを増やしました。光すぎもありますが、",
+        "translated": "Also, I fine-tuned parameters to increase variations. Some are too bright, but"
+    },
+    {
+        "original": "ありがとうございます。",
+        "translated": "Thank you."
+    },
+    {
+        "original": "ありがとうございます。(*´ω｀*)",
+        "translated": "Thank you. (*´ω｀*)"
+    },
+    {
+        "original": "ありがとうございます！",
+        "translated": "Thank you!"
+    },
+    {
+        "original": "ありがとうございます！ 額の内側に影を落とすのもポイントですね。",
+        "translated": "Thank you! Casting a shadow on the inside of the frame is also a key point."
+    },
+    {
+        "original": "あるようです。",
+        "translated": "It seems there is."
+    },
+    {
+        "original": "いましたが、ジュリア集合では、aとbが固定で、X0とY0を変化させる",
+        "translated": "but in Julia set, a and b are fixed, and X0 and Y0 are changed"
+    },
+    {
+        "original": "おかずさんに圧倒的感謝を！",
+        "translated": "Overwhelming thanks to Okazu-san!"
+    },
+    {
+        "original": "おぼろげな感じがなんか良くないですか？(*´ω｀*)",
+        "translated": "Isn't the hazy feeling kinda nice? (*´ω｀*)"
+    },
+    {
+        "original": "お題のシートはこちらです。",
+        "translated": "The theme sheet is here."
+    },
+    {
+        "original": "かを試しにやってみました。",
+        "translated": "I tried to see if."
+    },
+    {
+        "original": "が強く入って良い感じだと思います。軽いので速いし。",
+        "translated": "is strongly included so I think it's a good feeling. It's light so it's fast."
+    },
+    {
+        "original": "きっかけを作って下さったeasings.netさんとクジラ飛行机さん、そして",
+        "translated": "To easings.net and Kujirahikouzukue-san who created the opportunity, and"
+    },
+    {
+        "original": "ここで実装するJavaScriptのクラスはぼいちが個人的に利用する",
+        "translated": "The JavaScript classes implemented here are for Voich's personal use"
+    },
+    {
+        "original": "ここで実装するJavaScriptのクラスや関数はぼいちが個人的に",
+        "translated": "The JavaScript classes and functions implemented here are for Voich's personal use"
+    },
+    {
+        "original": "ここで言う発散とは無限に値が大きくなる状態のことを言うそうです。",
+        "translated": "Divergence here means a state where the value becomes infinitely large."
+    },
+    {
+        "original": "このWebGL版R2では、Bloom処理を万華鏡キラキラで使ったcanvas版の処理の",
+        "translated": "In this WebGL version R2, the Bloom processing uses the canvas version processing used in Kaleidoscope Sparkle"
+    },
+    {
+        "original": "このWebGL版では、Bloom処理もシェーダ側で行うようにしています。",
+        "translated": "In this WebGL version, Bloom processing is also done on the shader side."
+    },
+    {
+        "original": "このWebGL版では、GPUでジュリア集合の計算をしています。",
+        "translated": "In this WebGL version, Julia set calculation is done on GPU."
+    },
+    {
+        "original": "このWebGL版では、GPUでマンデルブロ集合の計算をしています。",
+        "translated": "In this WebGL version, Mandelbrot set calculation is done on GPU."
+    },
+    {
+        "original": "このZnを点(Xn,Yn)に、Cを点(a,b)に置き換えると、",
+        "translated": "Replacing this Zn with point (Xn, Yn) and C with point (a, b),"
+    },
+    {
+        "original": "このツイートで知りました。ありがとうございます。",
+        "translated": "I learned about it from this tweet. Thank you."
+    },
+    {
+        "original": "このデモでは、JavaScriptでBLACKWORKに書かれてる刺繍の模様のような",
+        "translated": "In this demo, using JavaScript to create something like embroidery patterns written in BLACKWORK"
+    },
+    {
+        "original": "このデモでは、JavaScriptでL-Systemを利用して植物っぽい図形を描いてみました。",
+        "translated": "In this demo, I tried drawing plant-like shapes using L-System in JavaScript."
+    },
+    {
+        "original": "このデモでは、JavaScriptで□型キラキラアートを描いてみました。",
+        "translated": "In this demo, I tried drawing square-shaped sparkling art in JavaScript."
+    },
+    {
+        "original": "このデモでは、JavaScriptで△型キラキラアートを描いてみました。",
+        "translated": "In this demo, I tried drawing triangle-shaped sparkling art in JavaScript."
+    },
+    {
+        "original": "このデモでは、JavaScriptで☓型キラキラアートを描いてみました。",
+        "translated": "In this demo, I tried drawing X-shaped sparkling art in JavaScript."
+    },
+    {
+        "original": "このデモでは、JavaScriptでどんどん拡大していく模様を描いてみました。",
+        "translated": "In this demo, I tried drawing a pattern that keeps expanding in JavaScript."
+    },
+    {
+        "original": "このデモでは、JavaScriptでキラキラ光るロープを描いてみました。",
+        "translated": "In this demo, I tried drawing a sparkling rope in JavaScript."
+    },
+    {
+        "original": "このデモでは、JavaScriptでストレンジアトラクターを描いてみました。",
+        "translated": "In this demo, I tried drawing a Strange Attractor in JavaScript."
+    },
+    {
+        "original": "このデモでは、JavaScriptでフローフィールド(ベクターフィールド)を練習します。",
+        "translated": "In this demo, I practice Flow Field (Vector Field) in JavaScript."
+    },
+    {
+        "original": "このデモでは、JavaScriptでポイントキラキラアートを描いてみました。",
+        "translated": "In this demo, I tried drawing point sparkling art in JavaScript."
+    },
+    {
+        "original": "このデモでは、JavaScriptでポイントキラキラアートを描きます。",
+        "translated": "In this demo, I draw point sparkling art in JavaScript."
+    },
+    {
+        "original": "このデモでは、JavaScriptでワープを描いてみました。",
+        "translated": "In this demo, I tried drawing a warp in JavaScript."
+    },
+    {
+        "original": "このデモでは、JavaScriptで円弧を使ったキラキラした華をアレンジします。",
+        "translated": "In this demo, I arrange sparkling flowers using arcs in JavaScript."
+    },
+    {
+        "original": "このデモでは、JavaScriptで半透明ラインアートでトーラストンネルを",
+        "translated": "In this demo, a torus tunnel with translucent line art in JavaScript"
+    },
+    {
+        "original": "このデモでは、JavaScriptで半透明ラインアートで波形を描いてみました。",
+        "translated": "In this demo, I tried drawing waveforms with translucent line art in JavaScript."
+    },
+    {
+        "original": "このデモでは、JavaScriptで半透明ラインアートを描いてみました。",
+        "translated": "In this demo, I tried drawing translucent line art in JavaScript."
+    },
+    {
+        "original": "このデモでは、JavaScriptで基本的な図形をたくさん並べて、シャドウを",
+        "translated": "In this demo, arranging many basic shapes in JavaScript, and applying shadow"
+    },
+    {
+        "original": "このデモでは、JavaScriptで文字のアウトライン化を練習します。",
+        "translated": "In this demo, I practice text outlining in JavaScript."
+    },
+    {
+        "original": "このデモでは、JavaScriptで画面を分割するパターンを練習します。",
+        "translated": "In this demo, I practice screen splitting patterns in JavaScript."
+    },
+    {
+        "original": "このデモでは、JavaScriptで砂シミュレーションを練習します。",
+        "translated": "In this demo, I practice sand simulation in JavaScript."
+    },
+    {
+        "original": "このデモでは、JavaScriptで謎のいきものたちをたくさん並べます。",
+        "translated": "In this demo, I line up many mysterious creatures in JavaScript."
+    },
+    {
+        "original": "このデモでは、下記のURLの練習1(円弧の華)をベースに",
+        "translated": "In this demo, based on Practice 1 (Flower of Arcs) from the URL below"
+    },
+    {
+        "original": "このデモは、JavaScriptでWebGLも使わずに、自力3D計算でオブジェクトを",
+        "translated": "This demo uses JavaScript without WebGL, calculating 3D manually to render objects"
+    },
+    {
+        "original": "このデモは、JavaScriptでWebGLを使って、3Dのジェネラティブアート",
+        "translated": "This demo uses JavaScript and WebGL to create 3D generative art"
+    },
+    {
+        "original": "このデモは、JavaScriptでWebGLを使って、3Dの不思議アートに挑戦",
+        "translated": "This demo uses JavaScript and WebGL to challenge 3D mystery art"
+    },
+    {
+        "original": "このデモは、JavaScriptで擬似3D表示をして高速表示を試みたものです。",
+        "translated": "This demo attempts high-speed display using pseudo-3D display in JavaScript."
+    },
+    {
+        "original": "このデモは、neko800(@nekohachi1)さんが公開されたプチコン作品をベースに",
+        "translated": "This demo is based on a SmileBASIC work published by neko800 (@nekohachi1)"
+    },
+    {
+        "original": "このデモは、ジュリア集合をJavaScriptのCanvasで描画します。",
+        "translated": "This demo draws Julia Sets on JavaScript Canvas."
+    },
+    {
+        "original": "このデモは、セルラーノイズを使っての図形描画の練習になります。",
+        "translated": "This demo is practice for drawing shapes using Cellular Noise."
+    },
+    {
+        "original": "このデモは、ノイズを使っての図形描画の練習になります。",
+        "translated": "This demo is practice for drawing shapes using Noise."
+    },
+    {
+        "original": "このデモは、バラ曲線をJavaScriptのCanvasで描画します。",
+        "translated": "This demo draws Rose Curves on JavaScript Canvas."
+    },
+    {
+        "original": "このデモは、パーリンノイズを使っての図形描画の練習になります。",
+        "translated": "This demo is practice for drawing shapes using Perlin Noise."
+    },
+    {
+        "original": "このデモは、マンデルブロ集合をJavaScriptのCanvasで描画します。",
+        "translated": "This demo draws Mandelbrot Sets on JavaScript Canvas."
+    },
+    {
+        "original": "このデモは、反射するポイントキラキラアートで文字をかたどって",
+        "translated": "This demo models text with reflecting point sparkle art"
+    },
+    {
+        "original": "このデモは、繭(@mayutotsu)さんがnoteで書かれた、",
+        "translated": "This demo was written by Mayu (@mayutotsu) on note,"
+    },
+    {
+        "original": "このリポジトリは、ぼいち（[@voich2014](https://twitter.com/voich2014)）が過去に",
+        "translated": "This repository is what Voich ([@voich2014](https://twitter.com/voich2014)) previously"
+    },
+    {
+        "original": "このリポジトリ内の作品は、`src/` フォルダ以下に整理されています：",
+        "translated": "Works in this repository are organized under the `src/` folder:"
+    },
+    {
+        "original": "この本を教えてくださったセンバクさん(@senbaku)にも圧倒的感謝を！",
+        "translated": "Overwhelming thanks also to Senbaku-san (@senbaku) who taught me this book!"
+    },
+    {
+        "original": "これ、ほんと脳がバグりますよね(*´ω｀*)",
+        "translated": "This really bugs your brain doesn't it (*´ω｀*)"
+    },
+    {
+        "original": "これらの作品は趣味の作品で、ゆるーく開発していく目的のものですので、",
+        "translated": "These works are hobby works, intended to be developed loosely, so"
+    },
+    {
+        "original": "これ面白いですね。ありがとうございます(*´ω｀*)",
+        "translated": "This is interesting. Thank you (*´ω｀*)"
+    },
+    {
+        "original": "されていたので、一緒に紹介させて頂きます。",
+        "translated": "so I will introduce them together."
+    },
+    {
+        "original": "されるまでの回数などで決めるようです。",
+        "translated": "It seems to be decided by the number of times until it happens."
+    },
+    {
+        "original": "したものでは無いため、ご利用は自己責任でお願いします。",
+        "translated": "Please use at your own risk as it is not strictly verified."
+    },
+    {
+        "original": "したバージョンです。PC版では見た目に変わりは無いと思います。",
+        "translated": "version. I think there is no change in appearance in the PC version."
+    },
+    {
+        "original": "しています。",
+        "translated": "Doing."
+    },
+    {
+        "original": "しています。いつもありがとうございます(*´ω｀*)",
+        "translated": "Doing. Thank you always (*´ω｀*)"
+    },
+    {
+        "original": "すばらしい作品を公開してくださったneko800さんに圧倒的感謝を！！",
+        "translated": "Overwhelming thanks to neko800-san for publishing such a wonderful work!!"
+    },
+    {
+        "original": "すばらしい作品を公開してくださったオリジナルの方々に圧倒的感謝を！！",
+        "translated": "Overwhelming thanks to the original creators for publishing such wonderful works!!"
+    },
+    {
+        "original": "するような値で、これを振動すると言うようです。",
+        "translated": "values that do that, and this is called oscillation."
+    },
+    {
+        "original": "ただ、GPUのfloatの精度の問題なのか、JavaScriptだけで計算した時",
+        "translated": "However, perhaps due to GPU float precision issues, when calculated only with JavaScript"
+    },
+    {
+        "original": "ただ、同じスクリーンに対してかけているので、2枚合成の割にはぼかし",
+        "translated": "However, since it is applied to the same screen, the blur is"
+    },
+    {
+        "original": "たりと、色々改善を試みました。",
+        "translated": "and tried various improvements."
+    },
+    {
+        "original": "ちょっと変えてみました。前より光り方がやわらなくなった気がします。",
+        "translated": "I changed it a bit. I feel like the way it shines has become softer than before."
+    },
+    {
+        "original": "つまり、マンデルブロ集合はある回数計算を繰り返しても発散しなかった",
+        "translated": "In other words, the Mandelbrot set did not diverge even after repeating calculation a certain number of times"
+    },
+    {
+        "original": "では無いため、ご利用は自己責任でお願いします。",
+        "translated": "Please use at your own risk as it is not."
+    },
+    {
+        "original": "でもオブジェクト数は360個から500個にパワーアップしています(*´ω｀*)",
+        "translated": "But the number of objects has powered up from 360 to 500 (*´ω｀*)"
+    },
+    {
+        "original": "で紹介されている数式を使って、図形を表現してみたいと思います。",
+        "translated": "I would like to express shapes using the formulas introduced in."
+    },
+    {
+        "original": "という境地にたどり着きました(*´ω｀*)",
+        "translated": "I reached that state of mind (*´ω｀*)"
+    },
+    {
+        "original": "という計算になるみたい。",
+        "translated": "It seems to be calculated like that."
+    },
+    {
+        "original": "思います。",
+        "translated": "I think."
+    },
+    {
+        "original": "なお、ぼいちが真似っ子する前に、天才の方々があっという間に真似っ子",
+        "translated": "By the way, before Voich could imitate it, geniuses imitated it in the blink of an eye"
+    },
+    {
+        "original": "なんか太いラインを使うより、細い線がわしゃわしゃしてる方がカッコいい",
+        "translated": "Rather than using thick lines, it's cooler to have thin lines messing around"
+    },
+    {
+        "original": "なんか水の中を漂ってるような、時にはドバーッと流れるような感じになったので、",
+        "translated": "It became a feeling like drifting in water, sometimes flowing with a gush, so"
+    },
+    {
+        "original": "なんだか、宝石箱みたいですね(*´ω｀*)",
+        "translated": "It's kinda like a jewelry box (*´ω｀*)"
+    },
+    {
+        "original": "にさせて頂きました。ありがとうございます(*´ω｀*)",
+        "translated": "I decided to do that. Thank you (*´ω｀*)"
+    },
+    {
+        "original": "にしました。",
+        "translated": "I made it."
+    },
+    {
+        "original": "になるようです。",
+        "translated": "It seems to become."
+    },
+    {
+        "original": "に挑戦しています。",
+        "translated": "Challenging."
+    },
+    {
+        "original": "に綺麗になって嬉しいです！",
+        "translated": "I'm happy it became beautiful!"
+    },
+    {
+        "original": "ねこはちさんに圧倒的感謝を！",
+        "translated": "Overwhelming thanks to Nekohachi-san!"
+    },
+    {
+        "original": "ので、256x128にしています。",
+        "translated": "So I set it to 256x128."
+    },
+    {
+        "original": "ので、探してみてくださいね。",
+        "translated": "So please look for it."
+    },
+    {
+        "original": "のレイアウトで並べるというテクニックに挑戦しました。",
+        "translated": "I challenged the technique of arranging in the layout of."
+    },
+    {
+        "original": "の記事を参考にしています。",
+        "translated": "referencing the article of."
+    },
+    {
+        "original": "はぅ君さんに圧倒的感謝を！",
+        "translated": "Overwhelming thanks to Hau-kun-san!"
+    },
+    {
+        "original": "ぼいち(@voich2014)がJavaScriptに移植したものです。",
+        "translated": "Ported to JavaScript by Voich (@voich2014)."
+    },
+    {
+        "original": "ぼいち(@voich2014)が自分でも作ってみました。",
+        "translated": "Voich (@voich2014) tried making it himself."
+    },
+    {
+        "original": "ぼいちの古いスマホ(Android)では動きませんでした…_(┐「ε:)_",
+        "translated": "It didn't work on Voich's old smartphone (Android)... _(┐「ε:)_"
+    }
+]

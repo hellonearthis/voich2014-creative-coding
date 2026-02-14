@@ -1,17 +1,17 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-<title>パパのワイヤーフレームっぽいの</title>
+<title>Papa's Wireframe-ish Thing</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=320, user-scalable=no, initial-scale=1.0">
 <meta http-equiv="Cache-Control" content="no-cache">
 <!--
-	このデモは、neko800(@nekohachi1)さんが公開されたプチコン作品をベースに
-	ぼいち(@voich2014)がJavaScriptに移植したものです。
+	This demo is based on a SmileBASIC work published by neko800 (@nekohachi1)
+	Ported to JavaScript by Voich (@voich2014).
 	
-	すばらしい作品を公開してくださったneko800さんに圧倒的感謝を！！
+	Overwhelming thanks to neko800-san for publishing such a wonderful work!!
 	
-	neko800さんのプチコン4 オリジナル版 https://twitter.com/nekohachi1/status/1196444460868980736
+	neko800-san's SmileBASIC 4 Original Version https://twitter.com/nekohachi1/status/1196444460868980736
 
 -->
 <style type="text/css">
@@ -60,11 +60,11 @@
 </style>
 <script type="text/javascript">
 
-//グローバルオブジェクト
+// Global Object
 var g_game_width    = 320;
 var g_game_height   = 500;
 
-const g_sprite_num  = 2048;		//全スプライト数
+const g_sprite_num  = 2048;		// Total number of sprites
 
 var g_sprite        = [];
 var g_r0            = 0;
@@ -72,66 +72,66 @@ var g_r1            = 1;
 var g_cnt           = 0;
 var g_id            = 0;
 
-var g_offsc;					//自力直線描画用オフスクリーン
-var g_color;					//自力直線描画の色オブジェクト
-var g_funcDrawBegin;			//描画前処理関数オブジェクト
-var g_funcDrawEnd;				//描画後処理関数オブジェクト
-var g_funcDrawLine;				//Line描画処理関数オブジェクト
-var g_funcDrawPoint;			//点描画処理関数オブジェクト
-var g_line_algo;				//選択中のLine描画アルゴリズムインデックス
+var g_offsc;					// Off-screen for manual line drawing
+var g_color;					// Color object for manual line drawing
+var g_funcDrawBegin;			// Pre-drawing processing function object
+var g_funcDrawEnd;				// Post-drawing processing function object
+var g_funcDrawLine;				// Line drawing processing function object
+var g_funcDrawPoint;			// Point drawing processing function object
+var g_line_algo;				// Index of currently selected Line drawing algorithm
 
 var g_last_fps_time = 0;
 var g_fps_count     = 0;
 
 function rad(deg)
 {
-	//度→ラジアン変換
+	// Degree -> Radian conversion
 	return deg * Math.PI / 180;
 }
 
 function rnd(x)
 {
-	//乱数取得
+	// Get random number
 	return Math.floor(Math.random() * x);
 }
 
 function max(a,b)
 {
-	//大きい方を返す
+	// Return larger one
 	return Math.max(a,b);
 }
 
 function min(a,b)
 {
-	//小さい方を返す
+	// Return smaller one
 	return Math.min(a,b);
 }
 
 function init_game()
 {
 	
-	//ゲームの初期化処理
+	// Game initialization processing
 	
-	//画面調整
+	// Screen Adjustment
 	adjust_screen();
 	
-	//ゲームに必要なオブジェクトの生成
+	// Generation of objects necessary for game
 	create_obj();
 	
-	//描画処理方法を準備
+	// Prepare drawing processing method
 	g_line_algo = 3-1;
 	change_line_algorithm();
 	window.onmousedown = change_line_algorithm;
 	window.ontouchdown = change_line_algorithm;
 	
-	//requestAnimationFrameの準備(各種ブラウザ対応)
+	// Preparation of requestAnimationFrame (compatible with various browsers)
 	var requestAnimationFrame = window.requestAnimationFrame       ||
                                 window.mozRequestAnimationFrame    ||
                                 window.webkitRequestAnimationFrame ||
                                 window.msRequestAnimationFrame;
     window.requestAnimationFrame = requestAnimationFrame;
     
-	//描画を登録
+	// Register drawing
 	window.requestAnimationFrame(render_game);
 	
 }
@@ -139,14 +139,14 @@ function init_game()
 function draw_fps()
 {
 	
-	//FPS計測
+	// FPS Measurement
 	
-	//現在時刻を取得
+	// Get current time
 	var now_time = Date.now();
 	
 	if((now_time - g_last_fps_time) >= 1000)
 	{
-		//FPS表示
+		// FPS Display
 		var fps_div = document.getElementById("fps");
 		fps_div.innerText = "FPS:"+(g_fps_count*(1000/(now_time - g_last_fps_time)));
 		
@@ -159,21 +159,21 @@ function draw_fps()
 
 function adjust_screen()
 {
-	//画面調整
+	// Screen Adjustment
 	
-	//ウインドウのサイズを取得
+	// Get window size
 	var window_w = window.innerWidth;
 	var window_h = window.innerHeight;
 	
-	//ウインドウ幅が十分に広い場合はPCだとして
-	//画面サイズを変更する
+	// Assuming it's a PC if window width is wide enough
+	// Change screen size
 	if((g_game_width * 2) <= window_w)
 	{
 		g_game_width  = 1280;
 		g_game_height = 720;
 	}
 	
-	//ゲームスクリーンを中央に配置
+	// Place game screen in center
 	var screen  = document.getElementById("game-screen");
 	var game_x  = (window_w - g_game_width) / 2;
 	var game_y  = (window_h - g_game_height) / 2;
@@ -183,7 +183,7 @@ function adjust_screen()
 	screen.width      = g_game_width;
 	screen.height     = g_game_height;
 
-	//オフスクリーン用のImageDataを作成
+	// Create ImageData for off-screen
 	var ctx = screen.getContext("2d");
 	g_offsc = ctx.createImageData(g_game_width,g_game_height);
 	
@@ -191,9 +191,9 @@ function adjust_screen()
 
 function create_obj()
 {
-	//オブジェクトの生成
+	// Object Generation
 	
-	//スプライトオブジェクト情報の初期化
+	// Initialize sprite object information
 	for(var i = 0;i < g_sprite_num;++i)
 	{
 		var obj = { x: 0, y: 0, z: 0, v: 0 };
@@ -204,25 +204,25 @@ function create_obj()
 
 function change_line_algorithm()
 {
-	//LINE描画アルゴリズムの選択
+	// Selection of LINE drawing algorithm
 	
 	g_line_algo = (g_line_algo + 1) % 4;
 	
 	switch(g_line_algo)
 	{
-		case 0:	//デフォルトのLINE描画
+		case 0:	// Default LINE drawing
 			setup_draw_default();
 			break;
 			
-		case 1:	//ブレゼンハムLINE描画
+		case 1:	// Bresenham LINE Drawing
 			setup_draw_bresenham();
 			break;
 			
-		case 2:	//ダブルステップブレゼンハムLINE描画
+		case 2:	// Double Step Bresenham LINE Drawing
 			setup_draw_doublestep_bresenham();
 			break;
 		
-		case 3:	//なんちゃってアンチエイリアス付きブレゼンハムLINE描画
+		case 3:	// Fake Anti-aliased Bresenham LINE Drawing
 			setup_draw_bresenham_aa();
 			break;
 	}
@@ -231,7 +231,7 @@ function change_line_algorithm()
 
 function setup_draw_default()
 {
-	//デフォルトのLINE描画の関数を準備
+	// Prepare default LINE drawing function
 	
 	g_funcDrawBegin = drawBegin_default;
 	g_funcDrawEnd   = drawEnd_default;
@@ -244,33 +244,33 @@ function setup_draw_default()
 
 function drawBegin_default(ctx,sc_w,sc_h)
 {
-	//デフォルトのLINE描画前処理
+	// Default LINE drawing pre-processing
 	
-	//画面クリア
+	// Screen Clear
 	ctx.clearRect(0,0,sc_w,sc_h);
 	
-	//ワイヤーの色を決める
+	// Determine wire color
 	ctx.strokeStyle = 'lime';
 	
-	//描画登録開始指示
+	// Instruction to start drawing registration
 	ctx.beginPath();
 	
 }
 
 function drawEnd_default(ctx,sc_w,sc_h)
 {
-	//デフォルトのLINE描画後処理
+	// Default LINE drawing post-processing
 	
-	//描画実施指示
+	// Instruction to execute drawing
 	ctx.stroke();
 	
 }
 
 function drawLine_default(ctx,sc_w,sc_h,x1,y1,x2,y2)
 {
-	//デフォルトのLINE描画処理
+	// Default LINE drawing processing
 	
-	//LINE描画
+	// LINE Drawing
 	ctx.moveTo(x1,y1);
 	ctx.lineTo(x2,y2);
 	
@@ -278,7 +278,7 @@ function drawLine_default(ctx,sc_w,sc_h,x1,y1,x2,y2)
 
 function setup_draw_bresenham()
 {
-	//ブレゼンハムのLINE描画の関数を準備
+	// Prepare Bresenham LINE drawing function
 	
 	g_funcDrawBegin = drawBegin_bresenham;
 	g_funcDrawEnd   = drawEnd_bresenham;
@@ -292,61 +292,61 @@ function setup_draw_bresenham()
 
 function drawBegin_bresenham(ctx,sc_w,sc_h)
 {
-	//ブレゼンハムのLINE描画前処理
+	// Bresenham LINE drawing pre-processing
 	
-	//α値だけすべてゼロにして画面クリア
+	// Clear screen by setting all alpha values to zero
 	var iPxNum = sc_w * sc_h * 4;
 	for(var i = 3;i < iPxNum;i+= 4)
 	{
 		g_offsc.data[i] = 0;	//α
 	}
 	
-	//ワイヤーの色を決める
+	// Determine wire color
 	g_color = { r: 0, g: 255, b: 0, a: 255 };
 
 }
 
 function drawEnd_bresenham(ctx,sc_w,sc_h)
 {
-	//ブレゼンハムのLINE描画後処理
+	// Bresenham LINE drawing post-processing
 	
-	//オフスクリーンを転送
+	// Transfer off-screen
 	ctx.putImageData(g_offsc,0,0);
 	
 }
 
 function drawLine_bresenham(ctx,sc_w,sc_h,x1,y1,x2,y2)
 {
-	//ブレゼンハムのLINE描画処理
+	// Bresenham LINE drawing processing
 	
-	//整数化(重要！　これをやらないとImageDataへの書き込みで失敗する)
+	// Convert to integer (Important! if not done, writing to ImageData will fail)
 	x1 = Math.floor(x1);
 	y1 = Math.floor(y1);
 	x2 = Math.floor(x2);
 	y2 = Math.floor(y2);
 	
-	//パラメータ準備
+	// Parameter preparation
 	var dx   = Math.abs(x2 - x1);
 	var dy   = Math.abs(y2 - y1);
 	var addX = (x1 < x2) ? 1 : -1;
 	var addY = (y1 < y2) ? 1 : -1;
 
-	//クリッピング
+	// Clipping
 	if(((x1 < 0) && (x2 < 0)) || ((x1 >= sc_w) && (x2 >= sc_w)) ||
 	   ((y1 < 0) && (y2 < 0)) || ((y1 >= sc_h) && (y2 >= sc_h)))
 	{	return;	}
 	
 	if(dx > dy)
 	{
-		//Xでループ
+		// Loop by X
 		var diff = Math.floor(dy - dx / 2);
 
 		while(x1 != x2)
 		{
-			//点を描画
+			// Draw Point
 			g_funcDrawPoint(sc_w,sc_h,x1,y1,g_color);
 
-			//座標更新
+			// Update Coordinates
 			x1 += addX;
 			if(diff >= 0)
 			{
@@ -358,15 +358,15 @@ function drawLine_bresenham(ctx,sc_w,sc_h,x1,y1,x2,y2)
 	}
 	else
 	{
-		//Yでループ
+		// Loop by Y
 		var diff = Math.floor(dx - dy / 2);
 
 		while(y1 != y2)
 		{
-			//点を描画
+			// Draw Point
 			g_funcDrawPoint(sc_w,sc_h,x1,y1,g_color);
 
-			//座標更新
+			// Update Coordinates
 			y1 += addY;
 			if(diff >= 0)
 			{
@@ -377,16 +377,16 @@ function drawLine_bresenham(ctx,sc_w,sc_h,x1,y1,x2,y2)
 		}
 	}
 
-	//終点を描画
+	// Draw end point
 	g_funcDrawPoint(sc_w,sc_h,x2,y2,g_color);
 	
 }
 
 function drawPoint_bresenham(sc_w,sc_h,x,y,color)
 {
-	//ブレゼンハム直線描画用の点描画
+	// Point drawing for Bresenham line drawing
 	
-	//クリッピングして描画
+	// Clip and draw
 	if((x >= 0) && (x < sc_w) && (y >= 0) && (y < sc_h))
 	{
 		var pos = sc_w * 4 * y + 4 * x;
@@ -400,7 +400,7 @@ function drawPoint_bresenham(sc_w,sc_h,x,y,color)
 
 function setup_draw_doublestep_bresenham()
 {
-	//ダブルステップブレゼンハムのLINE描画の関数を準備
+	// Prepare double-step Bresenham LINE drawing function
 	
 	g_funcDrawBegin = drawBegin_bresenham;
 	g_funcDrawEnd   = drawEnd_bresenham;
@@ -414,105 +414,105 @@ function setup_draw_doublestep_bresenham()
 
 function drawLine_doublestep_bresenham(ctx,sc_w,sc_h,x1,y1,x2,y2)
 {
-	//ダブルステップブレゼンハムのLINE描画処理
+	// Double-step Bresenham LINE drawing processing
 	
-	//整数化(重要！　これをやらないとImageDataへの書き込みで失敗する)
+	// Convert to integer (Important! if not done, writing to ImageData will fail)
 	x1 = Math.floor(x1);
 	y1 = Math.floor(y1);
 	x2 = Math.floor(x2);
 	y2 = Math.floor(y2);
 	
-	//パラメータ準備
+	// Parameter preparation
 	var dx   = Math.abs(x2 - x1);
 	var dy   = Math.abs(y2 - y1);
 	var addX = (x1 < x2) ? 1 : -1;
 	var addY = (y1 < y2) ? 1 : -1;
-	var e,n,nn; //eは蓄積誤差値
+	var e,n,nn; // e is accumulated error value
 	
-	//クリッピング
+	// Clipping
 	if(((x1 < 0) && (x2 < 0)) || ((x1 >= sc_w) && (x2 >= sc_w)) ||
 	   ((y1 < 0) && (y2 < 0)) || ((y1 >= sc_h) && (y2 >= sc_h)))
 	{	return;	}
 	
-	//完全な横線のとき
+	// When completely horizontal line
 	if(dy == 0)
 	{
-		//両端から進むのでループは差分の半分
+		// Loop is half the difference since proceeding from both ends
 		n = dx >> 1;	//n = dx / 2;
 		
-		//描画ループ
+		// Drawing Loop
 		for(var i = 0;i <= n;++i)
 		{
-			//点を描画
+			// Draw Point
 			g_funcDrawPoint(sc_w,sc_h,x1,y1,g_color);
 			g_funcDrawPoint(sc_w,sc_h,x2,y2,g_color);
 			
-			//描画位置を更新
+			// Update drawing position
 			x1 += addX;
 			x2 -= addX;
 		}
 	
-		//描画量が奇数の場合は最後の１ピクセルを描画する
+		// Draw last 1 pixel if drawing amount is odd
 		if((dx & 0x01) == 0)
 		{
-			//点を描画
+			// Draw Point
 			g_funcDrawPoint(sc_w,sc_h,x1 - addX,y1,g_color);
 		}
 	}
-	//完全な縦線のとき
+	// When completely vertical line
 	else if(dx == 0)
 	{
-		//両端から進むのでループは差分の半分
+		// Loop is half the difference since proceeding from both ends
 		n = dy >> 1;	//n = dy / 2;
 		
-		//描画ループ
+		// Drawing Loop
 		for(var i = 0;i <= n;++i)
 		{
-			//点を描画
+			// Draw Point
 			g_funcDrawPoint(sc_w,sc_h,x1,y1,g_color);
 			g_funcDrawPoint(sc_w,sc_h,x2,y2,g_color);
 
-			//描画位置を更新
+			// Update drawing position
 			y1 += addY;
 			y2 -= addY;
 		}
 	
-		//描画量が奇数の場合は最後の１ピクセルを描画する
+		// Draw last 1 pixel if drawing amount is odd
 		if((dy & 0x01) == 0)
 		{
-			//点を描画
+			// Draw Point
 			g_funcDrawPoint(sc_w,sc_h,x1,y1 - addY,g_color);
 		}
 	}
 	else if(dx >= dy) 
 	{
-		//Ｘについてループする場合
+		// When looping for X
 
-		//誤差値を初期化
+		// Initialize error value
 		e = -dx;
 
-		//ループ回数の算出
+		// Calculation of loop count
 		n = (dx + 1) >> 2;	//n = (dx + 1) / 4;
 
-		//m ＜ 1/2の場合 m = |x2 - x1| / |y2 - y1|
+		// In case m < 1/2, m = |x2 - x1| / |y2 - y1|
 		if((dy << 2) < (dx << 1))
 		{
 			for(var i = 0;i < n;++i)
 			{
-				//誤差値を更新
+				// Update error value
 				e += (dy << 2);	//e += 4dy;
 				
 				if(e < 0)
 				{
-					//●●○
+					// ●●○
 
-					//２ピクセル同時に点を描画
+					// Draw points for 2 pixels simultaneously
 					g_funcDrawPoint(sc_w,sc_h,x1,y1,g_color);
 					g_funcDrawPoint(sc_w,sc_h,x2,y2,g_color);
 					g_funcDrawPoint(sc_w,sc_h,x1 + addX,y1,g_color);
 					g_funcDrawPoint(sc_w,sc_h,x2 - addX,y2,g_color);
 					
-					//描画位置の更新
+					// Update drawing position
 					x1 += (addX << 1);	//x1 += 2addX;
 					x2 -= (addX << 1);	//x2 -= 2addX;
 				}
@@ -520,96 +520,96 @@ function drawLine_doublestep_bresenham(ctx,sc_w,sc_h,x1,y1,x2,y2)
 				{
 					if(e < (dy << 1))	//if(e < 2dy)
 					{
-						//　　○
-						//●●
+						//    ○
+						// ●●
 
-						//２ピクセル同時に点を描画
+						// Draw points for 2 pixels simultaneously
 						g_funcDrawPoint(sc_w,sc_h,x1,y1,g_color);
 						g_funcDrawPoint(sc_w,sc_h,x2,y2,g_color);
 						g_funcDrawPoint(sc_w,sc_h,x1 + addX,y1,g_color);
 						g_funcDrawPoint(sc_w,sc_h,x2 - addX,y2,g_color);
 						
-						//描画位置を更新
+						// Update drawing position
 						x1 += (addX << 1);	//x1 += 2addX;
 						x2 -= (addX << 1);	//x2 -= 2addX;
 						y1 += addY;
 						y2 -= addY;
 						
-						//誤差値を更新
+						// Update error value
 						e -= (dx << 1);		//e -= 2dx;
 					}
 					else
 					{
-						//　●○
-						//●
+						//  ●○
+						// ●
 
-						//２ピクセル同時に描画
+						// Draw 2 pixels simultaneously
 
-						//１ピクセル目を描画
+						// Draw 1st pixel
 						g_funcDrawPoint(sc_w,sc_h,x1,y1,g_color);
 						g_funcDrawPoint(sc_w,sc_h,x2,y2,g_color);
 						
-						//描画位置の更新
+						// Update drawing position
 						y1 += addY;
 						y2 -= addY;
 						
-						//２ピクセル目を描画
+						// Draw 2nd pixel
 						g_funcDrawPoint(sc_w,sc_h,x1 + addX,y1,g_color);
 						g_funcDrawPoint(sc_w,sc_h,x2 - addX,y2,g_color);
 
-						//描画位置を更新
+						// Update drawing position
 						x1 += (addX << 1);	//x1 += 2addX; 
 						x2 -= (addX << 1);	//x2 -= 2addX;
 							
-						//誤差値を更新
+						// Update error value
 						e -= (dx << 1);		//e -= 2dx;
 					}
 				}
 			}
 		}
-		// 1/2 ≦ m ≦ 1の場合 m = |y2 - y1| / |x2 - x1|
+		// Case 1/2 ≦ m ≦ 1: m = |y2 - y1| / |x2 - x1|
 		else
 		{
 			for(var i = 0;i < n;++i)
 			{
-				//誤差値を更新
+				// Update error value
 				e += ((dy << 2) - (dx << 1));	//e += 4dy - 2dx;
 				
 				if(e >= 0)
 				{	
-					//　　○
-					//　●
-					//●
+					//    ○
+					//  ●
+					// ●
 
-					//２ピクセル同時に描画
+					// Draw 2 pixels simultaneously
 					g_funcDrawPoint(sc_w,sc_h,x1,y1,g_color);
 					g_funcDrawPoint(sc_w,sc_h,x2,y2,g_color);
 					g_funcDrawPoint(sc_w,sc_h,x1 + addX,y1 + addY,g_color);
 					g_funcDrawPoint(sc_w,sc_h,x2 - addX,y2 - addY,g_color);
 
-					//描画位置を更新
+					// Update drawing position
 					x1 += (addX << 1);	//x1 += 2addX;
 					x2 -= (addX << 1);	//x2 -= 2addX;
 					y1 += (addY << 1);	//y1 += 2addY;
 					y2 -= (addY << 1);	//y2 -= 2addY;
 					
-					//誤差値を更新
+					// Update error value
 					e -= (dx << 1);		//e -= 2dx;
 				}
 				else
 				{
 					if(e < ((dy << 1) - (dx << 1)))	//if(e < 2dy - 2dx)
 					{
-						//　　○
-						//●●
+						//    ○
+						// ●●
 
-						//２ピクセル同時に描画
+						// Draw 2 pixels simultaneously
 						g_funcDrawPoint(sc_w,sc_h,x1,y1,g_color);
 						g_funcDrawPoint(sc_w,sc_h,x2,y2,g_color);
 						g_funcDrawPoint(sc_w,sc_h,x1 + addX,y1,g_color);
 						g_funcDrawPoint(sc_w,sc_h,x2 - addX,y2,g_color);
 
-						//描画位置を更新
+						// Update drawing position
 						x1 += (addX << 1);	//x1 += 2addX;
 						x2 -= (addX << 1);	//x2 -= 2addX;
 						y1 += addY;
@@ -617,24 +617,24 @@ function drawLine_doublestep_bresenham(ctx,sc_w,sc_h,x1,y1,x2,y2)
 					}
 					else
 					{
-						//　●○
-						//●
+						//  ●○
+						// ●
 
-						//２ピクセル同時に描画
+						// Draw 2 pixels simultaneously
 						
-						//１ピクセル目を描画
+						// Draw 1st pixel
 						g_funcDrawPoint(sc_w,sc_h,x1,y1,g_color);
 						g_funcDrawPoint(sc_w,sc_h,x2,y2,g_color);
 
-						//描画位置を更新
+						// Update drawing position
 						y1 += addY;
 						y2 -= addY;
 						
-						//２ピクセル目を描画
+						// Draw 2nd pixel
 						g_funcDrawPoint(sc_w,sc_h,x1 + addX,y1,g_color);
 						g_funcDrawPoint(sc_w,sc_h,x2 - addX,y2,g_color);
 
-						//描画位置を更新
+						// Update drawing position
 						x1 += (addX << 1);	//x1 += 2addX;
 						x2 -= (addX << 1);	//x2 -= 2addX;
 					}
@@ -642,63 +642,63 @@ function drawLine_doublestep_bresenham(ctx,sc_w,sc_h,x1,y1,x2,y2)
 			}
 		}
 
-		// ４ピクセル未満の端数分を描画
+		// Draw fractional part less than 4 pixels
 		
-		//ループ回数を算出
+		// Calculate loop count
 		n = ((dx + 1) % 4);
 		
 		for(var i = 0;i < n;++i)
 		{
-			//点を描画
+			// Draw Point
 			g_funcDrawPoint(sc_w,sc_h,x1,y1,g_color);
 			
-			//描画位置を更新
+			// Update drawing position
 			x1 += addX;
 			
-			//誤差値を更新
+			// Update error value
 			e += (dy << 1);		//e += 2dy;
 
 			if(e >= 0)
 			{
-				//描画位置を更新
+				// Update drawing position
 				y1 += addY;
 
-				//誤差値を更新
+				// Update error value
 				e -= (dx << 1);		//e -= 2dx;
 			}
 		}
 	}
 	else
 	{
-		//Ｙについてループ
+		// Loop for Y
 
-		//誤差値を初期化
+		// Initialize error value
 		e = -dy;
 
-		//ループ回数を算出
+		// Calculate loop count
 		n = (dy + 1) >> 2;	//n = (dy + 1) / 4;
 
-		//m ＜ 1/2の場合 m = |y2 - y1| / |x2 - x1|
+		// In case m < 1/2, m = |y2 - y1| / |x2 - x1|
 		if(dy >= (dx << 1))
 		{
 			for(var i = 0; i < n;++i)
 			{
-				//誤差値を更新
+				// Update error value
 				e += (dx << 2);	//e += 4dx;
 				
 				if(e < 0)
 				{
 					//○
-					//●
-					//● 
+					// ●
+					// ● 
 					
-					//２ピクセル同時に描画
+					// Draw 2 pixels simultaneously
 					g_funcDrawPoint(sc_w,sc_h,x1,y1,g_color);
 					g_funcDrawPoint(sc_w,sc_h,x2,y2,g_color);
 					g_funcDrawPoint(sc_w,sc_h,x1,y1 + addY,g_color);
 					g_funcDrawPoint(sc_w,sc_h,x2,y2 - addY,g_color);
 					
-					//描画位置を更新
+					// Update drawing position
 					y1 += (addY << 1);	//y1 += 2addY;
 					y2 -= (addY << 1);	//y2 -= 2addY;
 				}
@@ -706,99 +706,99 @@ function drawLine_doublestep_bresenham(ctx,sc_w,sc_h,x1,y1,x2,y2)
 				{
 					if(e < (dx << 1))	//if(e < 2dx)
 					{
-						//　○
-						//●
-						//●
+						//  ○
+						// ●
+						// ●
 
-						//２ピクセル同時に描画
+						// Draw 2 pixels simultaneously
 						g_funcDrawPoint(sc_w,sc_h,x1,y1,g_color);
 						g_funcDrawPoint(sc_w,sc_h,x2,y2,g_color);
 						g_funcDrawPoint(sc_w,sc_h,x1,y1 + addY,g_color);
 						g_funcDrawPoint(sc_w,sc_h,x2,y2 - addY,g_color);
 
-						//描画位置を更新
+						// Update drawing position
 						y1 += (addY << 1);	//y1 += 2addY;
 						y2 -= (addY << 1);	//y2 -= 2addY;
 						x1 += addX;
 						x2 -= addX;
 						
-						//誤差値を更新
+						// Update error value
 						e -= (dy << 1);		//e -= 2dy;
 					}
 					else
 					{
-						//　○
-						//　●
-						//●
+						//  ○
+						//  ●
+						// ●
 
-						//２ピクセル同時に描画
+						// Draw 2 pixels simultaneously
 
-						//１ピクセル目を描画
+						// Draw 1st pixel
 						g_funcDrawPoint(sc_w,sc_h,x1,y1,g_color);
 						g_funcDrawPoint(sc_w,sc_h,x2,y2,g_color);
 						
-						//描画位置を更新
+						// Update drawing position
 						x1 += addX;
 						x2 -= addX;
 						
-						//２ピクセル目を描画
+						// Draw 2nd pixel
 						g_funcDrawPoint(sc_w,sc_h,x1,y1 + addY,g_color);
 						g_funcDrawPoint(sc_w,sc_h,x2,y2 - addY,g_color);
 						
-						//描画位置を更新
+						// Update drawing position
 						y1 += (addY << 1);	//y1 += 2addY;
 						y2 -= (addY << 1);	//y2 -= 2addY;
 						
-						//誤差値を更新
+						// Update error value
 						e -= (dy << 1);		//e -= 2dy;
 					}
 				}
 			}
 		}
-		// 1/2 ≦ m ≦ 1の場合 m = |y2 - y1| / |x2 - x1|
+		// Case 1/2 ≦ m ≦ 1: m = |y2 - y1| / |x2 - x1|
 		else
 		{
 			for(var i = 0;i < n;++i)
 			{
-				//誤差値の更新
+				// Update error value
 				e += (dx << 2) - (dy << 1);		//e += (4dx - 2dy);
 				
 				if(e >= 0)
 				{
-					//　　○
-					//　●
-					//●
+					//    ○
+					//  ●
+					// ●
 
-					//２ピクセル同時に描画
+					// Draw 2 pixels simultaneously
 					g_funcDrawPoint(sc_w,sc_h,x1,y1,g_color);
 					g_funcDrawPoint(sc_w,sc_h,x2,y2,g_color);
 					g_funcDrawPoint(sc_w,sc_h,x1 + addX,y1 + addY,g_color);
 					g_funcDrawPoint(sc_w,sc_h,x2 - addX,y2 - addY,g_color);
 					
-					//描画位置の更新
+					// Update drawing position
 					x1 += (addX << 1);	//x1 += 2addX;
 					x2 -= (addX << 1);	//x2 -= 2addX;
 					y1 += (addY << 1);	//y1 += 2addY;
 					y2 -= (addY << 1);	//y2 -= 2addY;
 					
-					//誤差値の更新
+					// Update error value
 					e -= (dy << 1);		//e -= 2dy;
 				}
 				else
 				{
 					if(((dx << 1) - (dy << 1)) > e)	//if((2dx - 2dy) > e)
 					{
-						//　○
-						//●　
-						//●
+						//  ○
+						// ●　
+						// ●
 
-						//２ピクセル同時に描画
+						// Draw 2 pixels simultaneously
 						g_funcDrawPoint(sc_w,sc_h,x1,y1,g_color);
 						g_funcDrawPoint(sc_w,sc_h,x2,y2,g_color);
 						g_funcDrawPoint(sc_w,sc_h,x1,y1 + addY,g_color);
 						g_funcDrawPoint(sc_w,sc_h,x2,y2 - addY,g_color);
 
-						//描画位置を更新
+						// Update drawing position
 						y1 += (addY << 1);	//y1 += 2addY;
 						y2 -= (addY << 1);	//y2 -= 2addY;
 						x1 += addX;
@@ -806,25 +806,25 @@ function drawLine_doublestep_bresenham(ctx,sc_w,sc_h,x1,y1,x2,y2)
 					}
 					else
 					{
-						//　○
-						//　●
-						//●
+						//  ○
+						//  ●
+						// ●
 
-						//２ピクセル同時に描画
+						// Draw 2 pixels simultaneously
 
-						//１ピクセル目を描画
+						// Draw 1st pixel
 						g_funcDrawPoint(sc_w,sc_h,x1,y1,g_color);
 						g_funcDrawPoint(sc_w,sc_h,x2,y2,g_color);
 
-						//描画位置を更新
+						// Update drawing position
 						x1 += addX;
 						x2 -= addX;
 						
-						//２ピクセル目を描画
+						// Draw 2nd pixel
 						g_funcDrawPoint(sc_w,sc_h,x1,y1 + addY,g_color);
 						g_funcDrawPoint(sc_w,sc_h,x2,y2 - addY,g_color);
 						
-						//描画位置を更新
+						// Update drawing position
 						y1 += (addY << 1);	//y1 += 2addY;
 						y2 -= (addY << 1);	//y2 -= 2addY;
 					}
@@ -832,28 +832,28 @@ function drawLine_doublestep_bresenham(ctx,sc_w,sc_h,x1,y1,x2,y2)
 			}
 		}
 
-		// ４ピクセル未満の端数分を描画 
+		// Draw fractional part less than 4 pixels 
 		
-		//ループ回数を算出
+		// Calculate loop count
 		n = ((dy + 1) % 4);
 
 		for(var i = 0;i < n;++i)
 		{
-			//点を描画
+			// Draw Point
 			g_funcDrawPoint(sc_w,sc_h,x1,y1,g_color);
 			
-			//描画位置を更新
+			// Update drawing position
 			y1 += addY;
 
-			//誤差値を更新
+			// Update error value
 			e += (dx << 1);		//e += 2dx;
 		
 			if(e >= 0)
 			{
-				//描画位置を更新
+				// Update drawing position
 				x1 += addX;
 
-				//誤差値を更新
+				// Update error value
 				e -= (dy << 1);	//e -= 2dy;
 			}
 		}
@@ -863,7 +863,7 @@ function drawLine_doublestep_bresenham(ctx,sc_w,sc_h,x1,y1,x2,y2)
 
 function setup_draw_bresenham_aa()
 {
-	//なんちゃってアンチエイリアス付きブレゼンハムのLINE描画の関数を準備
+	// Prepare fake anti-aliased Bresenham LINE drawing function
 	
 	g_funcDrawBegin = drawBegin_bresenham;
 	g_funcDrawEnd   = drawEnd_bresenham;
@@ -877,29 +877,29 @@ function setup_draw_bresenham_aa()
 
 function drawLine_bresenham_aa(ctx,sc_w,sc_h,x1,y1,x2,y2)
 {
-	//アンチエイリアス付きブレゼンハムのLINE描画
+	// Anti-aliased Bresenham LINE drawing
 	
 	//
-	// 本来は、背景色やすでに描画されている色との
-	// ブレンドをしますが、ここではα値だけを操作し、
-	// 常に背景色とのブレンドになっている、
-	// なんちゃってアンチエイリアスです（＾＾；
+	// Originally, with background color or already drawn color
+	// Blending is done, but here only manipulate alpha value,
+	// It is always blending with background color,
+	// It's fake anti-aliasing (^^;
 	//
-	// 画面クリアをα値だけの変更ではなく、ちゃんと
-	// 背景色で塗りつぶしていれば、現在の描画色との
-	// ブレンドもできると思いますが、ちゃんと背景色
-	// で塗りつぶすとすごく遅くなるので、仕方なく
-	// α値だけの操作としています。
-	// あらかじめご了承下さい。
+	// Screen clear is not just changing alpha value, but properly
+	// If filled with background color, with current drawing color
+	// I think blending is possible, but proper background color
+	// Filling with ... makes it very slow, so unavoidably
+	// Operation is only for alpha value.
+	// Please be forewarned.
 	//
 	
-	//整数化(重要！　これをやらないとImageDataへの書き込みで失敗する)
+	// Convert to integer (Important! if not done, writing to ImageData will fail)
 	x1 = Math.floor(x1);
 	y1 = Math.floor(y1);
 	x2 = Math.floor(x2);
 	y2 = Math.floor(y2);
 	
-	//パラメータ準備
+	// Parameter preparation
 	var dx   = Math.abs(x2 - x1);
 	var dy   = Math.abs(y2 - y1);
 	var addX = (x1 < x2) ? 1 : -1;
@@ -907,131 +907,131 @@ function drawLine_bresenham_aa(ctx,sc_w,sc_h,x1,y1,x2,y2)
 	var x,y,alpha;
 	var alpha_color = { r: g_color.r, g: g_color.g, b: g_color.b, a: 0 };
 	
-	//クリッピング
+	// Clipping
 	if(((x1 < 0) && (x2 < 0)) || ((x1 >= sc_w) && (x2 >= sc_w)) ||
 	   ((y1 < 0) && (y2 < 0)) || ((y1 >= sc_h) && (y2 >= sc_h)))
 	{	return;	}
 	
-	//完全な横線のとき
+	// When completely horizontal line
 	if(dy == 0)
 	{
-		//両端から進むのでループは差分の半分
+		// Loop is half the difference since proceeding from both ends
 		var n = dx >> 1;	//n = dx / 2;
 		
-		//描画ループ
+		// Drawing Loop
 		for(var i = 0;i <= n;++i)
 		{
-			//点を描画
+			// Draw Point
 			g_funcDrawPoint(sc_w,sc_h,x1,y1,g_color);
 			g_funcDrawPoint(sc_w,sc_h,x2,y2,g_color);
 			
-			//描画位置を更新
+			// Update drawing position
 			x1 += addX;
 			x2 -= addX;
 		}
 	
-		//描画量が奇数の場合は最後の１ピクセルを描画する
+		// Draw last 1 pixel if drawing amount is odd
 		if((dx & 0x01) == 0)
 		{
-			//点を描画
+			// Draw Point
 			g_funcDrawPoint(sc_w,sc_h,x1 - addX,y1,g_color);
 		}
 	}
-	//完全な縦線のとき
+	// When completely vertical line
 	else if(dx == 0)
 	{
-		//両端から進むのでループは差分の半分
+		// Loop is half the difference since proceeding from both ends
 		var n = dy >> 1;	//n = dy / 2;
 		
-		//描画ループ
+		// Drawing Loop
 		for(var i = 0;i <= n;++i)
 		{
-			//点を描画
+			// Draw Point
 			g_funcDrawPoint(sc_w,sc_h,x1,y1,g_color);
 			g_funcDrawPoint(sc_w,sc_h,x2,y2,g_color);
 
-			//描画位置を更新
+			// Update drawing position
 			y1 += addY;
 			y2 -= addY;
 		}
 	
-		//描画量が奇数の場合は最後の１ピクセルを描画する
+		// Draw last 1 pixel if drawing amount is odd
 		if((dy & 0x01) == 0)
 		{
-			//点を描画
+			// Draw Point
 			g_funcDrawPoint(sc_w,sc_h,x1,y1 - addY,g_color);
 		}
 	}
 	else if(dx > dy)
 	{
-		//Xでループ
+		// Loop by X
 		
-		//Y座標だけ固定小数化
+		// Convert only Y coordinate to fixed point
 		y1 = y1 << 16;
 		y2 = y2 << 16;
 		
-		//固定小数の誤差値を算出
+		// Calculate fixed-point error value
 		var e = (y2 - y1) / dx;
 
 		while(x1 != x2)
 		{
-			//α値を取得
-			alpha = (y1 & 0xFFFF) >> 8;	//0～FFFFを0～FFに変換
+			// Get alpha value
+			alpha = (y1 & 0xFFFF) >> 8;	// Convert 0-FFFF to 0-FF
 			
-			//Y座標を整数にする
+			// Convert Y coordinate to integer
 			y = y1 >> 16;
 
-			//ライン部を描画
+			// Draw line part
 			alpha_color.a = 255 - alpha;
 			g_funcDrawPoint(sc_w,sc_h,x1,y,alpha_color);
 
-			//アンチエイリアス部を描画
+			// Draw anti-aliased part
 			alpha_color.a = alpha;
 			if(alpha != 0)
 			{	g_funcDrawPoint(sc_w,sc_h,x1,y+1,alpha_color);	}
 
-			//座標更新
+			// Update Coordinates
 			x1 += addX;
 			y1 += e;
 		}
 		
-		//終点を描画
+		// Draw end point
 		g_funcDrawPoint(sc_w,sc_h,x2,(y2 >> 16),g_color);
 	}
 	else
 	{
-		//Yでループ
+		// Loop by Y
 		
-		//X座標だけ固定小数化
+		// Convert only X coordinate to fixed point
 		x1 = x1 << 16;
 		x2 = x2 << 16;
 		
-		//固定小数の誤差値を算出
+		// Calculate fixed-point error value
 		var e = (x2 - x1) / dy;
 
 		while(y1 != y2)
 		{
-			//α値を取得
-			alpha = (x1 & 0xFFFF) >> 8;	//0～FFFFを0～FFに変換
+			// Get alpha value
+			alpha = (x1 & 0xFFFF) >> 8;	// Convert 0-FFFF to 0-FF
 			
-			//X座標を整数にする
+			// Convert X coordinate to integer
 			x = x1 >> 16;
 			
-			//ライン部を描画
+			// Draw line part
 			alpha_color.a = 255 - alpha;
 			g_funcDrawPoint(sc_w,sc_h,x,y1,alpha_color);
 
-			//アンチエイリアス部を描画
+			// Draw anti-aliased part
 			alpha_color.a = alpha;
 			if(alpha != 0)
 			{	g_funcDrawPoint(sc_w,sc_h,x+1,y1,alpha_color);	}
 
-			//座標更新
+			// Update Coordinates
 			x1 += e;
 			y1 += addY;
 		}
 		
-		//終点を描画
+		// Draw end point
 		g_funcDrawPoint(sc_w,sc_h,(x2 >> 16),y2,g_color);
 	}
 
@@ -1039,7 +1039,7 @@ function drawLine_bresenham_aa(ctx,sc_w,sc_h,x1,y1,x2,y2)
 
 function set_obj_pos()
 {
-	//オブジェクトの位置を決定する
+	// Determine object position
 	
 	if(!(g_cnt & 7))
 	{
@@ -1053,7 +1053,7 @@ function set_obj_pos()
 		
 		for(var i = 0;i < 16;++i)
 		{
-			var f = (!(i % 15) ? 1 : 0);	//左右の端のラインを上に上げるためのフラグ
+			var f = (!(i % 15) ? 1 : 0);	// Flag to raise the left and right edge lines
 			var x = i * 16 - 120 + con_cnt * 32;
 			var y = rnd(8) + 64 - f * 64 + sin_cnt * 8;
 			var z = 4096;
@@ -1072,7 +1072,7 @@ function set_obj_pos()
 
 function draw_obj(id,ctx,sc_w,sc_h,wh,hh)
 {
-	//ワイヤーオブジェクトの描画
+	// Draw Wire Object
 	
 	if(g_sprite[id].v)
 	{
@@ -1082,7 +1082,7 @@ function draw_obj(id,ctx,sc_w,sc_h,wh,hh)
 		var ox = sp.x / a + wh;
 		var oy = sp.y / a + hh;
 		
-		//縦線(Z方向)のラインを描画
+		// Draw vertical line (Z direction)
 		if(g_sprite[tg].v)
 		{
 			var tsp = g_sprite[tg];
@@ -1094,7 +1094,7 @@ function draw_obj(id,ctx,sc_w,sc_h,wh,hh)
 			g_funcDrawLine(ctx,sc_w,sc_h,ox,oy,tx / b + wh,ty / b + hh);
 		}
 
-		//横線(X/Y方向)のラインを描画
+		// Draw horizontal line (X/Y direction)
 		if((id & 15) != 15)
 		{
 			var st   = id + 1;
@@ -1107,7 +1107,7 @@ function draw_obj(id,ctx,sc_w,sc_h,wh,hh)
 			g_funcDrawLine(ctx,sc_w,sc_h,ox,oy,sx / c + wh,sy / c + hh);
 		}
 
-		//手前に来て見えなくなったら非表示にする
+		// Hide if it comes to front and becomes invisible
 		var z = sp.z - 8;
 		sp.z  = z;
 		if(z <= 0)
@@ -1120,18 +1120,18 @@ function draw_obj(id,ctx,sc_w,sc_h,wh,hh)
 
 function draw_wire()
 {
-	//ワイヤーフレームっぽいもの描画処理	
-	var screen = document.getElementById("game-screen");	//描画先canvas
+	// Wireframe-ish drawing processing	
+	var screen = document.getElementById("game-screen");	// Drawing destination canvas
 	var ctx    = screen.getContext("2d");
 	var sc_w   = g_game_width;
 	var sc_h   = g_game_height;
 	var wh     = sc_w / 2;
 	var hh     = sc_h / 2;
 	
-	//オブジェクトの新しい位置を設定
+	// Set new position of object
 	set_obj_pos();
 	
-	//ワイヤーオブジェクトの描画
+	// Draw Wire Object
 	g_funcDrawBegin(ctx,sc_w,sc_h);
 	for(var i = 0;i < g_sprite_num;++i)
 	{
@@ -1139,7 +1139,7 @@ function draw_wire()
 	}
 	g_funcDrawEnd(ctx,sc_w,sc_h);
 	
-	//次へ
+	// Next
 	g_cnt++;
 	if(!rnd(16))
 	{
@@ -1151,15 +1151,15 @@ function draw_wire()
 function render_game()
 {
 	
-	//ゲームの描画処理
+	// Game drawing processing
 	
-	//ワイヤーフレームっぽいものの描画
+	// Draw wireframe-ish things
 	draw_wire();
 	
-	//FPS描画
+	// Draw FPS
 	draw_fps();
 	
-	//次の描画呼び出しを登録
+	// Register next drawing call
 	window.requestAnimationFrame(render_game);
 
 }

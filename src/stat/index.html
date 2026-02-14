@@ -1,22 +1,22 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-<title>パパのストレンジアトラクター</title>
+<title>Papa's Strange Attractor</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=320, user-scalable=no, initial-scale=1.0">
 <meta http-equiv="Cache-Control" content="no-cache">
 <!--
-	このデモでは、JavaScriptでストレンジアトラクターを描いてみました。
+	In this demo, I tried drawing a Strange Attractor in JavaScript.
     
-    今回は、Koji Saitoさん(@KojiSaito)の note記事 
-    「Sprott のコードとストレンジアトラクタ探索機」を参考に、J.C.Sprott氏の
-    式を用いて自分なりのストレンジアトラクターを表示してみたいと思います。
+    This time, Koji Saito-san's (@KojiSaito) note article 
+    Referencing "Sprott's Code and Strange Attractor Explorer", J.C. Sprott's
+    I would like to display my own Strange Attractor using the formula.
     https://note.com/kojisaito/n/n656981fa17bc
 
-    記事にしてくださったKoji Saitoさんに圧倒的感謝を！(*´ω｀*)
+    Overwhelming thanks to Koji Saito-san for writing the article! (*´ω｀*)
 
     
-    Copyright (c) 2022 ぼいち(@voich2014 in Twitter)
+    Copyright (c) 2022 Voich (@voich2014 in Twitter)
 	
 	Released under the MIT license.
  	see https://opensource.org/licenses/MIT
@@ -54,20 +54,20 @@
 </style>
 <script type="text/javascript">
 
-//グローバルオブジェクト
+// Global Object
 let g_game_width     = 320;
 let g_game_height    = 320;
 
-let g_time           = 0;		//現在時刻[ms]
-let g_dtime          = 0;		//前回の描画からの経過時間[ms]
+let g_time           = 0;		// Current time [ms]
+let g_dtime          = 0;		// Elapsed time since last drawing [ms]
 
 let g_screen_ctx     = null;
-let g_bloom_offscs   = [];		//ブルーム処理用オフスクリーンcanvas
+let g_bloom_offscs   = [];		// Off-screen canvas for Bloom processing
 
 const PC_WIDTH       = 800;
 const PC_HEIGHT      = 800;
 const HI_WIDTH       = 1800;
-const HI_HEIGHT      = 1400;	//高解像度版の方の縦を少し小さくしておくと、最終的に引き伸ばしが入って、より光って見えることを発見した
+const HI_HEIGHT      = 1400;	// Discovered that if height of high-res version is slightly smaller, it gets stretched eventually and looks more glowing
 const MORPH_TIME     = 8000;
 const FADE_TIME      = 500;
 
@@ -106,7 +106,7 @@ let g_fps_visible    = true;
 let g_cnt            = 0;
 let g_auto_save_cnt  = 0;
 
-//動画キャプチャ用定数
+// Constants for video capture
 const REC_TURN_NUM         = 7;
 const ENABLE_VIDEO_CAPTURE = false;
 
@@ -115,27 +115,27 @@ let g_selected = [];
 function init()
 {
 	
-	//初期化処理
+	// Initialization processing
 	
-	//準備
+	// Preparation
 	setup();
 	
-	//クリックorタップでFPSの表示ON/OFF
+	// Toggle FPS display ON/OFF with click or tap
 	toggle_fps_visible();
 	window.onclick     = toggle_fps_visible;
 	window.ontouchdown = toggle_fps_visible;
 	
-	//ダブルクリックで画像として保存
+	// Save as image on double click
 	window.ondblclick  = save_image;
 	
-	//requestAnimationFrameの準備(各種ブラウザ対応)
+	// Preparation of requestAnimationFrame (compatible with various browsers)
 	let requestAnimationFrame = window.requestAnimationFrame       ||
                                 window.mozRequestAnimationFrame    ||
                                 window.webkitRequestAnimationFrame ||
                                 window.msRequestAnimationFrame;
     window.requestAnimationFrame = requestAnimationFrame;
     
-	//描画を登録
+	// Register drawing
 	window.requestAnimationFrame(render);
 	
 }
@@ -143,14 +143,14 @@ function init()
 function adjust_screen()
 {
 
-	//画面調整
+	// Screen Adjustment
 	
-	//ウインドウのサイズを取得
+	// Get window size
 	let window_w = window.innerWidth;
 	let window_h = window.innerHeight;
 	
-	//ウインドウ幅が十分に広い場合はPCだとして
-	//画面サイズを変更する
+	// Assuming it's a PC if window width is wide enough
+	// Change screen size
 	if((g_game_width * 2) <= window_w)
 	{
 		g_game_width     = PC_WIDTH;
@@ -158,7 +158,7 @@ function adjust_screen()
 		g_scale          = 1.0;
 	}
 	
-	//ゲームスクリーンを中央に配置
+	// Place game screen in center
 	let screen  = document.getElementById("game-screen");
 	let game_x  = (window_w - g_game_width)  / 2;
 	let game_y  = (window_h - g_game_height) / 2;
@@ -168,7 +168,7 @@ function adjust_screen()
 	screen.width      = g_game_width;
 	screen.height     = g_game_height;
 	
-	//画面の幅に合わせて額縁の幅を比率で決める
+	// Determine frame width by ratio according to screen width
 	const bw = (g_game_width * 0.05) | 0;
 	const pw = (g_game_width * 0.10) | 0;
 	screen.style.borderWidth = bw+"px";
@@ -179,19 +179,19 @@ function adjust_screen()
 function setup_obj()
 {
 
-	//オブジェクトの準備
+	// Preparation of object
 	
-	//メイン画面のContextを取得しておく
+	// Get Context of main screen in advance
 	const sc_w   = g_game_width;
 	const sc_h   = g_game_height;
 	const screen = document.getElementById("game-screen");
 	g_screen_ctx = screen.getContext("2d");
 	
-	//カラーリストの生成
+	// Generate color list
 	const urls = 
 	[
 /*	
-		//グラデーションになるパレットを選んでみました
+		// I chose a palette that becomes a gradation
 		"https://coolors.co/f7b267-f79d65-f4845f-f27059-f25c54",
 		"https://coolors.co/fbfbf2-e5e6e4-cfd2cd-a6a2a2-847577",
 		"https://coolors.co/fbba72-ca5310-bb4d00-8f250c-691e06",
@@ -208,7 +208,7 @@ function setup_obj()
 		"https://coolors.co/d4c5e2-c9d7f8-a7e2e3-80cfa9-4c6663",
 */		
 
-		//アクセントになるように明るい色が少しある感じのパレットを選びました
+		// Chose a palette with some bright colors to be an accent
 		"https://coolors.co/227c9d-17c3b2-ffcb77-fef9ef-fe6d73",
 		"https://coolors.co/f6fedb-e6d3a3-d8d174-b6c454-91972a",
 		"https://coolors.co/704e2e-79745c-e6f8b2-cde77f-709176",
@@ -270,7 +270,7 @@ function setup_obj()
 		g_col_list.push(createPalette(urls[i]));
 	}
 	
-	//高解像度用のキャンバスを準備
+	// Prepare canvas for high resolution
 	g_image_cv  = document.createElement("canvas");
 	g_image_ctx = g_image_cv.getContext("2d");
 	
@@ -281,7 +281,7 @@ function setup_obj()
 
 function setup_bloom(w = g_game_width,h = g_game_height)
 {
-	//ブルーム処理用の準備
+	// Preparation for Bloom Processing
 
 	let scale = 0.5;
 	const num = 2;//(g_scale == 1.0) ? 2 : 1;
@@ -309,35 +309,35 @@ function setup_bloom(w = g_game_width,h = g_game_height)
 
 function do_bloom(sc_ctx,sc_cv)
 {
-	//ブルーム処理を実施
+	// Execute Bloom Processing
 	
-	//sc_ctx,sc_cvはブルーム処理をかけて上書きする元画像の2DContextとcanvasです
+	// sc_ctx, sc_cv are 2DContext and canvas of original image to be overwritten with bloom processing
 	
-	//レンダリング後画像にフィルタをかける
+	// Apply filter to image after rendering
 	const sc_w = sc_cv.width;
 	const sc_h = sc_cv.height;
 	
 	//
-	// 簡易的なブルーム処理をやっています。
+	// Doing simple bloom processing.
 	//
-	// 高輝度部分だけ抜き出しではなく、全体が光って見えちゃうので、
-	// 本来のブルーム処理とはちょっと違うと思いますが、とりあえず
-	// 手軽に光らせたい場合には楽かも(*´ω｀*)
+	// Because it's not extracting only high luminance parts, but whole thing looks glowing,
+	// I think it's a bit different from original bloom processing, but anyway
+	// Might be easy if you want to make it glow easily (*´ω｀*)
 	//
 	
-	//複数段階の縦横2分の1ずつ解像度を下げたオフスクリーンキャンバスに
-	//CanvasのBlurフィルタをかけて、拡大して加算合成します
+	// To off-screen canvas with resolution lowered by half vertically and horizontally in multiple stages
+	// Apply Canvas Blur filter, enlarge and additive blend
 	const offsc_num = g_bloom_offscs.length;
 	let blur_w = [ 4,16 ];
-	//if(g_scale != 1.0){ blur_w = [ 3,6 ]; }	//スマホはこっち
+	// if(g_scale != 1.0){ blur_w = [ 3,6 ]; }	// Smartphone uses this
 	for(let idx = 0;idx < offsc_num;++idx)
 	{
-		//画面に表示されているキャンバスから現在の状態を取得
+		// Get current state from canvas displayed on screen
 		let offsc = g_bloom_offscs[idx];
 		offsc.ctx.clearRect(0,0,offsc.cv_w,offsc.cv_h);
 		offsc.ctx.drawImage(sc_cv,0,0,sc_w,sc_h,0,0,offsc.cv_w,offsc.cv_h);
 
-		//縮小された絵にフィルタをかけながら画面に反映(加算合成)
+		// Reflect on screen (additive blending) while applying filter to reduced image
 		sc_ctx.save();
 		sc_ctx.globalAlpha = 1.0;
 		sc_ctx.globalCompositeOperation = 'lighter';
@@ -345,30 +345,30 @@ function do_bloom(sc_ctx,sc_cv)
 		sc_ctx.drawImage(offsc.cv,0,0,offsc.cv_w,offsc.cv_h,0,0,sc_w,sc_h);
 		sc_ctx.restore();
 		
-		//sc_cvが表示用のキャンバスと同じになっていると
-		//↑で合成したものをさらに取得して拡大するので、ぼかし
-		//がきつめにかけられてると思う。
+		// If sc_cv is same as display canvas
+		// ^ Get the composited result and enlarge it, so blur
+		// I think ... is applied tightly.
 	}
 }
 
 function setup()
 {
 	
-	//準備
+	// Preparation
 		
-	//画面調整
+	// Screen Adjustment
 	adjust_screen();
 	
-	//オブジェクトの準備
+	// Preparation of object
 	setup_obj();
 	
-	//ブルーム処理の準備
+	// Preparation for Bloom Processing
 	setup_bloom(HI_WIDTH,HI_HEIGHT);
 
-	//最初の値を決める
+	// Determine initial value
 	reset();
 	
-	//Video録画準備と開始
+	// Video recording preparation and start
 	setupVideoCapture(REC_TURN_NUM,ENABLE_VIDEO_CAPTURE);
 
 }
@@ -376,17 +376,17 @@ function setup()
 function reset()
 {
 
-	//乱数のシード値を決定
+	// Determine random seed value
 	g_seed = rnd(12345);
 	randomSeed(g_seed);
 
-	//標準のパレットを決定
+	// Determine standard palette
 	g_col = shuffle(g_col_list[random(0,g_col_list.length-1)|0]);
 	
-	//パレットランダムモード選択
+	// Select palette random mode
 	g_col_rnd = (random(0,100) < 60) ? 1 : 0;1
 	
-	//ストレンジアトラクター関連の設定
+	// Strange Attractor related settings
 	reset_attractor();
 	
 	g_add_c  = random(MIN_col  ,MAX_col  )/1000;
@@ -397,11 +397,11 @@ function reset()
 
 function reset_attractor()
 {
-	//ストレンジアトラクター関連の設定
+	// Strange Attractor related settings
 	
 	while(1)
 	{
-		//ストレンジアトラクターのIDを決定
+		// Determine ID of Strange Attractor
 		function att_idchar()
 		{
 			const ascii = random("A".charCodeAt(0),"Y".charCodeAt(0));
@@ -409,21 +409,21 @@ function reset_attractor()
 		}
 		if(0)
 		{
-			//ランダムにIDを選択
+			// Randomly select ID
 			for(let i = 0;i < 12;++i)
 			{	g_att_id += att_idchar();	}
 		}
 		else
 		{
-			//選定済みのIDからランダムチョイス
+			// Randomly choose from pre-selected IDs
 			g_att_id = get_att_id();
 			
-			//ちょっと入れ替えるだけでまともに見れない図形に
-			//なったりしたので、やっぱり入れ替え作戦は中止
+			// Just swapping a little makes the figure unwatchable
+			// Became ..., so decided to stop swap strategy after all
 			/*
 			if((random(0,100) < 30))
 			{
-				//たまに数文字入れ替えする
+				// Occasionally swap a few characters
 				const rep_num = random(1,3);
 				for(let i = 0;i < rep_num;++i)
 				{
@@ -437,23 +437,23 @@ function reset_attractor()
 			*/
 		}
 		
-		//パラメータ決定
+		// Parameter determination
 		//
-		// パラメータは -1.2 から +1.2 まで 0.1 刻みで
-		// -1.2をAに、+1.2をYに当てはめた25文字の範囲で表した
-		// IDを元に設定されます
+		// Parameters are from -1.2 to +1.2 in 0.1 increments
+		// Represented in a range of 25 characters with -1.2 as A and +1.2 as Y
+		// Set based on ID
 		//
 		let param_list = [];
 		for(let i = 0;i < g_att_id.length;++i)
 		{
-			const p = -1.2 + (g_att_id.charCodeAt(i) - 0x41) * 0.1;	//0x41は'A'のASCIIコード
+			const p = -1.2 + (g_att_id.charCodeAt(i) - 0x41) * 0.1;	// 0x41 is ASCII code for 'A'
 			param_list.push(p);
 		}
 		
 		function next(x,y)
 		{
 			//
-			// J.C.Sprott氏 の式
+			// J.C.Sprott's formula
 			//
 			// newX = a1 + a2*x + a3*x*x +  a4*x*y +  a5*y +  a6*y*y
 		    // newY = a7 + a8*x + a9*x*x + a10*x*y + a11*y + a12*y*y
@@ -464,7 +464,7 @@ function reset_attractor()
 			return { x:nx, y:ny };
 		}
 		
-		//座標分布の最大値を用いてスケールも計算
+		// Calculate scale using maximum value of coordinate distribution
 		const x0 = random(1,10) / 1000;
 		const y0 = random(1,10) / 1000;
 		let x_mm  = { min: 0, max: 0 };
@@ -481,8 +481,8 @@ function reset_attractor()
 			if(pos.y > y_mm.max){ y_mm.max = pos.y; }
 		}
 		
-		//座標の偏りを調整して、中心に絵ができるように
-		//オフセットを計算し、最大値も補正
+		// Adjust coordinate bias so picture is in center
+		// Calculate offset and correct maximum value
 		const x_w2     = (x_mm.max - x_mm.min) / 2;
 		const y_h2     = (y_mm.max - y_mm.min) / 2;
 		const x_min    = Math.abs(x_mm.min);
@@ -490,13 +490,13 @@ function reset_attractor()
 		const offset_x = (x_min < x_mm.max) ? -(x_mm.max - x_w2) : (x_min - x_w2);
 		const offset_y = (y_min < y_mm.max) ? -(y_mm.max - y_h2) : (y_min - y_h2);
 		
-		//描画時には、描画領域の半分を1.0として -1.0 ～ 1.0の範囲が
-		//見える範囲になるので、最大値が±1.0になるように座標値を補正します。
-		//ただし、ぴっちりにしてしまうとBloomの光が切れてしまうので、ほんの
-		//ちょっと縮小しておきます。
+		// When drawing, half of drawing area is 1.0, so range -1.0 to 1.0 is
+		// Since it becomes visible range, correct coordinate values so max value is +/- 1.0.
+		// However, if made tight, Bloom light will be cut off, so just a little
+		// Shrink it a little.
 		//
-		//あと、描画時の高速化のため、ここでcx,cyを掛けて座標位置を
-		//計算しきってしまいます。
+		// Also, for faster drawing, multiply by cx, cy here to set coordinate position
+		// Calculate completely.
 		const max_xy = Math.max(x_w2,y_h2);
 		const scale  = (1.0 / max_xy) * 0.975;
 		const cx     = HI_WIDTH  / 2;
@@ -509,7 +509,7 @@ function reset_attractor()
 			g_att_pos[i].y *= (scale * cy);
 		}
 		
-		//妥当な範囲に入ってない場合はもう一回リセット
+		// Reset again if not in valid range
 		if((x_w2 < 3.0) && (y_h2 < 3.0) &&
 		   (x_w2 > 1.0) && (y_h2 > 1.0))
 		{	break;	}
@@ -521,9 +521,9 @@ function reset_attractor()
 function get_att_id()
 {
 	
-	//あらかじめ選定したIDの中からランダムでチョイス
+	// Randomly choose from pre-selected IDs
 	
-	const att_ids = //360個あります
+	const att_ids = // There are 360 items
 	[
 		"WCHMQMRDIFHK","TMMOWHFAYGSN","PHIYDFXPDOKF","YBMPKKWOYHDK","DEQLIPJMJTGT","IHSRNCXRSMAD",
 		"VWJMJFMOBKIO","TFHRNKWQDHBM","NITPIGRVGSEN","MWNLTIOEYKGM","GAGKCPINRKES","TJITDSDGPERO",
@@ -594,19 +594,19 @@ function get_att_id()
 function draw_fps()
 {
 	
-	//FPS計測
+	// FPS Measurement
 	
-	//現在時刻を取得
+	// Get current time
 	let now_time = Date.now();
 	
 	if((now_time - g_last_fps_time) >= 1000)
 	{
-		//FPS履歴に追加
+		// Add to FPS history
 		g_fps_list.push(g_fps_count);
 		if(g_fps_list.length > 10)
 		{	
-			//先頭を削除して過去n回分までの
-			//FPSの平均とします(移動平均)
+			// Delete first and keep up to past n times
+			// Use average of FPS (moving average)
 			g_fps_list.shift();
 		}
 		let fps_ave = 0;
@@ -614,7 +614,7 @@ function draw_fps()
 		{	fps_ave += g_fps_list[i];	}
 		fps_ave /= g_fps_list.length;
 		
-		//FPS表示
+		// FPS Display
 		let fps_div = document.getElementById("fps");
 		let fps     = (fps_ave*(1000/(now_time - g_last_fps_time)));
 		fps_div.innerText = "FPS:"+fps + "   ID:"+g_att_id + "   ramp="+g_r_amp;
@@ -631,7 +631,7 @@ function save_image()
 {
 	var canvas = document.getElementById("game-screen");
 	
-	//現在時刻+IDでファイル名を生成
+	// Generate filename with current time + ID
 	const dt   = new Date();
 	const date = dt.getFullYear().toString() + 
 				 ("0" + (dt.getMonth() + 1).toString()).slice(-2) +
@@ -649,26 +649,26 @@ function save_image()
 	}
 	else
 	{
-		//アンカータグを作成
+		// Create anchor tag
 		var a  = document.createElement('a');
 		a.href = canvas.toDataURL('image/png');
 		
-		//ダウンロード時のファイル名を指定
+		// Specify filename when downloading
 		a.download = dl_filename;
 		
-		//クリックイベントを発生させる
+		// Trigger click event
 		a.click();
 	}
 }
 
 function toggle_fps_visible()
 {
-	//FPSの表示をON/OFFします
+	// Toggle FPS display ON/OFF
 	
-	//表示フラグを反転させる
+	// Invert display flag
 	g_fps_visible = !g_fps_visible;
 	
-	//表示フラグに合わせてvisible制御
+	// Control visible based on display flag
 	let fps_div = document.getElementById("fps");
 	fps_div.style.display = g_fps_visible ? "block" : "none";
 
@@ -677,18 +677,18 @@ function toggle_fps_visible()
 function draw()
 {
 
-	//描画コア
+	// Drawing Core
 	
-	//開始時刻保存
+	// Save start time
 	if(g_start_time == 0)
 	{
 		g_start_time = g_time;
 		g_next_time  = g_time + MORPH_TIME;
 	}
 	
-	randomSeed(g_seed);	//シードを固定してランダム結果が毎回同じになるようにする
+	randomSeed(g_seed);	// Fix seed so random results are same every time
 	
-	//画面クリア
+	// Screen Clear
 	const sc_w   = g_game_width;
 	const sc_h   = g_game_height;
 	const hi_w   = HI_WIDTH;
@@ -702,7 +702,7 @@ function draw()
 	
 	ctx.save();
 	
-	//フェートイン
+	// Fade In
 	const time_ms = g_time - g_start_time;
 	if(time_ms < FADE_TIME)
 	{
@@ -721,7 +721,7 @@ function draw()
 	
 	hi_ctx.save();
 	
-	//パラメータ準備
+	// Parameter preparation
 	const cx     = hi_w / 2;
 	const cy     = hi_h / 2;
 	const add_c  = g_add_c;
@@ -733,19 +733,19 @@ function draw()
 	const col    = g_col;
 	const time   = g_time - g_start_time;
 
-	//描画準備
+	// Preparation for drawing
 	hi_ctx.globalCompositeOperation = 'lighter';
 	hi_ctx.translate(cx,cy);
 	hi_ctx.lineWidth = 0.0;
 
-	//描画ループ
+	// Drawing Loop
 	let nx = 0.0;
 	let c  = 0.0;
 	for(let i = 0;i < g_att_pos.length;++i)
 	{
 		const pos = g_att_pos[i];
 		
-		//色を選択します
+		// Select color
 		let pal = Math.floor(c) % col.length;
 		c += add_c;
 		
@@ -756,7 +756,7 @@ function draw()
 		if(n < 1){ n = 1; }
 		nx += add_nx;
 		
-		//点を描画
+		// Draw Point
 		hi_ctx.globalAlpha=1.0-(n/7);
 		hi_ctx.arc(pos.x,pos.y,n,0,TAU,false);
 		hi_ctx.fill();
@@ -764,16 +764,16 @@ function draw()
 
 	hi_ctx.restore();
 	
-	//ブルーム処理
+	// Bloom Processing
 	do_bloom(hi_ctx,hi_cv);
 
 	ctx.save();
 	
-	//画面に縮小転送
+	// Transfer reduced size to screen
 	ctx.drawImage(hi_cv,0,0,hi_w,hi_h,0,0,sc_w,sc_h);
 
 /*
-	//フェートイン・アウト
+	// Fade In/Out
 	const time_ms = g_time - g_start_time;
 	if(time_ms < FADE_TIME)
 	{
@@ -795,13 +795,13 @@ function draw()
 		//if(g_auto_save_cnt++ < 100)
 		//{	save_image();	}
 		
-		//Video録画の停止判定
+		// Video recording stop judgment
 		CheckVideoCapture();
 
-		//次の区切り時刻を決めてリセット
+		// Determine next break time and reset
 		//
-		// 座標位置の作成に少し時間がかかるので、
-		// ここで現在時刻をリセット
+		// Since creating coordinate positions takes a little time,
+		// Reset current time here
 		//
 		reset();
 		g_time = (new Date).getTime();
@@ -816,9 +816,9 @@ function draw()
 function render()
 {
 	
-	//毎ターンの描画処理
+	// Drawing processing for every turn
 	
-	//時間計算
+	// Time Calculation
 	const last_time = g_time;
 	g_time = (new Date).getTime();
 	if(last_time == 0)
@@ -826,13 +826,13 @@ function render()
 	else
 	{	g_dtime = g_time - last_time;	}
 	
-	//描画コア
+	// Drawing Core
 	draw();
 	
-	//FPS描画
+	// Draw FPS
 	draw_fps();
 	
-	//次の描画呼び出しを登録
+	// Register next drawing call
 	window.requestAnimationFrame(render);
 
 }

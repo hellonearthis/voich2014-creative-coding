@@ -1,0 +1,802 @@
+[
+    {
+        "original": "//| X + Width / 2\tHeight / 2 + Y\t0\t\t\t1 |\t原点を画面の中心に平行移動",
+        "translated": "//| X + Width / 2\tHeight / 2 + Y\t0\t\t\t1 |\tTranslate origin to center of screen"
+    },
+    {
+        "original": "//| vecX.x        vecY.x        vecZ.x        0 |\t回転",
+        "translated": "//| vecX.x        vecY.x        vecZ.x        0 |\tRotation"
+    },
+    {
+        "original": "//| vecX.x       vecX.y        vecX.z  -(vecX・from) |",
+        "translated": "//| vecX.x       vecX.y        vecX.z  -(vecX・from) |"
+    },
+    {
+        "original": "//| vecX.y        vecY.y        vecZ.z        0 |\t回転",
+        "translated": "//| vecX.y        vecY.y        vecZ.z        0 |\tRotation"
+    },
+    {
+        "original": "//| vecX.z        vecY.y        vecZ.z        0 |\t回転",
+        "translated": "//| vecX.z        vecY.y        vecZ.z        0 |\tRotation"
+    },
+    {
+        "original": "//| vecY.x       vecY.y        vecY.z  -(vecY・from) |",
+        "translated": "//| vecY.x       vecY.y        vecY.z  -(vecY・from) |"
+    },
+    {
+        "original": "//| vecZ.x       vecZ.y        vecZ.z  -(vecZ・from) |",
+        "translated": "//| vecZ.x       vecZ.y        vecZ.z  -(vecZ・from) |"
+    },
+    {
+        "original": "//αブレンディング処理した色を計算",
+        "translated": "// Calculate color processed with alpha blending"
+    },
+    {
+        "original": "//α値だけすべてゼロにして画面クリア",
+        "translated": "// Clear screen by setting all alpha values to zero"
+    },
+    {
+        "original": "//α値を取得",
+        "translated": "// Get alpha value"
+    },
+    {
+        "original": "//※1回だとstartの値が不定になるのでreset()を2回呼びます",
+        "translated": "// * Calling reset() twice because start value becomes undefined if called once"
+    },
+    {
+        "original": "//※HLSで色変えようかと思ったけど、やっぱり灰色固定にしました",
+        "translated": "// * Thought about changing color with HLS, but decided to fix it to gray"
+    },
+    {
+        "original": "//※↑調整してみたは良いものの、透明度を下げると光すぎは確かに低減されるが、",
+        "translated": "// * ^ Adjusted it, and while lowering transparency certainly reduces excessive glare,"
+    },
+    {
+        "original": "//※とりあえず必要最低限だけ実装。あとは必要になったら…",
+        "translated": "// * Implemented only the bare minimum for now. The rest when needed..."
+    },
+    {
+        "original": "//※ビュー(カメラ)変換行列を通ってきた座標は、視点(カメラの位置)",
+        "translated": "// * Coordinates passed through View (Camera) transformation matrix are viewpoint (camera position)"
+    },
+    {
+        "original": "//※ランダム要素多めな作品だから、光すぎも個性ということにして、調整なしで",
+        "translated": "// * Since this work has many random elements, I'll consider excessive glare as a characteristic and go without adjustment"
+    },
+    {
+        "original": "//※今回のフラットシェーディングではこの時点で座標がViewPort変換",
+        "translated": "// * In this flat shading, coordinates are ViewPort transformed at this point"
+    },
+    {
+        "original": "//※若干物足りなさを感じるのと、透明度が低い程描画速度が落ちる傾向があるので、",
+        "translated": "// * It feels a bit lacking, and drawing speed tends to drop as transparency decreases,"
+    },
+    {
+        "original": "//※行こうと思いました！",
+        "translated": "// * I decided to go directly!"
+    },
+    {
+        "original": "//※配列類は最初に最大数を確保しておく",
+        "translated": "// * Allocate maximum number for arrays at the beginning"
+    },
+    {
+        "original": "//↑vw1～3を全部1にすると、パースペクティブコレクトなしになるので、試してみると面白い",
+        "translated": "// ^ If you set all vw1-3 to 1, there will be no perspective correction, so it's interesting to try"
+    },
+    {
+        "original": "//↑で合成したものをさらに取得して拡大するので、ぼかし",
+        "translated": "// ^ Get the composited result and enlarge it, so blur"
+    },
+    {
+        "original": "//↑の3D noiseのソースを参考に移植しています。",
+        "translated": "// ^ Ported referring to the 3D noise source above."
+    },
+    {
+        "original": "//↑のC#のソースを参考に雑に移植しています。",
+        "translated": "// ^ Roughly ported referring to the C# source above."
+    },
+    {
+        "original": "//↑のソースを参考に雑に移植しています。",
+        "translated": "// ^ Roughly ported referring to the source above."
+    },
+    {
+        "original": "//↑の記事を参考に実装しています。",
+        "translated": "// ^ Implemented referring to the article above."
+    },
+    {
+        "original": "//↑コメント外して、aa-chipのcssを消したら",
+        "translated": "// ^ If you uncomment and delete aa-chip css"
+    },
+    {
+        "original": "//↑今回は、背景を白で統一しました",
+        "translated": "// ^ This time, I unified the background to white"
+    },
+    {
+        "original": "//↑座標じゃないよベクトル(方向)だよ",
+        "translated": "// ^ It's not coordinates, it's a vector (direction)"
+    },
+    {
+        "original": "//□型を描画します",
+        "translated": "// Draw square shape"
+    },
+    {
+        "original": "//△型を描画します",
+        "translated": "// Draw triangle shape"
+    },
+    {
+        "original": "//●",
+        "translated": "// ●"
+    },
+    {
+        "original": "//◯を描画",
+        "translated": "// Draw Circle"
+    },
+    {
+        "original": "//☓のサイズをノイズで決定",
+        "translated": "// Determine X size with noise"
+    },
+    {
+        "original": "//☓の模様を描く",
+        "translated": "// Draw X pattern"
+    },
+    {
+        "original": "//☓型を描画します",
+        "translated": "// Draw X shape"
+    },
+    {
+        "original": "//　○",
+        "translated": "//  ○"
+    },
+    {
+        "original": "//　●",
+        "translated": "//  ●"
+    },
+    {
+        "original": "//　●○",
+        "translated": "//  ●○"
+    },
+    {
+        "original": "//　　○",
+        "translated": "//    ○"
+    },
+    {
+        "original": "//　その結果、Y座標が上下反転したものとなり、普通に法線を求める",
+        "translated": "//  As a result, Y coordinates are flipped upside down, so calculating normal normally"
+    },
+    {
+        "original": "//　を済ませたもので送られてきます。",
+        "translated": "//  is sent with ... completed."
+    },
+    {
+        "original": "//あえて15fps未満にする",
+        "translated": "// Intentionally make it less than 15fps"
+    },
+    {
+        "original": "//あと、描画時の高速化のため、ここでcx,cyを掛けて座標位置を",
+        "translated": "// Also, for faster drawing, multiply by cx, cy here to set coordinate position"
+    },
+    {
+        "original": "//あらかじめ選定したIDの中からランダムでチョイス",
+        "translated": "// Randomly choose from pre-selected IDs"
+    },
+    {
+        "original": "//あんよ",
+        "translated": "// Feet"
+    },
+    {
+        "original": "//いきます。",
+        "translated": "// Going."
+    },
+    {
+        "original": "//いったんY軸での回転とX軸での平行移動を元に戻して、",
+        "translated": "// Once revert rotation on Y axis and translation on X axis,"
+    },
+    {
+        "original": "//おめめ",
+        "translated": "// Eyes"
+    },
+    {
+        "original": "//かろうじて発散するところを覚えておく",
+        "translated": "// Remember where it barely diverges"
+    },
+    {
+        "original": "//があります。",
+        "translated": "// There is."
+    },
+    {
+        "original": "//がきつめにかけられてると思う。",
+        "translated": "// I think ... is applied tightly."
+    },
+    {
+        "original": "//くるまオブジェクト管理人",
+        "translated": "// Car Object Manager"
+    },
+    {
+        "original": "//ぐるりと囲めるパスを生成します",
+        "translated": "// Generate a path that can surround"
+    },
+    {
+        "original": "//ここから遅延を付けて逆回転スタート",
+        "translated": "// Start reverse rotation with delay from here"
+    },
+    {
+        "original": "//ここから録画開始",
+        "translated": "// Start recording from here"
+    },
+    {
+        "original": "//ここでcanvasのスクリーン座標系に変換",
+        "translated": "// Convert to canvas screen coordinate system here"
+    },
+    {
+        "original": "//ここまででいったんラインを引く",
+        "translated": "// Draw a line up to here for now"
+    },
+    {
+        "original": "//ことで、\"#rrggbb\"の形式に変換します",
+        "translated": "// by converting to \"#rrggbb\" format"
+    },
+    {
+        "original": "//このグリッド領域の角度を保存",
+        "translated": "// Save angle of this grid area"
+    },
+    {
+        "original": "//このターンでのパラメータを計算",
+        "translated": "// Calculate parameters for this turn"
+    },
+    {
+        "original": "//このパターンの線の太さを決める",
+        "translated": "// Determine line width for this pattern"
+    },
+    {
+        "original": "//このパターンの色を決める",
+        "translated": "// Determine color for this pattern"
+    },
+    {
+        "original": "//このベクトルを単位ベクトル化したものが頂点v1,v2,v3から",
+        "translated": "// The unit vector version of this vector is from vertices v1, v2, v3"
+    },
+    {
+        "original": "//このポイントが属するパスのインデックスを選定",
+        "translated": "// Select index of path this point belongs to"
+    },
+    {
+        "original": "//この分岐点はどこもダメだったので削除",
+        "translated": "// Deleted this branch point because nowhere was good"
+    },
+    {
+        "original": "//この射影変換では、視点からの見える範囲(視錘台)で区切って座標を正規化",
+        "translated": "// In this projection transformation, normalize coordinates by delimiting visible range (frustum) from viewpoint"
+    },
+    {
+        "original": "//この行列は、ビューポートの寸法および指定の深度範囲に従って",
+        "translated": "// This matrix follows viewport dimensions and specified depth range"
+    },
+    {
+        "original": "//この頂点の法線ベクトルを算出する際に利用されます。",
+        "translated": "// Used when calculating normal vector of this vertex."
+    },
+    {
+        "original": "//この頂点を利用する各ポリゴンの法線ベクトルを平均化して、",
+        "translated": "// Average normal vectors of each polygon using this vertex,"
+    },
+    {
+        "original": "//これによって、見える範囲のX/Y/Zの値の範囲が-1.0～1.0に変換されるので、",
+        "translated": "// By this, range of X/Y/Z values in visible range is converted to -1.0 - 1.0,"
+    },
+    {
+        "original": "//これらのサイトを参考にシェーダ内で利用できる関数を",
+        "translated": "// Functions available in shader referring to these sites"
+    },
+    {
+        "original": "//ご利用は自己責任でお願いします。",
+        "translated": "// Please use at your own risk."
+    },
+    {
+        "original": "//しっぽ",
+        "translated": "// Tail"
+    },
+    {
+        "original": "//しっぽ時間が終わったら空きにします",
+        "translated": "// Make empty when tail time ends"
+    },
+    {
+        "original": "//します。",
+        "translated": "// Do."
+    },
+    {
+        "original": "//すでに全部加速が終わって角度がそろってる場合はリセットする",
+        "translated": "// Reset if all acceleration is finished and angles are aligned"
+    },
+    {
+        "original": "//すでに処理済みの座標が一番近い場合は",
+        "translated": "// If already processed coordinate is closest"
+    },
+    {
+        "original": "//すでに描かれているピクセルのZ座標よりも",
+        "translated": "// Than Z coordinate of pixel already drawn"
+    },
+    {
+        "original": "//すでに描かれているピクセルのZ座標よりも手前になるなら描画",
+        "translated": "// Draw if it is in front of Z coordinate of pixel already drawn"
+    },
+    {
+        "original": "//すでに通路なら穴掘りしない",
+        "translated": "// Don't dig if it's already a passage"
+    },
+    {
+        "original": "//すべてのオブジェクト情報を埋める",
+        "translated": "// Fill all object information"
+    },
+    {
+        "original": "//すべての断面の頂点を回転させる",
+        "translated": "// Rotate vertices of all cross sections"
+    },
+    {
+        "original": "//すべて壁になるように埋める",
+        "translated": "// Fill so everything becomes walls"
+    },
+    {
+        "original": "//ずらす",
+        "translated": "// Shift"
+    },
+    {
+        "original": "//そこから各パラメータを設定する",
+        "translated": "// Set each parameter from there"
+    },
+    {
+        "original": "//そこで図形が閉じたと判断します",
+        "translated": "// Determine that the figure closed there"
+    },
+    {
+        "original": "//そこに回転行列を合成します",
+        "translated": "// Compose rotation matrix there"
+    },
+    {
+        "original": "//そこに回転行列を必要最低限の計算で合成します",
+        "translated": "// Compose rotation matrix there with minimum necessary calculation"
+    },
+    {
+        "original": "//そのまま転送",
+        "translated": "// Transfer as is"
+    },
+    {
+        "original": "//その場回転行列作成",
+        "translated": "// Create in-place rotation matrix"
+    },
+    {
+        "original": "//そもそも画面の範囲内にいない場合はスキップ",
+        "translated": "// Skip if not in screen range in the first place"
+    },
+    {
+        "original": "//それぞれのポイントのパラメータを決定",
+        "translated": "// Determine parameters for each point"
+    },
+    {
+        "original": "//それ以外になるまで繰り返します",
+        "translated": "// Repeat until it becomes otherwise"
+    },
+    {
+        "original": "//たくさんCubeを並べる",
+        "translated": "// Arrange many Cubes"
+    },
+    {
+        "original": "//たくさんポリ板を並べる",
+        "translated": "// Arrange many poly boards"
+    },
+    {
+        "original": "//ただし、ぴっちりにしてしまうとBloomの光が切れてしまうので、ほんの",
+        "translated": "// However, if made tight, Bloom light will be cut off, so just a little"
+    },
+    {
+        "original": "//たまに数文字入れ替えする",
+        "translated": "// Occasionally swap a few characters"
+    },
+    {
+        "original": "//ちょっと下に配置する行例を生成",
+        "translated": "// Generate matrix to place slightly below"
+    },
+    {
+        "original": "//ちょっと入れ替えるだけでまともに見れない図形に",
+        "translated": "// Just swapping a little makes the figure unwatchable"
+    },
+    {
+        "original": "//ちょっと奥に配置",
+        "translated": "// Place slightly in the back"
+    },
+    {
+        "original": "//ちょっと横着して、X座標が0になったら",
+        "translated": "// Being a bit lazy, if X coordinate becomes 0"
+    },
+    {
+        "original": "//ちょっと縮小しておきます。",
+        "translated": "// Shrink it a little."
+    },
+    {
+        "original": "//つまり、頂点は依然として [x,y,z,w] 頂点として存在するので、",
+        "translated": "// In other words, since vertex still exists as [x,y,z,w] vertex,"
+    },
+    {
+        "original": "//つもりで使います。効果があったかどうかは、よく分からないｗ",
+        "translated": "// Intending to use it. Not sure if it was effective lol"
+    },
+    {
+        "original": "//できたパスをリストに追加",
+        "translated": "// Add created path to list"
+    },
+    {
+        "original": "//でのカメラから見えている風景になるように座標を変換する",
+        "translated": "// Transform coordinates so it becomes scenery seen from camera at"
+    },
+    {
+        "original": "//で代用します",
+        "translated": "// Substitute with"
+    },
+    {
+        "original": "//ところが微妙に違いますが…)の",
+        "translated": "// Place is slightly different but... ) of"
+    },
+    {
+        "original": "//どちらに掘り進めるかの方向テーブルを作成",
+        "translated": "// Create direction table of which way to dig"
+    },
+    {
+        "original": "//ない場合は、コマンド文字をそのままにする",
+        "translated": "// If not, leave command character as is"
+    },
+    {
+        "original": "//なったりしたので、やっぱり入れ替え作戦は中止",
+        "translated": "// Became ..., so decided to stop swap strategy after all"
+    },
+    {
+        "original": "//なので、各値を長さで割ってベクトルの長さが1",
+        "translated": "// So, divide each value by length so vector length is 1"
+    },
+    {
+        "original": "//なるので、45度を中心に比率を補間して半径を計算",
+        "translated": "// Becomes ..., so interpolate ratio centering on 45 degrees to calculate radius"
+    },
+    {
+        "original": "//なる三角形ポリゴンの法線ベクトルとなります",
+        "translated": "// Becomes normal vector of triangle polygon that becomes"
+    },
+    {
+        "original": "//なんか動いているので、チェックして抜ける",
+        "translated": "// Something is moving, so check and exit"
+    },
+    {
+        "original": "//なんか変数でのインデックス指定ができなかったので苦肉の策",
+        "translated": "// Last resort because index specification with variable didn't work"
+    },
+    {
+        "original": "//なんちゃってアンチエイリアス付きブレゼンハムのLINE描画の関数を準備",
+        "translated": "// Prepare fake anti-aliased Bresenham LINE drawing function"
+    },
+    {
+        "original": "//になるようにする",
+        "translated": "// Make it so that"
+    },
+    {
+        "original": "//ねじれるトーラスオブジェクト管理人",
+        "translated": "// Twisted Torus Object Manager"
+    },
+    {
+        "original": "//ねじれアクション",
+        "translated": "// Twist Action"
+    },
+    {
+        "original": "//ねじれアクションカウンタ初期化",
+        "translated": "// Initialize Twist Action Counter"
+    },
+    {
+        "original": "//ねじれアクション用の情報配列を初期化しておく",
+        "translated": "// Initialize information array for Twist Action"
+    },
+    {
+        "original": "//のびるCubeの場合変動が激しいので過去2回分が良いみたい",
+        "translated": "// For stretching Cube, fluctuations are intense so past 2 times seems good"
+    },
+    {
+        "original": "//のびるCubeの描画処理",
+        "translated": "// Drawing processing of stretching Cube"
+    },
+    {
+        "original": "//のびるCube描画",
+        "translated": "// Draw stretching Cube"
+    },
+    {
+        "original": "//の内積結果",
+        "translated": "// Dot product result of"
+    },
+    {
+        "original": "//の範囲から画面の幅・高さのピクセル数に変換します。",
+        "translated": "// Convert from range of to number of pixels of screen width/height."
+    },
+    {
+        "original": "//はみ出した範囲で扱う",
+        "translated": "// Handle in protruding range"
+    },
+    {
+        "original": "//ばらつきを与える",
+        "translated": "// Give variation"
+    },
+    {
+        "original": "//ひとつ下の座標が移動できる場所か？",
+        "translated": "// Is the coordinate one below a movable place?"
+    },
+    {
+        "original": "//ひものための角度を更新",
+        "translated": "// Update angle for string"
+    },
+    {
+        "original": "//びょんびょん動く",
+        "translated": "// Move boing boing"
+    },
+    {
+        "original": "//ほんとは、RidgeTextureと同じsnoiseを使うのですが、",
+        "translated": "// Actually, I use the same snoise as RidgeTexture, but"
+    },
+    {
+        "original": "//ぼかしは、9x9,21x21,65x65",
+        "translated": "// Blur is 9x9, 21x21, 65x65"
+    },
+    {
+        "original": "//ぼでー",
+        "translated": "// Body"
+    },
+    {
+        "original": "//まずは手前に",
+        "translated": "// First to the front"
+    },
+    {
+        "original": "//まだ処理していない座標を起点にして、",
+        "translated": "// Starting from coordinates not yet processed,"
+    },
+    {
+        "original": "//まだ落下中",
+        "translated": "// Still falling"
+    },
+    {
+        "original": "//ればならない。",
+        "translated": "// must be."
+    },
+    {
+        "original": "//アクションを決める",
+        "translated": "// Decide action"
+    },
+    {
+        "original": "//アクセントになるように明るい色が少しある感じのパレットを選びました",
+        "translated": "// Chose a palette with some bright colors to be an accent"
+    },
+    {
+        "original": "//アニメパターンの準備",
+        "translated": "// Preparation of animation pattern"
+    },
+    {
+        "original": "//アニメーション速度を変更",
+        "translated": "// Change animation speed"
+    },
+    {
+        "original": "//アニメーション速度変更イベントを登録",
+        "translated": "// Register animation speed change event"
+    },
+    {
+        "original": "//アンカータグを作成",
+        "translated": "// Create anchor tag"
+    },
+    {
+        "original": "//アンチエイリアス付きブレゼンハムのLINE描画",
+        "translated": "// Anti-aliased Bresenham LINE drawing"
+    },
+    {
+        "original": "//アンチエイリアス付きブレゼンハムのLINE描画で準備する",
+        "translated": "// Prepare with anti-aliased Bresenham LINE drawing"
+    },
+    {
+        "original": "//アンチエイリアス付きブレゼンハムのLINE描画処理",
+        "translated": "// Anti-aliased Bresenham LINE drawing processing"
+    },
+    {
+        "original": "//アンチエイリアス部を描画",
+        "translated": "// Draw anti-aliased part"
+    },
+    {
+        "original": "//インスタンスを描画",
+        "translated": "// Draw instance"
+    },
+    {
+        "original": "//インデックスを更新",
+        "translated": "// Update index"
+    },
+    {
+        "original": "//イージング関数クラス",
+        "translated": "// Easing Function Class"
+    },
+    {
+        "original": "//ウインドウのサイズを取得",
+        "translated": "// Get window size"
+    },
+    {
+        "original": "//ウインドウ幅が十分に広い場合はPCだとして",
+        "translated": "// Assuming it's a PC if window width is wide enough"
+    },
+    {
+        "original": "//ウッドテクスチャクラス",
+        "translated": "// Wood Texture Class"
+    },
+    {
+        "original": "//エッジの場合は黒で描画(これだと不十分だったのでいったんやめる)",
+        "translated": "// Draw in black if edge (this was insufficient so stopped for now)"
+    },
+    {
+        "original": "//エッジ関数",
+        "translated": "// Edge function"
+    },
+    {
+        "original": "//オフスクリーンを転送",
+        "translated": "// Transfer off-screen"
+    },
+    {
+        "original": "//オフスクリーンキャンバスの作成",
+        "translated": "// Create off-screen canvas"
+    },
+    {
+        "original": "//オフスクリーンデータを更新",
+        "translated": "// Update off-screen data"
+    },
+    {
+        "original": "//オフスクリーン用のImageDataを作成",
+        "translated": "// Create ImageData for off-screen"
+    },
+    {
+        "original": "//オフスクリーン用のImageDataを再取得",
+        "translated": "// Re-get ImageData for off-screen"
+    },
+    {
+        "original": "//オフセットを計算し、最大値も補正",
+        "translated": "// Calculate offset and correct maximum value"
+    },
+    {
+        "original": "//オブジェクトごとのY軸回転行列を作成",
+        "translated": "// Create Y-axis rotation matrix for each object"
+    },
+    {
+        "original": "//オブジェクトのサイズを16倍に拡大",
+        "translated": "// Enlarge object size by 16 times"
+    },
+    {
+        "original": "//オブジェクトのサイズを5倍に拡大",
+        "translated": "// Enlarge object size by 5 times"
+    },
+    {
+        "original": "//オブジェクトのサイズを拡大する行列を生成",
+        "translated": "// Generate matrix to enlarge object size"
+    },
+    {
+        "original": "//オブジェクトのサイズを調整",
+        "translated": "// Adjust object size"
+    },
+    {
+        "original": "//オブジェクトの位置を取得",
+        "translated": "// Get object position"
+    },
+    {
+        "original": "//オブジェクトの位置を決定する",
+        "translated": "// Determine object position"
+    },
+    {
+        "original": "//オブジェクトの初期値を設定",
+        "translated": "// Set initial values of object"
+    },
+    {
+        "original": "//オブジェクトの初期化",
+        "translated": "// Object Initialization"
+    },
+    {
+        "original": "//オブジェクトの描画",
+        "translated": "// Object Drawing"
+    },
+    {
+        "original": "//オブジェクトの描画処理",
+        "translated": "// Object drawing processing"
+    },
+    {
+        "original": "//オブジェクトの新しい位置を設定",
+        "translated": "// Set new position of object"
+    },
+    {
+        "original": "//オブジェクトの法線との外積を計算して、",
+        "translated": "// Calculate cross product with object normal,"
+    },
+    {
+        "original": "//オブジェクトの準備",
+        "translated": "// Preparation of object"
+    },
+    {
+        "original": "//オブジェクトの生成",
+        "translated": "// Object Generation"
+    },
+    {
+        "original": "//オブジェクトの画面外判定",
+        "translated": "// Object off-screen judgment"
+    },
+    {
+        "original": "//オブジェクトの移動",
+        "translated": "// Object Movement"
+    },
+    {
+        "original": "//オブジェクトの軸をずらす",
+        "translated": "// Shift object axis"
+    },
+    {
+        "original": "//オブジェクトの頂点リストを生成",
+        "translated": "// Generate object vertex list"
+    },
+    {
+        "original": "//オブジェクトをカメラから見た位置へ変換するための行列",
+        "translated": "// Matrix to transform object to position seen from camera"
+    },
+    {
+        "original": "//オブジェクトを動かす",
+        "translated": "// Move object"
+    },
+    {
+        "original": "//オブジェクト全体に関係する行列を準備",
+        "translated": "// Prepare matrices related to entire object"
+    },
+    {
+        "original": "//オブジェクト全体の回転行列を作成",
+        "translated": "// Create rotation matrix for entire object"
+    },
+    {
+        "original": "//オブジェクト描画",
+        "translated": "// Draw object"
+    },
+    {
+        "original": "//オブジェクト追加",
+        "translated": "// Add object"
+    },
+    {
+        "original": "//オリジナルは、-1.0 ～ 1.0 までの値を取るので、0.0 ～ 1.0 に変換します",
+        "translated": "// Original takes values from -1.0 to 1.0, so convert to 0.0 to 1.0"
+    },
+    {
+        "original": "//カメラと射影行列の準備",
+        "translated": "// Preparation of Camera and Projection Matrix"
+    },
+    {
+        "original": "//カメラ位置に合わせて平行移動と回転",
+        "translated": "// Translate and rotate according to camera position"
+    },
+    {
+        "original": "//カメラ位置の補間",
+        "translated": "// Interpolation of camera position"
+    },
+    {
+        "original": "//カメラ（視点）から注視点までのベクトルを算出",
+        "translated": "// Calculate vector from camera (viewpoint) to gaze point"
+    },
+    {
+        "original": "//カラーリストの生成",
+        "translated": "// Generate color list"
+    },
+    {
+        "original": "//カーブを描くように回転",
+        "translated": "// Rotate to draw a curve"
+    },
+    {
+        "original": "//ガウシアンフィルタシーンのレンダリング開始",
+        "translated": "// Start rendering Gaussian filter scene"
+    },
+    {
+        "original": "//ガウシアンフィルタシーンの頂点バッファに切り替え",
+        "translated": "// Switch to vertex buffer of Gaussian filter scene"
+    },
+    {
+        "original": "//ガウシアンフィルタフラグメントシェーダ",
+        "translated": "// Gaussian Filter Fragment Shader"
+    },
+    {
+        "original": "//ガウシアンフィルタ情報生成",
+        "translated": "// Gaussian filter information generation"
+    }
+]

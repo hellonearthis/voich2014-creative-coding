@@ -1,21 +1,21 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-<title>パパのL-System練習2</title>
+<title>Papa's L-System Practice 2</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=320, user-scalable=no, initial-scale=1.0">
 <meta http-equiv="Cache-Control" content="no-cache">
 <!--
-	このデモでは、JavaScriptでL-Systemを利用して植物っぽい図形を描いてみました。
+	In this demo, I tried drawing plant-like shapes using L-System in JavaScript.
     
-    今回は、ギンさん(@gin_graphic)のブログ記事 
-    「【p5.js】L-systemで木を描く」を参考にさせて頂きました。
+    This time, Gin-san's (@gin_graphic) blog article 
+    I referenced "[p5.js] Drawing trees with L-system".
     https://gin-graphic.hatenablog.com/entry/2022/12/20/000000
     
-    記事にしてくださったギンさんに圧倒的感謝を！(*´ω｀*)
+    Overwhelming thanks to Gin-san for writing the article! (*´ω｀*)
 
     
-    Copyright (c) 2023 ぼいち(@voich2014 in Twitter)
+    Copyright (c) 2023 Voich (@voich2014 in Twitter)
 	
 	Released under the MIT license.
  	see https://opensource.org/licenses/MIT
@@ -57,20 +57,20 @@
 </style>
 <script type="text/javascript">
 
-//グローバルオブジェクト
+// Global Object
 let g_game_width     = 250;
 let g_game_height    = 250;
 
-let g_time           = 0;		//現在時刻[ms]
-let g_dtime          = 0;		//前回の描画からの経過時間[ms]
+let g_time           = 0;		// Current time [ms]
+let g_dtime          = 0;		// Elapsed time since last drawing [ms]
 
 let g_screen_ctx     = null;
-let g_bloom_offscs   = [];		//ブルーム処理用オフスクリーンcanvas
+let g_bloom_offscs   = [];		// Off-screen canvas for Bloom processing
 
 const PC_WIDTH       = 680;
 const PC_HEIGHT      = 680;
 const HI_WIDTH       = 1800;
-const HI_HEIGHT      = 1400;	//高解像度版の方の縦を少し小さくしておくと、最終的に引き伸ばしが入って、より光って見えることを発見した
+const HI_HEIGHT      = 1400;	// Discovered that if height of high-res version is slightly smaller, it gets stretched eventually and looks more glowing
 const MORPH_TIME     = 8000;
 const FADE_TIME      = 200;
 
@@ -118,24 +118,24 @@ let g_cnt            = 0;
 function init()
 {
 	
-	//初期化処理
+	// Initialization processing
 	
-	//準備
+	// Preparation
 	setup();
 	
-	//クリックorタップでFPSの表示ON/OFF
+	// Toggle FPS display ON/OFF with click or tap
 	toggle_fps_visible();
 	window.onmousedown = toggle_fps_visible;
 	window.ontouchdown = toggle_fps_visible;
 	
-	//requestAnimationFrameの準備(各種ブラウザ対応)
+	// Preparation of requestAnimationFrame (compatible with various browsers)
 	let requestAnimationFrame = window.requestAnimationFrame       ||
                                 window.mozRequestAnimationFrame    ||
                                 window.webkitRequestAnimationFrame ||
                                 window.msRequestAnimationFrame;
     window.requestAnimationFrame = requestAnimationFrame;
     
-	//描画を登録
+	// Register drawing
 	window.requestAnimationFrame(render);
 	
 }
@@ -143,14 +143,14 @@ function init()
 function adjust_screen()
 {
 
-	//画面調整
+	// Screen Adjustment
 	
-	//ウインドウのサイズを取得
+	// Get window size
 	let window_w = window.innerWidth;
 	let window_h = window.innerHeight;
 	
-	//ウインドウ幅が十分に広い場合はPCだとして
-	//画面サイズを変更する
+	// Assuming it's a PC if window width is wide enough
+	// Change screen size
 	if((g_game_width * 2) <= window_w)
 	{
 		g_game_width     = PC_WIDTH;
@@ -158,7 +158,7 @@ function adjust_screen()
 		g_scale          = 1.0;
 	}
 	
-	//画面の幅に合わせて額縁の幅を比率で決める
+	// Determine frame width by ratio according to screen width
 	const screen = document.getElementById("game-screen");
 	const bw     = (g_game_width * 0.05) | 0;
 	const pw     = (g_game_width * 0.10) | 0;
@@ -173,16 +173,16 @@ function adjust_screen()
 function setup_obj()
 {
 
-	//オブジェクトの準備
+	// Preparation of object
 	
-	//メイン画面のContextを取得しておく
+	// Get Context of main screen in advance
 	const screen = document.getElementById("game-screen");
 	g_screen_ctx = screen.getContext("2d");
 	
-	//カラーリストの生成
+	// Generate color list
 	const urls = 
 	[
-		//葉っぱになる部分なので、濃い色のグラデーションなどを選びました
+		// Since it becomes leaves, I chose dark color gradations etc.
 		"https://coolors.co/293f14-386c0b-38a700-31d843-3eff8b",
 		"https://coolors.co/090809-f40000-f44e3f-f4796b-f4998d",
 		"https://coolors.co/8cff98-aad922-6f7c12-483519-000000",
@@ -211,10 +211,10 @@ function setup_obj()
 		g_col_list.push(createPalette(urls[i]));
 	}
 	
-	//幹用のカラーリストを準備
+	// Prepare color list for trunk
 	const urls_shaft = 
 	[
-		//薄い背景に混じらないような濃いめの色を選びました
+		// Chose a darker color that won't blend into the light background
 		"https://coolors.co/660000-990033-5f021f-8c001a-00272b",
 		"https://coolors.co/2d2d2a-353831-38423b-3f5e5a-20342e",
 		"https://coolors.co/191d32-282f44-453a49-6d3b47-4f1331",
@@ -232,7 +232,7 @@ function setup_obj()
 		g_col_list_shaft.push(createPalette(urls_shaft[i]));
 	}
 	
-	//高解像度用のキャンバスを準備
+	// Prepare canvas for high resolution
 	g_image_cv  = document.createElement("canvas");
 	g_image_ctx = g_image_cv.getContext("2d");
 	
@@ -243,7 +243,7 @@ function setup_obj()
 
 function setup_bloom(w = g_game_width,h = g_game_height)
 {
-	//ブルーム処理用の準備
+	// Preparation for Bloom Processing
 
 	let scale = 0.5;
 	const num = 2;//(g_scale == 1.0) ? 2 : 1;
@@ -271,35 +271,35 @@ function setup_bloom(w = g_game_width,h = g_game_height)
 
 function do_bloom(sc_ctx,sc_cv)
 {
-	//ブルーム処理を実施
+	// Execute Bloom Processing
 	
-	//sc_ctx,sc_cvはブルーム処理をかけて上書きする元画像の2DContextとcanvasです
+	// sc_ctx, sc_cv are 2DContext and canvas of original image to be overwritten with bloom processing
 	
-	//レンダリング後画像にフィルタをかける
+	// Apply filter to image after rendering
 	const sc_w = sc_cv.width;
 	const sc_h = sc_cv.height;
 	
 	//
-	// 簡易的なブルーム処理をやっています。
+	// Doing simple bloom processing.
 	//
-	// 高輝度部分だけ抜き出しではなく、全体が光って見えちゃうので、
-	// 本来のブルーム処理とはちょっと違うと思いますが、とりあえず
-	// 手軽に光らせたい場合には楽かも(*´ω｀*)
+	// Because it's not extracting only high luminance parts, but whole thing looks glowing,
+	// I think it's a bit different from original bloom processing, but anyway
+	// Might be easy if you want to make it glow easily (*´ω｀*)
 	//
 	
-	//複数段階の縦横2分の1ずつ解像度を下げたオフスクリーンキャンバスに
-	//CanvasのBlurフィルタをかけて、拡大して加算合成します
+	// To off-screen canvas with resolution lowered by half vertically and horizontally in multiple stages
+	// Apply Canvas Blur filter, enlarge and additive blend
 	const offsc_num = g_bloom_offscs.length;
 	let blur_w = [ 4,12 ];
-	//if(g_scale != 1.0){ blur_w = [ 3,6 ]; }	//スマホはこっち
+	// if(g_scale != 1.0){ blur_w = [ 3,6 ]; }	// Smartphone uses this
 	for(let idx = 0;idx < offsc_num;++idx)
 	{
-		//画面に表示されているキャンバスから現在の状態を取得
+		// Get current state from canvas displayed on screen
 		let offsc = g_bloom_offscs[idx];
 		offsc.ctx.clearRect(0,0,offsc.cv_w,offsc.cv_h);
 		offsc.ctx.drawImage(sc_cv,0,0,sc_w,sc_h,0,0,offsc.cv_w,offsc.cv_h);
 
-		//縮小された絵にフィルタをかけながら画面に反映(加算合成)
+		// Reflect on screen (additive blending) while applying filter to reduced image
 		sc_ctx.save();
 		sc_ctx.globalAlpha = 0.2;
 		sc_ctx.globalCompositeOperation = 'lighter';
@@ -307,16 +307,16 @@ function do_bloom(sc_ctx,sc_cv)
 		sc_ctx.drawImage(offsc.cv,0,0,offsc.cv_w,offsc.cv_h,0,0,sc_w,sc_h);
 		sc_ctx.restore();
 		
-		//sc_cvが表示用のキャンバスと同じになっていると
-		//↑で合成したものをさらに取得して拡大するので、ぼかし
-		//がきつめにかけられてると思う。
+		// If sc_cv is same as display canvas
+		// ^ Get the composited result and enlarge it, so blur
+		// I think ... is applied tightly.
 	}
 }
 
 function reset_L_system()
 {
 
-	//L-systemでのコマンドをリセット
+	// Reset commands in L-system
 
 	const data1 = {
 		start: "A",
@@ -347,14 +347,14 @@ function reset_L_system()
 		command = "";
 		for(const key of cmd)
 		{
-			//コマンド文字に展開ルールがあるならそれに置き換える
-			//ない場合は、コマンド文字をそのままにする
+			// Replace command character with expansion rule if exists
+			// If not, leave command character as is
 			command += (rules[key] ? rules[key]() : key);
 		}
 		return command;
 	}
 	
-	//ルールに従って置換して描画コマンドを生成
+	// Generate drawing commands by substituting according to rules
 	const d = random(0,datas.length-1);
 	g_cmd = datas[d].start;
 	for(let i = 0;i < datas[d].depth;++i)
@@ -379,26 +379,26 @@ function reset_L_system()
 function create_image(cv,ctx)
 {
 	
-	//表示画像を作成
+	// Create display image
 	
-	//キャンバスのサイズを取得
+	// Get canvas size
 	const cv_w = cv.width;
 	const cv_h = cv.height;
 	
-	//背景色で塗りつぶす
+	// Fill with background color
 	ctx.fillStyle = "#EDD382";
 	ctx.fillRect(0,0,cv_w,cv_h);
 	
 	ctx.save();
 	
-	//パラメータ準備
+	// Parameter preparation
 	const col_shaft   = g_col_shaft;
 	const add_c_shaft = g_add_c_shaft;
 	const col_leaf    = g_col;
 	const add_c_leaf  = g_add_c;
 	const r           = g_draw_param.distance;
 	
-	//描画準備
+	// Preparation for drawing
 	ctx.translate(g_draw_param.x,g_draw_param.y);
 	
 	const stack   = [];
@@ -430,10 +430,10 @@ function create_image(cv,ctx)
 				break;
 			
 			default:
-				//制御記号以外でnoneに含まれていない場合は描画する
+				// Draw if not control symbol and not included in none
 				if(g_draw_param.none.indexOf(cmd) === -1)
 				{
-					//次の移動先を計算
+					// Calculate next destination
 					const nx = x + Math.cos(angle) * r;
 					const ny = y + Math.sin(angle) * r;
 					
@@ -441,7 +441,7 @@ function create_image(cv,ctx)
 	
 					switch(cmd)
 					{
-						case "F":	//幹
+						case "F":	// Trunk
 						{
 							let pal = Math.floor(c_shaft) % col_shaft.length;
 							c_shaft += add_c_shaft;
@@ -451,7 +451,7 @@ function create_image(cv,ctx)
 							ctx.strokeStyle = col_shaft[pal];
 							ctx.lineWidth   = g_shaft_lw;
 							
-							//ラインを描画
+							// Draw line
 							ctx.moveTo(x,y);
 							ctx.lineTo(nx,ny);
 							ctx.stroke();
@@ -459,7 +459,7 @@ function create_image(cv,ctx)
 							break;
 						}
 							
-						case "A":	//葉
+						case "A":	// Leaf
 						{
 							const num = random(4,10);
 							for(let l = 0;l < num;++l)
@@ -472,7 +472,7 @@ function create_image(cv,ctx)
 								ctx.strokeStyle = col_leaf[pal];
 								ctx.lineWidth   = random(MIN_leaf ,MAX_leaf )/1000;
 
-								//ラインを描画
+								// Draw line
 								const rlen = 500;
 								const rdiv1 = 40;
 								const rdiv2 = 10;
@@ -484,7 +484,7 @@ function create_image(cv,ctx)
 							break;
 						}
 						
-						case "C":	//実
+						case "C":	// Fruit
 						{
 							const num = random(1,1);
 							for(let l = 0;l < num;++l)
@@ -493,7 +493,7 @@ function create_image(cv,ctx)
 								ctx.globalAlpha = 0.9;
 								ctx.fillStyle = "red";
 
-								//◯を描画
+								// Draw Circle
 								const mr = random(5,15);
 								const rlen = 300;
 								const rdiv = 20;
@@ -517,7 +517,7 @@ function create_image(cv,ctx)
 
 	ctx.restore();
 
-	//ブルーム処理
+	// Bloom Processing
 	//do_bloom(ctx,cv);
 
 }
@@ -525,18 +525,18 @@ function create_image(cv,ctx)
 function setup()
 {
 	
-	//準備
+	// Preparation
 		
-	//画面調整
+	// Screen Adjustment
 	adjust_screen();
 	
-	//オブジェクトの準備
+	// Preparation of object
 	setup_obj();
 	
-	//ブルーム処理の準備
+	// Preparation for Bloom Processing
 	setup_bloom(HI_WIDTH,HI_HEIGHT);
 
-	//最初の値を決める
+	// Determine initial value
 	reset();
 
 }
@@ -544,15 +544,15 @@ function setup()
 function reset()
 {
 
-	//乱数のシード値を決定
+	// Determine random seed value
 	g_seed = rnd(12345);
 	randomSeed(g_seed);
 
-	//標準のパレットを決定
+	// Determine standard palette
 	g_col       = shuffle(g_col_list      [random(0,g_col_list.length      -1)|0]);
 	g_col_shaft = shuffle(g_col_list_shaft[random(0,g_col_list_shaft.length-1)|0]);
 	
-	//パレットランダムモード選択
+	// Select palette random mode
 	g_col_rnd = (random(0,100) < 60) ? 1 : 0;
 
 	g_add_c       = random(MIN_col      ,MAX_col      )/1000;
@@ -563,10 +563,10 @@ function reset()
 	
 	if(random(0,100) < 50){ g_angle *= -1; }
 	
-	//L-systemでのコマンドをリセット
+	// Reset commands in L-system
 	reset_L_system();
 	
-	//表示画像を生成
+	// Generate display image
 	create_image(g_image_cv,g_image_ctx);
 
 }
@@ -574,19 +574,19 @@ function reset()
 function draw_fps()
 {
 	
-	//FPS計測
+	// FPS Measurement
 	
-	//現在時刻を取得
+	// Get current time
 	let now_time = Date.now();
 	
 	if((now_time - g_last_fps_time) >= 1000)
 	{
-		//FPS履歴に追加
+		// Add to FPS history
 		g_fps_list.push(g_fps_count);
 		if(g_fps_list.length > 10)
 		{	
-			//先頭を削除して過去n回分までの
-			//FPSの平均とします(移動平均)
+			// Delete first and keep up to past n times
+			// Use average of FPS (moving average)
 			g_fps_list.shift();
 		}
 		let fps_ave = 0;
@@ -594,7 +594,7 @@ function draw_fps()
 		{	fps_ave += g_fps_list[i];	}
 		fps_ave /= g_fps_list.length;
 		
-		//FPS表示
+		// FPS Display
 		let fps_div = document.getElementById("fps");
 		let fps     = (fps_ave*(1000/(now_time - g_last_fps_time)));
 		fps_div.innerText = "FPS:"+fps;
@@ -609,12 +609,12 @@ function draw_fps()
 
 function toggle_fps_visible()
 {
-	//FPSの表示をON/OFFします
+	// Toggle FPS display ON/OFF
 	
-	//表示フラグを反転させる
+	// Invert display flag
 	g_fps_visible = !g_fps_visible;
 	
-	//表示フラグに合わせてvisible制御
+	// Control visible based on display flag
 	let fps_div = document.getElementById("fps");
 	fps_div.style.display = g_fps_visible ? "block" : "none";
 
@@ -623,16 +623,16 @@ function toggle_fps_visible()
 function draw()
 {
 
-	//描画コア
+	// Drawing Core
 	
-	//開始時刻保存
+	// Save start time
 	if(g_start_time == 0)
 	{
 		g_start_time = g_time;
 		g_next_time  = g_time + MORPH_TIME;
 	}
 	
-	//画面に縮小転送
+	// Transfer reduced size to screen
 	const hi_w  = HI_WIDTH;
 	const hi_h  = HI_HEIGHT;
 	const hi_cv = g_image_cv;
@@ -643,7 +643,7 @@ function draw()
 
 	ctx.save();
 	
-	//フェートイン・アウト
+	// Fade In/Out
 	const time_ms = g_time - g_start_time;
 	if(time_ms < FADE_TIME)
 	{
@@ -662,7 +662,7 @@ function draw()
 	
 	if(g_time >= g_next_time)
 	{
-		//次の区切り時刻を決めてリセット
+		// Determine next break time and reset
 		g_start_time = g_time;
 		g_next_time  = g_start_time + MORPH_TIME;
 		reset();
@@ -673,9 +673,9 @@ function draw()
 function render()
 {
 	
-	//毎ターンの描画処理
+	// Drawing processing for every turn
 	
-	//時間計算
+	// Time Calculation
 	const last_time = g_time;
 	g_time = (new Date).getTime();
 	if(last_time == 0)
@@ -683,13 +683,13 @@ function render()
 	else
 	{	g_dtime = g_time - last_time;	}
 	
-	//描画コア
+	// Drawing Core
 	draw();
 	
-	//FPS描画
+	// Draw FPS
 	draw_fps();
 	
-	//次の描画呼び出しを登録
+	// Register next drawing call
 	window.requestAnimationFrame(render);
 
 }

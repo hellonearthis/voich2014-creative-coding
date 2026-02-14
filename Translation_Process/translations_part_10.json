@@ -1,0 +1,802 @@
+[
+    {
+        "original": "//拡大と移動行列作成",
+        "translated": "// Create Scale and Translation Matrix"
+    },
+    {
+        "original": "//拡大率決定",
+        "translated": "// Determine Scale Factor"
+    },
+    {
+        "original": "//拡散光色をセット",
+        "translated": "// Set diffuse light color"
+    },
+    {
+        "original": "//指定のIDで登録",
+        "translated": "// Register with specified ID"
+    },
+    {
+        "original": "//指定のシード値で乱数を初期化",
+        "translated": "// Initialize random numbers with specified seed"
+    },
+    {
+        "original": "//指定のプロパティが存在しているかどうかをチェック",
+        "translated": "// Check if specified property exists"
+    },
+    {
+        "original": "//指定の中心座標から正三角形の頂点座標を計算",
+        "translated": "// Calculate vertex coordinates of equilateral triangle from specified center coordinates"
+    },
+    {
+        "original": "//指定の位置が通路なら通路リストに追加",
+        "translated": "// Add to passage list if specified position is a passage"
+    },
+    {
+        "original": "//指定の位置の周りの通路リストを取得",
+        "translated": "// Get list of passages around specified position"
+    },
+    {
+        "original": "//指定の位置の通路情報をルートリストに追加",
+        "translated": "// Add passage info of specified position to route list"
+    },
+    {
+        "original": "//指定の座標が任意の中心から回転した座標を計算",
+        "translated": "// Calculate coordinates rotated from arbitrary center for specified coordinates"
+    },
+    {
+        "original": "//指定の座標が空いているかを判定",
+        "translated": "// Determine if specified coordinate is empty"
+    },
+    {
+        "original": "//指定の座標の色を取得",
+        "translated": "// Get color of specified coordinate"
+    },
+    {
+        "original": "//描く部分の頂点情報をひとつ追加",
+        "translated": "// Add one piece of vertex info for drawing part"
+    },
+    {
+        "original": "//描画",
+        "translated": "// Drawing"
+    },
+    {
+        "original": "//描画しまーす",
+        "translated": "// Drawing now!"
+    },
+    {
+        "original": "//描画するっす",
+        "translated": "// Going to draw!"
+    },
+    {
+        "original": "//描画を登録",
+        "translated": "// Register drawing"
+    },
+    {
+        "original": "//描画アルゴリズムの選択",
+        "translated": "// Selection of drawing algorithm"
+    },
+    {
+        "original": "//描画コア",
+        "translated": "// Drawing Core"
+    },
+    {
+        "original": "//描画ループ",
+        "translated": "// Drawing Loop"
+    },
+    {
+        "original": "//描画位置の更新",
+        "translated": "// Update drawing position"
+    },
+    {
+        "original": "//描画位置を更新",
+        "translated": "// Update drawing position"
+    },
+    {
+        "original": "//描画先Y座標のアドレスを算出",
+        "translated": "// Calculate address of drawing destination Y coordinate"
+    },
+    {
+        "original": "//描画先にある色を(1 - α)、描画色をαでブレンド",
+        "translated": "// Blend color at drawing destination with (1 - alpha) and drawing color with alpha"
+    },
+    {
+        "original": "//描画処理方法を準備",
+        "translated": "// Prepare drawing processing method"
+    },
+    {
+        "original": "//描画前処理",
+        "translated": "// Pre-drawing processing"
+    },
+    {
+        "original": "//描画命令",
+        "translated": "// Drawing command"
+    },
+    {
+        "original": "//描画実施指示",
+        "translated": "// Instruction to execute drawing"
+    },
+    {
+        "original": "//描画後処理",
+        "translated": "// Post-drawing processing"
+    },
+    {
+        "original": "//描画後処理(画面に転送)",
+        "translated": "// Post-drawing processing (Transfer to screen)"
+    },
+    {
+        "original": "//描画時には、描画領域の半分を1.0として -1.0 ～ 1.0の範囲が",
+        "translated": "// When drawing, half of drawing area is 1.0, so range -1.0 to 1.0 is"
+    },
+    {
+        "original": "//描画準備",
+        "translated": "// Preparation for drawing"
+    },
+    {
+        "original": "//描画登録開始指示",
+        "translated": "// Instruction to start drawing registration"
+    },
+    {
+        "original": "//描画量が奇数の場合は最後の１ピクセルを描画する",
+        "translated": "// Draw last 1 pixel if drawing amount is odd"
+    },
+    {
+        "original": "//描画領域に合わせて座標変換",
+        "translated": "// Transform coordinates according to drawing area"
+    },
+    {
+        "original": "//描画領域の中央に白い文字を描く",
+        "translated": "// Draw white text in center of drawing area"
+    },
+    {
+        "original": "//描画領域の中心からのオフセットに変換",
+        "translated": "// Convert to offset from center of drawing area"
+    },
+    {
+        "original": "//整数化(重要！　これをやらないとImageDataへの書き込みで失敗する)",
+        "translated": "// Convert to integer (Important! if not done, writing to ImageData will fail)"
+    },
+    {
+        "original": "//文字のアウトラインを取得",
+        "translated": "// Get text outline"
+    },
+    {
+        "original": "//文字のアウトラインを生成する",
+        "translated": "// Generate text outline"
+    },
+    {
+        "original": "//文字のマスク画像のモーフィング",
+        "translated": "// Morphing of text mask image"
+    },
+    {
+        "original": "//文字のマスク画像を作成",
+        "translated": "// Create text mask image"
+    },
+    {
+        "original": "//文字マスクを設定",
+        "translated": "// Set text mask"
+    },
+    {
+        "original": "//文字マスク画像更新",
+        "translated": "// Update text mask image"
+    },
+    {
+        "original": "//斜面のポリゴン頂点ループ",
+        "translated": "// Slope polygon vertex loop"
+    },
+    {
+        "original": "//斜面ポリゴンの作成",
+        "translated": "// Create slope polygon"
+    },
+    {
+        "original": "//断面を中心に持ってきた後、Z軸回転して、再度平行",
+        "translated": "// After bringing cross section to center, rotate on Z axis, then translate again"
+    },
+    {
+        "original": "//新しいしっぽを生成",
+        "translated": "// Generate new tail"
+    },
+    {
+        "original": "//新しい光を追加",
+        "translated": "// Add new light"
+    },
+    {
+        "original": "//新しい砂を生成",
+        "translated": "// Generate new sand"
+    },
+    {
+        "original": "//新しい角度を決める",
+        "translated": "// Determine new angle"
+    },
+    {
+        "original": "//新規追加",
+        "translated": "// Add new"
+    },
+    {
+        "original": "//方向をリストに追加",
+        "translated": "// Add direction to list"
+    },
+    {
+        "original": "//方向テーブルをシャッフルする",
+        "translated": "// Shuffle direction table"
+    },
+    {
+        "original": "//方向テーブルをランダムにシャッフルする",
+        "translated": "// Randomly shuffle direction table"
+    },
+    {
+        "original": "//既存の光を動かす",
+        "translated": "// Move existing light"
+    },
+    {
+        "original": "//星オブジェクトの初期化",
+        "translated": "// Initialize Star Object"
+    },
+    {
+        "original": "//星オブジェクトの描画",
+        "translated": "// Draw Star Object"
+    },
+    {
+        "original": "//星オブジェクト情報の更新",
+        "translated": "// Update Star Object Info"
+    },
+    {
+        "original": "//星オブジェクト情報の生成",
+        "translated": "// Generate Star Object Info"
+    },
+    {
+        "original": "//星空を移動",
+        "translated": "// Move Starry Sky"
+    },
+    {
+        "original": "//時間をベースにしたノイズ値を取得(回転アニメの素)",
+        "translated": "// Get noise value based on time (source of rotation animation)"
+    },
+    {
+        "original": "//時間計算",
+        "translated": "// Time Calculation"
+    },
+    {
+        "original": "//最初にアルファ値が255になるように埋める",
+        "translated": "// Fill so alpha value becomes 255 at first"
+    },
+    {
+        "original": "//最初の位置の通路リスト情報をルートリストに追加",
+        "translated": "// Add passage list info of initial position to route list"
+    },
+    {
+        "original": "//最初の値を決める",
+        "translated": "// Determine initial value"
+    },
+    {
+        "original": "//最初の分岐情報を取得して進む方向と目標位置をセットしておく",
+        "translated": "// Get first branch info and set direction and target position"
+    },
+    {
+        "original": "//最初の初期状態をセット",
+        "translated": "// Set initial state"
+    },
+    {
+        "original": "//最初の時刻を覚えるだけ",
+        "translated": "// Just remember initial time"
+    },
+    {
+        "original": "//最大分割数を決める",
+        "translated": "// Determine maximum number of divisions"
+    },
+    {
+        "original": "//最小・最大X座標値リスト",
+        "translated": "// Min/Max X coordinate value list"
+    },
+    {
+        "original": "//最小幅",
+        "translated": "// Minimum width"
+    },
+    {
+        "original": "//最後に動いていた時刻を更新",
+        "translated": "// Update last moved time"
+    },
+    {
+        "original": "//最後の分岐点の通路リストをひとつ削除して",
+        "translated": "// Delete one passage list of last branch point and"
+    },
+    {
+        "original": "//最後の部分だけ微調整",
+        "translated": "// Fine tune only the last part"
+    },
+    {
+        "original": "//最後はあらかじめ候補ができるのが判っている値にする",
+        "translated": "// Set last one to a value known to generate candidates"
+    },
+    {
+        "original": "//来た道は除外する",
+        "translated": "// Exclude path came from"
+    },
+    {
+        "original": "//極座標変換",
+        "translated": "// Polar Coordinate Transformation"
+    },
+    {
+        "original": "//極座標変換前の座標系のイメージ",
+        "translated": "// Image of coordinate system before polar transformation"
+    },
+    {
+        "original": "//標準のパレットを決定",
+        "translated": "// Determine standard palette"
+    },
+    {
+        "original": "//模倣したものです。",
+        "translated": "// It is an imitation."
+    },
+    {
+        "original": "//模様パターンを決める",
+        "translated": "// Determine pattern design"
+    },
+    {
+        "original": "//横に検索",
+        "translated": "// Search horizontally"
+    },
+    {
+        "original": "//横への移動量は大きくしておかないとすぐに身動き取れなくなる…",
+        "translated": "// If horizontal movement amount is not large, it will get stuck immediately..."
+    },
+    {
+        "original": "//横回転",
+        "translated": "// Horizontal Rotation"
+    },
+    {
+        "original": "//横振り回転",
+        "translated": "// Horizontal Swing Rotation"
+    },
+    {
+        "original": "//横方向ぼかし",
+        "translated": "// Horizontal Blur"
+    },
+    {
+        "original": "//横方向ぼかし)",
+        "translated": "// Horizontal Blur)"
+    },
+    {
+        "original": "//横線(X/Y方向)のラインを描画",
+        "translated": "// Draw horizontal line (X/Y direction)"
+    },
+    {
+        "original": "//次に遷移",
+        "translated": "// Transition to next"
+    },
+    {
+        "original": "//次のViewPort変換によって、描画先画面解像度に合わせて座標変換する必要",
+        "translated": "// Need to transform coordinates according to drawing destination screen resolution by next ViewPort transformation"
+    },
+    {
+        "original": "//次のグリッドへ",
+        "translated": "// To next grid"
+    },
+    {
+        "original": "//次のパスに移動",
+        "translated": "// Move to next pass"
+    },
+    {
+        "original": "//次のポリゴン頂点インデックスへ",
+        "translated": "// To next polygon vertex index"
+    },
+    {
+        "original": "//次の位置に移動",
+        "translated": "// Move to next position"
+    },
+    {
+        "original": "//次の位置の通路リストを取得",
+        "translated": "// Get passage list of next position"
+    },
+    {
+        "original": "//次の位置をこの区画(grid)の角度から決めます",
+        "translated": "// Determine next position from angle of this section (grid)"
+    },
+    {
+        "original": "//次の分岐点情報から進む方向を更新",
+        "translated": "// Update direction to proceed from next branch point info"
+    },
+    {
+        "original": "//次の切り替えタイミングを設定",
+        "translated": "// Set next switch timing"
+    },
+    {
+        "original": "//次の刺繍領域へ",
+        "translated": "// To next embroidery area"
+    },
+    {
+        "original": "//次の区切り時刻を決めてリセット",
+        "translated": "// Determine next break time and reset"
+    },
+    {
+        "original": "//次の座標に移動",
+        "translated": "// Move to next coordinates"
+    },
+    {
+        "original": "//次の描画先Y座標のアドレスを算出",
+        "translated": "// Calculate address of next drawing destination Y coordinate"
+    },
+    {
+        "original": "//次の描画呼び出しを登録",
+        "translated": "// Register next drawing call"
+    },
+    {
+        "original": "//次の方向を更新",
+        "translated": "// Update next direction"
+    },
+    {
+        "original": "//次の目標値を決める",
+        "translated": "// Determine next target value"
+    },
+    {
+        "original": "//次の移動先を計算",
+        "translated": "// Calculate next destination"
+    },
+    {
+        "original": "//次の花火のパラメータを決める",
+        "translated": "// Determine parameters for next firework"
+    },
+    {
+        "original": "//次へ",
+        "translated": "// Next"
+    },
+    {
+        "original": "//止まるまでの速度を調整",
+        "translated": "// Adjust speed until stopping"
+    },
+    {
+        "original": "//正三角形の内側の頂点リストを計算",
+        "translated": "// Calculate inner vertex list of equilateral triangle"
+    },
+    {
+        "original": "//正三角形の外側の頂点リストを計算",
+        "translated": "// Calculate outer vertex list of equilateral triangle"
+    },
+    {
+        "original": "//正規化されたHSLオブジェクトからFloat32Arrayに移し替え",
+        "translated": "// Transfer from normalized HSL object to Float32Array"
+    },
+    {
+        "original": "//正面(上)",
+        "translated": "// Front (Top)"
+    },
+    {
+        "original": "//正面(下)",
+        "translated": "// Front (Bottom)"
+    },
+    {
+        "original": "//毎ターンの描画処理",
+        "translated": "// Drawing processing for every turn"
+    },
+    {
+        "original": "//毎ターンの画面クリア",
+        "translated": "// Screen clear for every turn"
+    },
+    {
+        "original": "//毎回の描画でnewをしたくないのと、グローバル変数の",
+        "translated": "// Because I don't want to new every time drawing, and global variable"
+    },
+    {
+        "original": "//比率で範囲置き換え",
+        "translated": "// Replace range by ratio"
+    },
+    {
+        "original": "//決定",
+        "translated": "// Decision"
+    },
+    {
+        "original": "//沢山並べるオブジェクト情報配列を作成",
+        "translated": "// Create array of object info to line up many"
+    },
+    {
+        "original": "//法線ベクトルとの内積結果",
+        "translated": "// Dot product result with normal vector"
+    },
+    {
+        "original": "//注目する候補が見つからない場合が多いので",
+        "translated": "// Because often interesting candidates are not found"
+    },
+    {
+        "original": "//注目する候補として覚えておく",
+        "translated": "// Remember as a candidate to focus on"
+    },
+    {
+        "original": "//注目する座標を決める",
+        "translated": "// Determine coordinates to focus on"
+    },
+    {
+        "original": "//深度テストとカリングをOFFにする",
+        "translated": "// Turn OFF depth test and culling"
+    },
+    {
+        "original": "//深度テストとカリングを有効化",
+        "translated": "// Enable depth test and culling"
+    },
+    {
+        "original": "//準備",
+        "translated": "// Preparation"
+    },
+    {
+        "original": "//点の場所を計算",
+        "translated": "// Calculate point location"
+    },
+    {
+        "original": "//点を描画",
+        "translated": "// Draw Point"
+    },
+    {
+        "original": "//状態管理をリセット",
+        "translated": "// Reset state management"
+    },
+    {
+        "original": "//現在のFPSによって早送りをする",
+        "translated": "// Fast forward depending on current FPS"
+    },
+    {
+        "original": "//現在の拡大率から画面左上の座標と",
+        "translated": "// From current scale factor, screen top-left coordinates and"
+    },
+    {
+        "original": "//現在時刻+IDでファイル名を生成",
+        "translated": "// Generate filename with current time + ID"
+    },
+    {
+        "original": "//現在時刻を取得",
+        "translated": "// Get current time"
+    },
+    {
+        "original": "//球を縦に切った上からの順番になるようにする",
+        "translated": "// Order from top of vertically cut sphere"
+    },
+    {
+        "original": "//球体のための角度を更新",
+        "translated": "// Update angle for sphere"
+    },
+    {
+        "original": "//球体オブジェクト管理人",
+        "translated": "// Sphere Object Manager"
+    },
+    {
+        "original": "//環境光色をセット",
+        "translated": "// Set ambient light color"
+    },
+    {
+        "original": "//生成したシェーダにソースを割り当てる",
+        "translated": "// Assign source to generated shader"
+    },
+    {
+        "original": "//画面に縮小転送",
+        "translated": "// Transfer reduced size to screen"
+    },
+    {
+        "original": "//画面に表示されているキャンバスから現在の状態を取得",
+        "translated": "// Get current state from canvas displayed on screen"
+    },
+    {
+        "original": "//画面の幅に合わせて額縁の幅を比率で決める",
+        "translated": "// Determine frame width by ratio according to screen width"
+    },
+    {
+        "original": "//画面の解像度で正規化して利用",
+        "translated": "// Normalize by screen resolution and use"
+    },
+    {
+        "original": "//画面キャンバスの全ピクセルについて判定して色付け",
+        "translated": "// Determine and color all pixels of screen canvas"
+    },
+    {
+        "original": "//画面クリア",
+        "translated": "// Screen Clear"
+    },
+    {
+        "original": "//画面クリア用(setでゼロ埋め用)\t\t\t\t\t\t※なんかfillの方が速かったので、もう使わないと思う",
+        "translated": "// For screen clear (zero fill with set) * Some fill was faster, so I don't think I'll use it anymore"
+    },
+    {
+        "original": "//画面サイズを変更する",
+        "translated": "// Change screen size"
+    },
+    {
+        "original": "//画面内なので図形を描画",
+        "translated": "// Draw figure since it's inside screen"
+    },
+    {
+        "original": "//画面外になったら消す",
+        "translated": "// Delete if it goes off-screen"
+    },
+    {
+        "original": "//画面外に出た",
+        "translated": "// Went off-screen"
+    },
+    {
+        "original": "//画面外判定",
+        "translated": "// Off-screen judgment"
+    },
+    {
+        "original": "//画面調整",
+        "translated": "// Screen Adjustment"
+    },
+    {
+        "original": "//番号は4角形タイヤでの相対インデックス順",
+        "translated": "// Order is relative index order in tetragonal tire"
+    },
+    {
+        "original": "//番号は4角形トーラスでのインデックス順",
+        "translated": "// Order is index order in tetragonal torus"
+    },
+    {
+        "original": "//番号は4角柱でのインデックス順",
+        "translated": "// Order is index order in quadrangular prism"
+    },
+    {
+        "original": "//疑似シェーダ関数クラス",
+        "translated": "// Pseudo Shader Function Class"
+    },
+    {
+        "original": "//疑似乱数クラス",
+        "translated": "// Pseudo Random Number Class"
+    },
+    {
+        "original": "//発散がMAX回数に近いほど暗くする",
+        "translated": "// Make darker as divergence gets closer to MAX count"
+    },
+    {
+        "original": "//発散しなかったら黒",
+        "translated": "// Black if did not diverge"
+    },
+    {
+        "original": "//発散すると判断できるか？",
+        "translated": "// Can be determined to diverge?"
+    },
+    {
+        "original": "//発散するまでの回数を調べる",
+        "translated": "// Check number of times until divergence"
+    },
+    {
+        "original": "//発散までの計算回数(拡大していく程に増えていきます)",
+        "translated": "// Calculation count until divergence (increases as you zoom in)"
+    },
+    {
+        "original": "//白い文字を描く",
+        "translated": "// Draw white text"
+    },
+    {
+        "original": "//目的の方向を向くクォータニオンを計算",
+        "translated": "// Calculate quaternion facing target direction"
+    },
+    {
+        "original": "//目的地に到着したので次の位置を決定する",
+        "translated": "// Determine next position since arrived at destination"
+    },
+    {
+        "original": "//看板か木",
+        "translated": "// Billboard or Tree"
+    },
+    {
+        "original": "//砂の描画",
+        "translated": "// Draw sand"
+    },
+    {
+        "original": "//砂の生成・移動・描画",
+        "translated": "// Generate/Move/Draw Sand"
+    },
+    {
+        "original": "//砂の移動",
+        "translated": "// Move sand"
+    },
+    {
+        "original": "//砂の色を決定",
+        "translated": "// Determine sand color"
+    },
+    {
+        "original": "//砂情報をリセット",
+        "translated": "// Reset sand info"
+    },
+    {
+        "original": "//確認用",
+        "translated": "// For confirmation"
+    },
+    {
+        "original": "//移動OK",
+        "translated": "// Move OK"
+    },
+    {
+        "original": "//移動した位置に砂があることを覚えておく",
+        "translated": "// Remember sand is at moved position"
+    },
+    {
+        "original": "//移動できる場所だったか？",
+        "translated": "// Was it a movable place?"
+    },
+    {
+        "original": "//移動できる部分になるまで繰り返す",
+        "translated": "// Repeat until movable part"
+    },
+    {
+        "original": "//移動と回転を掛ける行列を生成する",
+        "translated": "// Generate matrix multiplying translation and rotation"
+    },
+    {
+        "original": "//移動・回転させる",
+        "translated": "// Move/Rotate"
+    },
+    {
+        "original": "//移動行列作成",
+        "translated": "// Create Translation Matrix"
+    },
+    {
+        "original": "//移動速度に合わせて切り替え時間を計算",
+        "translated": "// Calculate switch time according to movement speed"
+    },
+    {
+        "original": "//移動開始時刻をセット",
+        "translated": "// Set movement start time"
+    },
+    {
+        "original": "//穴の半径の比率を決める",
+        "translated": "// Determine hole radius ratio"
+    },
+    {
+        "original": "//空いているところを探す",
+        "translated": "// Search for empty place"
+    },
+    {
+        "original": "//空いてない",
+        "translated": "// Not empty"
+    },
+    {
+        "original": "//空いてる",
+        "translated": "// Empty"
+    },
+    {
+        "original": "//空いてる場所に生成",
+        "translated": "// Generate in empty place"
+    },
+    {
+        "original": "//空が前に集まるようにソート(検索効率がちょっと上がります)",
+        "translated": "// Sort so empty gathers at front (search efficiency improves slightly)"
+    },
+    {
+        "original": "//空きを見つけた",
+        "translated": "// Found empty spot"
+    },
+    {
+        "original": "//空じゃないものが来たらループ終わり",
+        "translated": "// Loop end if non-empty comes"
+    },
+    {
+        "original": "//空の要素が前に集まるようにソートしてるので、",
+        "translated": "// Since sorted so empty elements gather at front,"
+    },
+    {
+        "original": "//立方体の基本座標を準備",
+        "translated": "// Prepare basic coordinates of cube"
+    },
+    {
+        "original": "//立方体の頂点と法線リストを生成",
+        "translated": "// Generate vertex and normal list of cube"
+    },
+    {
+        "original": "//立方体オブジェクト管理人",
+        "translated": "// Cube Object Manager"
+    },
+    {
+        "original": "//端っこの動かさないブロックなので、",
+        "translated": "// Because it's an edge block that doesn't move,"
+    },
+    {
+        "original": "//端っこの距離を計算",
+        "translated": "// Calculate edge distance"
+    },
+    {
+        "original": "//端っこの部分は動かさないようにdistを",
+        "translated": "// Set dist to not move edge parts"
+    },
+    {
+        "original": "//端っこオブジェクト管理人",
+        "translated": "// Edge Object Manager"
+    },
+    {
+        "original": "//範囲の最大を1として正規化する",
+        "translated": "// Normalize with range maximum as 1"
+    }
+]

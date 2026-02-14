@@ -1,22 +1,22 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-<title>パパの半透明トーラストンネル</title>
+<title>Papa's Translucent Torus Tunnel</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=320, user-scalable=no, initial-scale=1.0">
 <meta http-equiv="Cache-Control" content="no-cache">
 <!--
 
-	このデモでは、JavaScriptで半透明ラインアートでトーラストンネルを
-	描いてみました。
+	In this demo, a torus tunnel with translucent line art in JavaScript
+	I drew it.
 	
-	トーラストンネルはJunKiyoshiさん(@junkiyoshi)の作品を元ネタに
-	しています。いつもありがとうございます(*´ω｀*)
+	Torus Tunnel is based on JunKiyoshi-san's (@junkiyoshi) work
+	Doing. Thank you always (*´ω｀*)
 	https://junkiyoshi.com/openframeworks20190420/
 	
-	JunKiyoshiさんに圧倒的感謝を！
+	Overwhelming thanks to JunKiyoshi-san!
 	
-	(C)2020 ぼいち(@voich2014)
+	(C)2020 Voich(@voich2014)
 
 -->
 <link rel="stylesheet" href="./../vlib/vl_common_v1.0.0.css">
@@ -28,12 +28,12 @@
 </style>
 <script type="text/javascript">
 
-//グローバルオブジェクト
+// Global Object
 let g_game_width    = 320;
 let g_game_height   = 500;
 
-let g_time          = 0;		//現在時刻[ms]
-let g_dtime         = 0;		//前回の描画からの経過時間[ms]
+let g_time          = 0;		// Current time [ms]
+let g_dtime         = 0;		// Elapsed time since last drawing [ms]
 
 const TAU           = 2.0 * Math.PI;
 let g_pn            = new Perlin();
@@ -127,24 +127,24 @@ let g_cnt           = 0;
 function init()
 {
 	
-	//初期化処理
+	// Initialization processing
 	
-	//準備
+	// Preparation
 	setup();
 	
-	//クリックorタップでFPSの表示ON/OFF
+	// Toggle FPS display ON/OFF with click or tap
 	toggle_fps_visible();
 	window.onmousedown = toggle_fps_visible;
 	window.ontouchdown = toggle_fps_visible;
 	
-	//requestAnimationFrameの準備(各種ブラウザ対応)
+	// Preparation of requestAnimationFrame (compatible with various browsers)
 	let requestAnimationFrame = window.requestAnimationFrame       ||
                                 window.mozRequestAnimationFrame    ||
                                 window.webkitRequestAnimationFrame ||
                                 window.msRequestAnimationFrame;
     window.requestAnimationFrame = requestAnimationFrame;
     
-	//描画を登録
+	// Register drawing
 	window.requestAnimationFrame(render);
 	
 }
@@ -152,19 +152,19 @@ function init()
 function adjust_screen()
 {
 
-	//画面調整
+	// Screen Adjustment
 	
-	//ウインドウのサイズを取得
+	// Get window size
 	let window_w = window.innerWidth;
 	let window_h = window.innerHeight;
 	
-	//ウインドウ幅が十分に広い場合はPCだとして
-	//画面サイズを変更する
+	// Assuming it's a PC if window width is wide enough
+	// Change screen size
 	if((g_game_width * 2) <= window_w)
 	{
 		if(0)
 		{
-			//スマホに雰囲気合わせるバージョン	
+			// Version to match atmosphere to smartphone	
 			const       h = 320;
 			g_game_width  = 500 / 320 * h;
 			g_game_height = h;
@@ -173,7 +173,7 @@ function adjust_screen()
 		}
 		else
 		{
-			//PC側ならではの雰囲気にする
+			// Create an atmosphere unique to PC side
 			const       h = 720;
 			g_game_width  = 500 / 320 * h;
 			g_game_height = h;
@@ -182,7 +182,7 @@ function adjust_screen()
 		}
 	}
 	
-	//ゲームスクリーンを中央に配置
+	// Place game screen in center
 	let screen  = document.getElementById("game-screen");
 	let game_x  = (window_w - g_game_width)  / 2;
 	let game_y  = (window_h - g_game_height) / 2;
@@ -197,15 +197,15 @@ function adjust_screen()
 function setup_obj()
 {
 
-	//オブジェクトの準備
+	// Preparation of object
 	
-	//メイン画面のContextを取得しておく
+	// Get Context of main screen in advance
 	const sc_w   = g_game_width;
 	const sc_h   = g_game_height;
 	const screen = document.getElementById("game-screen");
 	g_screen_ctx = screen.getContext("2d");
 	
-	//coolors.co URLからデフォルトパレットを生成
+	// Generate default palette from coolors.co URL
 	const url1    = "https://coolors.co/485696-e7e7e7-f9c784-fc7a1e-f24c00";
 	const url2    = "https://coolors.co/e4572e-17bebb-ffc914-2e282a-76b041";
 	g_def1_colors = createPaletteNHSL(url1);
@@ -216,20 +216,20 @@ function setup_obj()
 function setup_matrix()
 {
 	
-	//射影・ビュー変換行列の準備
+	// Preparation of Projection/View Transformation Matrix
 	
-	//射影行列を生成
+	// Generate Projection Matrix
 	let mtx_projection = new MatrixMan4();
 	mtx_projection.projectionOpenGL(NEAR_Z_POS,FAR_Z_POS,rad(60),g_game_width/g_game_height);
 	
-	//ビュー行列を生成
+	// Generate View Matrix
 	let vFrom    = new VectorMan3(0.0,200.0,500.0);
 	let vTo      = new VectorMan3(0.0,0.0,0.0);
 	let vUp      = new VectorMan3(0.0,1.0,0.0);
 	let mtx_view = new MatrixMan4();
 	mtx_view.view(vFrom,vTo,vUp);
 	
-	//合成行列を作っておく
+	// Create composition matrix
 	g_mtx_vp.initialize();
 	g_mtx_vp.mul(mtx_view);
 	g_mtx_vp.mul(mtx_projection);
@@ -239,19 +239,19 @@ function setup_matrix()
 function setup()
 {
 	
-	//準備
+	// Preparation
 		
-	//画面調整
+	// Screen Adjustment
 	adjust_screen();
 	
-	//オブジェクトの準備
+	// Preparation of object
 	setup_obj();
 	
-	//変換行列の準備
+	// Preparation of Transformation Matrix
 	setup_matrix();
 	
-	//最初の値を決める
-	//※1回だとstartの値が不定になるのでreset()を2回呼びます
+	// Determine initial value
+	// * Calling reset() twice because start value becomes undefined if called once
 	g_next1_colors = g_def1_colors.slice();
 	g_next2_colors = g_def2_colors.slice();
 	reset();
@@ -262,7 +262,7 @@ function setup()
 function reset()
 {
 
-	//次の目標値を決める
+	// Determine next target value
 	
 	g_start_s       = g_next_s;
 	g_start_la      = g_next_la;
@@ -296,13 +296,13 @@ function reset()
 	g_next_rd       = Math.min(MIN_rd      + rnd(MAX_rd     ),MAX_rd     );
 	g_next_xd       = Math.min(MIN_xd      + rnd(MAX_xd     ),MAX_xd     );
 	
-	//パレットを決定
-	g_start_colors  = g_next1_colors.slice();	//配列の値渡しコピー
-	g_next1_colors  = g_next2_colors.slice();	//配列の値渡しコピー
-	g_next2_colors  = g_def1_colors.slice();	//次のパレットの初期値とする
+	// Determine palette
+	g_start_colors  = g_next1_colors.slice();	// Pass-by-value copy of array
+	g_next1_colors  = g_next2_colors.slice();	// Pass-by-value copy of array
+	g_next2_colors  = g_def1_colors.slice();	// Set as initial value of next palette
 	getColormind(function(palette)
 	{
-		//Colormindから5色のパレットを取得
+		// Get 5-color palette from Colormind
 		g_next2_colors = rgbAA2hslNA(palette);		
 	});
 	
@@ -311,19 +311,19 @@ function reset()
 function draw_fps()
 {
 	
-	//FPS計測
+	// FPS Measurement
 	
-	//現在時刻を取得
+	// Get current time
 	let now_time = Date.now();
 	
 	if((now_time - g_last_fps_time) >= 1000)
 	{
-		//FPS履歴に追加
+		// Add to FPS history
 		g_fps_list.push(g_fps_count);
 		if(g_fps_list.length > 10)
 		{	
-			//先頭を削除して過去n回分までの
-			//FPSの平均とします(移動平均)
+			// Delete first and keep up to past n times
+			// Use average of FPS (moving average)
 			g_fps_list.shift();
 		}
 		let fps_ave = 0;
@@ -331,7 +331,7 @@ function draw_fps()
 		{	fps_ave += g_fps_list[i];	}
 		fps_ave /= g_fps_list.length;
 		
-		//FPS表示
+		// FPS Display
 		let fps_div = document.getElementById("fps");
 		let fps     = (fps_ave*(1000/(now_time - g_last_fps_time)));
 		fps_div.innerText = "FPS:"+fps;
@@ -346,12 +346,12 @@ function draw_fps()
 
 function toggle_fps_visible()
 {
-	//FPSの表示をON/OFFします
+	// Toggle FPS display ON/OFF
 	
-	//表示フラグを反転させる
+	// Invert display flag
 	g_fps_visible = !g_fps_visible;
 	
-	//表示フラグに合わせてvisible制御
+	// Control visible based on display flag
 	let fps_div = document.getElementById("fps");
 	fps_div.style.display = g_fps_visible ? "block" : "none";
 
@@ -360,16 +360,16 @@ function toggle_fps_visible()
 function draw()
 {
 
-	//描画コア
+	// Drawing Core
 	
-	//開始時刻保存
+	// Save start time
 	if(g_start_time == 0)
 	{
 		g_start_time = g_time;
 		g_next_time  = g_time + MORPH_TIME;
 	}
 	
-	//画面クリア
+	// Screen Clear
 	const sc_w  = g_game_width;
 	const sc_h  = g_game_height;
 	const ctx   = g_screen_ctx;
@@ -377,7 +377,7 @@ function draw()
 	
 	ctx.save();
 
-	//シーンの準備
+	// Preparation of scene
 	let time = (g_time - g_start_time) / MORPH_TIME;
 	if(time > 1.0){ time = 1.0; }
 	const e  = Ease.easeInSine(time);
@@ -394,7 +394,7 @@ function draw()
 	let mtx_model    = new MatrixMan4();
 	let vec_pos      = new VectorMan4();
 	
-	//半透明ラインの描画
+	// Draw semi-transparent line
 	ctx.globalCompositeOperation = 'lighter';
 	ctx.translate(sc_w / 2,sc_h / 2);
 	
@@ -505,8 +505,8 @@ function draw()
 					const z = amp_z * n;
 					vec_pos.setValue(x,y,z,1.0);
 			
-					//高速化のため拡大と並行移動行列は手動で作り、
-					//そこに回転行列を合成します
+					// For speed, create scaling and translation matrix manually,
+					// Compose rotation matrix there
 					mtx_model.copy(mtx_move);
 					
 					mtx_model.mul(mtx_scale);
@@ -517,7 +517,7 @@ function draw()
 					mtx_model.mul(mtx_work);
 					
 
-					//座標変換
+					// Coordinate Transformation
 					vec_pos.mul_matrix(mtx_model);
 					vec_pos.mul_matrix(mtx_vp);
 					vec_pos.x /= vec_pos.w;
@@ -541,8 +541,8 @@ function draw()
 /*	
 	for(let a = 0;a < TAU;a += add_a)
 	{
-		//補間で回転数が増えていく際に位置が近すぎると
-		//加算合成で急に明るく見えるので透明度を調整
+		// If positions are too close when rotation count increases by interpolation
+		// Adjust transparency because it looks suddenly bright with additive blending
 		const near = 0.018;
 		if((add_a < near) && (a + add_a) > TAU)
 		{	ctx.globalAlpha = la * lw * (add_a / near);	};
@@ -563,14 +563,14 @@ function draw()
 				const n = g_pn.perlin(t + x_table[xidx][0],y,tt) - 0.5;
 				vec_pos.setValue(x,y_amp * n);
 		
-				//高速化のため拡大と並行移動行列は手動で作り、
-				//そこに回転行列を合成します
+				// For speed, create scaling and translation matrix manually,
+				// Compose rotation matrix there
 				mtx_model.copy(mtx_scale);
 				mtx_model.m[6] = ox;
 				mtx_model.m[7] = oy + x_table[xidx][1];
 				mtx_model.mul(mtx_work);
 
-				//座標変換
+				// Coordinate Transformation
 				vec_pos.mul_matrix(mtx_model);
 				
 				if(x == start_pos)
@@ -587,7 +587,7 @@ function draw()
 	
 	if(g_time >= g_next_time)
 	{
-		//次の区切り時刻を決めてリセット
+		// Determine next break time and reset
 		g_start_time = g_time;
 		g_next_time  = g_start_time + MORPH_TIME;
 		reset();
@@ -598,9 +598,9 @@ function draw()
 function render()
 {
 	
-	//毎ターンの描画処理
+	// Drawing processing for every turn
 	
-	//時間計算
+	// Time Calculation
 	const last_time = g_time;
 	g_time = (new Date).getTime();
 	if(last_time == 0)
@@ -608,13 +608,13 @@ function render()
 	else
 	{	g_dtime = g_time - last_time;	}
 	
-	//描画コア
+	// Drawing Core
 	draw();
 	
-	//FPS描画
+	// Draw FPS
 	draw_fps();
 	
-	//次の描画呼び出しを登録
+	// Register next drawing call
 	window.requestAnimationFrame(render);
 
 }

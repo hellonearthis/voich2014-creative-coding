@@ -1,0 +1,402 @@
+[
+    {
+        "original": "//    |／|   裏: 0,4,1,4,5,1",
+        "translated": "//    |／|   Back: 0,4,1,4,5,1"
+    },
+    {
+        "original": "//    |／|   裏: 1,5,2,5,6,2",
+        "translated": "//    |／|   Back: 1,5,2,5,6,2"
+    },
+    {
+        "original": "//    |／|   裏: 3,7,0,7,4,0",
+        "translated": "//    |／|   Back: 3,7,0,7,4,0"
+    },
+    {
+        "original": "//    |／|   ：",
+        "translated": "//    |／|   :"
+    },
+    {
+        "original": "//    |＼|   裏: 0,4,3,4,7,3",
+        "translated": "//    |＼|   Back: 0,4,3,4,7,3"
+    },
+    {
+        "original": "//    |＼|   裏: 1,5,0,5,4,0",
+        "translated": "//    |＼|   Back: 1,5,0,5,4,0"
+    },
+    {
+        "original": "//    |＼|   裏: 2,6,1,6,5,1",
+        "translated": "//    |＼|   Back: 2,6,1,6,5,1"
+    },
+    {
+        "original": "//    |＼|   ：",
+        "translated": "//    |＼|   :"
+    },
+    {
+        "original": "//    ／|＼",
+        "translated": "//    ／|＼"
+    },
+    {
+        "original": "//    ／|＼     a,0,3 0,1,3 3,1,4 1,2,4 4,2,5 2,a+1,5",
+        "translated": "//    ／|＼     a,0,3 0,1,3 3,1,4 1,2,4 4,2,5 2,a+1,5"
+    },
+    {
+        "original": "//    ／|＼    表：n,0,1,n,1,2",
+        "translated": "//    ／|＼    Front: n,0,1,n,1,2"
+    },
+    {
+        "original": "//    ＼|／",
+        "translated": "//    ＼|／"
+    },
+    {
+        "original": "//   +--+--+… 底：n+1,1,0,n+1,2,1",
+        "translated": "//   +--+--+… Bottom: n+1,1,0,n+1,2,1"
+    },
+    {
+        "original": "//   +--+--+… 表: 0,4,1,1,4,5",
+        "translated": "//   +--+--+… Front: 0,4,1,1,4,5"
+    },
+    {
+        "original": "//   +--+--+… 表: 1,5,2,2,5,6",
+        "translated": "//   +--+--+… Front: 1,5,2,2,5,6"
+    },
+    {
+        "original": "//   0+--+4  表: 0,1,4,4,1,5",
+        "translated": "//   0+--+4  Front: 0,1,4,4,1,5"
+    },
+    {
+        "original": "//   0+--+4  表: 1,0,5,5,0,4",
+        "translated": "//   0+--+4  Front: 1,0,5,5,0,4"
+    },
+    {
+        "original": "//   1+--+5  表: 1,2,5,5,1,2",
+        "translated": "//   1+--+5  Front: 1,2,5,5,1,2"
+    },
+    {
+        "original": "//   1+--+5  表: 2,1,6,6,1,5",
+        "translated": "//   1+--+5  Front: 2,1,6,6,1,5"
+    },
+    {
+        "original": "//   2+--+6  ：",
+        "translated": "//   2+--+6  :"
+    },
+    {
+        "original": "//   3+--+7  表: 0,3,4,4,3,7",
+        "translated": "//   3+--+7  Front: 0,3,4,4,3,7"
+    },
+    {
+        "original": "//   3+--+7  表: 3,0,7,7,0,4",
+        "translated": "//   3+--+7  Front: 3,0,7,7,0,4"
+    },
+    {
+        "original": "//   4  5  6   表: 1,2,5,2,6,5",
+        "translated": "//   4  5  6   Front: 1,2,5,2,6,5"
+    },
+    {
+        "original": "//   n = 4 の場合",
+        "translated": "//   Case of n = 4"
+    },
+    {
+        "original": "//   |  ／|",
+        "translated": "//   |  ／|"
+    },
+    {
+        "original": "//   |  ／|      |  ／|",
+        "translated": "//   |  ／|      |  ／|"
+    },
+    {
+        "original": "//   |／  |",
+        "translated": "//   |／  |"
+    },
+    {
+        "original": "//   |／  |      |／  |",
+        "translated": "//   |／  |      |／  |"
+    },
+    {
+        "original": "//   |／|／|",
+        "translated": "//   |／|／|"
+    },
+    {
+        "original": "//   |／|／|   裏: 0,1,4,1,5,4",
+        "translated": "//   |／|／|   Back: 0,1,4,1,5,4"
+    },
+    {
+        "original": "//   ただし、ポリゴンの法線ベクトルと光線ベクトルとの内積結果は負の",
+        "translated": "//   However, the dot product result of the polygon's normal vector and the light ray vector is negative"
+    },
+    {
+        "original": "//   で、0に補正します。",
+        "translated": "//   So correct it to 0."
+    },
+    {
+        "original": "//   もし、内積結果が正の数になった場合は光が当たらないことになるの",
+        "translated": "//   If the dot product result becomes a positive number, it means light does not hit"
+    },
+    {
+        "original": "//   値となるのでマイナスをかけて正に反転させます。",
+        "translated": "//   value, so multiply by minus to invert it to positive."
+    },
+    {
+        "original": "//   回転         回転          回転      平行移動",
+        "translated": "//   Rotation         Rotation          Rotation      Translation"
+    },
+    {
+        "original": "//   拡散光(Diffuse)の値を調整します。",
+        "translated": "//   Adjust the diffuse light value."
+    },
+    {
+        "original": "//  +------+X (左手座標系　向こう側が+Z)",
+        "translated": "//  +------+X (Left-handed coordinate system, +Z is the far side)"
+    },
+    {
+        "original": "//  +------+X (左手座標系　手前側が+Y)",
+        "translated": "//  +------+X (Left-handed coordinate system, +Y is the near side)"
+    },
+    {
+        "original": "//  +Y   |＼　 |",
+        "translated": "//  +Y   |＼　 |"
+    },
+    {
+        "original": "//  +Z   |＼　 |",
+        "translated": "//  +Z   |＼　 |"
+    },
+    {
+        "original": "//  X座標のScaling  Y座標のScaling  Z座標は     原点を画面の中心に",
+        "translated": "//  X coordinate Scaling  Y coordinate Scaling  Z is     Origin to center of screen"
+    },
+    {
+        "original": "//  h(hue)       : 色相  0-359の値[度]",
+        "translated": "//  h(hue)       : Hue  Value from 0-359 [degrees]"
+    },
+    {
+        "original": "//  l(lightness) : 明度  0-1.0の値[%]",
+        "translated": "//  l(lightness) : Lightness  Value from 0-1.0 [%]"
+    },
+    {
+        "original": "//  s(saturation): 彩度  0-1.0の値[%]",
+        "translated": "//  s(saturation): Saturation  Value from 0-1.0 [%]"
+    },
+    {
+        "original": "//  |    |　＼ |",
+        "translated": "//  |    |　＼ |"
+    },
+    {
+        "original": "//  ことになります。",
+        "translated": "//  This will be the case."
+    },
+    {
+        "original": "//  と、ポリゴン面の法線が表裏反転してしまいます。",
+        "translated": "//  Then, the normal of the polygon face will be flipped inside out."
+    },
+    {
+        "original": "//  というわけで、頂点の描画順をちょっと変えて、正しく法線が",
+        "translated": "//  So, change the vertex drawing order slightly so that the normal is correct"
+    },
+    {
+        "original": "//  の座標が(x,y,z)=(0.0,0.0,0.0)として変換されているので、Zが負の",
+        "translated": "//  Because the coordinates are transformed as (x,y,z)=(0.0,0.0,0.0), Z is negative"
+    },
+    {
+        "original": "//  値になっているということは、カメラよりも後ろに位置しているという",
+        "translated": "//  Being a value means it is located behind the camera"
+    },
+    {
+        "original": "//  側面        上面/下面",
+        "translated": "//  Side        Top/Bottom"
+    },
+    {
+        "original": "//  光源の向いている方向だよ",
+        "translated": "//  It's the direction the light source is facing"
+    },
+    {
+        "original": "//  光源の向いている方向だよ(右手座標系用)",
+        "translated": "//  It's the direction the light source is facing (for right-handed coordinate system)"
+    },
+    {
+        "original": "//  得られるようになっているので、ちょっと考えてみてね。",
+        "translated": "//  You can obtain it, so please think about it."
+    },
+    {
+        "original": "//  貼り付け具合が見えるようになるよ",
+        "translated": "//  You will be able to see how it is pasted"
+    },
+    {
+        "original": "//  ／  |  ＼",
+        "translated": "//  ／  |  ＼"
+    },
+    {
+        "original": "//  ＼  |  ／",
+        "translated": "//  ＼  |  ／"
+    },
+    {
+        "original": "// %02X 変換",
+        "translated": "// %02X Conversion"
+    },
+    {
+        "original": "// (A,B,C)があった時に、ベクトルとしてはAからBへ伸びる",
+        "translated": "// When there is (A,B,C), as a vector extending from A to B"
+    },
+    {
+        "original": "// (法線ベクトルと視線ベクトルが向き合う)を作ろう",
+        "translated": "// Let's make (normal vector and view vector face each other)"
+    },
+    {
+        "original": "// +Zが手前で-Zが奥になります。",
+        "translated": "// +Z is front and -Z is back."
+    },
+    {
+        "original": "// -1.2をAに、+1.2をYに当てはめた25文字の範囲で表した",
+        "translated": "// Represented in a range of 25 characters with -1.2 as A and +1.2 as Y"
+    },
+    {
+        "original": "// 0.0 ～ 1.0の補間式、5次のものがアーティファクトが少なくていいらしい",
+        "translated": "// Interpolation formula from 0.0 to 1.0, 5th order seems to have fewer artifacts"
+    },
+    {
+        "original": "// 0.0 ～ 1.0の補間式、5次のものがアーティファクト少なくていいらしい",
+        "translated": "// Interpolation formula from 0.0 to 1.0, 5th order seems to have fewer artifacts"
+    },
+    {
+        "original": "// 0:線路",
+        "translated": "// 0: Railroad"
+    },
+    {
+        "original": "// 1/2 ≦ m ≦ 1の場合 m = |y2 - y1| / |x2 - x1|",
+        "translated": "// Case 1/2 ≦ m ≦ 1: m = |y2 - y1| / |x2 - x1|"
+    },
+    {
+        "original": "// 1:草１",
+        "translated": "// 1: Grass 1"
+    },
+    {
+        "original": "// 2:草２",
+        "translated": "// 2: Grass 2"
+    },
+    {
+        "original": "// 3:看板",
+        "translated": "// 3: Signboard"
+    },
+    {
+        "original": "// 4:木",
+        "translated": "// 4: Tree"
+    },
+    {
+        "original": "// 4番目の行には平行移動の値(各方向のベクトルとfromとの内積)",
+        "translated": "// The 4th row contains translation values (dot product of direction vectors and from)"
+    },
+    {
+        "original": "// 5:ポール",
+        "translated": "// 5: Pole"
+    },
+    {
+        "original": "// <頂点A,B,Cをv0,v1,v2として、法線ベクトルとなるnベクトルを求める場合>",
+        "translated": "// <Case of finding n vector which becomes normal vector with vertices A, B, C as v0, v1, v2>"
+    },
+    {
+        "original": "// ABCのポリゴンは表を向いていることになります。",
+        "translated": "// The polygon ABC will be facing front."
+    },
+    {
+        "original": "// ABベクトルとACベクトルとの外積で計算します。",
+        "translated": "// Calculate with the cross product of AB vector and AC vector."
+    },
+    {
+        "original": "// EdgeFunctionの答えは面積値でもあるので、全体の",
+        "translated": "// The answer of EdgeFunction is also the area value, so the whole"
+    },
+    {
+        "original": "// IDを元に設定されます",
+        "translated": "// Set based on ID"
+    },
+    {
+        "original": "// J.C.Sprott氏 の式",
+        "translated": "// J.C.Sprott's formula"
+    },
+    {
+        "original": "// Processingによる実践ガイドの「5.3.3 球を描く間違った方法」を参考にしてみました。",
+        "translated": "// I referred to '5.3.3 The Wrong Way to Draw a Sphere' in the Processing Practice Guide."
+    },
+    {
+        "original": "// Wikipediaで紹介されている、f2とg1が組み合わされた方の",
+        "translated": "// The one combining f2 and g1 introduced on Wikipedia"
+    },
+    {
+        "original": "// Wikipedia調べ",
+        "translated": "// Researched on Wikipedia"
+    },
+    {
+        "original": "// X = (左)   -1.0 ～ 1.0(右)",
+        "translated": "// X = (Left)   -1.0 to 1.0 (Right)"
+    },
+    {
+        "original": "// X-Z平面上にn角形の頂点を配置し、それをY軸に沿って広げることで円柱",
+        "translated": "// A cylinder is created by placing vertices of an n-gon on the X-Z plane and expanding them along the Y axis"
+    },
+    {
+        "original": "// X/Y/Zが-1.0～1.0の範囲に変換されています。",
+        "translated": "// X/Y/Z are converted to the range of -1.0 to 1.0."
+    },
+    {
+        "original": "// XY平面に垂直なZ軸と平行になる+Zの法線ベクトルが計算できました。",
+        "translated": "// +Z normal vector which is perpendicular to XY plane and parallel to Z axis was calculated."
+    },
+    {
+        "original": "// XY平面の頂点は以下の順番で4点とします",
+        "translated": "// The vertices of the XY plane are 4 points in the following order"
+    },
+    {
+        "original": "// XZ平面において、上向き(+Y)の方向に向く法線ベクトルを",
+        "translated": "// On the XZ plane, calculate the normal vector pointing upward (+Y)"
+    },
+    {
+        "original": "// XZ平面の頂点は以下の順番で4点とします",
+        "translated": "// The vertices of the XZ plane are 4 points in the following order"
+    },
+    {
+        "original": "// XとYは-1.0～1.0を描画するスクリーンの領域にマッピング",
+        "translated": "// X and Y are mapped to the screen area drawing -1.0 to 1.0"
+    },
+    {
+        "original": "// X軸は左側がマイナス、Y軸は下側がマイナスです。",
+        "translated": "// X axis is minus on the left side, Y axis is minus on the bottom side."
+    },
+    {
+        "original": "// X軸は左側がマイナス、Z軸は奥側がマイナスです。",
+        "translated": "// X axis is minus on the left side, Z axis is minus on the back side."
+    },
+    {
+        "original": "// Y = (下)   -1.0 ～ 1.0(上)",
+        "translated": "// Y = (Bottom)   -1.0 to 1.0 (Top)"
+    },
+    {
+        "original": "// Y座標の方向をスクリーン座標系に合わせるのと、X/Y",
+        "translated": "// Matching the direction of Y coordinate to screen coordinate system, and X/Y"
+    },
+    {
+        "original": "// Y軸を中心にia度分回転させることで座標が計算できます",
+        "translated": "// Coordinates can be calculated by rotating ia degrees around the Y axis"
+    },
+    {
+        "original": "// Z = (nearZ)-1.0 ～ 1.0(farZ)",
+        "translated": "// Z = (nearZ)-1.0 ～ 1.0(farZ)"
+    },
+    {
+        "original": "// Z値が同じくらいならポリゴン中央Z値が手前の方を優先",
+        "translated": "// If Z values are about the same, prioritize the one with polygon center Z value closer"
+    },
+    {
+        "original": "// Z値はそのまま残ります。",
+        "translated": "// Z value remains as is."
+    },
+    {
+        "original": "// Z値を補間する必要があり、かなりややこしい計算で確認",
+        "translated": "// Need to interpolate Z value, confirmed with quite complicated calculation"
+    },
+    {
+        "original": "// alpha\t\tα値（固定小数の小数部16bit)",
+        "translated": "// alpha\t\tAlpha value (16bit fractional part of fixed point)"
+    },
+    {
+        "original": "// aからbに伸びるベクトルとaからcに伸びるベクトルとの外積になります。",
+        "translated": "// It becomes the cross product of the vector extending from a to b and the vector extending from a to c."
+    }
+]

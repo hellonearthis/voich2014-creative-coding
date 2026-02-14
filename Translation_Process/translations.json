@@ -1,0 +1,802 @@
+[
+  {
+    "original": "## 🌐 公開URL（GitHub Pages）",
+    "translated": "## 🌐 Published URL (GitHub Pages)"
+  },
+  {
+    "original": "## 📁 構成について",
+    "translated": "## 📁 About Structure"
+  },
+  {
+    "original": "## 📄 ライセンス",
+    "translated": "## 📄 License"
+  },
+  {
+    "original": "## 📫 作者",
+    "translated": "## 📫 Author"
+  },
+  {
+    "original": "(4より大きいと発散する値だと判断する)",
+    "translated": "(Values larger than 4 are considered to diverge)"
+  },
+  {
+    "original": "(C)2019 ぼいち(@voich2014)",
+    "translated": "(C)2019 Voich(@voich2014)"
+  },
+  {
+    "original": "(C)2020 ぼいち(@voich2014)",
+    "translated": "(C)2020 Voich(@voich2014)"
+  },
+  {
+    "original": "* this.act_info[i].dir;\t\t//方向はdirで決まる",
+    "translated": "* this.act_info[i].dir;\t\t// Direction is determined by dir"
+  },
+  {
+    "original": "- (Math.sin(rad(iratio * 45)) * g_first_speed);\t\t\t//山が円弧の様に丸く削れるように調整",
+    "translated": "- (Math.sin(rad(iratio * 45)) * g_first_speed);\t\t\t// Adjust so the mountain is rounded like an arc"
+  },
+  {
+    "original": "- (Math.sin(rad(iratio * 45)) * g_first_speed);\t\t//山が円弧の様に丸く削れるように調整",
+    "translated": "- (Math.sin(rad(iratio * 45)) * g_first_speed);\t\t// Adjust so the mountain is rounded like an arc"
+  },
+  {
+    "original": "- **生成されるビジュアル作品（Canvas等のアート）** は、以下のライセンスに準拠します：",
+    "translated": "- **Generated visual works (Canvas art, etc.)** comply with the following license:"
+  },
+  {
+    "original": "- 001.`prac1`：[円弧の華（スクロール版）](https://voich2014.github.io/creative_coding/src/prac1/index2.html)",
+    "translated": "- 001.`prac1`: [Flower of Arcs (Scroll Ver.)](https://voich2014.github.io/creative_coding/src/prac1/index2.html)"
+  },
+  {
+    "original": "- 002.`prac2`：[光る砂の滝](https://voich2014.github.io/creative_coding/src/prac2/index1.html)",
+    "translated": "- 002.`prac2`: [Waterfall of Glowing Sand](https://voich2014.github.io/creative_coding/src/prac2/index1.html)"
+  },
+  {
+    "original": "- 003.`prac4`：[円弧の奇跡](https://voich2014.github.io/creative_coding/src/prac4/index1.html)",
+    "translated": "- 003.`prac4`: [Miracle of Arcs](https://voich2014.github.io/creative_coding/src/prac4/index1.html)"
+  },
+  {
+    "original": "- 004.`prac5`：[ShinyFlowField](https://voich2014.github.io/creative_coding/src/prac5/index2.html)",
+    "translated": "- 004.`prac5`: [ShinyFlowField](https://voich2014.github.io/creative_coding/src/prac5/index2.html)"
+  },
+  {
+    "original": "- 005.`prac7`：[文字でキラキラ](https://voich2014.github.io/creative_coding/src/prac7/index1.html)",
+    "translated": "- 005.`prac7`: [Sparkling with Text](https://voich2014.github.io/creative_coding/src/prac7/index1.html)"
+  },
+  {
+    "original": "- 006.`tkw`：[パパの綺麗なやつ](https://voich2014.github.io/creative_coding/src/tkw/index2.html)",
+    "translated": "- 006.`tkw`: [Papa's Beautiful Thing](https://voich2014.github.io/creative_coding/src/tkw/index2.html)"
+  },
+  {
+    "original": "- 007.`tkw2`：[パパの綺麗な重ね合わせ](https://voich2014.github.io/creative_coding/src/tkw2/index1.html)",
+    "translated": "- 007.`tkw2`: [Papa's Beautiful Overlay](https://voich2014.github.io/creative_coding/src/tkw2/index1.html)"
+  },
+  {
+    "original": "- 008.`tkw3`：[パパのブルームブロック](https://voich2014.github.io/creative_coding/src/tkw3/index1.html)",
+    "translated": "- 008.`tkw3`: [Papa's Bloom Block](https://voich2014.github.io/creative_coding/src/tkw3/index1.html)"
+  },
+  {
+    "original": "- 009.`tkw4`：[パパのブロックシャワー](https://voich2014.github.io/creative_coding/src/tkw4/index2.html)",
+    "translated": "- 009.`tkw4`: [Papa's Block Shower](https://voich2014.github.io/creative_coding/src/tkw4/index2.html)"
+  },
+  {
+    "original": "- 010.`bw`：[パパの刺繍円](https://voich2014.github.io/creative_coding/src/bw/index1.html)",
+    "translated": "- 010.`bw`: [Papa's Embroidery Circle](https://voich2014.github.io/creative_coding/src/bw/index1.html)"
+  },
+  {
+    "original": "- 011.`lsys2`：[パパのにょきにょき(L-System練習2)](https://voich2014.github.io/creative_coding/src/lsys2/index1.html)",
+    "translated": "- 011.`lsys2`: [Papa's Nyoki Nyoki (L-System Practice 2)](https://voich2014.github.io/creative_coding/src/lsys2/index1.html)"
+  },
+  {
+    "original": "- 012.`stat`：[パパのストレンジアトラクター](https://voich2014.github.io/creative_coding/src/stat/index1.html)",
+    "translated": "- 012.`stat`: [Papa's Strange Attractor](https://voich2014.github.io/creative_coding/src/stat/index1.html)"
+  },
+  {
+    "original": "- 013.`kirafw`：[パパのキラキラ花火](https://voich2014.github.io/creative_coding/src/kirafw/index2.html)",
+    "translated": "- 013.`kirafw`: [Papa's Sparkling Fireworks](https://voich2014.github.io/creative_coding/src/kirafw/index2.html)"
+  },
+  {
+    "original": "- 014.`infkira`：[パパの無限大キラキラ](https://voich2014.github.io/creative_coding/src/infkira/index1.html)",
+    "translated": "- 014.`infkira`: [Papa's Infinite Sparkle](https://voich2014.github.io/creative_coding/src/infkira/index1.html)"
+  },
+  {
+    "original": "- 015.`sparf`：[パパのキラキラフラワー](https://voich2014.github.io/creative_coding/src/sparf/index1.html)",
+    "translated": "- 015.`sparf`: [Papa's Sparkling Flower](https://voich2014.github.io/creative_coding/src/sparf/index1.html)"
+  },
+  {
+    "original": "- 016.`spir`：[パパの螺旋キラキラ](https://voich2014.github.io/creative_coding/src/spir/index1.html)",
+    "translated": "- 016.`spir`: [Papa's Spiral Sparkle](https://voich2014.github.io/creative_coding/src/spir/index1.html)"
+  },
+  {
+    "original": "- 017.`bez`：[パパのキラキラワームホール](https://voich2014.github.io/creative_coding/src/bez/index1.html)",
+    "translated": "- 017.`bez`: [Papa's Sparkling Wormhole](https://voich2014.github.io/creative_coding/src/bez/index1.html)"
+  },
+  {
+    "original": "- 018.`bez2`：[パパのキラキラの壺](https://voich2014.github.io/creative_coding/src/bez2/index1.html)",
+    "translated": "- 018.`bez2`: [Papa's Sparkling Pot](https://voich2014.github.io/creative_coding/src/bez2/index1.html)"
+  },
+  {
+    "original": "- 019.`crys`：[パパのキラキラ宝石箱](https://voich2014.github.io/creative_coding/src/crys/index2.html)",
+    "translated": "- 019.`crys`: [Papa's Sparkling Jewelry Box](https://voich2014.github.io/creative_coding/src/crys/index2.html)"
+  },
+  {
+    "original": "- 020.`nazo`：[パパの謎のいきものたち](https://voich2014.github.io/creative_coding/src/nazo/index1.html)",
+    "translated": "- 020.`nazo`: [Papa's Mysterious Creatures](https://voich2014.github.io/creative_coding/src/nazo/index1.html)"
+  },
+  {
+    "original": "- 021.`nazo2`：[パパの謎のいきものたちver.Walk](https://voich2014.github.io/creative_coding/src/nazo2/index1.html)",
+    "translated": "- 021.`nazo2`: [Papa's Mysterious Creatures ver.Walk](https://voich2014.github.io/creative_coding/src/nazo2/index1.html)"
+  },
+  {
+    "original": "- 022.`warp`：[パパの無限ワープ](https://voich2014.github.io/creative_coding/src/warp/index1.html)",
+    "translated": "- 022.`warp`: [Papa's Infinite Warp](https://voich2014.github.io/creative_coding/src/warp/index1.html)"
+  },
+  {
+    "original": "- 023.`alcube`：[パパのAlphaLineCube](https://voich2014.github.io/creative_coding/src/alcube/index1.html)",
+    "translated": "- 023.`alcube`: [Papa's AlphaLineCube](https://voich2014.github.io/creative_coding/src/alcube/index1.html)"
+  },
+  {
+    "original": "- 024.`sphr`：[パパのキラキラ回転水晶v3](https://voich2014.github.io/creative_coding/src/sphr/index_cr3.html)",
+    "translated": "- 024.`sphr`: [Papa's Sparkling Rotating Crystal v3](https://voich2014.github.io/creative_coding/src/sphr/index_cr3.html)"
+  },
+  {
+    "original": "- 025.`rope`：[パパのキラキラロープ](https://voich2014.github.io/creative_coding/src/rope/index1.html)",
+    "translated": "- 025.`rope`: [Papa's Sparkling Rope](https://voich2014.github.io/creative_coding/src/rope/index1.html)"
+  },
+  {
+    "original": "- 026.`kirat`：[パパのキラキラ反射文字](https://voich2014.github.io/creative_coding/src/kirat/index1.html)",
+    "translated": "- 026.`kirat`: [Papa's Sparkling Reflective Text](https://voich2014.github.io/creative_coding/src/kirat/index1.html)"
+  },
+  {
+    "original": "- 027.`agete`：[パパの無限瑪瑙](https://voich2014.github.io/creative_coding/src/agate/index1.html)",
+    "translated": "- 027.`agete`: [Papa's Infinite Agate](https://voich2014.github.io/creative_coding/src/agate/index1.html)"
+  },
+  {
+    "original": "- 028.`rose`：[パパのkawaiiバラ曲線](https://voich2014.github.io/creative_coding/src/rose/index4.html)",
+    "translated": "- 028.`rose`: [Papa's kawaii Rose Curve](https://voich2014.github.io/creative_coding/src/rose/index4.html)"
+  },
+  {
+    "original": "- 029.`gmo2`：[パパのポイントキラキラ](https://voich2014.github.io/creative_coding/src/gmo2/index1.html)",
+    "translated": "- 029.`gmo2`: [Papa's Point Sparkle](https://voich2014.github.io/creative_coding/src/gmo2/index1.html)"
+  },
+  {
+    "original": "- 030.`awave2`：[パパのAlphaWave2](https://voich2014.github.io/creative_coding/src/awave2/index6.html)",
+    "translated": "- 030.`awave2`: [Papa's AlphaWave2](https://voich2014.github.io/creative_coding/src/awave2/index6.html)"
+  },
+  {
+    "original": "- 031.`att`：[パパのウロボロスドラゴンテイル](https://voich2014.github.io/creative_coding/src/att/index2.html)",
+    "translated": "- 031.`att`: [Papa's Ouroboros Dragon Tail](https://voich2014.github.io/creative_coding/src/att/index2.html)"
+  },
+  {
+    "original": "- 032.`mand`：[パパのマンデルブロ集合](https://voich2014.github.io/creative_coding/src/mand/index4.html)",
+    "translated": "- 032.`mand`: [Papa's Mandelbrot Set](https://voich2014.github.io/creative_coding/src/mand/index4.html)"
+  },
+  {
+    "original": "- 033.`julia`：[パパのジュリア集合](https://voich2014.github.io/creative_coding/src/julia/index2.html)",
+    "translated": "- 033.`julia`: [Papa's Julia Set](https://voich2014.github.io/creative_coding/src/julia/index2.html)"
+  },
+  {
+    "original": "- 034.`lenti`：[パパのレンチキュラー](https://voich2014.github.io/creative_coding/src/lenti/index2.html)",
+    "translated": "- 034.`lenti`: [Papa's Lenticular](https://voich2014.github.io/creative_coding/src/lenti/index2.html)"
+  },
+  {
+    "original": "- 035.`csph`：[パパの間違った球体](https://voich2014.github.io/creative_coding/src/csph/index1.html)",
+    "translated": "- 035.`csph`: [Papa's Wrong Sphere](https://voich2014.github.io/creative_coding/src/csph/index1.html)"
+  },
+  {
+    "original": "- 036.`boo`：[パパのミニチュアぶーぶー](https://voich2014.github.io/creative_coding/src/boo/index1.html)",
+    "translated": "- 036.`boo`: [Papa's Miniature BooBoo](https://voich2014.github.io/creative_coding/src/boo/index1.html)"
+  },
+  {
+    "original": "- 037.`bb`：[パパの脳がバグるやつ](https://voich2014.github.io/creative_coding/src/bb/index1.html)",
+    "translated": "- 037.`bb`: [Papa's Brain Bug](https://voich2014.github.io/creative_coding/src/bb/index1.html)"
+  },
+  {
+    "original": "- 038.`imp`：[パパの不可能図形](https://voich2014.github.io/creative_coding/src/imp/index1.html)",
+    "translated": "- 038.`imp`: [Papa's Impossible Shape](https://voich2014.github.io/creative_coding/src/imp/index1.html)"
+  },
+  {
+    "original": "- 039.`md`：[パパの数学デッサン](https://voich2014.github.io/creative_coding/src/md/index3.html)",
+    "translated": "- 039.`md`: [Papa's Math Sketch](https://voich2014.github.io/creative_coding/src/md/index3.html)"
+  },
+  {
+    "original": "- 040.`earth`：[パパの球体テクスチャ](https://voich2014.github.io/creative_coding/src/earth/index1.html)",
+    "translated": "- 040.`earth`: [Papa's Sphere Texture](https://voich2014.github.io/creative_coding/src/earth/index1.html)"
+  },
+  {
+    "original": "- 041.`maze`：[パパのちっちゃい迷路](https://voich2014.github.io/creative_coding/src/maze/index1.html)",
+    "translated": "- 041.`maze`: [Papa's Tiny Maze](https://voich2014.github.io/creative_coding/src/maze/index1.html)"
+  },
+  {
+    "original": "- 042.`idomi`：[パパの無限ドミノ](https://voich2014.github.io/creative_coding/src/idomi/index5.html)",
+    "translated": "- 042.`idomi`: [Papa's Infinite Domino](https://voich2014.github.io/creative_coding/src/idomi/index5.html)"
+  },
+  {
+    "original": "- 043.`cube`：[パパののびるCube](https://voich2014.github.io/creative_coding/src/cube/index4.html)",
+    "translated": "- 043.`cube`: [Papa's Stretching Cube](https://voich2014.github.io/creative_coding/src/cube/index4.html)"
+  },
+  {
+    "original": "- 044.`tortun`：[パパのトーラストンネル](https://voich2014.github.io/creative_coding/src/tortun/index3.html)",
+    "translated": "- 044.`tortun`: [Papa's Torus Tunnel](https://voich2014.github.io/creative_coding/src/tortun/index3.html)"
+  },
+  {
+    "original": "- 045.`slit`：[パパのスリットアニメ](https://voich2014.github.io/creative_coding/src/slit/index1.html)",
+    "translated": "- 045.`slit`: [Papa's Slit Animation](https://voich2014.github.io/creative_coding/src/slit/index1.html)"
+  },
+  {
+    "original": "- 046.`wire2`：[パパのぐるぐる正方形](https://voich2014.github.io/creative_coding/src/wire2/index5.html)",
+    "translated": "- 046.`wire2`: [Papa's Spinning Square](https://voich2014.github.io/creative_coding/src/wire2/index5.html)"
+  },
+  {
+    "original": "- 047.`noise`：[パパのノイズ練習１](https://voich2014.github.io/creative_coding/src/noise/index1.html)",
+    "translated": "- 047.`noise`: [Papa's Noise Practice 1](https://voich2014.github.io/creative_coding/src/noise/index1.html)"
+  },
+  {
+    "original": "- 048.`noise2`：[パパのノイズ練習２](https://voich2014.github.io/creative_coding/src/noise/index2.html)",
+    "translated": "- 048.`noise2`: [Papa's Noise Practice 2](https://voich2014.github.io/creative_coding/src/noise/index2.html)"
+  },
+  {
+    "original": "- 049.`wire`：[パパのワイヤーフレームっぽいの](https://voich2014.github.io/creative_coding/src/wire/index3.html)",
+    "translated": "- 049.`wire`: [Papa's Wireframe-ish Thing](https://voich2014.github.io/creative_coding/src/wire/index3.html)"
+  },
+  {
+    "original": "- 050.`train`：[パパのAA Train](https://voich2014.github.io/creative_coding/src/train/index1.html)",
+    "translated": "- 050.`train`: [Papa's AA Train](https://voich2014.github.io/creative_coding/src/train/index1.html)"
+  },
+  {
+    "original": "- Bluesky：[@voich2014.bsky.social](https://bsky.app/profile/voich2014.bsky.social)",
+    "translated": "- Bluesky: [@voich2014.bsky.social](https://bsky.app/profile/voich2014.bsky.social)"
+  },
+  {
+    "original": "- X（旧Twitter）：[@voich2014](https://twitter.com/voich2014)",
+    "translated": "- X (formerly Twitter): [@voich2014](https://twitter.com/voich2014)"
+  },
+  {
+    "original": "- YouTube：[voichannel](https://www.youtube.com/@voichannel)",
+    "translated": "- YouTube: [voichannel](https://www.youtube.com/@voichannel)"
+  },
+  {
+    "original": "- `vlib/` 以下には共通のCSSやJavaScriptライブラリを配置しています。",
+    "translated": "- `vlib/` contains common CSS and JavaScript libraries."
+  },
+  {
+    "original": "- 各作品はそれぞれ `index.html` を持ち、GitHub Pages から直接閲覧できます。",
+    "translated": "- Each work has an `index.html` and can be viewed directly on GitHub Pages."
+  },
+  {
+    "original": "- 引用や参考にした他の作品がある場合は、各作品の公開ライセンスに従ってください。",
+    "translated": "- If there are other works cited or referenced, please follow the public license of each work."
+  },
+  {
+    "original": "- 本リポジトリ内の **ソースコード（HTML/CSS/JavaScript）** は MIT ライセンスで公開されています。",
+    "translated": "- **Source code (HTML/CSS/JavaScript)** in this repository is released under the MIT License."
+  },
+  {
+    "original": "-1, 0, 0, -1, 0, 0, -1, 0, 0, -1, 0, 0, -1, 0, 0, -1, 0, 0,  \t//左側面",
+    "translated": "-1, 0, 0, -1, 0, 0, -1, 0, 0, -1, 0, 0, -1, 0, 0, -1, 0, 0,  \t//Left side"
+  },
+  {
+    "original": "-this.vLight.y,\t//光線ベクトルもY座標を反転",
+    "translated": "-this.vLight.y,\t//Invert Y coordinate of light ray vector too"
+  },
+  {
+    "original": "-u, u, u, -u,-u, u,  u, u, u,  u, u, u, -u,-u, u,  u,-u, u,\t\t//正面",
+    "translated": "-u, u, u, -u,-u, u,  u, u, u,  u, u, u, -u,-u, u,  u,-u, u,\t\t//Front"
+  },
+  {
+    "original": "-u, u,-u, -u, u, u,  u, u,-u,  u, u,-u, -u, u, u,  u, u, u,\t\t//天面",
+    "translated": "-u, u,-u, -u, u, u,  u, u,-u,  u, u,-u, -u, u, u,  u, u, u,\t\t//Top"
+  },
+  {
+    "original": "-u, u,-u, -u,-u,-u, -u, u, u, -u, u, u, -u,-u,-u, -u,-u, u,\t\t//左側面",
+    "translated": "-u, u,-u, -u,-u,-u, -u, u, u, -u, u, u, -u,-u,-u, -u,-u, u,\t\t//Left side"
+  },
+  {
+    "original": "-u,-u, u, -u,-u,-u,  u,-u, u,  u,-u, u, -u,-u,-u,  u,-u,-u\t\t//底面",
+    "translated": "-u,-u, u, -u,-u,-u,  u,-u, u,  u,-u, u, -u,-u,-u,  u,-u,-u\t\t//Bottom"
+  },
+  {
+    "original": "/*\t\t今回はいつものカラーリストを使わない",
+    "translated": "/*\t\tNot using the usual color list this time"
+  },
+  {
+    "original": "/* 今回は個別に変化するのでフェードは使わない",
+    "translated": "/* Not using fade this time because it changes individually"
+  },
+  {
+    "original": "/* 今回は描画に時間がかかるので、フェードイン・アウトはやめます",
+    "translated": "/* Stopping fade in/out because drawing takes time this time"
+  },
+  {
+    "original": "/* 今回は背景色使いません",
+    "translated": "/* Not using background color this time"
+  },
+  {
+    "original": "//\t\t\t\t\t1プリミティブは3頂点の三角形なので",
+    "translated": "//\t\t\t\t\tSince one primitive is a triangle with 3 vertices"
+  },
+  {
+    "original": "//\t\t\t\t\t頂点順番リストの個数を3で割った数",
+    "translated": "//\t\t\t\t\tNumber of vertex order lists divided by 3"
+  },
+  {
+    "original": "//\t//ポリゴンの内側に存在しない場合はスキップ",
+    "translated": "//\t//Skip if not inside the polygon"
+  },
+  {
+    "original": "//\t//光源の情報を登録",
+    "translated": "//\t//Register light source information"
+  },
+  {
+    "original": "//\tuniform vec3 light_dir;\t\t//光源の方向(正規化済み)",
+    "translated": "//\tuniform vec3 light_dir;\t\t//Direction of light source (normalized)"
+  },
+  {
+    "original": "//                  i(虚軸)の範囲は、-1.25 ～ 1.25",
+    "translated": "//                  Range of i (imaginary axis) is -1.25 to 1.25"
+  },
+  {
+    "original": "//                  ＆ 上下反転     そのまま    平行移動",
+    "translated": "//                  & Vertical flip   As is       Translation"
+  },
+  {
+    "original": "//              i(虚軸)の範囲は、-1.6 ～ 1.6 にしました",
+    "translated": "//              Set the range of i (imaginary axis) to -1.6 to 1.6"
+  },
+  {
+    "original": "//           ↑hole_r |      ｜radius_max",
+    "translated": "//           ↑hole_r |      ｜radius_max"
+  },
+  {
+    "original": "//        |      ／|",
+    "translated": "//        |      ／|"
+  },
+  {
+    "original": "//        |      ＼|",
+    "translated": "//        |      ＼|"
+  },
+  {
+    "original": "//        |    ／  |",
+    "translated": "//        |    ／  |"
+  },
+  {
+    "original": "//        |    ＼  |",
+    "translated": "//        |    ＼  |"
+  },
+  {
+    "original": "//        |  ／    | scale",
+    "translated": "//        |  ／    | scale"
+  },
+  {
+    "original": "//        |  ＼    |",
+    "translated": "//        |  ＼    |"
+  },
+  {
+    "original": "//        |／)fov/2|",
+    "translated": "//        |／)fov/2|"
+  },
+  {
+    "original": "//        |＼)     |",
+    "translated": "//        |＼)     |"
+  },
+  {
+    "original": "//      n  (n+1は底面の中心)",
+    "translated": "//      n  (n+1 is the center of the bottom)"
+  },
+  {
+    "original": "//      |             |      ｜     |",
+    "translated": "//      |             |      ｜     |"
+  },
+  {
+    "original": "//      ★最初の画面クリア時に計算しておく！",
+    "translated": "//      ★Calculate when clearing the screen for the first time!"
+  },
+  {
+    "original": "//      平均半径[km]  月基準のスケール",
+    "translated": "//      Average radius [km]  Scale based on the moon"
+  },
+  {
+    "original": "//    |／|",
+    "translated": "//    |／|"
+  },
+  {
+    "original": "//    |／|   裏: 0,4,1,4,5,1",
+    "translated": "//    |／|   Back: 0,4,1,4,5,1"
+  },
+  {
+    "original": "//    |／|   裏: 1,5,2,5,6,2",
+    "translated": "//    |／|   Back: 1,5,2,5,6,2"
+  },
+  {
+    "original": "//    |／|   裏: 3,7,0,7,4,0",
+    "translated": "//    |／|   Back: 3,7,0,7,4,0"
+  },
+  {
+    "original": "//    |／|   ：",
+    "translated": "//    |／|   :"
+  },
+  {
+    "original": "//    |＼|   裏: 0,4,3,4,7,3",
+    "translated": "//    |＼|   Back: 0,4,3,4,7,3"
+  },
+  {
+    "original": "//    |＼|   裏: 1,5,0,5,4,0",
+    "translated": "//    |＼|   Back: 1,5,0,5,4,0"
+  },
+  {
+    "original": "//    |＼|   裏: 2,6,1,6,5,1",
+    "translated": "//    |＼|   Back: 2,6,1,6,5,1"
+  },
+  {
+    "original": "//    |＼|   ：",
+    "translated": "//    |＼|   :"
+  },
+  {
+    "original": "//    ／|＼",
+    "translated": "//    ／|＼"
+  },
+  {
+    "original": "//    ／|＼     a,0,3 0,1,3 3,1,4 1,2,4 4,2,5 2,a+1,5",
+    "translated": "//    ／|＼     a,0,3 0,1,3 3,1,4 1,2,4 4,2,5 2,a+1,5"
+  },
+  {
+    "original": "//    ／|＼    表：n,0,1,n,1,2",
+    "translated": "//    ／|＼    Front: n,0,1,n,1,2"
+  },
+  {
+    "original": "//    ＼|／",
+    "translated": "//    ＼|／"
+  },
+  {
+    "original": "//   +--+--+… 底：n+1,1,0,n+1,2,1",
+    "translated": "//   +--+--+… Bottom: n+1,1,0,n+1,2,1"
+  },
+  {
+    "original": "//   +--+--+… 表: 0,4,1,1,4,5",
+    "translated": "//   +--+--+… Front: 0,4,1,1,4,5"
+  },
+  {
+    "original": "//   +--+--+… 表: 1,5,2,2,5,6",
+    "translated": "//   +--+--+… Front: 1,5,2,2,5,6"
+  },
+  {
+    "original": "//   0+--+4  表: 0,1,4,4,1,5",
+    "translated": "//   0+--+4  Front: 0,1,4,4,1,5"
+  },
+  {
+    "original": "//   0+--+4  表: 1,0,5,5,0,4",
+    "translated": "//   0+--+4  Front: 1,0,5,5,0,4"
+  },
+  {
+    "original": "//   1+--+5  表: 1,2,5,5,1,2",
+    "translated": "//   1+--+5  Front: 1,2,5,5,1,2"
+  },
+  {
+    "original": "//   1+--+5  表: 2,1,6,6,1,5",
+    "translated": "//   1+--+5  Front: 2,1,6,6,1,5"
+  },
+  {
+    "original": "//   2+--+6  ：",
+    "translated": "//   2+--+6  :"
+  },
+  {
+    "original": "//   3+--+7  表: 0,3,4,4,3,7",
+    "translated": "//   3+--+7  Front: 0,3,4,4,3,7"
+  },
+  {
+    "original": "//   3+--+7  表: 3,0,7,7,0,4",
+    "translated": "//   3+--+7  Front: 3,0,7,7,0,4"
+  },
+  {
+    "original": "//   4  5  6   表: 1,2,5,2,6,5",
+    "translated": "//   4  5  6   Front: 1,2,5,2,6,5"
+  },
+  {
+    "original": "//   n = 4 の場合",
+    "translated": "//   Case of n = 4"
+  },
+  {
+    "original": "//   |  ／|",
+    "translated": "//   |  ／|"
+  },
+  {
+    "original": "//   |  ／|      |  ／|",
+    "translated": "//   |  ／|      |  ／|"
+  },
+  {
+    "original": "//   |／  |",
+    "translated": "//   |／  |"
+  },
+  {
+    "original": "//   |／  |      |／  |",
+    "translated": "//   |／  |      |／  |"
+  },
+  {
+    "original": "//   |／|／|",
+    "translated": "//   |／|／|"
+  },
+  {
+    "original": "//   |／|／|   裏: 0,1,4,1,5,4",
+    "translated": "//   |／|／|   Back: 0,1,4,1,5,4"
+  },
+  {
+    "original": "//   ただし、ポリゴンの法線ベクトルと光線ベクトルとの内積結果は負の",
+    "translated": "//   However, the dot product result of the polygon's normal vector and the light ray vector is negative"
+  },
+  {
+    "original": "//   で、0に補正します。",
+    "translated": "//   So correct it to 0."
+  },
+  {
+    "original": "//   もし、内積結果が正の数になった場合は光が当たらないことになるの",
+    "translated": "//   If the dot product result becomes a positive number, it means light does not hit"
+  },
+  {
+    "original": "//   値となるのでマイナスをかけて正に反転させます。",
+    "translated": "//   value, so multiply by minus to invert it to positive."
+  },
+  {
+    "original": "//   回転         回転          回転      平行移動",
+    "translated": "//   Rotation         Rotation          Rotation      Translation"
+  },
+  {
+    "original": "//   拡散光(Diffuse)の値を調整します。",
+    "translated": "//   Adjust the diffuse light value."
+  },
+  {
+    "original": "//  +------+X (左手座標系　向こう側が+Z)",
+    "translated": "//  +------+X (Left-handed coordinate system, +Z is the far side)"
+  },
+  {
+    "original": "//  +------+X (左手座標系　手前側が+Y)",
+    "translated": "//  +------+X (Left-handed coordinate system, +Y is the near side)"
+  },
+  {
+    "original": "//  +Y   |＼　 |",
+    "translated": "//  +Y   |＼　 |"
+  },
+  {
+    "original": "//  +Z   |＼　 |",
+    "translated": "//  +Z   |＼　 |"
+  },
+  {
+    "original": "//  X座標のScaling  Y座標のScaling  Z座標は     原点を画面の中心に",
+    "translated": "//  X coordinate Scaling  Y coordinate Scaling  Z is     Origin to center of screen"
+  },
+  {
+    "original": "//  h(hue)       : 色相  0-359の値[度]",
+    "translated": "//  h(hue)       : Hue  Value from 0-359 [degrees]"
+  },
+  {
+    "original": "//  l(lightness) : 明度  0-1.0の値[%]",
+    "translated": "//  l(lightness) : Lightness  Value from 0-1.0 [%]"
+  },
+  {
+    "original": "//  s(saturation): 彩度  0-1.0の値[%]",
+    "translated": "//  s(saturation): Saturation  Value from 0-1.0 [%]"
+  },
+  {
+    "original": "//  |    |　＼ |",
+    "translated": "//  |    |　＼ |"
+  },
+  {
+    "original": "//  ことになります。",
+    "translated": "//  This will be the case."
+  },
+  {
+    "original": "//  と、ポリゴン面の法線が表裏反転してしまいます。",
+    "translated": "//  Then, the normal of the polygon face will be flipped inside out."
+  },
+  {
+    "original": "//  というわけで、頂点の描画順をちょっと変えて、正しく法線が",
+    "translated": "//  So, change the vertex drawing order slightly so that the normal is correct"
+  },
+  {
+    "original": "//  の座標が(x,y,z)=(0.0,0.0,0.0)として変換されているので、Zが負の",
+    "translated": "//  Because the coordinates are transformed as (x,y,z)=(0.0,0.0,0.0), Z is negative"
+  },
+  {
+    "original": "//  値になっているということは、カメラよりも後ろに位置しているという",
+    "translated": "//  Being a value means it is located behind the camera"
+  },
+  {
+    "original": "//  側面        上面/下面",
+    "translated": "//  Side        Top/Bottom"
+  },
+  {
+    "original": "//  光源の向いている方向だよ",
+    "translated": "//  It's the direction the light source is facing"
+  },
+  {
+    "original": "//  光源の向いている方向だよ(右手座標系用)",
+    "translated": "//  It's the direction the light source is facing (for right-handed coordinate system)"
+  },
+  {
+    "original": "//  得られるようになっているので、ちょっと考えてみてね。",
+    "translated": "//  You can obtain it, so please think about it."
+  },
+  {
+    "original": "//  貼り付け具合が見えるようになるよ",
+    "translated": "//  You will be able to see how it is pasted"
+  },
+  {
+    "original": "//  ／  |  ＼",
+    "translated": "//  ／  |  ＼"
+  },
+  {
+    "original": "//  ＼  |  ／",
+    "translated": "//  ＼  |  ／"
+  },
+  {
+    "original": "// %02X 変換",
+    "translated": "// %02X Conversion"
+  },
+  {
+    "original": "// (A,B,C)があった時に、ベクトルとしてはAからBへ伸びる",
+    "translated": "// When there is (A,B,C), as a vector extending from A to B"
+  },
+  {
+    "original": "// (法線ベクトルと視線ベクトルが向き合う)を作ろう",
+    "translated": "// Let's make (normal vector and view vector face each other)"
+  },
+  {
+    "original": "// +Zが手前で-Zが奥になります。",
+    "translated": "// +Z is front and -Z is back."
+  },
+  {
+    "original": "// -1.2をAに、+1.2をYに当てはめた25文字の範囲で表した",
+    "translated": "// Represented in a range of 25 characters with -1.2 as A and +1.2 as Y"
+  },
+  {
+    "original": "// 0.0 ～ 1.0の補間式、5次のものがアーティファクトが少なくていいらしい",
+    "translated": "// Interpolation formula from 0.0 to 1.0, 5th order seems to have fewer artifacts"
+  },
+  {
+    "original": "// 0.0 ～ 1.0の補間式、5次のものがアーティファクト少なくていいらしい",
+    "translated": "// Interpolation formula from 0.0 to 1.0, 5th order seems to have fewer artifacts"
+  },
+  {
+    "original": "// 0:線路",
+    "translated": "// 0: Railroad"
+  },
+  {
+    "original": "// 1/2 ≦ m ≦ 1の場合 m = |y2 - y1| / |x2 - x1|",
+    "translated": "// Case 1/2 ≦ m ≦ 1: m = |y2 - y1| / |x2 - x1|"
+  },
+  {
+    "original": "// 1:草１",
+    "translated": "// 1: Grass 1"
+  },
+  {
+    "original": "// 2:草２",
+    "translated": "// 2: Grass 2"
+  },
+  {
+    "original": "// 3:看板",
+    "translated": "// 3: Signboard"
+  },
+  {
+    "original": "// 4:木",
+    "translated": "// 4: Tree"
+  },
+  {
+    "original": "// 4番目の行には平行移動の値(各方向のベクトルとfromとの内積)",
+    "translated": "// The 4th row contains translation values (dot product of direction vectors and from)"
+  },
+  {
+    "original": "// 5:ポール",
+    "translated": "// 5: Pole"
+  },
+  {
+    "original": "// <頂点A,B,Cをv0,v1,v2として、法線ベクトルとなるnベクトルを求める場合>",
+    "translated": "// <Case of finding n vector which becomes normal vector with vertices A, B, C as v0, v1, v2>"
+  },
+  {
+    "original": "// ABCのポリゴンは表を向いていることになります。",
+    "translated": "// The polygon ABC will be facing front."
+  },
+  {
+    "original": "// ABベクトルとACベクトルとの外積で計算します。",
+    "translated": "// Calculate with the cross product of AB vector and AC vector."
+  },
+  {
+    "original": "// EdgeFunctionの答えは面積値でもあるので、全体の",
+    "translated": "// The answer of EdgeFunction is also the area value, so the whole"
+  },
+  {
+    "original": "// IDを元に設定されます",
+    "translated": "// Set based on ID"
+  },
+  {
+    "original": "// J.C.Sprott氏 の式",
+    "translated": "// J.C.Sprott's formula"
+  },
+  {
+    "original": "// Processingによる実践ガイドの「5.3.3 球を描く間違った方法」を参考にしてみました。",
+    "translated": "// I referred to '5.3.3 The Wrong Way to Draw a Sphere' in the Processing Practice Guide."
+  },
+  {
+    "original": "// Wikipediaで紹介されている、f2とg1が組み合わされた方の",
+    "translated": "// The one combining f2 and g1 introduced on Wikipedia"
+  },
+  {
+    "original": "// Wikipedia調べ",
+    "translated": "// Researched on Wikipedia"
+  },
+  {
+    "original": "// X = (左)   -1.0 ～ 1.0(右)",
+    "translated": "// X = (Left)   -1.0 to 1.0 (Right)"
+  },
+  {
+    "original": "// X-Z平面上にn角形の頂点を配置し、それをY軸に沿って広げることで円柱",
+    "translated": "// A cylinder is created by placing vertices of an n-gon on the X-Z plane and expanding them along the Y axis"
+  },
+  {
+    "original": "// X/Y/Zが-1.0～1.0の範囲に変換されています。",
+    "translated": "// X/Y/Z are converted to the range of -1.0 to 1.0."
+  },
+  {
+    "original": "// XY平面に垂直なZ軸と平行になる+Zの法線ベクトルが計算できました。",
+    "translated": "// +Z normal vector which is perpendicular to XY plane and parallel to Z axis was calculated."
+  },
+  {
+    "original": "// XY平面の頂点は以下の順番で4点とします",
+    "translated": "// The vertices of the XY plane are 4 points in the following order"
+  },
+  {
+    "original": "// XZ平面において、上向き(+Y)の方向に向く法線ベクトルを",
+    "translated": "// On the XZ plane, calculate the normal vector pointing upward (+Y)"
+  },
+  {
+    "original": "// XZ平面の頂点は以下の順番で4点とします",
+    "translated": "// The vertices of the XZ plane are 4 points in the following order"
+  },
+  {
+    "original": "// XとYは-1.0～1.0を描画するスクリーンの領域にマッピング",
+    "translated": "// X and Y are mapped to the screen area drawing -1.0 to 1.0"
+  },
+  {
+    "original": "// X軸は左側がマイナス、Y軸は下側がマイナスです。",
+    "translated": "// X axis is minus on the left side, Y axis is minus on the bottom side."
+  },
+  {
+    "original": "// X軸は左側がマイナス、Z軸は奥側がマイナスです。",
+    "translated": "// X axis is minus on the left side, Z axis is minus on the back side."
+  },
+  {
+    "original": "// Y = (下)   -1.0 ～ 1.0(上)",
+    "translated": "// Y = (Bottom)   -1.0 to 1.0 (Top)"
+  },
+  {
+    "original": "// Y座標の方向をスクリーン座標系に合わせるのと、X/Y",
+    "translated": "// Matching the direction of Y coordinate to screen coordinate system, and X/Y"
+  },
+  {
+    "original": "// Y軸を中心にia度分回転させることで座標が計算できます",
+    "translated": "// Coordinates can be calculated by rotating ia degrees around the Y axis"
+  },
+  {
+    "original": "// Z = (nearZ)-1.0 ～ 1.0(farZ)",
+    "translated": "// Z = (nearZ)-1.0 ～ 1.0(farZ)"
+  },
+  {
+    "original": "// Z値が同じくらいならポリゴン中央Z値が手前の方を優先",
+    "translated": "// If Z values are about the same, prioritize the one with polygon center Z value closer"
+  },
+  {
+    "original": "// Z値はそのまま残ります。",
+    "translated": "// Z value remains as is."
+  },
+  {
+    "original": "// Z値を補間する必要があり、かなりややこしい計算で確認",
+    "translated": "// Need to interpolate Z value, confirmed with quite complicated calculation"
+  },
+  {
+    "original": "// alpha\t\tα値（固定小数の小数部16bit)",
+    "translated": "// alpha\t\tAlpha value (16bit fractional part of fixed point)"
+  },
+  {
+    "original": "// aからbに伸びるベクトルとaからcに伸びるベクトルとの外積になります。",
+    "translated": "// It becomes the cross product of the vector extending from a to b and the vector extending from a to c."
+  }
+]

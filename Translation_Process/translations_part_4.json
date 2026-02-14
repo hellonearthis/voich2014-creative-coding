@@ -1,0 +1,622 @@
+[
+    {
+        "original": "// ポリゴンの表面が外側を向くように、以下の説明の要領で頂点の描画順を設定",
+        "translated": "// Set the vertex drawing order as explained below so that the polygon surface faces outward"
+    },
+    {
+        "original": "// ポリゴンの表面の方向は、OpenGL系に合わせて反時計回り(左回り)を",
+        "translated": "// The direction of the polygon surface is counter-clockwise (left rotation) to match OpenGL system"
+    },
+    {
+        "original": "// ポリゴンは反時計回り(左回り)が表になるように",
+        "translated": "// So that the polygon is front when counter-clockwise (left rotation)"
+    },
+    {
+        "original": "// ポリゴン描画用に各頂点の描画順インデックスを作成",
+        "translated": "// Create drawing order index of each vertex for polygon drawing"
+    },
+    {
+        "original": "// リングの円周となる正面から見た際の正方形の",
+        "translated": "// Square when viewed from the front, which becomes the circumference of the ring"
+    },
+    {
+        "original": "// 三角形ポリゴンの面の向き(法線ベクトル)は、３頂点",
+        "translated": "// The face direction (normal vector) of a triangle polygon is determined by 3 vertices"
+    },
+    {
+        "original": "// 下向きになっているのでそれを変換するのと、実際の",
+        "translated": "// Since it is facing down, convert it, and the actual"
+    },
+    {
+        "original": "// 下記のサイトの列優先用(OpenGL用)のものを参考にしています。",
+        "translated": "// Referencing the one for column-major (for OpenGL) on the following site."
+    },
+    {
+        "original": "// 下記のサイトの行優先用のものを参考にしています。",
+        "translated": "// Referencing the one for row-major on the following site."
+    },
+    {
+        "original": "// 下記のサイトを参考にしました。ありがとうございます！",
+        "translated": "// Referred to the following site. Thank you!"
+    },
+    {
+        "original": "// 下面的計4つになります。1面に付きポリゴン2つ。",
+        "translated": "// Total 4 including the bottom surface. 2 polygons per surface."
+    },
+    {
+        "original": "// 今回の水晶型(四角錐を上下に反対で重ねた形)は、らせんを描きながら作る球体",
+        "translated": "// This crystal type (shape with square pyramids stacked oppositely up and down) is a sphere created while drawing a spiral"
+    },
+    {
+        "original": "// 今回は両面作るのでわかりやすい順番で並べました",
+        "translated": "// Since I'm making both sides this time, I arranged them in an easy-to-understand order"
+    },
+    {
+        "original": "// 今回は内向きの面も作るので、反対向きの法線を",
+        "translated": "// Since I'm making inward faces too this time, normal vectors in the opposite direction"
+    },
+    {
+        "original": "// 今後は、WebGLに合わせやすいOpenGL系の反時計回り(右回り)",
+        "translated": "// From now on, counter-clockwise (right rotation) of the OpenGL system which is easy to match with WebGL"
+    },
+    {
+        "original": "// 以下の、 https://coolors.co/ で作成した色見本から、パレット配列を",
+        "translated": "// Create a palette array from the color sample created at https://coolors.co/ below"
+    },
+    {
+        "original": "// 以前はDirectXを参考にしていたので、時計回り(右回り)",
+        "translated": "// Previously referenced DirectX, so clockwise (right rotation)"
+    },
+    {
+        "original": "// 例(x,y)",
+        "translated": "// Example (x,y)"
+    },
+    {
+        "original": "// 修正します。",
+        "translated": "// Correct."
+    },
+    {
+        "original": "// 修正中です。",
+        "translated": "// Under correction."
+    },
+    {
+        "original": "// 値になれば内側と判定できます。",
+        "translated": "// If it becomes a value, it can be determined as inside."
+    },
+    {
+        "original": "// 優先するためにポリゴンの中央Z値を取得しておきます。",
+        "translated": "// Get the center Z value of the polygon to prioritize."
+    },
+    {
+        "original": "// 共有してるラインの判定の場合、左上だけ描画するとしたら、上手いこといくのか？",
+        "translated": "// In the case of shared line determination, if I draw only the top left, will it work well?"
+    },
+    {
+        "original": "// 内積の結果がマイナスの値の場合は、視線ベクトルとポリゴンの法線ベクトル",
+        "translated": "// If the dot product result is a negative value, the line of sight vector and the polygon's normal vector"
+    },
+    {
+        "original": "// 円の半径を√2とした場合、垂線と弦の半分の長さは1になるので、",
+        "translated": "// If the radius of the circle is √2, the length of perpendicular and half the chord is 1, so"
+    },
+    {
+        "original": "// 円形のポリゴンは極座標変換の形にするので、n分割されたu座標",
+        "translated": "// Since circular polygons are in the form of polar coordinate conversion, n-divided u coordinate"
+    },
+    {
+        "original": "// 列優先用",
+        "translated": "// For column-major"
+    },
+    {
+        "original": "// 利用する面は、正面と背面を除いた、側面2個と上面と",
+        "translated": "// Surfaces to use are 2 side surfaces and top surface, excluding front and back surfaces"
+    },
+    {
+        "original": "// 参考",
+        "translated": "// Reference"
+    },
+    {
+        "original": "// 参考(このサイトは行優先行列)",
+        "translated": "// Reference (This site uses row-major matrix)"
+    },
+    {
+        "original": "// 参考　tomoqさん(@TOMOQ8192)紹介のページ",
+        "translated": "// Reference: Page introduced by tomoq-san (@TOMOQ8192)"
+    },
+    {
+        "original": "// 反時計周りの頂点順のポリゴンの場合、0以上の正の",
+        "translated": "// In the case of a polygon with counter-clockwise vertex order, 0 or positive"
+    },
+    {
+        "original": "// 右手座標系では、手前(カメラを向いている方向)が+Zなので、三角形",
+        "translated": "// In the right-handed coordinate system, front (direction facing the camera) is +Z, so triangle"
+    },
+    {
+        "original": "// 右手座標系の空間",
+        "translated": "// Space of right-handed coordinate system"
+    },
+    {
+        "original": "// 各3Dオブジェクトのローカル座標系からワールド座標系",
+        "translated": "// From local coordinate system of each 3D object to world coordinate system"
+    },
+    {
+        "original": "// 各辺の長さはとりあず1.0として、リングの幅は",
+        "translated": "// Assuming length of each side is 1.0 for now, ring width is"
+    },
+    {
+        "original": "// 各辺の長さはとりあず1.0として適当に",
+        "translated": "// Assuming length of each side is 1.0 appropriately for now"
+    },
+    {
+        "original": "// 各頂点の座標を指定します。",
+        "translated": "// Specify coordinates of each vertex."
+    },
+    {
+        "original": "// 向ける頂点の描画順は、C,B,Dになります。",
+        "translated": "// The drawing order of vertices to face is C, B, D."
+    },
+    {
+        "original": "// 四角形を構成する表を向くポリゴンは、△ABCと△CBDになります。",
+        "translated": "// Polygons facing front constituting a quadrangle are triangle ABC and triangle CBD."
+    },
+    {
+        "original": "// 地球　 6371.0       3.66760693109205",
+        "translated": "// Earth  6371.0       3.66760693109205"
+    },
+    {
+        "original": "// 垂線の長さ = 1 / √2 * 半径",
+        "translated": "// Perpendicular length = 1 / √2 * Radius"
+    },
+    {
+        "original": "// 境界線描画サンプルを参考にさせて頂きました。",
+        "translated": "// Referenced the border drawing sample."
+    },
+    {
+        "original": "// 変換すると、0.025 ～ 0.975 の値を返すようになります。",
+        "translated": "// When converted, it returns a value between 0.025 and 0.975."
+    },
+    {
+        "original": "// 外積で計算するには、頂点の描画順は、ABCとCBDになります。",
+        "translated": "// To calculate with cross product, vertex drawing order is ABC and CBD."
+    },
+    {
+        "original": "// 外積の結果の絶対値は2つのベクトルを2辺とする平行四辺形の面積に",
+        "translated": "// The absolute value of the cross product result is the area of the parallelogram with two vectors as two sides"
+    },
+    {
+        "original": "// 失敗した…",
+        "translated": "// Failed..."
+    },
+    {
+        "original": "// 奥行きを示す Z方向ベクトルを取得する。",
+        "translated": "// Get Z direction vector indicating depth."
+    },
+    {
+        "original": "// 始点(x1,y1) 中間制御点(x2,y2) 終点(x3,y3)の想定で",
+        "translated": "// Assuming start point (x1,y1), control point (x2,y2), end point (x3,y3)"
+    },
+    {
+        "original": "// 始点(x1,y1) 中間制御点1(x2,y2) 中間制御点2(x3,y3) 終点(x4,y4)の想定で",
+        "translated": "// Assuming start point (x1,y1), control point 1 (x2,y2), control point 2 (x3,y3), end point (x4,y4)"
+    },
+    {
+        "original": "// 射影変換後は、手前がZ=-1で奥が+1という左手座標系の空間",
+        "translated": "// After projection transformation, space of left-handed coordinate system where front is Z=-1 and back is +1"
+    },
+    {
+        "original": "// 射影変換後は左手座標系になり、",
+        "translated": "// Becomes left-handed coordinate system after projection transformation,"
+    },
+    {
+        "original": "// 射影変換行列を通ってきた座標はクリッピング空間として、",
+        "translated": "// Coordinates passed through projection transformation matrix are as clipping space,"
+    },
+    {
+        "original": "// 左上判定するのは、エッジ関数で0になった(エッジの直線上の点だった)場合に、評価",
+        "translated": "// Top-left judgment evaluates when edge function becomes 0 (point on edge line)"
+    },
+    {
+        "original": "// 常に背景色とのブレンドになっている、",
+        "translated": "// It is always blending with background color,"
+    },
+    {
+        "original": "// 平面リングの頂点は以下の順番で前と後ろの",
+        "translated": "// Vertices of plane ring are front and back in the following order"
+    },
+    {
+        "original": "// 座標はOpenGLの右手座標系に合わせるので、",
+        "translated": "// Since coordinates match OpenGL's right-handed coordinate system,"
+    },
+    {
+        "original": "// 座標はOpenGLの右手座標系に合わせるので、+Zが手前で-Zが奥になります。",
+        "translated": "// Since coordinates match OpenGL's right-handed coordinate system, +Z is front and -Z is back."
+    },
+    {
+        "original": "// 座標位置の作成に少し時間がかかるので、",
+        "translated": "// Since creating coordinate positions takes a little time,"
+    },
+    {
+        "original": "// 座標値を当てはめてみる",
+        "translated": "// Try applying coordinate values"
+    },
+    {
+        "original": "// 座標移動の計算がしやすいように、左端中央を原点",
+        "translated": "// Left end center as origin to make coordinate movement calculation easier"
+    },
+    {
+        "original": "// 式を利用します。",
+        "translated": "// Use formula."
+    },
+    {
+        "original": "// 必要があります。",
+        "translated": "// There is a need."
+    },
+    {
+        "original": "// 手前の枠の頂点が0,1,2,3で奥の枠の頂点が4,5,6,7です。",
+        "translated": "// Front frame vertices are 0,1,2,3 and back frame vertices are 4,5,6,7."
+    },
+    {
+        "original": "// 手前の面の頂点が0,1,2,3で奥の面の頂点が4,5,6,7です。",
+        "translated": "// Front face vertices are 0,1,2,3 and back face vertices are 4,5,6,7."
+    },
+    {
+        "original": "// 手前方向(+Y方向)になります。",
+        "translated": "// Becomes front direction (+Y direction)."
+    },
+    {
+        "original": "// 手前方向(-Z方向)になります。",
+        "translated": "// Becomes front direction (-Z direction)."
+    },
+    {
+        "original": "// 手軽に光らせたい場合には楽かも(*´ω｀*)",
+        "translated": "// Might be easy if you want to make it glow easily (*´ω｀*)"
+    },
+    {
+        "original": "// 拡大して使います",
+        "translated": "// Use enlarged"
+    },
+    {
+        "original": "// 拡大縮小させる)",
+        "translated": "// Scale)"
+    },
+    {
+        "original": "// 持つポリゴンの頂点の描画順は、A,C,BとC,D,Bに",
+        "translated": "// Drawing order of polygon vertices held becomes A,C,B and C,D,B"
+    },
+    {
+        "original": "// 指定のピクセルがポリゴンの中にあるかを判定するEdgeFunctionってので",
+        "translated": "// Because EdgeFunction determines if specified pixel is inside polygon"
+    },
+    {
+        "original": "// 掛ける順番は、",
+        "translated": "// Order of multiplication is,"
+    },
+    {
+        "original": "// 描画候補のX,Y座標に0.5ずつ加算した仮想的な",
+        "translated": "// Virtual ... obtained by adding 0.5 to candidate X,Y coordinates"
+    },
+    {
+        "original": "// 描画先の表示範囲の幅・高さのピクセル数に合わせて",
+        "translated": "// According to the number of pixels of width and height of the display range of drawing destination"
+    },
+    {
+        "original": "// 時計回り(右回り)の三角形ACBの場合",
+        "translated": "// In case of clockwise (right rotation) triangle ACB"
+    },
+    {
+        "original": "// 時計回りの頂点順の場合、-Zになり、向こう側を向いていること",
+        "translated": "// In case of clockwise vertex order, becomes -Z, meaning facing the other side"
+    },
+    {
+        "original": "// 月　　 1737.1       1.0",
+        "translated": "// Moon  1737.1       1.0"
+    },
+    {
+        "original": "// 木星　69911        40.2458119854931",
+        "translated": "// Jupiter  69911        40.2458119854931"
+    },
+    {
+        "original": "// 本来のブルーム処理とはちょっと違うと思いますが、とりあえず",
+        "translated": "// I think it's a bit different from original bloom processing, but anyway"
+    },
+    {
+        "original": "// 本来は、背景色やすでに描画されている色との",
+        "translated": "// Originally, with background color or already drawn color"
+    },
+    {
+        "original": "// 極座標の方程式",
+        "translated": "// Polar coordinate equation"
+    },
+    {
+        "original": "// 次のViewPort変換によって、描画先画面解像度に合わせて座標変換する必要",
+        "translated": "// Need to transform coordinates according to drawing destination screen resolution by next ViewPort transformation"
+    },
+    {
+        "original": "// 正方形の16分の1の0.0625にします。",
+        "translated": "// Set to 0.0625, 1/16 of square."
+    },
+    {
+        "original": "// 注視する方向 (通常+Z) である。",
+        "translated": "// Direction to gaze (usually +Z)."
+    },
+    {
+        "original": "// 注視する方向 (通常-Z) である。",
+        "translated": "// Direction to gaze (usually -Z)."
+    },
+    {
+        "original": "// 注視する方向(Z方向ベクトル)と カメラの上方向を表すupベクトル",
+        "translated": "// Direction to gaze (Z direction vector) and up vector representing camera's up direction"
+    },
+    {
+        "original": "// 潔く諦めてスキップ)",
+        "translated": "// Gracefully give up and skip)"
+    },
+    {
+        "original": "// 点pが占める3頂点の属性情報の比率が計算できます。",
+        "translated": "// Can calculate ratio of attribute information of 3 vertices occupied by point p."
+    },
+    {
+        "original": "// 球体のポリゴンは、上から下にn個縦に連なったポリゴン2つの四角形",
+        "translated": "// Sphere polygons are quadrangles of 2 polygons connected vertically n times from top to bottom"
+    },
+    {
+        "original": "// 生成するコードは、takawo shunsukeさん(@takawo)の作品からお借りしました。",
+        "translated": "// The generation code was borrowed from takawo shunsuke-san (@takawo)'s work."
+    },
+    {
+        "original": "// 用意するので、さらに倍の、計4 * 2 * 2 = 16枚。",
+        "translated": "// Prepare ..., so double that, total 4 * 2 * 2 = 16 sheets."
+    },
+    {
+        "original": "// 画面クリアをα値だけの変更ではなく、ちゃんと",
+        "translated": "// Screen clear is not just changing alpha value, but properly"
+    },
+    {
+        "original": "// 番号は n = 4 の場合でのインデックス順",
+        "translated": "// Numbers are in index order for case n = 4"
+    },
+    {
+        "original": "// 番号は四角円でのインデックス順",
+        "translated": "// Numbers are in index order for square circle"
+    },
+    {
+        "original": "// 番号は四角錐でのインデックス順",
+        "translated": "// Numbers are in index order for square pyramid"
+    },
+    {
+        "original": "// 移動させた後、Y軸を中心に360/n度分回転させることで座標が計算できます",
+        "translated": "// After moving, coordinates can be calculated by rotating 360/n degrees around Y axis"
+    },
+    {
+        "original": "// 移動させた後、Y軸を中心に360/r_n度分回転させることで座標が計算できます",
+        "translated": "// After moving, coordinates can be calculated by rotating 360/r_n degrees around Y axis"
+    },
+    {
+        "original": "// 立方体の側面と上面/下面を別の画像にするために、横長の",
+        "translated": "// To make cube side and top/bottom surfaces different images, horizontally long"
+    },
+    {
+        "original": "// 立方体の頂点は以下の順番で前と後ろの",
+        "translated": "// Cube vertices are front and back in following order"
+    },
+    {
+        "original": "// 簡単な車の形を取る頂点を定義します。",
+        "translated": "// Define vertices taking simple car shape."
+    },
+    {
+        "original": "// 簡易的なブルーム処理をやっています。",
+        "translated": "// Doing simple bloom processing."
+    },
+    {
+        "original": "// 絶対値が1より大きいものは、視野範囲外として除外できます。",
+        "translated": "// Values with absolute value greater than 1 can be excluded as outside field of view."
+    },
+    {
+        "original": "// 背景色で塗りつぶしていれば、現在の描画色との",
+        "translated": "// If filled with background color, with current drawing color"
+    },
+    {
+        "original": "// 自前ライブラリ群",
+        "translated": "// Self-made libraries"
+    },
+    {
+        "original": "// 行優先用",
+        "translated": "// For row-major"
+    },
+    {
+        "original": "// 行列の構築を開始する。最初の 3 つの行には、",
+        "translated": "// Start constructing matrix. In the first 3 rows,"
+    },
+    {
+        "original": "// 表とします。",
+        "translated": "// Assumed to be front."
+    },
+    {
+        "original": "// 表示する際には拡大して使います",
+        "translated": "// Use enlarged when displaying"
+    },
+    {
+        "original": "// 表：A,B,C,C,B,D",
+        "translated": "// Front: A,B,C,C,B,D"
+    },
+    {
+        "original": "// 裏：A,C,B,C,D,B",
+        "translated": "// Back: A,C,B,C,D,B"
+    },
+    {
+        "original": "// 見える範囲に含まれるものだけ描画",
+        "translated": "// Draw only what is included in visible range"
+    },
+    {
+        "original": "// 視点から注視点までの差である。これは",
+        "translated": "// The difference from viewpoint to gaze point. This is"
+    },
+    {
+        "original": "// 視点を中心とした回転が行われる。",
+        "translated": "// Rotation centered on viewpoint is performed."
+    },
+    {
+        "original": "// 視点を中心とした回転が行われる。(列優先での配置)",
+        "translated": "// Rotation centered on viewpoint is performed. (Column-major arrangement)"
+    },
+    {
+        "original": "// 計8点になります",
+        "translated": "// Total 8 points"
+    },
+    {
+        "original": "// 計算式は、下記のサイトのものを参考にしました。",
+        "translated": "// Calculation formula referred to the one on the following site."
+    },
+    {
+        "original": "// 調べてみると、だいたい、-0.95 ～ 0.95 の値を返してきていたので、",
+        "translated": "// When checked, it returned values roughly between -0.95 and 0.95, so"
+    },
+    {
+        "original": "// 調べると色々出てくると思います。",
+        "translated": "// I think various things come up if you search."
+    },
+    {
+        "original": "// 負けじゃなくて、同じ値だった場合に左上チェックをしたら良いってことかもしれん。",
+        "translated": "// Not losing, maybe it means handle top-left check if values are the same."
+    },
+    {
+        "original": "// 負のY軸回転→負の平行移動→Z軸回転→正の平行移動→正のY軸回転",
+        "translated": "// Negative Y-axis rotation -> Negative translation -> Z-axis rotation -> Positive translation -> Positive Y-axis rotation"
+    },
+    {
+        "original": "// 面の向きは法線ベクトルの向きで表し、法線ベクトルは頂点A,B,Cの",
+        "translated": "// Surface direction is represented by normal vector direction, and normal vector is of vertices A,B,C"
+    },
+    {
+        "original": "// 面の向きは法線ベクトルの向きで表し、法線ベクトルは頂点順がA,B,C",
+        "translated": "// Surface direction is represented by normal vector direction, and normal vector is vertex order A,B,C"
+    },
+    {
+        "original": "// 面の向きは法線ベクトルの向きで表し、法線ベクトルは頂点順がA,B,E",
+        "translated": "// Surface direction is represented by normal vector direction, and normal vector is vertex order A,B,E"
+    },
+    {
+        "original": "// 面の色を計算",
+        "translated": "// Calculate surface color"
+    },
+    {
+        "original": "// 面積で割ることで各頂点の属性情報の比率が算出できる",
+        "translated": "// Ratio of attribute info of each vertex can be calculated by dividing by area"
+    },
+    {
+        "original": "// 頂点の位置は立方体と同じですが、ポリゴンとして",
+        "translated": "// Vertex positions are same as cube, but as polygon"
+    },
+    {
+        "original": "// 頂点の順番は|／と／_で反時計回りだった",
+        "translated": "// Vertex order was counter-clockwise at |/ and /_"
+    },
+    {
+        "original": "// 高輝度部分だけ抜き出しではなく、全体が光って見えちゃうので、",
+        "translated": "// Because it's not extracting only high luminance parts, but whole thing looks glowing,"
+    },
+    {
+        "original": "// ４ピクセル未満の端数分を描画",
+        "translated": "// Draw fractional part less than 4 pixels"
+    },
+    {
+        "original": "//((1/wを掛けておく）",
+        "translated": "// ((Multiply by 1/w)"
+    },
+    {
+        "original": "//(3Dオブジェクトの座標系はY座標のプラス方向が上向き",
+        "translated": "// (3D object coordinate system has positive Y direction upwards"
+    },
+    {
+        "original": "//(やり直したりすると無限ループに陥る場合があるので、",
+        "translated": "// (Because redoing might cause infinite loop,"
+    },
+    {
+        "original": "//(シードを固定して分割が毎回同じになるようにします)",
+        "translated": "// (Fix seed so division is same every time)"
+    },
+    {
+        "original": "//(スキャンラインコンバージョン)",
+        "translated": "// (Scanline conversion)"
+    },
+    {
+        "original": "//(デフォルトは三角形ポリゴンなので3)",
+        "translated": "// (Default is 3 since it's a triangle polygon)"
+    },
+    {
+        "original": "//(全体の中で色の計算が一番重たいのでキャッシュ方式にする)",
+        "translated": "// (Use cache method since color calculation is heaviest in whole)"
+    },
+    {
+        "original": "//0-255の範囲に飽和",
+        "translated": "// Saturate to range 0-255"
+    },
+    {
+        "original": "//0.0 ～ 1.0の乱数を返す",
+        "translated": "// Return random number 0.0 - 1.0"
+    },
+    {
+        "original": "//0度になってからプレイヤーが落下開始する時間を計算",
+        "translated": "// Calculate time player starts falling after becoming 0 degrees"
+    },
+    {
+        "original": "//0～255のRGB配列の配列を正規化された",
+        "translated": "// Normalized array of arrays of RGB 0-255"
+    },
+    {
+        "original": "//0～255のRGB配列を正規化された",
+        "translated": "// Normalized array of RGB 0-255"
+    },
+    {
+        "original": "//1.7や9.2は任意の数値です。特別な意味はないです。",
+        "translated": "// 1.7 and 9.2 are arbitrary numbers. No special meaning."
+    },
+    {
+        "original": "//1ピクセル辺りの移動量を計算",
+        "translated": "// Calculate movement amount per pixel"
+    },
+    {
+        "original": "//1ラインずつコピー",
+        "translated": "// Copy line by line"
+    },
+    {
+        "original": "//1ラインを避けて黒で塗りつぶす",
+        "translated": "// Fill with black avoiding 1 line"
+    },
+    {
+        "original": "//1回も移動できなかったら場所をリセット",
+        "translated": "// Reset location if unable to move even once"
+    },
+    {
+        "original": "//1次元配列で2次元ベクトルを返す",
+        "translated": "// Return 2D vector in 1D array"
+    },
+    {
+        "original": "//1次元配列で3次元ベクトルを返す",
+        "translated": "// Return 3D vector in 1D array"
+    },
+    {
+        "original": "//1次元配列で4次元ベクトルを返す",
+        "translated": "// Return 4D vector in 1D array"
+    },
+    {
+        "original": "//1歩進む",
+        "translated": "// Advance 1 step"
+    },
+    {
+        "original": "//2マス先を調べる",
+        "translated": "// Check 2 squares ahead"
+    },
+    {
+        "original": "//2マス穴を掘る",
+        "translated": "// Dig 2 square hole"
+    },
+    {
+        "original": "//2値化",
+        "translated": "// Binarization"
+    },
+    {
+        "original": "//2次元ベクトル管理人",
+        "translated": "// 2D Vector Manager"
+    }
+]

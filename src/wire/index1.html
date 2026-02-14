@@ -1,17 +1,17 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-<title>パパのワイヤーフレームっぽいの</title>
+<title>Papa's Wireframe-ish Thing</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=320, user-scalable=no, initial-scale=1.0">
 <meta http-equiv="Cache-Control" content="no-cache">
 <!--
-	このデモは、neko800(@nekohachi1)さんが公開されたプチコン作品をベースに
-	ぼいち(@voich2014)がJavaScriptに移植したものです。
+	This demo is based on a SmileBASIC work published by neko800 (@nekohachi1)
+	Ported to JavaScript by Voich (@voich2014).
 	
-	すばらしい作品を公開してくださったneko800さんに圧倒的感謝を！！
+	Overwhelming thanks to neko800-san for publishing such a wonderful work!!
 	
-	neko800さんのプチコン4 オリジナル版 https://twitter.com/nekohachi1/status/1196444460868980736
+	neko800-san's SmileBASIC 4 Original Version https://twitter.com/nekohachi1/status/1196444460868980736
 
 -->
 <style type="text/css">
@@ -52,11 +52,11 @@
 </style>
 <script type="text/javascript">
 
-//グローバルオブジェクト
+// Global Object
 var g_game_width    = 320;
 var g_game_height   = 500;
 
-const g_sprite_num  = 2048;		//全スプライト数
+const g_sprite_num  = 2048;		// Total number of sprites
 
 var g_sprite        = [];
 var g_r0            = 0;
@@ -69,47 +69,47 @@ var g_fps_count     = 0;
 
 function rad(deg)
 {
-	//度→ラジアン変換
+	// Degree -> Radian conversion
 	return deg * Math.PI / 180;
 }
 
 function rnd(x)
 {
-	//乱数取得
+	// Get random number
 	return Math.floor(Math.random() * x);
 }
 
 function max(a,b)
 {
-	//大きい方を返す
+	// Return larger one
 	return Math.max(a,b);
 }
 
 function min(a,b)
 {
-	//小さい方を返す
+	// Return smaller one
 	return Math.min(a,b);
 }
 
 function init_game()
 {
 	
-	//ゲームの初期化処理
+	// Game initialization processing
 	
-	//画面調整
+	// Screen Adjustment
 	adjust_screen();
 	
-	//ゲームに必要なオブジェクトの生成
+	// Generation of objects necessary for game
 	create_obj();
 
-	//requestAnimationFrameの準備(各種ブラウザ対応)
+	// Preparation of requestAnimationFrame (compatible with various browsers)
 	var requestAnimationFrame = window.requestAnimationFrame       ||
                                 window.mozRequestAnimationFrame    ||
                                 window.webkitRequestAnimationFrame ||
                                 window.msRequestAnimationFrame;
     window.requestAnimationFrame = requestAnimationFrame;
     
-	//描画を登録
+	// Register drawing
 	window.requestAnimationFrame(render_game);
 	
 }
@@ -117,14 +117,14 @@ function init_game()
 function draw_fps()
 {
 	
-	//FPS計測
+	// FPS Measurement
 	
-	//現在時刻を取得
+	// Get current time
 	var now_time = Date.now();
 	
 	if((now_time - g_last_fps_time) >= 1000)
 	{
-		//FPS表示
+		// FPS Display
 		var fps_div = document.getElementById("fps");
 		fps_div.innerText = "FPS:"+(g_fps_count*(1000/(now_time - g_last_fps_time)));
 		
@@ -137,21 +137,21 @@ function draw_fps()
 
 function adjust_screen()
 {
-	//画面調整
+	// Screen Adjustment
 	
-	//ウインドウのサイズを取得
+	// Get window size
 	var window_w = window.innerWidth;
 	var window_h = window.innerHeight;
 	
-	//ウインドウ幅が十分に広い場合はPCだとして
-	//画面サイズを変更する
+	// Assuming it's a PC if window width is wide enough
+	// Change screen size
 	if((g_game_width * 2) <= window_w)
 	{
 		g_game_width  = 1280;
 		g_game_height = 720;
 	}
 	
-	//ゲームスクリーンを中央に配置
+	// Place game screen in center
 	var screen  = document.getElementById("game-screen");
 	var game_x  = (window_w - g_game_width) / 2;
 	var game_y  = (window_h - g_game_height) / 2;
@@ -165,9 +165,9 @@ function adjust_screen()
 
 function create_obj()
 {
-	//オブジェクトの生成
+	// Object Generation
 	
-	//スプライトオブジェクト情報の初期化
+	// Initialize sprite object information
 	for(var i = 0;i < g_sprite_num;++i)
 	{
 		var obj = { x: 0, y: 0, z: 0, v: 0 };
@@ -178,7 +178,7 @@ function create_obj()
 
 function set_obj_pos()
 {
-	//オブジェクトの位置を決定する
+	// Determine object position
 	
 	if(!(g_cnt & 7))
 	{
@@ -192,7 +192,7 @@ function set_obj_pos()
 		
 		for(var i = 0;i < 16;++i)
 		{
-			var f = (!(i % 15) ? 1 : 0);	//左右の端のラインを上に上げるためのフラグ
+			var f = (!(i % 15) ? 1 : 0);	// Flag to raise the left and right edge lines
 			var x = i * 16 - 120 + con_cnt * 32;
 			var y = rnd(4) + 64 - f * 64 + sin_cnt * 8;
 			var z = 2048;
@@ -211,7 +211,7 @@ function set_obj_pos()
 
 function draw_obj(id,ctx,wh,hh)
 {
-	//ワイヤーオブジェクトの描画
+	// Draw Wire Object
 	
 	if(g_sprite[id].v)
 	{
@@ -221,7 +221,7 @@ function draw_obj(id,ctx,wh,hh)
 		var ox = sp.x / a + wh;
 		var oy = sp.y / a + hh;
 		
-		//縦線(Z方向)のラインを描画
+		// Draw vertical line (Z direction)
 		if(g_sprite[tg].v)
 		{
 			var tsp = g_sprite[tg];
@@ -237,7 +237,7 @@ function draw_obj(id,ctx,wh,hh)
 			ctx.stroke();
 		}
 		
-		//横線(X/Y方向)のラインを描画
+		// Draw horizontal line (X/Y direction)
 		if((id & 15) != 15)
 		{
 			var st   = id + 1;
@@ -254,7 +254,7 @@ function draw_obj(id,ctx,wh,hh)
 			ctx.stroke();
 		}
 
-		//手前に来て見えなくなったら非表示にする
+		// Hide if it comes to front and becomes invisible
 		var z = sp.z - 4;
 		sp.z  = z;
 		if(z <= 0)
@@ -267,20 +267,20 @@ function draw_obj(id,ctx,wh,hh)
 
 function draw_wire()
 {
-	//ワイヤーフレームっぽいもの描画処理	
-	var screen  = document.getElementById("game-screen");	//描画先canvas
+	// Wireframe-ish drawing processing	
+	var screen  = document.getElementById("game-screen");	// Drawing destination canvas
 
-	//毎ターンの画面クリア
+	// Screen clear for every turn
 	var ctx = screen.getContext("2d");
 	ctx.clearRect(0,0,screen.width,screen.height);
 	
-	//オブジェクトの新しい位置を設定
+	// Set new position of object
 	set_obj_pos();
 	
-	//ワイヤーの色を決める
+	// Determine wire color
 	ctx.strokeStyle = 'lime';
 	
-	//ワイヤーオブジェクトの描画
+	// Draw Wire Object
 	var wh = g_game_width  / 2;
 	var hh = g_game_height / 2;
 	for(var i = 0;i < g_sprite_num;++i)
@@ -288,7 +288,7 @@ function draw_wire()
 		draw_obj(i,ctx,wh,hh);
 	}
 	
-	//次へ
+	// Next
 	g_cnt++;
 	if(!rnd(16))
 	{
@@ -300,15 +300,15 @@ function draw_wire()
 function render_game()
 {
 	
-	//ゲームの描画処理
+	// Game drawing processing
 	
-	//ワイヤーフレームっぽいものの描画
+	// Draw wireframe-ish things
 	draw_wire();
 	
-	//FPS描画
+	// Draw FPS
 	draw_fps();
 	
-	//次の描画呼び出しを登録
+	// Register next drawing call
 	window.requestAnimationFrame(render_game);
 
 }

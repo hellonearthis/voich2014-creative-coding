@@ -1,0 +1,802 @@
+[
+    {
+        "original": "case 5:\t\t//パターンF",
+        "translated": "case 5:\t\t// Pattern F"
+    },
+    {
+        "original": "case 6:\t\t//パターンG",
+        "translated": "case 6:\t\t// Pattern G"
+    },
+    {
+        "original": "case 7:\t\t//パターンH",
+        "translated": "case 7:\t\t// Pattern H"
+    },
+    {
+        "original": "case 8:\t\t//パターンI",
+        "translated": "case 8:\t\t// Pattern I"
+    },
+    {
+        "original": "case 9:\t\t//パターンJ",
+        "translated": "case 9:\t\t// Pattern J"
+    },
+    {
+        "original": "color += texture(tex2,tc).rgb * 2.0;\t//光が弱かったのでそれぞれ2倍して合成しています",
+        "translated": "color += texture(tex2,tc).rgb * 2.0;\t// Light was weak so doubling each before composition"
+    },
+    {
+        "original": "const BLOCK_WIDTH       = 10;\t\t\t//正方形の対角線",
+        "translated": "const BLOCK_WIDTH       = 10;\t\t\t// Diagonal of square"
+    },
+    {
+        "original": "const BLOCK_WIDTH_HIGH  = 16;\t\t\t//高解像度用",
+        "translated": "const BLOCK_WIDTH_HIGH  = 16;\t\t\t// For high resolution"
+    },
+    {
+        "original": "const DEFAULT_AMBIENT_LIGHT = 0.0;\t\t\t//デフォルトの環境光の値(R/G/B共通)",
+        "translated": "const DEFAULT_AMBIENT_LIGHT = 0.0;\t\t\t// Default ambient light value (Common for R/G/B)"
+    },
+    {
+        "original": "const DEFAULT_AMBIENT_LIGHT = 0.1;\t\t\t//デフォルトの環境光の値(R/G/B共通)",
+        "translated": "const DEFAULT_AMBIENT_LIGHT = 0.1;\t\t\t// Default ambient light value (Common for R/G/B)"
+    },
+    {
+        "original": "const DEFAULT_AMBIENT_LIGHT = 0.2;\t\t\t//デフォルトの環境光の値(R/G/B共通)",
+        "translated": "const DEFAULT_AMBIENT_LIGHT = 0.2;\t\t\t// Default ambient light value (Common for R/G/B)"
+    },
+    {
+        "original": "const DEFAULT_DEFUSE_LIGHT  = 0.7;\t\t\t//デフォルトの拡散光の値(R/G/B共通)",
+        "translated": "const DEFAULT_DEFUSE_LIGHT  = 0.7;\t\t\t// Default diffuse light value (Common for R/G/B)"
+    },
+    {
+        "original": "const DEFAULT_LIGHT_X       =  0.0;\t\t\t//デフォルトの光源ベクトルのX方向",
+        "translated": "const DEFAULT_LIGHT_X       =  0.0;\t\t\t// Default light source vector X direction"
+    },
+    {
+        "original": "const DEFAULT_LIGHT_X       =  0.2;\t\t\t//デフォルトの光源ベクトルのX方向",
+        "translated": "const DEFAULT_LIGHT_X       =  0.2;\t\t\t// Default light source vector X direction"
+    },
+    {
+        "original": "const DEFAULT_LIGHT_X       =  6.0;\t\t\t//デフォルトの光源ベクトルのX方向",
+        "translated": "const DEFAULT_LIGHT_X       =  6.0;\t\t\t// Default light source vector X direction"
+    },
+    {
+        "original": "const DEFAULT_LIGHT_X       = -1.0;\t\t\t//デフォルトの光源ベクトルのX方向",
+        "translated": "const DEFAULT_LIGHT_X       = -1.0;\t\t\t// Default light source vector X direction"
+    },
+    {
+        "original": "const DEFAULT_LIGHT_X       = -2.0;\t\t\t//デフォルトの光源ベクトルのX方向",
+        "translated": "const DEFAULT_LIGHT_X       = -2.0;\t\t\t// Default light source vector X direction"
+    },
+    {
+        "original": "const DEFAULT_LIGHT_X       = 1.0;\t\t\t//デフォルトの光源ベクトルのX方向",
+        "translated": "const DEFAULT_LIGHT_X       = 1.0;\t\t\t// Default light source vector X direction"
+    },
+    {
+        "original": "const DEFAULT_LIGHT_X       = 2.0;\t\t\t//デフォルトの光源ベクトルのX方向",
+        "translated": "const DEFAULT_LIGHT_X       = 2.0;\t\t\t// Default light source vector X direction"
+    },
+    {
+        "original": "const DEFAULT_LIGHT_Y       =  0.0;\t\t\t//デフォルトの光源ベクトルのY方向",
+        "translated": "const DEFAULT_LIGHT_Y       =  0.0;\t\t\t// Default light source vector Y direction"
+    },
+    {
+        "original": "const DEFAULT_LIGHT_Y       =  0.2;\t\t\t//デフォルトの光源ベクトルのY方向",
+        "translated": "const DEFAULT_LIGHT_Y       =  0.2;\t\t\t// Default light source vector Y direction"
+    },
+    {
+        "original": "const DEFAULT_LIGHT_Y       =  1.0\t\t\t//デフォルトの光源ベクトルのY方向",
+        "translated": "const DEFAULT_LIGHT_Y       =  1.0\t\t\t// Default light source vector Y direction"
+    },
+    {
+        "original": "const DEFAULT_LIGHT_Y       =  2.0;\t\t\t//デフォルトの光源ベクトルのY方向",
+        "translated": "const DEFAULT_LIGHT_Y       =  2.0;\t\t\t// Default light source vector Y direction"
+    },
+    {
+        "original": "const DEFAULT_LIGHT_Y       = -1.0;\t\t\t//デフォルトの光源ベクトルのY方向",
+        "translated": "const DEFAULT_LIGHT_Y       = -1.0;\t\t\t// Default light source vector Y direction"
+    },
+    {
+        "original": "const DEFAULT_LIGHT_Y       = -4.0;\t\t\t//デフォルトの光源ベクトルのY方向",
+        "translated": "const DEFAULT_LIGHT_Y       = -4.0;\t\t\t// Default light source vector Y direction"
+    },
+    {
+        "original": "const DEFAULT_LIGHT_Y       = 1.0;\t\t\t//デフォルトの光源ベクトルのY方向",
+        "translated": "const DEFAULT_LIGHT_Y       = 1.0;\t\t\t// Default light source vector Y direction"
+    },
+    {
+        "original": "const DEFAULT_LIGHT_Y       = 4.0;\t\t\t//デフォルトの光源ベクトルのY方向",
+        "translated": "const DEFAULT_LIGHT_Y       = 4.0;\t\t\t// Default light source vector Y direction"
+    },
+    {
+        "original": "const DEFAULT_LIGHT_Z       = -1.0;\t\t\t//デフォルトの光源ベクトルのZ方向",
+        "translated": "const DEFAULT_LIGHT_Z       = -1.0;\t\t\t// Default light source vector Z direction"
+    },
+    {
+        "original": "const DEFAULT_LIGHT_Z       = 1.0;\t\t\t//デフォルトの光源ベクトルのZ方向",
+        "translated": "const DEFAULT_LIGHT_Z       = 1.0;\t\t\t// Default light source vector Z direction"
+    },
+    {
+        "original": "const DEF_CIRCLE_NUM               = 10;\t//n角円オブジェクトのデフォルト分割数",
+        "translated": "const DEF_CIRCLE_NUM               = 10;\t// Default division count for n-gon circle object"
+    },
+    {
+        "original": "const DEF_CYLINDER_NUM             = 10;\t//シリンダー(円柱)オブジェクトのデフォルト分割数",
+        "translated": "const DEF_CYLINDER_NUM             = 10;\t// Default division count for cylinder object"
+    },
+    {
+        "original": "const DEF_PYRAMID_NUM              = 4;\t    //ピラミッド(ｎ角錐)オブジェクトのデフォルト分割数",
+        "translated": "const DEF_PYRAMID_NUM              = 4;\t    // Default division count for pyramid (n-gonal pyramid) object"
+    },
+    {
+        "original": "const DEF_SPHERE_NUM               = 4;\t    //球体オブジェクトのデフォルト分割数",
+        "translated": "const DEF_SPHERE_NUM               = 4;\t    // Default division count for sphere object"
+    },
+    {
+        "original": "const DEF_TORUS_NUM                = 10;\t//トーラスオブジェクトのデフォルト分割数",
+        "translated": "const DEF_TORUS_NUM                = 10;\t// Default division count for torus object"
+    },
+    {
+        "original": "const DEF_VERTEX_NUM_FOR_PRIMITIVE = 3;\t\t//デフォルトの1プリミティブあたりの頂点数",
+        "translated": "const DEF_VERTEX_NUM_FOR_PRIMITIVE = 3;\t\t// Default number of vertices per primitive"
+    },
+    {
+        "original": "const FAR_Z_POS             = 1000;\t\t\t//描画許可するZ方向の最大値",
+        "translated": "const FAR_Z_POS             = 1000;\t\t\t// Max Z direction value allowed for drawing"
+    },
+    {
+        "original": "const FAR_Z_POS             = 100;\t\t\t//描画許可するZ方向の最大値",
+        "translated": "const FAR_Z_POS             = 100;\t\t\t// Max Z direction value allowed for drawing"
+    },
+    {
+        "original": "const HI_HEIGHT      = 1400;\t//高解像度版の方の縦を少し小さくしておくと、最終的に引き伸ばしが入って、より光って見えることを発見した",
+        "translated": "const HI_HEIGHT      = 1400;\t// Discovered that if height of high-res version is slightly smaller, it gets stretched eventually and looks more glowing"
+    },
+    {
+        "original": "const INVALID_DP_VALUE      = 10000.0;\t\t//無効な内積値",
+        "translated": "const INVALID_DP_VALUE      = 10000.0;\t\t// Invalid dot product value"
+    },
+    {
+        "original": "const INVALID_Z_VALUE       = 10000.0;\t\t//無効なZ値",
+        "translated": "const INVALID_Z_VALUE       = 10000.0;\t\t// Invalid Z value"
+    },
+    {
+        "original": "const MANDEL_HEIGHT = 400;\t\t\t\t//マンデルブロ集合平面の最初の高さ",
+        "translated": "const MANDEL_HEIGHT = 400;\t\t\t\t// Initial height of Mandelbrot set plane"
+    },
+    {
+        "original": "const MANDEL_WIDTH  = 400;\t\t\t\t//マンデルブロ集合平面の最初の幅",
+        "translated": "const MANDEL_WIDTH  = 400;\t\t\t\t// Initial width of Mandelbrot set plane"
+    },
+    {
+        "original": "const MAX_Z_POS             = 1000;\t\t\t//描画許可するZ方向の最大値",
+        "translated": "const MAX_Z_POS             = 1000;\t\t\t// Max Z direction value allowed for drawing"
+    },
+    {
+        "original": "const MAX_Z_POS = 1000;\t\t\t//描画許可するZ方向の最大値",
+        "translated": "const MAX_Z_POS = 1000;\t\t\t// Max Z direction value allowed for drawing"
+    },
+    {
+        "original": "const MAX_step_za   = 20;\t//円の分割数が少ない程角ばってドラゴンっぽいｗ　あと計算量減って速くなる。",
+        "translated": "const MAX_step_za   = 20;\t// Less circle divisions means more angular and dragon-like lol. Also faster with less calculation."
+    },
+    {
+        "original": "const NEAR_Z_POS            = 10;\t\t\t//描画許可するZ方向の最小値",
+        "translated": "const NEAR_Z_POS            = 10;\t\t\t// Min Z direction value allowed for drawing"
+    },
+    {
+        "original": "const TORUS_CUT_RADIUS_MAX = 4.0;\t\t//カット面の最大半径",
+        "translated": "const TORUS_CUT_RADIUS_MAX = 4.0;\t\t// Max radius of cut surface"
+    },
+    {
+        "original": "const TORUS_CUT_RADIUS_MIN = 0.2;\t\t//カット面の最小半径",
+        "translated": "const TORUS_CUT_RADIUS_MIN = 0.2;\t\t// Min radius of cut surface"
+    },
+    {
+        "original": "const TORUS_CUT_VERTEX_NUM = 12;\t\t//カット面の頂点数",
+        "translated": "const TORUS_CUT_VERTEX_NUM = 12;\t\t// Number of vertices of cut surface"
+    },
+    {
+        "original": "const TORUS_IN_ANGLE       = 60;\t\t//扇形角度[deg]",
+        "translated": "const TORUS_IN_ANGLE       = 60;\t\t// Sector angle [deg]"
+    },
+    {
+        "original": "const TORUS_IN_RADIUS      = 14;\t\t//扇形中心の半径",
+        "translated": "const TORUS_IN_RADIUS      = 14;\t\t// Radius of sector center"
+    },
+    {
+        "original": "const TORUS_IN_VERTEX_NUM  = 8;\t\t\t//扇形角度の頂点数",
+        "translated": "const TORUS_IN_VERTEX_NUM  = 8;\t\t\t// Number of vertices for sector angle"
+    },
+    {
+        "original": "const TORUS_NUM            = 10;\t\t//重ねる扇形トーラスの数",
+        "translated": "const TORUS_NUM            = 10;\t\t// Number of stacked sector tori"
+    },
+    {
+        "original": "const TORUS_SCALE          = 1.2;\t\t//トーラス拡大率",
+        "translated": "const TORUS_SCALE          = 1.2;\t\t// Torus scale factor"
+    },
+    {
+        "original": "const add_pa  = random(2,40) / 10;\t\t//円弧の角度を適当にずらします",
+        "translated": "const add_pa  = random(2,40) / 10;\t\t// Shift arc angle appropriately"
+    },
+    {
+        "original": "const alpha = (random(0,100) < 20) ? (random(60,98) / 100) : 0.98;\t//最大100%にせずに、ほんのりしたやわらかさを出してるつもり",
+        "translated": "const alpha = (random(0,100) < 20) ? (random(60,98) / 100) : 0.98;\t// Intending to create slight softness by not making it max 100%"
+    },
+    {
+        "original": "const area = this.edgeFunction(v1,v2,v3);\t//比率計算するための分母となる",
+        "translated": "const area = this.edgeFunction(v1,v2,v3);\t// Becomes denominator for ratio calculation"
+    },
+    {
+        "original": "const att_ids = //360個あります",
+        "translated": "const att_ids = // There are 360 items"
+    },
+    {
+        "original": "const col    = shuffle(createPaletteNHSL(g_col_url));\t//正規化したHSLオブジェクトで取得",
+        "translated": "const col    = shuffle(createPaletteNHSL(g_col_url));\t// Get with normalized HSL object"
+    },
+    {
+        "original": "const d = 18 * s;\t\t//半径の比率を調整",
+        "translated": "const d = 18 * s;\t\t// Adjust radius ratio"
+    },
+    {
+        "original": "const dist  = Math.sqrt(dx*dx+dz*dz);\t//中心からの距離",
+        "translated": "const dist  = Math.sqrt(dx*dx+dz*dz);\t// Distance from center"
+    },
+    {
+        "original": "const eyeDot = vNormal.dotProduct(this.vEye);\t//視線ベクトルと",
+        "translated": "const eyeDot = vNormal.dotProduct(this.vEye);\t// With line of sight vector"
+    },
+    {
+        "original": "const eyeDot = vNormal.dotProduct(this.vEye);\t//視線ベクトルと法線ベクトルと",
+        "translated": "const eyeDot = vNormal.dotProduct(this.vEye);\t// With view vector and normal vector"
+    },
+    {
+        "original": "const firstpos = cvn * xz;\t//各多角形の最初の頂点のインデックス",
+        "translated": "const firstpos = cvn * xz;\t// Index of first vertex of each polygon"
+    },
+    {
+        "original": "const firstpos = n * xz;\t//各多角形の最初の頂点のインデックス",
+        "translated": "const firstpos = n * xz;\t// Index of first vertex of each polygon"
+    },
+    {
+        "original": "const g_accel_add   = 0.02;\t\t\t\t//毎ターンの加減速度",
+        "translated": "const g_accel_add   = 0.02;\t\t\t\t// Acceleration/deceleration per turn"
+    },
+    {
+        "original": "const g_angle_unit  = 2;\t\t\t\t//基準角速度[deg]",
+        "translated": "const g_angle_unit  = 2;\t\t\t\t// Base angular velocity [deg]"
+    },
+    {
+        "original": "const g_dec_rate       = 1.02;\t\t\t//初速の減衰率",
+        "translated": "const g_dec_rate       = 1.02;\t\t\t// Attenuation rate of initial velocity"
+    },
+    {
+        "original": "const g_delay_speed     = 0.45;\t\t\t//遅延速度",
+        "translated": "const g_delay_speed     = 0.45;\t\t\t// Delay speed"
+    },
+    {
+        "original": "const g_delay_speed     = 0.55;\t\t\t//遅延速度",
+        "translated": "const g_delay_speed     = 0.55;\t\t\t// Delay speed"
+    },
+    {
+        "original": "const g_delay_speed    = 0.4;\t\t\t//遅延速度",
+        "translated": "const g_delay_speed    = 0.4;\t\t\t// Delay speed"
+    },
+    {
+        "original": "const g_down_accel      = 0.08;\t\t\t//下降加速度",
+        "translated": "const g_down_accel      = 0.08;\t\t\t// Downward acceleration"
+    },
+    {
+        "original": "const g_down_accel      = 0.095;\t\t//下降加速度",
+        "translated": "const g_down_accel      = 0.095;\t\t// Downward acceleration"
+    },
+    {
+        "original": "const g_down_accel     = 0.11;\t\t\t//下降加速度",
+        "translated": "const g_down_accel     = 0.11;\t\t\t// Downward acceleration"
+    },
+    {
+        "original": "const g_down_speed      = -0.045;\t\t//下降中の速度",
+        "translated": "const g_down_speed      = -0.045;\t\t// Speed while descending"
+    },
+    {
+        "original": "const g_down_speed      = -0.04;\t\t//下降中の速度",
+        "translated": "const g_down_speed      = -0.04;\t\t// Speed while descending"
+    },
+    {
+        "original": "const g_down_speed      = -0.084;\t\t//下降中の速度",
+        "translated": "const g_down_speed      = -0.084;\t\t// Speed while descending"
+    },
+    {
+        "original": "const g_down_speed     = -0.02;\t\t\t//下降中の速度",
+        "translated": "const g_down_speed     = -0.02;\t\t\t// Speed while descending"
+    },
+    {
+        "original": "const g_first_speed     = 0.83;\t\t\t//基準の初速",
+        "translated": "const g_first_speed     = 0.83;\t\t\t// Base initial velocity"
+    },
+    {
+        "original": "const g_first_speed     = 0.942;\t\t//基準の初速",
+        "translated": "const g_first_speed     = 0.942;\t\t// Base initial velocity"
+    },
+    {
+        "original": "const g_first_speed    = 1.2;\t\t\t//基準の初速",
+        "translated": "const g_first_speed    = 1.2;\t\t\t// Base initial velocity"
+    },
+    {
+        "original": "const g_gravi_accel_up  = -0.027;\t\t//上昇中の重力加速度",
+        "translated": "const g_gravi_accel_up  = -0.027;\t\t// Gravitational acceleration while ascending"
+    },
+    {
+        "original": "const g_gravi_accel_up  = -0.028;\t\t//上昇中の重力加速度",
+        "translated": "const g_gravi_accel_up  = -0.028;\t\t// Gravitational acceleration while ascending"
+    },
+    {
+        "original": "const g_gravi_accel_up = -0.046;\t\t//上昇中の重力加速度",
+        "translated": "const g_gravi_accel_up = -0.046;\t\t// Gravitational acceleration while ascending"
+    },
+    {
+        "original": "const g_line_num    = 512;\t\t//線路の数",
+        "translated": "const g_line_num    = 512;\t\t// Number of tracks"
+    },
+    {
+        "original": "const g_obj_delay   = 0.05;\t\t\t\t//オブジェクトごとの遅延",
+        "translated": "const g_obj_delay   = 0.05;\t\t\t\t// Delay per object"
+    },
+    {
+        "original": "const g_obj_num     = 8;\t\t\t\t//オブジェクトの数",
+        "translated": "const g_obj_num     = 8;\t\t\t\t// Number of objects"
+    },
+    {
+        "original": "const g_obj_offset  = 64;\t\t//線路の移動幅",
+        "translated": "const g_obj_offset  = 64;\t\t// Movement width of track"
+    },
+    {
+        "original": "const g_sprite_num  = 1280;\t\t//全スプライト数",
+        "translated": "const g_sprite_num  = 1280;\t\t// Total number of sprites"
+    },
+    {
+        "original": "const g_sprite_num  = 2048;\t\t//全スプライト数",
+        "translated": "const g_sprite_num  = 2048;\t\t// Total number of sprites"
+    },
+    {
+        "original": "const g_sprite_num  = 512*3;\t//全スプライト数(線路+左側+右側)",
+        "translated": "const g_sprite_num  = 512*3;\t// Total number of sprites (Track + Left side + Right side)"
+    },
+    {
+        "original": "const g_wait        = 1.0;\t\t\t\t//硬直時間",
+        "translated": "const g_wait        = 1.0;\t\t\t\t// Wait time"
+    },
+    {
+        "original": "const geta = fixed_keys.includes(key2) ? (nw ** 2) : 0;\t//未処理の点が優先になるように既存の点には下駄をはかす",
+        "translated": "const geta = fixed_keys.includes(key2) ? (nw ** 2) : 0;\t// Give handicap to existing points so unprocessed points are prioritized"
+    },
+    {
+        "original": "const p = -1.2 + (g_att_id.charCodeAt(i) - 0x41) * 0.1;\t//0x41は'A'のASCIIコード",
+        "translated": "const p = -1.2 + (g_att_id.charCodeAt(i) - 0x41) * 0.1;\t// 0x41 is ASCII code for 'A'"
+    },
+    {
+        "original": "const pn = POINT_NUM - (POINT_NUM * ((g_start_ra / 2.0)|0) / 8);\t//回転重ねが多いほど数を減らす",
+        "translated": "const pn = POINT_NUM - (POINT_NUM * ((g_start_ra / 2.0)|0) / 8);\t// Decrease number as rotation overlaps increase"
+    },
+    {
+        "original": "const pos_num = random(16,60);\t\t\t//2つ目の数値を増やすとわしゃわしゃします",
+        "translated": "const pos_num = random(16,60);\t\t\t// Increasing 2nd number makes it messy"
+    },
+    {
+        "original": "const px    = x0 * Math.cos(a)/* - y0 * Math.sin(a)*/;\t//それをさらにZ軸で回転",
+        "translated": "const px    = x0 * Math.cos(a)/* - y0 * Math.sin(a)*/;\t// Rotate it further on Z axis"
+    },
+    {
+        "original": "const r_n            = 16;\t\t\t\t\t\t\t\t//断面の数",
+        "translated": "const r_n            = 16;\t\t\t\t\t\t\t\t// Number of cross sections"
+    },
+    {
+        "original": "const radius    = 0.4;\t\t\t\t\t//n角形の半径",
+        "translated": "const radius    = 0.4;\t\t\t\t\t// Radius of n-gon"
+    },
+    {
+        "original": "const radius    = 0.8;\t\t\t\t\t//n角形の半径",
+        "translated": "const radius    = 0.8;\t\t\t\t\t// Radius of n-gon"
+    },
+    {
+        "original": "const radius    = cr;\t\t\t\t\t\t//cvn角形の半径",
+        "translated": "const radius    = cr;\t\t\t\t\t\t// Radius of cvn-gon"
+    },
+    {
+        "original": "const radius   = 0.4;\t\t\t\t\t//n角形の半径",
+        "translated": "const radius   = 0.4;\t\t\t\t\t// Radius of n-gon"
+    },
+    {
+        "original": "const radius   = 0.5;\t\t\t\t\t//n角形の半径",
+        "translated": "const radius   = 0.5;\t\t\t\t\t// Radius of n-gon"
+    },
+    {
+        "original": "const radius = (g_block_w_num / 2) * Math.sqrt(2);\t// 1:1:√2 の三平方の定理から対角線の距離を出す",
+        "translated": "const radius = (g_block_w_num / 2) * Math.sqrt(2);\t// Calculate diagonal distance from Pythagorean theorem 1:1:√2"
+    },
+    {
+        "original": "const ratio = 1 / ((1 + Math.sqrt(5)) / 2);\t//黄金比",
+        "translated": "const ratio = 1 / ((1 + Math.sqrt(5)) / 2);\t// Golden Ratio"
+    },
+    {
+        "original": "const s = S / 800;\t\t//元ソースのCanvasに合わせて",
+        "translated": "const s = S / 800;\t\t// Match to original source Canvas"
+    },
+    {
+        "original": "const screen     = document.getElementById(\"game-screen\");\t//描画先canvas",
+        "translated": "const screen     = document.getElementById(\"game-screen\");\t// Drawing destination canvas"
+    },
+    {
+        "original": "const screen = document.getElementById(\"game-screen\");\t//描画先canvas",
+        "translated": "const screen = document.getElementById(\"game-screen\");\t// Drawing destination canvas"
+    },
+    {
+        "original": "const speed         = random(2,5);\t//bez_time[ms]あたりのパス座標移動量",
+        "translated": "const speed         = random(2,5);\t// Path coordinate movement amount per bez_time[ms]"
+    },
+    {
+        "original": "const tau = TAU - 0.02;\t//あとちょっとで重なるのを避ける",
+        "translated": "const tau = TAU - 0.02;\t// Avoid overlapping just a little bit before"
+    },
+    {
+        "original": "const tau = TAU - 0.04;\t//あとちょっとで重なるのを避ける",
+        "translated": "const tau = TAU - 0.04;\t// Avoid overlapping just a little bit before"
+    },
+    {
+        "original": "const totalPolyIndex = totalPolygon *\t\t\t\t\t//頂点インデックス",
+        "translated": "const totalPolyIndex = totalPolygon *\t\t\t\t\t// Vertex Index"
+    },
+    {
+        "original": "const totalPolygon   = (9 + (n * 4)) * 2 + (n * 2 * 4);\t//ポリゴンの数",
+        "translated": "const totalPolygon   = (9 + (n * 4)) * 2 + (n * 2 * 4);\t// Number of polygons"
+    },
+    {
+        "original": "const totalPolygon   = (n * 2) * 2 + (n * 4) * (n - 2);\t//ポリゴンの数",
+        "translated": "const totalPolygon   = (n * 2) * 2 + (n * 4) * (n - 2);\t// Number of polygons"
+    },
+    {
+        "original": "const totalPolygon   = 2 * 2;\t\t\t\t\t\t\t//ポリゴンの数",
+        "translated": "const totalPolygon   = 2 * 2;\t\t\t\t\t\t\t// Number of polygons"
+    },
+    {
+        "original": "const totalPolygon   = 2;\t\t\t\t\t\t\t\t//ポリゴンの数",
+        "translated": "const totalPolygon   = 2;\t\t\t\t\t\t\t\t// Number of polygons"
+    },
+    {
+        "original": "const totalPolygon   = 4 * 2 * 2;\t\t\t\t\t\t//ポリゴンの数",
+        "translated": "const totalPolygon   = 4 * 2 * 2;\t\t\t\t\t\t// Number of polygons"
+    },
+    {
+        "original": "const totalPolygon   = 6 * 2;\t\t\t\t\t\t\t//ポリゴンの数",
+        "translated": "const totalPolygon   = 6 * 2;\t\t\t\t\t\t\t// Number of polygons"
+    },
+    {
+        "original": "const totalPolygon   = cvn * (ivn-1) * 2 * 2;\t\t\t//ポリゴンの数",
+        "translated": "const totalPolygon   = cvn * (ivn-1) * 2 * 2;\t\t\t// Number of polygons"
+    },
+    {
+        "original": "const totalPolygon   = n * 2;\t\t\t\t\t\t\t//ポリゴンの数",
+        "translated": "const totalPolygon   = n * 2;\t\t\t\t\t\t\t// Number of polygons"
+    },
+    {
+        "original": "const totalPolygon   = n;\t\t\t\t\t\t\t\t//ポリゴンの数",
+        "translated": "const totalPolygon   = n;\t\t\t\t\t\t\t\t// Number of polygons"
+    },
+    {
+        "original": "const totalPolygon   = totalVertex * 2;\t\t\t\t\t//ポリゴンの数",
+        "translated": "const totalPolygon   = totalVertex * 2;\t\t\t\t\t// Number of polygons"
+    },
+    {
+        "original": "const totalVertex    = (n * 2) * (n - 1) + 2;\t\t\t//頂点の数",
+        "translated": "const totalVertex    = (n * 2) * (n - 1) + 2;\t\t\t// Number of vertices"
+    },
+    {
+        "original": "const totalVertex    = 12 + (n * 2 + 2) * 4;\t\t\t//頂点の数",
+        "translated": "const totalVertex    = 12 + (n * 2 + 2) * 4;\t\t\t// Number of vertices"
+    },
+    {
+        "original": "const totalVertex    = 4 * 2;\t\t\t\t\t\t\t//頂点の数",
+        "translated": "const totalVertex    = 4 * 2;\t\t\t\t\t\t\t// Number of vertices"
+    },
+    {
+        "original": "const totalVertex    = 4;\t\t\t\t\t\t\t\t//頂点の数",
+        "translated": "const totalVertex    = 4;\t\t\t\t\t\t\t\t// Number of vertices"
+    },
+    {
+        "original": "const totalVertex    = 6;\t\t\t\t\t\t\t\t//頂点の数",
+        "translated": "const totalVertex    = 6;\t\t\t\t\t\t\t\t// Number of vertices"
+    },
+    {
+        "original": "const totalVertex    = cvn * ivn;\t\t\t\t\t\t//頂点の数",
+        "translated": "const totalVertex    = cvn * ivn;\t\t\t\t\t\t// Number of vertices"
+    },
+    {
+        "original": "const totalVertex    = n * 2;\t\t\t\t\t\t\t//頂点の数",
+        "translated": "const totalVertex    = n * 2;\t\t\t\t\t\t\t// Number of vertices"
+    },
+    {
+        "original": "const totalVertex    = n * n;\t\t\t\t\t\t\t//頂点の数",
+        "translated": "const totalVertex    = n * n;\t\t\t\t\t\t\t// Number of vertices"
+    },
+    {
+        "original": "const totalVertex    = n * r_n;\t\t\t\t\t\t\t//頂点の数",
+        "translated": "const totalVertex    = n * r_n;\t\t\t\t\t\t\t// Number of vertices"
+    },
+    {
+        "original": "const totalVertex    = n + 1;\t\t\t\t\t\t\t//頂点の数",
+        "translated": "const totalVertex    = n + 1;\t\t\t\t\t\t\t// Number of vertices"
+    },
+    {
+        "original": "const totalVertex    = n + 2;\t\t\t\t\t\t\t//頂点の数",
+        "translated": "const totalVertex    = n + 2;\t\t\t\t\t\t\t// Number of vertices"
+    },
+    {
+        "original": "const unitAngle      = rad(2);\t\t\t\t\t\t//1回の回転角度",
+        "translated": "const unitAngle      = rad(2);\t\t\t\t\t\t// Angle per rotation"
+    },
+    {
+        "original": "const v  = sand.v | 0;\t//整数に変換",
+        "translated": "const v  = sand.v | 0;\t// Convert to integer"
+    },
+    {
+        "original": "const w = 1.0/(g_obj_num*2);\t//ひとつ飛ばしで並べた時の幅",
+        "translated": "const w = 1.0/(g_obj_num*2);\t// Width when arranged with one skipped"
+    },
+    {
+        "original": "const x0    = r2 * Math.cos(c) + r;\t//XZ平面で螺旋回転してから並行移動",
+        "translated": "const x0    = r2 * Math.cos(c) + r;\t// Spiral rotate on XZ plane then translate"
+    },
+    {
+        "original": "const x0    = r2 * Math.cos(cc) + r;\t//XZ平面で螺旋回転してから並行移動",
+        "translated": "const x0    = r2 * Math.cos(cc) + r;\t// Spiral rotate on XZ plane then translate"
+    },
+    {
+        "original": "const xpos = -(w * g_block_w_num / 2) + x * w + (w / 2);\t//(0,0)を中心とした座標にする",
+        "translated": "const xpos = -(w * g_block_w_num / 2) + x * w + (w / 2);\t// Center coordinates at (0,0)"
+    },
+    {
+        "original": "const ypos = -(w * g_block_h_num / 2) + y * w + (w / 2);\t\t//(0,0)を中心とした座標にする",
+        "translated": "const ypos = -(w * g_block_h_num / 2) + y * w + (w / 2);\t\t// Center coordinates at (0,0)"
+    },
+    {
+        "original": "ctx.miterLimit  = 1.0;\t\t\t//太線の鋭角時に飛び出すのを防ぐ",
+        "translated": "ctx.miterLimit  = 1.0;\t\t\t// Prevent protruding at sharp angles of thick lines"
+    },
+    {
+        "original": "data.fill(0);\t\t\t\t//0埋めするならforで回すより速い",
+        "translated": "data.fill(0);\t\t\t\t// Faster than counting with for loop if zero-filling"
+    },
+    {
+        "original": "f, h, z, f,-h, z, h,h,-r, h,h,-r, f,-h, z, h,-h,-r\t\t//右背面",
+        "translated": "f, h, z, f,-h, z, h,h,-r, h,h,-r, f,-h, z, h,-h,-r\t\t//Back Right"
+    },
+    {
+        "original": "float i  = gl_FragCoord.y * sc_h_ratio;\t//複素平面の虚軸",
+        "translated": "float i  = gl_FragCoord.y * sc_h_ratio;\t// Imaginary axis of complex plane"
+    },
+    {
+        "original": "float r  = gl_FragCoord.x * sc_w_ratio;\t//複素平面の虚軸",
+        "translated": "float r  = gl_FragCoord.x * sc_w_ratio;\t// Imaginary axis of complex plane"
+    },
+    {
+        "original": "float ti = jl_top  + (gl_FragCoord.y * step_i);\t//複素平面の虚軸",
+        "translated": "float ti = jl_top  + (gl_FragCoord.y * step_i);\t// Imaginary axis of complex plane"
+    },
+    {
+        "original": "float ti = md_top  + (gl_FragCoord.y * step_i);\t//複素平面の虚軸",
+        "translated": "float ti = md_top  + (gl_FragCoord.y * step_i);\t// Imaginary axis of complex plane"
+    },
+    {
+        "original": "float tr = jl_left + (gl_FragCoord.x * step_r);\t//複素平面の虚軸",
+        "translated": "float tr = jl_left + (gl_FragCoord.x * step_r);\t// Imaginary axis of complex plane"
+    },
+    {
+        "original": "float tr = md_left + (gl_FragCoord.x * step_r);\t//複素平面の虚軸",
+        "translated": "float tr = md_left + (gl_FragCoord.x * step_r);\t// Imaginary axis of complex plane"
+    },
+    {
+        "original": "for(let i = 0;i < sc_h;++i)\t\t//複素平面の虚軸",
+        "translated": "for(let i = 0;i < sc_h;++i)\t\t// Imaginary axis of complex plane"
+    },
+    {
+        "original": "for(let i = pos.length - 1;i >= 0;--i)\t//逆にするのがミソ",
+        "translated": "for(let i = pos.length - 1;i >= 0;--i)\t// The key is to reverse it"
+    },
+    {
+        "original": "for(let r = 0;r < sc_w;++r)\t//複素平面の実軸",
+        "translated": "for(let r = 0;r < sc_w;++r)\t// Real axis of complex plane"
+    },
+    {
+        "original": "g_blocks[i].delay    = (g_blocks[i].dist * 10) * g_delay_speed;\t\t\t\t\t//中心から離れる要領で遅延させる",
+        "translated": "g_blocks[i].delay    = (g_blocks[i].dist * 10) * g_delay_speed;\t\t\t\t\t// Delay in manner of moving away from center"
+    },
+    {
+        "original": "g_blocks[i].delay    = (g_blocks[i].dist * 10) * g_delay_speed;\t\t\t\t//中心から離れる要領で遅延させる",
+        "translated": "g_blocks[i].delay    = (g_blocks[i].dist * 10) * g_delay_speed;\t\t\t\t// Delay in manner of moving away from center"
+    },
+    {
+        "original": "g_blocks[i].down_spd = g_down_speed - g_down_accel * ratio;\t\t\t\t\t\t//中心の下降速度はちょっと速くする",
+        "translated": "g_blocks[i].down_spd = g_down_speed - g_down_accel * ratio;\t\t\t\t\t\t// Make center descent speed a bit faster"
+    },
+    {
+        "original": "g_blocks[i].down_spd = g_down_speed - g_down_accel * ratio;\t\t\t\t\t//中心の下降速度はちょっと速くする",
+        "translated": "g_blocks[i].down_spd = g_down_speed - g_down_accel * ratio;\t\t\t\t\t// Make center descent speed a bit faster"
+    },
+    {
+        "original": "g_board_offsc.data.fill(255);\t//不透明白で初期化",
+        "translated": "g_board_offsc.data.fill(255);\t// Initialize with opaque white"
+    },
+    {
+        "original": "g_draw_algo = (g_draw_algo + 1) % 2;\t// % 2 を変えてみてね",
+        "translated": "g_draw_algo = (g_draw_algo + 1) % 2;\t// Try changing % 2"
+    },
+    {
+        "original": "g_fps = (g_fps + fps) / 2;\t\t\t//平均にすることで速度調整時に参照するFPSの変化を緩和させる",
+        "translated": "g_fps = (g_fps + fps) / 2;\t\t\t// Mitigate FPS changes referenced during speed adjustment by averaging"
+    },
+    {
+        "original": "g_gl.texStorage3D\t//texStorage3D()メソッドを使用してimmutableテクスチャを確保する",
+        "translated": "g_gl.texStorage3D\t// Allocate immutable texture using texStorage3D() method"
+    },
+    {
+        "original": "g_next1_colors  = g_next2_colors.slice();\t//配列の値渡しコピー",
+        "translated": "g_next1_colors  = g_next2_colors.slice();\t// Pass-by-value copy of array"
+    },
+    {
+        "original": "g_next1_colors = g_next2_colors.slice();\t//配列の値渡しコピー",
+        "translated": "g_next1_colors = g_next2_colors.slice();\t// Pass-by-value copy of array"
+    },
+    {
+        "original": "g_next2_colors  = g_def1_colors.slice();\t//次のパレットの初期値とする",
+        "translated": "g_next2_colors  = g_def1_colors.slice();\t// Set as initial value of next palette"
+    },
+    {
+        "original": "g_next2_colors = g_def1_colors.slice();\t\t//次のパレットの初期値とする",
+        "translated": "g_next2_colors = g_def1_colors.slice();\t\t// Set as initial value of next palette"
+    },
+    {
+        "original": "g_next2_colors = g_def1_colors.slice();\t//次のパレットの初期値とする",
+        "translated": "g_next2_colors = g_def1_colors.slice();\t// Set as initial value of next palette"
+    },
+    {
+        "original": "g_next_colors  = g_def_colors.slice();\t//次のパレットの初期値とする",
+        "translated": "g_next_colors  = g_def_colors.slice();\t// Set as initial value of next palette"
+    },
+    {
+        "original": "g_sprite[g_pos_tg].a = g_pos_a;\t//線路の向いてる方向[deg]",
+        "translated": "g_sprite[g_pos_tg].a = g_pos_a;\t// Direction track is facing [deg]"
+    },
+    {
+        "original": "g_start_colors  = g_next1_colors.slice();\t//配列の値渡しコピー",
+        "translated": "g_start_colors  = g_next1_colors.slice();\t// Pass-by-value copy of array"
+    },
+    {
+        "original": "g_start_colors = g_next1_colors.slice();\t//配列の値渡しコピー",
+        "translated": "g_start_colors = g_next1_colors.slice();\t// Pass-by-value copy of array"
+    },
+    {
+        "original": "g_start_colors = g_next_colors.slice();\t//配列の値渡しコピー",
+        "translated": "g_start_colors = g_next_colors.slice();\t// Pass-by-value copy of array"
+    },
+    {
+        "original": "gumo2という作品でバラバラにキラキラさせてたのですが、そちらの方が",
+        "translated": "I was making things sparkle separately in a work called gumo2, but that one"
+    },
+    {
+        "original": "h, h, r, h,-h, r, f,h, z, f,h, z, h,-h, r, f,-h, z,\t\t//右前面",
+        "translated": "h, h, r, h,-h, r, f,h, z, f,h, z, h,-h, r, f,-h, z,\t\t//Front Right"
+    },
+    {
+        "original": "h, h,-r, h,-h,-r, z,h, z, z,h, z, h,-h,-r, z,-h, z,\t\t//左背面",
+        "translated": "h, h,-r, h,-h,-r, z,h, z, z,h, z, h,-h,-r, z,-h, z,\t\t//Back Left"
+    },
+    {
+        "original": "if(((g_cnt + g_aPos[i].o) % 360) == 30) //倒れかけ判定",
+        "translated": "if(((g_cnt + g_aPos[i].o) % 360) == 30) // Tipping over judgment"
+    },
+    {
+        "original": "if((obj.x != 0) && (obj.z != 0)) //最初の冗長部分をなくすための小細工",
+        "translated": "if((obj.x != 0) && (obj.z != 0)) // Trick to eliminate initial redundant part"
+    },
+    {
+        "original": "if(g_scale != 1.0){ blur_w = [ 3,6 ]; }\t//スマホはこっち",
+        "translated": "if(g_scale != 1.0){ blur_w = [ 3,6 ]; }\t// This way for smartphone"
+    },
+    {
+        "original": "if(g_scale < 1.0)\t//スマホはこっち",
+        "translated": "if(g_scale < 1.0)\t// This way for smartphone"
+    },
+    {
+        "original": "if(tex_idx > 2.0){ tidx = 1.0; }\t//時々最後4.0を超えてくる時があるようなので補正",
+        "translated": "if(tex_idx > 2.0){ tidx = 1.0; }\t// Correction because sometimes it seems to exceed 4.0 at the end"
+    },
+    {
+        "original": "if(w0 < 0){ continue; }\t\t\t\t\t\t\t\t\t//ポリゴンの内側に存在しない場合はスキップ",
+        "translated": "if(w0 < 0){ continue; }\t\t\t\t\t\t\t\t\t// Skip if not inside polygon"
+    },
+    {
+        "original": "if(w1 < 0){ continue; }\t\t\t\t\t\t\t\t\t//ポリゴンの内側に存在しない場合はスキップ",
+        "translated": "if(w1 < 0){ continue; }\t\t\t\t\t\t\t\t\t// Skip if not inside polygon"
+    },
+    {
+        "original": "if(w2 < 0){ continue; }\t\t\t\t\t\t\t\t\t//ポリゴンの内側に存在しない場合はスキップ",
+        "translated": "if(w2 < 0){ continue; }\t\t\t\t\t\t\t\t\t// Skip if not inside polygon"
+    },
+    {
+        "original": "in  vec3 v_color;\t\t\t//頂点シェーダからの出力色",
+        "translated": "in  vec3 v_color;\t\t\t// Output color from vertex shader"
+    },
+    {
+        "original": "in float ins_idx;\t\t\t//この頂点を含むインスタンスのインデックス",
+        "translated": "in float ins_idx;\t\t\t// Index of instance containing this vertex"
+    },
+    {
+        "original": "in float tex_idx;\t\t\t\t//テクスチャインデックス",
+        "translated": "in float tex_idx;\t\t\t\t// Texture index"
+    },
+    {
+        "original": "in float vtx_idx;\t\t\t//頂点インデックス",
+        "translated": "in float vtx_idx;\t\t\t// Vertex index"
+    },
+    {
+        "original": "in mat4 obj_model;\t\t\t//インスタンス毎のモデル変換行列",
+        "translated": "in mat4 obj_model;\t\t\t// Model transformation matrix per instance"
+    },
+    {
+        "original": "in vec2  tex_uv;\t\t\t\t//テクスチャ座標",
+        "translated": "in vec2  tex_uv;\t\t\t\t// Texture coordinates"
+    },
+    {
+        "original": "in vec3  vtx_pos;\t\t\t//頂点の座標",
+        "translated": "in vec3  vtx_pos;\t\t\t// Vertex coordinates"
+    },
+    {
+        "original": "in vec3 obj_color;\t\t\t//インスタンス毎の色",
+        "translated": "in vec3 obj_color;\t\t\t// Color per instance"
+    },
+    {
+        "original": "in vec3 vtx_normal;\t\t\t//頂点毎の法線",
+        "translated": "in vec3 vtx_normal;\t\t\t// Normal per vertex"
+    },
+    {
+        "original": "in vec3 vtx_pos;\t\t\t//頂点の座標",
+        "translated": "in vec3 vtx_pos;\t\t\t// Vertex coordinates"
+    },
+    {
+        "original": "issueやプルリクエストは受け付けません。あらかじめご了承下さい。",
+        "translated": "Issues and Pull Requests are not accepted. Thank you for your understanding."
+    },
+    {
+        "original": "let   MORPH_TIME    = 0;\t\t//あとで計算する",
+        "translated": "let   MORPH_TIME    = 0;\t\t// Calculate later"
+    },
+    {
+        "original": "let   addAngle  = (Math.PI * 2.0 / cvn);\t//cvn角形の角度増分値",
+        "translated": "let   addAngle  = (Math.PI * 2.0 / cvn);\t// Angle increment value for cvn-gon"
+    },
+    {
+        "original": "let   addAngle  = (Math.PI * 2.0 / n);\t//n角形の角度増分値",
+        "translated": "let   addAngle  = (Math.PI * 2.0 / n);\t// Angle increment value for n-gon"
+    },
+    {
+        "original": "let   addAngle = (Math.PI * 2.0 / n);\t//n角形の角度増分値",
+        "translated": "let   addAngle = (Math.PI * 2.0 / n);\t// Angle increment value for n-gon"
+    },
+    {
+        "original": "let   addAngle = (Math.PI / n);\t\t\t//n角形の角度増分値",
+        "translated": "let   addAngle = (Math.PI / n);\t\t\t// Angle increment value for n-gon"
+    },
+    {
+        "original": "let   angle     = 0.0;\t\t\t\t\t\t//cvn角形の角度",
+        "translated": "let   angle     = 0.0;\t\t\t\t\t\t// Angle of cvn-gon"
+    },
+    {
+        "original": "let   angle     = 0.0;\t\t\t\t\t//n角形の角度",
+        "translated": "let   angle     = 0.0;\t\t\t\t\t// Angle of n-gon"
+    },
+    {
+        "original": "let   angle    = 0.0;\t\t\t\t\t//n角形の角度",
+        "translated": "let   angle    = 0.0;\t\t\t\t\t// Angle of n-gon"
+    }
+]

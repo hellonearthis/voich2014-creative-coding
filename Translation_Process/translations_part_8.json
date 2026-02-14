@@ -1,0 +1,802 @@
+[
+    {
+        "original": "//ブロックノイズクラス",
+        "translated": "// Block Noise Class"
+    },
+    {
+        "original": "//ブロック情報をリセット",
+        "translated": "// Reset block information"
+    },
+    {
+        "original": "//プリミティブの描画",
+        "translated": "// Draw Primitives"
+    },
+    {
+        "original": "//プリミティブを減らす",
+        "translated": "// Reduce Primitives"
+    },
+    {
+        "original": "//プリミティブを順番に描画",
+        "translated": "// Draw primitives in order"
+    },
+    {
+        "original": "//プレイヤーのゴール落下処理",
+        "translated": "// Player goal fall processing"
+    },
+    {
+        "original": "//プレイヤーのサイズを調整",
+        "translated": "// Adjust player size"
+    },
+    {
+        "original": "//プレイヤーの初期位置を決める",
+        "translated": "// Determine player initial position"
+    },
+    {
+        "original": "//プレイヤーの情報を取得",
+        "translated": "// Get player information"
+    },
+    {
+        "original": "//プレイヤーの描画",
+        "translated": "// Draw Player"
+    },
+    {
+        "original": "//プレイヤーの次の位置を決定する",
+        "translated": "// Determine next player position"
+    },
+    {
+        "original": "//プレイヤーの登場時落下",
+        "translated": "// Player fall at appearance"
+    },
+    {
+        "original": "//プレイヤーの移動を制御",
+        "translated": "// Control player movement"
+    },
+    {
+        "original": "//プレイヤーの移動処理",
+        "translated": "// Player movement processing"
+    },
+    {
+        "original": "//プレイヤーの移動制御",
+        "translated": "// Player movement control"
+    },
+    {
+        "original": "//プレイヤー位置情報を初期化",
+        "translated": "// Initialize player position info"
+    },
+    {
+        "original": "//プレイヤー情報のリセット",
+        "translated": "// Reset player info"
+    },
+    {
+        "original": "//プレイヤー状態をリセット",
+        "translated": "// Reset player state"
+    },
+    {
+        "original": "//プレートの位置情報を準備",
+        "translated": "// Prepare plate position info"
+    },
+    {
+        "original": "//プログラムオブジェクトにシェーダを割り当てる",
+        "translated": "// Assign shader to program object"
+    },
+    {
+        "original": "//プログラムオブジェクトの利用開始",
+        "translated": "// Start using program object"
+    },
+    {
+        "original": "//プログラムオブジェクトの生成",
+        "translated": "// Generate program object"
+    },
+    {
+        "original": "//プロジェクション行列の作成",
+        "translated": "// Create Projection Matrix"
+    },
+    {
+        "original": "//プロジェクション行列の作成OpenGL準拠版",
+        "translated": "// Create Projection Matrix (OpenGL compliant version)"
+    },
+    {
+        "original": "//プロジェクション行列の作成その２",
+        "translated": "// Create Projection Matrix Part 2"
+    },
+    {
+        "original": "//プロパティの初期化",
+        "translated": "// Initialize properties"
+    },
+    {
+        "original": "//ベクトルa,bの外積をとると、ベクトルa,bで成る",
+        "translated": "// Taking cross product of vectors a,b results in"
+    },
+    {
+        "original": "//ベクトルを反転する",
+        "translated": "// Invert vector"
+    },
+    {
+        "original": "//ベクトル同士の四則演算",
+        "translated": "// Arithmetic operations between vectors"
+    },
+    {
+        "original": "//ベジェ曲線の制御点を決定する",
+        "translated": "// Determine control points of Bezier curve"
+    },
+    {
+        "original": "//ベジェ曲線を描画",
+        "translated": "// Draw Bezier curve"
+    },
+    {
+        "original": "//ポストエフェクト前の状態を保存",
+        "translated": "// Save state before post-effect"
+    },
+    {
+        "original": "//ポリゴンの3頂点を囲む最小矩形(バウンディングボックス)を作成",
+        "translated": "// Create bounding box surrounding 3 vertices of polygon"
+    },
+    {
+        "original": "//ポリゴンのエッジをチェック",
+        "translated": "// Check polygon edges"
+    },
+    {
+        "original": "//ポリゴンの中央Z値を調べる",
+        "translated": "// Check polygon center Z value"
+    },
+    {
+        "original": "//ポリゴンの内側に存在しない場合はスキップ",
+        "translated": "// Skip if not existing inside polygon"
+    },
+    {
+        "original": "//ポリゴンの描画",
+        "translated": "// Draw Polygon"
+    },
+    {
+        "original": "//ポリゴンの法線を求めて、カリング判定",
+        "translated": "// Calculate polygon normal and determine culling"
+    },
+    {
+        "original": "//ポリゴンの法線を求めて、面の色を算出",
+        "translated": "// Calculate polygon normal and determine face color"
+    },
+    {
+        "original": "//ポリゴンの法線ベクトルを求める",
+        "translated": "// Calculate normal vector of polygon"
+    },
+    {
+        "original": "//ポリゴンの法線ベクトルを計算するためのワーク",
+        "translated": "// Work for calculating normal vector of polygon"
+    },
+    {
+        "original": "//ポリゴンをフラットシェーディングで描画",
+        "translated": "// Draw polygon with flat shading"
+    },
+    {
+        "original": "//ポリゴンをワイヤーフレームで描画",
+        "translated": "// Draw polygon in wireframe"
+    },
+    {
+        "original": "//ポリゴン用頂点の描画順インデックスリストを作成",
+        "translated": "// Create drawing order index list of vertices for polygon"
+    },
+    {
+        "original": "//ポリゴン頂点ループ",
+        "translated": "// Polygon Vertex Loop"
+    },
+    {
+        "original": "//ポール",
+        "translated": "// Pole"
+    },
+    {
+        "original": "//マイナスにして分かるようにする",
+        "translated": "// Make negative to make it recognizable"
+    },
+    {
+        "original": "//マスクの位置を更新",
+        "translated": "// Update mask position"
+    },
+    {
+        "original": "//マスクの最初の表示位置を初期化",
+        "translated": "// Initialize initial display position of mask"
+    },
+    {
+        "original": "//マスクを配置",
+        "translated": "// Place mask"
+    },
+    {
+        "original": "//マスク画像用のキャンバスを準備",
+        "translated": "// Prepare canvas for mask image"
+    },
+    {
+        "original": "//マスター行列を作成",
+        "translated": "// Create Master Matrix"
+    },
+    {
+        "original": "//マンデルブロ集合のr(実軸)の範囲は、-2.00 ～ 0.50",
+        "translated": "// Range of r (real axis) of Mandelbrot set is -2.00 to 0.50"
+    },
+    {
+        "original": "//メインシーンのレンダリング開始",
+        "translated": "// Start main scene rendering"
+    },
+    {
+        "original": "//メインシーンの頂点バッファに切り替え",
+        "translated": "// Switch to main scene vertex buffer"
+    },
+    {
+        "original": "//メインシーンをテクスチャにレンダリングさせるための",
+        "translated": "// To render main scene to texture"
+    },
+    {
+        "original": "//メインシーンをレンダリングしたテクスチャのミップマップを作る",
+        "translated": "// Create mipmap of texture with main scene rendered"
+    },
+    {
+        "original": "//メインシーンフラグメントシェーダ",
+        "translated": "// Main Scene Fragment Shader"
+    },
+    {
+        "original": "//メインシーン頂点シェーダ",
+        "translated": "// Main Scene Vertex Shader"
+    },
+    {
+        "original": "//メインパス用の準備",
+        "translated": "// Preparation for Main Pass"
+    },
+    {
+        "original": "//メイン画面のContextを取得しておく",
+        "translated": "// Get Context of main screen in advance"
+    },
+    {
+        "original": "//メイン画面の中央に配置",
+        "translated": "// Place in center of main screen"
+    },
+    {
+        "original": "//メイン画面用キャンバスを更新",
+        "translated": "// Update canvas for main screen"
+    },
+    {
+        "original": "//メモ",
+        "translated": "// Memo"
+    },
+    {
+        "original": "//メンバの初期化",
+        "translated": "// Initialize members"
+    },
+    {
+        "original": "//メンバ初期化",
+        "translated": "// Member initialization"
+    },
+    {
+        "original": "//モデルの貼り付け場所定義",
+        "translated": "// Define model paste location"
+    },
+    {
+        "original": "//モデル・ビュー変換変換",
+        "translated": "// Model-View Transformation"
+    },
+    {
+        "original": "//モデル変換変換",
+        "translated": "// Model Transformation"
+    },
+    {
+        "original": "//モデル変換用の行列を作成",
+        "translated": "// Create matrix for model transformation"
+    },
+    {
+        "original": "//モデル変換行列のバッファに格納",
+        "translated": "// Store in buffer of model transformation matrix"
+    },
+    {
+        "original": "//モデル変換行列の初期化",
+        "translated": "// Initialize model transformation matrix"
+    },
+    {
+        "original": "//モデル変換行列をセット",
+        "translated": "// Set model transformation matrix"
+    },
+    {
+        "original": "//モデル色のバッファに格納",
+        "translated": "// Store in buffer of model color"
+    },
+    {
+        "original": "//モデル行列変換はここで先に作っておく",
+        "translated": "// Create model matrix transformation here in advance"
+    },
+    {
+        "original": "//ラインの先端形状選択",
+        "translated": "// Select line cap shape"
+    },
+    {
+        "original": "//ラインの先頭から末尾で、0.0 - 1.0 - 0.0 という値になるように調整",
+        "translated": "// Adjust to be 0.0 - 1.0 - 0.0 value from start to end of line"
+    },
+    {
+        "original": "//ラインの初期位置を決定する",
+        "translated": "// Determine initial position of line"
+    },
+    {
+        "original": "//ラインの初期設定",
+        "translated": "// Initial setting of line"
+    },
+    {
+        "original": "//ラインの移動",
+        "translated": "// Move line"
+    },
+    {
+        "original": "//ラインを描画",
+        "translated": "// Draw line"
+    },
+    {
+        "original": "//ライン情報を準備",
+        "translated": "// Prepare line info"
+    },
+    {
+        "original": "//ライン描画",
+        "translated": "// Line Drawing"
+    },
+    {
+        "original": "//ライン描画登録",
+        "translated": "// Register Line Drawing"
+    },
+    {
+        "original": "//ライン部を描画",
+        "translated": "// Draw line part"
+    },
+    {
+        "original": "//ラスタライザに送る前に頂点を非同次にトランスフォームしなけ",
+        "translated": "// Must transform vertices non-homogeneously before sending to rasterizer"
+    },
+    {
+        "original": "//ランダムでポイントを決める",
+        "translated": "// Determine points randomly"
+    },
+    {
+        "original": "//ランダムな経過位置で座標を計算する",
+        "translated": "// Calculate coordinates at random elapsed position"
+    },
+    {
+        "original": "//ランダムにIDを選択",
+        "translated": "// Randomly select ID"
+    },
+    {
+        "original": "//ランダムパレットモード",
+        "translated": "// Random Palette Mode"
+    },
+    {
+        "original": "//ランダムパレットモードは背景色を個別に描画",
+        "translated": "// Random Palette Mode draws background color individually"
+    },
+    {
+        "original": "//リクエスト失敗",
+        "translated": "// Request Failed"
+    },
+    {
+        "original": "//リクエスト成功",
+        "translated": "// Request Succeeded"
+    },
+    {
+        "original": "//リクエスト送信",
+        "translated": "// Send Request"
+    },
+    {
+        "original": "//リストの先頭のひとつ先に登録",
+        "translated": "// Register one ahead of the beginning of the list"
+    },
+    {
+        "original": "//リセットを掛けておく",
+        "translated": "// Apply reset"
+    },
+    {
+        "original": "//リセット処理",
+        "translated": "// Reset processing"
+    },
+    {
+        "original": "//リセット時刻判定",
+        "translated": "// Reset time judgment"
+    },
+    {
+        "original": "//リッジ(尾根)テクスチャクラス",
+        "translated": "// Ridge Texture Class"
+    },
+    {
+        "original": "//リンクできたかをチェック",
+        "translated": "// Check if linked successfully"
+    },
+    {
+        "original": "//ルート情報の末尾を見て進む方向を決める",
+        "translated": "// Determine direction to proceed by looking at end of route info"
+    },
+    {
+        "original": "//ループで初期化",
+        "translated": "// Initialize in loop"
+    },
+    {
+        "original": "//ループ回数の算出",
+        "translated": "// Calculation of loop count"
+    },
+    {
+        "original": "//ループ回数を算出",
+        "translated": "// Calculate loop count"
+    },
+    {
+        "original": "//ルールに従って置換して描画コマンドを生成",
+        "translated": "// Generate drawing commands by substituting according to rules"
+    },
+    {
+        "original": "//レンダラが描画した画面を彩度を上げて表示用Canvasに転送",
+        "translated": "// Increase saturation of screen drawn by renderer and transfer to display Canvas"
+    },
+    {
+        "original": "//レンダラにセット",
+        "translated": "// Set to renderer"
+    },
+    {
+        "original": "//レンダリング後画像にフィルタをかける",
+        "translated": "// Apply filter to image after rendering"
+    },
+    {
+        "original": "//レンダリング担当の準備",
+        "translated": "// Prepare rendering handler"
+    },
+    {
+        "original": "//レンダリング方法を初期化",
+        "translated": "// Initialize rendering method"
+    },
+    {
+        "original": "//ワイヤーの色を決める",
+        "translated": "// Determine wire color"
+    },
+    {
+        "original": "//ワイヤーオブジェクトの描画",
+        "translated": "// Draw Wire Object"
+    },
+    {
+        "original": "//ワイヤーフレームっぽいものの描画",
+        "translated": "// Draw wireframe-ish things"
+    },
+    {
+        "original": "//ワイヤーフレームっぽいもの描画処理",
+        "translated": "// Wireframe-ish drawing processing"
+    },
+    {
+        "original": "//ワイヤーフレームでレンダリング",
+        "translated": "// Render in wireframe"
+    },
+    {
+        "original": "//ワイヤーフレームで三角形を描画",
+        "translated": "// Draw triangle in wireframe"
+    },
+    {
+        "original": "//ワイヤーフレームとかの描画",
+        "translated": "// Drawing wireframes etc."
+    },
+    {
+        "original": "//ワイヤーフレームとかの描画処理",
+        "translated": "// Drawing processing for wireframes etc."
+    },
+    {
+        "original": "//ワイヤーフレームの描画処理",
+        "translated": "// Wireframe drawing processing"
+    },
+    {
+        "original": "//ワークリストのサイズが足りない場合は拡張する",
+        "translated": "// Expand work list if size is insufficient"
+    },
+    {
+        "original": "//ワープ終了時の揺れを作る",
+        "translated": "// Create shake at end of warp"
+    },
+    {
+        "original": "//ワールド変換行列をセット",
+        "translated": "// Set World Transformation Matrix"
+    },
+    {
+        "original": "//一時描画先をクリア",
+        "translated": "// Clear temporary drawing destination"
+    },
+    {
+        "original": "//一番近い座標のキーを探す",
+        "translated": "// Find key of closest coordinate"
+    },
+    {
+        "original": "//一番近い座標情報をパスに追加",
+        "translated": "// Add closest coordinate info to path"
+    },
+    {
+        "original": "//三角ポリゴンの法線ベクトルを求める",
+        "translated": "// Calculate normal vector of triangle polygon"
+    },
+    {
+        "original": "//三角ポリゴンの法線ベクトルを求める(左手座標系)",
+        "translated": "// Calculate normal vector of triangle polygon (left-handed coordinate system)"
+    },
+    {
+        "original": "//三角形を描画(ブレゼンハム)",
+        "translated": "// Draw triangle (Bresenham)"
+    },
+    {
+        "original": "//上に上がる",
+        "translated": "// Go up"
+    },
+    {
+        "original": "//上のフタ",
+        "translated": "// Top Lid"
+    },
+    {
+        "original": "//上下の中心点を追加",
+        "translated": "// Add top and bottom center points"
+    },
+    {
+        "original": "//上下をぼかす(中央から端に行くほどぼかす)",
+        "translated": "// Blur top and bottom (blur more from center to edge)"
+    },
+    {
+        "original": "//上昇中の重力加速度を加算",
+        "translated": "// Add gravitational acceleration during ascent"
+    },
+    {
+        "original": "//下から描いて行って、最初だけ影を付ける",
+        "translated": "// Draw from bottom, add shadow only at first"
+    },
+    {
+        "original": "//下に配置",
+        "translated": "// Place below"
+    },
+    {
+        "original": "//下のフタ",
+        "translated": "// Bottom Lid"
+    },
+    {
+        "original": "//下端からちょっと時間差付けて落下させる",
+        "translated": "// Drop from bottom edge with a slight time delay"
+    },
+    {
+        "original": "//下降中の速度は固定にする",
+        "translated": "// Fix speed during descent"
+    },
+    {
+        "original": "//両端から進むのでループは差分の半分",
+        "translated": "// Loop is half the difference since proceeding from both ends"
+    },
+    {
+        "original": "//中央Z値バッファクリア",
+        "translated": "// Clear center Z value buffer"
+    },
+    {
+        "original": "//中心からの距離によってパラメータを設定",
+        "translated": "// Set parameters according to distance from center"
+    },
+    {
+        "original": "//中心からの距離を計算",
+        "translated": "// Calculate distance from center"
+    },
+    {
+        "original": "//中心の座標",
+        "translated": "// Center coordinates"
+    },
+    {
+        "original": "//中心は遅延無し",
+        "translated": "// No delay at center"
+    },
+    {
+        "original": "//中心点(内側)",
+        "translated": "// Center point (inner)"
+    },
+    {
+        "original": "//中心点(外側)",
+        "translated": "// Center point (outer)"
+    },
+    {
+        "original": "//中心点の頂点座標を設定します",
+        "translated": "// Set vertex coordinates of center point"
+    },
+    {
+        "original": "//中心角90度の場合の円の中心から弦までの垂線の長さを計算",
+        "translated": "// Calculate perpendicular length from circle center to chord when central angle is 90 degrees"
+    },
+    {
+        "original": "//中間",
+        "translated": "// Middle"
+    },
+    {
+        "original": "//乱数のシード値を決定",
+        "translated": "// Determine random seed value"
+    },
+    {
+        "original": "//乱数のシード値を追加して先頭の要素を削除",
+        "translated": "// Add random seed value and remove first element"
+    },
+    {
+        "original": "//乱数取得",
+        "translated": "// Get random number"
+    },
+    {
+        "original": "//事前に1/zの形にしておく",
+        "translated": "// Convert to 1/z form in advance"
+    },
+    {
+        "original": "//今の状態をブラー用Canvasリストに追加",
+        "translated": "// Add current state to Blur Canvas list"
+    },
+    {
+        "original": "//今回の最大半径を決める(この長さが全ての基準となります)",
+        "translated": "// Determine max radius for this time (this length becomes standard for everything)"
+    },
+    {
+        "original": "//今回の移動角度を決定",
+        "translated": "// Determine movement angle for this time"
+    },
+    {
+        "original": "//伸ばす",
+        "translated": "// Extend"
+    },
+    {
+        "original": "//伸びるラインを描画",
+        "translated": "// Draw extending line"
+    },
+    {
+        "original": "//伸び代更新",
+        "translated": "// Update extension allowance"
+    },
+    {
+        "original": "//位置に変換",
+        "translated": "// Convert to position"
+    },
+    {
+        "original": "//位置取りとサイズ",
+        "translated": "// Positioning and Size"
+    },
+    {
+        "original": "//位置情報取得",
+        "translated": "// Get position info"
+    },
+    {
+        "original": "//位置更新",
+        "translated": "// Update position"
+    },
+    {
+        "original": "//倒す",
+        "translated": "// Knock down"
+    },
+    {
+        "original": "//値の一括セット",
+        "translated": "// Bulk set values"
+    },
+    {
+        "original": "//値書き込み",
+        "translated": "// Write value"
+    },
+    {
+        "original": "//傾き初めの先頭を見つけてそこに注目する",
+        "translated": "// Find the beginning of the tilt and focus there"
+    },
+    {
+        "original": "//傾ける",
+        "translated": "// Tilt"
+    },
+    {
+        "original": "//元に戻る",
+        "translated": "// Return to original"
+    },
+    {
+        "original": "//元座標決定",
+        "translated": "// Determine original coordinates"
+    },
+    {
+        "original": "//先頭に注目するビュー行列をセット",
+        "translated": "// Set view matrix focusing on the beginning"
+    },
+    {
+        "original": "//先頭のインデックスを初期化",
+        "translated": "// Initialize leading index"
+    },
+    {
+        "original": "//先頭のリングはここから逆回転スタート",
+        "translated": "// First ring starts reverse rotation from here"
+    },
+    {
+        "original": "//先頭を削除して過去n回分までの",
+        "translated": "// Delete first and keep up to past n times"
+    },
+    {
+        "original": "//先頭を更新",
+        "translated": "// Update head"
+    },
+    {
+        "original": "//光る砂用なので輝度が高めの色を選んでいます",
+        "translated": "// Selected higher luminance color since it's for glowing sand"
+    },
+    {
+        "original": "//光源と頂点の法線から頂点色を計算する",
+        "translated": "// Calculate vertex color from light source and vertex normal"
+    },
+    {
+        "original": "//光源の影響を計算",
+        "translated": "// Calculate influence of light source"
+    },
+    {
+        "original": "//光源の情報を登録",
+        "translated": "// Register light source info"
+    },
+    {
+        "original": "//光源ベクトルをセット",
+        "translated": "// Set light source vector"
+    },
+    {
+        "original": "//全オブジェクトの位置をカメラに合わせて変換",
+        "translated": "// Transform position of all objects according to camera"
+    },
+    {
+        "original": "//全体をY軸で回す",
+        "translated": "// Rotate whole around Y axis"
+    },
+    {
+        "original": "//全体回転",
+        "translated": "// Whole Rotation"
+    },
+    {
+        "original": "//全体回転の行列作成",
+        "translated": "// Create matrix for whole rotation"
+    },
+    {
+        "original": "//内側",
+        "translated": "// Inside"
+    },
+    {
+        "original": "//内側の三角形を透明になるように塗りつぶす",
+        "translated": "// Fill inner triangle to be transparent"
+    },
+    {
+        "original": "//内向きポリゴンの作成",
+        "translated": "// Create inward polygon"
+    },
+    {
+        "original": "//内積から得られる角度を回転角度とする",
+        "translated": "// Use angle obtained from dot product as rotation angle"
+    },
+    {
+        "original": "//内積を取るとベクトルとベクトルのなす角度が求まる",
+        "translated": "// Taking dot product gives angle between vectors"
+    },
+    {
+        "original": "//内積を計算",
+        "translated": "// Calculate dot product"
+    },
+    {
+        "original": "//内積値バッファクリア",
+        "translated": "// Clear dot product value buffer"
+    },
+    {
+        "original": "//円になるように回転",
+        "translated": "// Rotate to become a circle"
+    },
+    {
+        "original": "//円のサイズをノイズで決定",
+        "translated": "// Determine circle size with noise"
+    },
+    {
+        "original": "//円の中心の1点を決め、X-Y平面上に配置したポリゴンを",
+        "translated": "// Decide one center point of circle, and polygon placed on X-Y plane"
+    },
+    {
+        "original": "//円ポリゴンの作成",
+        "translated": "// Create circular polygon"
+    },
+    {
+        "original": "//円弧のグラデーション用パレットを選択します",
+        "translated": "// Select palette for arc gradation"
+    },
+    {
+        "original": "//円弧の傾きに合わせてグラデーションを作成",
+        "translated": "// Create gradation according to arc tilt"
+    },
+    {
+        "original": "//円弧を描画",
+        "translated": "// Draw Arc"
+    },
+    {
+        "original": "//円柱オブジェクト管理人",
+        "translated": "// Cylinder Object Manager"
+    },
+    {
+        "original": "//再帰で呼び出される穴掘り法",
+        "translated": "// Maze digging method called recursively"
+    }
+]
