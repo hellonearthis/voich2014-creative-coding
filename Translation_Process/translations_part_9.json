@@ -1,0 +1,802 @@
+[
+    {
+        "original": "//再帰的に穴を掘る",
+        "translated": "// Recursively dig holes"
+    },
+    {
+        "original": "//再現が上手く出来なかったので、これもパーリンノイズ",
+        "translated": "// Couldn't reproduce well, so this is also Perlin Noise"
+    },
+    {
+        "original": "//再確保",
+        "translated": "// Reallocate"
+    },
+    {
+        "original": "//分割ループ",
+        "translated": "// Division Loop"
+    },
+    {
+        "original": "//分割数",
+        "translated": "// Number of divisions"
+    },
+    {
+        "original": "//分割高さを決める",
+        "translated": "// Determine division height"
+    },
+    {
+        "original": "//分岐情報を追加",
+        "translated": "// Add branch info"
+    },
+    {
+        "original": "//分岐点からやり直す",
+        "translated": "// Restart from branch point"
+    },
+    {
+        "original": "//分岐点を登録して次に進む",
+        "translated": "// Register branch point and proceed"
+    },
+    {
+        "original": "//切り替わりチェック",
+        "translated": "// Check for switch"
+    },
+    {
+        "original": "//列優先での掛け算",
+        "translated": "// Column-major multiplication"
+    },
+    {
+        "original": "//列優先での配置",
+        "translated": "// Column-major arrangement"
+    },
+    {
+        "original": "//列優先データ順で格納します",
+        "translated": "// Store in column-major data order"
+    },
+    {
+        "original": "//初期値セット",
+        "translated": "// Set initial value"
+    },
+    {
+        "original": "//初期化",
+        "translated": "// Initialization"
+    },
+    {
+        "original": "//初期化処理",
+        "translated": "// Initialization processing"
+    },
+    {
+        "original": "//初期状態をセット",
+        "translated": "// Set initial state"
+    },
+    {
+        "original": "//制御記号以外でnoneに含まれていない場合は描画する",
+        "translated": "// Draw if not control symbol and not included in none"
+    },
+    {
+        "original": "//刺繍パターン情報を追加",
+        "translated": "// Add embroidery pattern info"
+    },
+    {
+        "original": "//前回と同じや2が出ると面白くないので",
+        "translated": "// Because it's not interesting if same as last time or 2 comes up"
+    },
+    {
+        "original": "//前回の画面に半透明黒を重ねる",
+        "translated": "// Overlay semi-transparent black on previous screen"
+    },
+    {
+        "original": "//加算合成で急に明るく見えるので透明度を調整",
+        "translated": "// Adjust transparency because it looks suddenly bright with additive blending"
+    },
+    {
+        "original": "//加算合成シーンのレンダリング開始",
+        "translated": "// Start rendering additive blending scene"
+    },
+    {
+        "original": "//加算合成シーンの頂点バッファに切り替え",
+        "translated": "// Switch to vertex buffer for additive blending scene"
+    },
+    {
+        "original": "//加算合成フラグメントシェーダ",
+        "translated": "// Additive Blending Fragment Shader"
+    },
+    {
+        "original": "//加算合成頂点シェーダ",
+        "translated": "// Additive Blending Vertex Shader"
+    },
+    {
+        "original": "//加速なしの状態がしばらく続いたら、加速度を更新して逆回転させる",
+        "translated": "// If state without acceleration continues for a while, update acceleration and rotate in reverse"
+    },
+    {
+        "original": "//加速中に最大化速度になったら減速に切り替え",
+        "translated": "// Switch to deceleration if max speed reached during acceleration"
+    },
+    {
+        "original": "//動いていない期間が一定時間以上になったら動き出す",
+        "translated": "// Start moving if motionless period exceeds certain time"
+    },
+    {
+        "original": "//動き出せるまで待つ",
+        "translated": "// Wait until can start moving"
+    },
+    {
+        "original": "//動けない場所にぶつかった",
+        "translated": "// Hit an immovable place"
+    },
+    {
+        "original": "//動画キャプチャ用",
+        "translated": "// For video capture"
+    },
+    {
+        "original": "//動画キャプチャ用定数",
+        "translated": "// Constants for video capture"
+    },
+    {
+        "original": "//十分に時間が経った場合にリセット",
+        "translated": "// Reset if enough time has passed"
+    },
+    {
+        "original": "//半透明ラインの描画",
+        "translated": "// Draw semi-transparent line"
+    },
+    {
+        "original": "//半透明ラインの描画がはっじまっるよー",
+        "translated": "// Semi-transparent line drawing is starting!"
+    },
+    {
+        "original": "//単位ベクトルとは、長さが1のベクトルのこと",
+        "translated": "// Unit vector is a vector with length 1"
+    },
+    {
+        "original": "//単位ベクトルに変換",
+        "translated": "// Convert to unit vector"
+    },
+    {
+        "original": "//単位行列で初期化",
+        "translated": "// Initialize with identity matrix"
+    },
+    {
+        "original": "//単位行列で初期化しておく",
+        "translated": "// Initialize with identity matrix in advance"
+    },
+    {
+        "original": "//単位行列とはこういうもの",
+        "translated": "// Identity matrix is like this"
+    },
+    {
+        "original": "//参照をローカル変数に持つと速いという話があったので",
+        "translated": "// Heard it's faster to hold reference in local variable"
+    },
+    {
+        "original": "//反転セルラーノイズクラス",
+        "translated": "// Inverted Cellular Noise Class"
+    },
+    {
+        "original": "//受け取り側は最大個数で確保しておきます。     65x65=1+32=33個",
+        "translated": "// Receiver allocates maximum number. 65x65=1+32=33 pieces"
+    },
+    {
+        "original": "//古いスマホだとrotateを繰り返すと上手く描画されない",
+        "translated": "// Old smartphones don't draw well if rotate is repeated"
+    },
+    {
+        "original": "//古い時刻のものから描画するようにソート",
+        "translated": "// Sort to draw from oldest time"
+    },
+    {
+        "original": "//右に曲がる",
+        "translated": "// Turn right"
+    },
+    {
+        "original": "//右・下・左・上の順でチェックする",
+        "translated": "// Check in order of Right, Down, Left, Up"
+    },
+    {
+        "original": "//右上から左下への対角線を生成",
+        "translated": "// Generate diagonal from top-right to bottom-left"
+    },
+    {
+        "original": "//右側の暗い方の面を描画",
+        "translated": "// Draw darker side on the right"
+    },
+    {
+        "original": "//右前                     //右後ろ",
+        "translated": "// Front Right             // Back Right"
+    },
+    {
+        "original": "//右辺だけを生成",
+        "translated": "// Generate only right side"
+    },
+    {
+        "original": "//右面(前)",
+        "translated": "// Right Face (Front)"
+    },
+    {
+        "original": "//右面(後)",
+        "translated": "// Right Face (Back)"
+    },
+    {
+        "original": "//各3Dオブジェクトのローカル座標系からワールド座標系",
+        "translated": "// From local coordinate system of each 3D object to world coordinate system"
+    },
+    {
+        "original": "//各Y座標のZバッファを見ながらポリゴンを1ラインずつ",
+        "translated": "// Draw polygon one line at a time while looking at Z buffer of each Y coordinate"
+    },
+    {
+        "original": "//各オブジェクトに遅延を付けて、逆回転スタート",
+        "translated": "// Start reverse rotation with delay for each object"
+    },
+    {
+        "original": "//各オブジェクトに遅延を付ける",
+        "translated": "// Add delay to each object"
+    },
+    {
+        "original": "//各オブジェクトの遅延を生成",
+        "translated": "// Generate delay for each object"
+    },
+    {
+        "original": "//各オブジェクト用",
+        "translated": "// For each object"
+    },
+    {
+        "original": "//各ブロックの中心点の座標を決めて",
+        "translated": "// Determine center point coordinates of each block"
+    },
+    {
+        "original": "//各ラインの最小・最大X座標値/Z値を初期化",
+        "translated": "// Initialize min/max X coordinate/Z value of each line"
+    },
+    {
+        "original": "//各天体の描画",
+        "translated": "// Draw each celestial body"
+    },
+    {
+        "original": "//各種Zバッファ",
+        "translated": "// Various Z buffers"
+    },
+    {
+        "original": "//各自のZ軸回転",
+        "translated": "// Individual Z axis rotation"
+    },
+    {
+        "original": "//各自のポジションに移動",
+        "translated": "// Move to individual position"
+    },
+    {
+        "original": "//各色ごとのブロックを準備",
+        "translated": "// Prepare blocks for each color"
+    },
+    {
+        "original": "//各面に割り当てられたテクスチャの色を取得",
+        "translated": "// Get texture color assigned to each face"
+    },
+    {
+        "original": "//各頂点のUV座標を射影変換時に利用したwで割っておく",
+        "translated": "// Divide UV coordinates of each vertex by w used during projection transformation"
+    },
+    {
+        "original": "//合成",
+        "translated": "// Composition"
+    },
+    {
+        "original": "//合成する行列を準備",
+        "translated": "// Prepare matrix to compose"
+    },
+    {
+        "original": "//合成行列を作っておく",
+        "translated": "// Create composition matrix"
+    },
+    {
+        "original": "//向きたい方向のベクトル(正規化したもの)を算出します",
+        "translated": "// Calculate vector (normalized) of direction to face"
+    },
+    {
+        "original": "//四角錐を上下に反対で重ねた範囲になるように調整",
+        "translated": "// Adjust to be range where square pyramids are stacked upside down"
+    },
+    {
+        "original": "//回転",
+        "translated": "// Rotation"
+    },
+    {
+        "original": "//回転が止まってない場合にチェック",
+        "translated": "// Check if rotation hasn't stopped"
+    },
+    {
+        "original": "//回転するタイヤの座標を設定",
+        "translated": "// Set coordinates of rotating tire"
+    },
+    {
+        "original": "//回転と移動",
+        "translated": "// Rotation and Translation"
+    },
+    {
+        "original": "//回転の中心からの差分座標になるように移動",
+        "translated": "// Move to become difference coordinates from rotation center"
+    },
+    {
+        "original": "//回転の中心からの差分座標に戻す",
+        "translated": "// Return to difference coordinates from rotation center"
+    },
+    {
+        "original": "//回転の変換行列を合成",
+        "translated": "// Compose rotation transformation matrix"
+    },
+    {
+        "original": "//回転を止めるかのチェック",
+        "translated": "// Check whether to stop rotation"
+    },
+    {
+        "original": "//回転を進める",
+        "translated": "// Advance rotation"
+    },
+    {
+        "original": "//回転移動行列作成",
+        "translated": "// Create Rotation Translation Matrix"
+    },
+    {
+        "original": "//回転行列に変換",
+        "translated": "// Convert to rotation matrix"
+    },
+    {
+        "original": "//回転行列を作成",
+        "translated": "// Create rotation matrix"
+    },
+    {
+        "original": "//回転行列作成",
+        "translated": "// Create Rotation Matrix"
+    },
+    {
+        "original": "//回転軸ベクトル(正規化したもの)を算出します",
+        "translated": "// Calculate rotation axis vector (normalized)"
+    },
+    {
+        "original": "//回転適用",
+        "translated": "// Apply rotation"
+    },
+    {
+        "original": "//回転開始",
+        "translated": "// Start rotation"
+    },
+    {
+        "original": "//図形キャンバスの全ピクセルについて判定して色付け",
+        "translated": "// Determine and color all pixels of figure canvas"
+    },
+    {
+        "original": "//図形描画用キャンバスとImageDataを準備",
+        "translated": "// Prepare figure drawing canvas and ImageData"
+    },
+    {
+        "original": "//図形描画用キャンバスを更新して転送",
+        "translated": "// Update figure drawing canvas and transfer"
+    },
+    {
+        "original": "//固定小数の誤差値を算出",
+        "translated": "// Calculate fixed-point error value"
+    },
+    {
+        "original": "//基本図形をir分X方向に平行移動させるための",
+        "translated": "// To translate basic figure by ir in X direction"
+    },
+    {
+        "original": "//基本図形をn角形の直径分X方向に平行移動させるための",
+        "translated": "// To translate basic figure by n-gon diameter in X direction"
+    },
+    {
+        "original": "//基本図形を内側の半径分平行移動させるための",
+        "translated": "// To translate basic figure by inner radius"
+    },
+    {
+        "original": "//基本図形を変換して座標を作成",
+        "translated": "// Transform basic figure to create coordinates"
+    },
+    {
+        "original": "//基本図形を平行移動させた後、Y軸を中心に回転させて",
+        "translated": "// After translating basic figure, rotate around Y axis"
+    },
+    {
+        "original": "//基準となる点をZ軸とY軸で回転させて、",
+        "translated": "// Rotate reference point around Z and Y axes,"
+    },
+    {
+        "original": "//基準座標に回転を適用",
+        "translated": "// Apply rotation to reference coordinates"
+    },
+    {
+        "original": "//基準点を決める",
+        "translated": "// Determine reference point"
+    },
+    {
+        "original": "//基準点を通路としておく",
+        "translated": "// Set reference point as passage"
+    },
+    {
+        "original": "//場合があるので自前で座標計算します",
+        "translated": "// Since there are cases, calculate coordinates manually"
+    },
+    {
+        "original": "//塗りつぶして描画していきます",
+        "translated": "// Draw by filling"
+    },
+    {
+        "original": "//境界線の位置なので色を変更",
+        "translated": "// Change color because it's boundary line position"
+    },
+    {
+        "original": "//境界線描画チェック",
+        "translated": "// Boundary line drawing check"
+    },
+    {
+        "original": "//境界線色をセット",
+        "translated": "// Set boundary line color"
+    },
+    {
+        "original": "//壁や見えないものは何もしない",
+        "translated": "// Do nothing for walls or invisible things"
+    },
+    {
+        "original": "//壁背景のサイズを調整",
+        "translated": "// Adjust wall background size"
+    },
+    {
+        "original": "//壁背景を移動させる",
+        "translated": "// Move wall background"
+    },
+    {
+        "original": "//壁背景オブジェクトの描画",
+        "translated": "// Draw Wall Background Object"
+    },
+    {
+        "original": "//変化があった点を保存",
+        "translated": "// Save points where change occurred"
+    },
+    {
+        "original": "//変化させます",
+        "translated": "// Change"
+    },
+    {
+        "original": "//変形終了時刻チェック",
+        "translated": "// Deformation end time check"
+    },
+    {
+        "original": "//変換行列の準備",
+        "translated": "// Preparation of Transformation Matrix"
+    },
+    {
+        "original": "//変換行列を先に合成しておく",
+        "translated": "// Compose transformation matrix first"
+    },
+    {
+        "original": "//外に出ちゃったら初期化",
+        "translated": "// Initialize if goes outside"
+    },
+    {
+        "original": "//外側",
+        "translated": "// Outside"
+    },
+    {
+        "original": "//外側の三角形を黒で塗りつぶす",
+        "translated": "// Fill outer triangle with black"
+    },
+    {
+        "original": "//外向きポリゴンの作成",
+        "translated": "// Create outward polygon"
+    },
+    {
+        "original": "//外積は主に面に垂直な法線ベクトルを求めるために使用する",
+        "translated": "// Cross product is mainly used to find normal vector perpendicular to face"
+    },
+    {
+        "original": "//外積を計算し、格納",
+        "translated": "// Calculate cross product and store"
+    },
+    {
+        "original": "//外積を計算して回転軸ベクトルとする",
+        "translated": "// Calculate cross product and use as rotation axis vector"
+    },
+    {
+        "original": "//大きい方を返す",
+        "translated": "// Return larger one"
+    },
+    {
+        "original": "//天辺の正方形を描く",
+        "translated": "// Draw top square"
+    },
+    {
+        "original": "//天面",
+        "translated": "// Top Surface"
+    },
+    {
+        "original": "//奇数個の場合またランダムで間を小さくしない",
+        "translated": "// If odd number, don't randomly reduce space again"
+    },
+    {
+        "original": "//奇数色の色をずらす",
+        "translated": "// Shift odd colors"
+    },
+    {
+        "original": "//奥に配置",
+        "translated": "// Place in back"
+    },
+    {
+        "original": "//妥当な範囲に入ってない場合はもう一回リセット",
+        "translated": "// Reset again if not in valid range"
+    },
+    {
+        "original": "//完全な横線のとき",
+        "translated": "// When completely horizontal line"
+    },
+    {
+        "original": "//完全な縦線のとき",
+        "translated": "// When completely vertical line"
+    },
+    {
+        "original": "//実際に描画するスクリーンの座標系に変換",
+        "translated": "// Trace to coordinate system of screen actually drawing"
+    },
+    {
+        "original": "//射影(Projection)変換",
+        "translated": "// Projection Transformation"
+    },
+    {
+        "original": "//射影・ビュー変換行列の準備",
+        "translated": "// Preparation of Projection/View Transformation Matrix"
+    },
+    {
+        "original": "//射影変換",
+        "translated": "// Projection Transformation"
+    },
+    {
+        "original": "//射影変換したX/Y/Z座標をwで割るとX/Y/Zのスケーリングが完了します",
+        "translated": "// Dividing projected X/Y/Z coordinates by w completes X/Y/Z scaling"
+    },
+    {
+        "original": "//射影変換したX/Y座標をwで割るとX/Yのスケーリングが完了します",
+        "translated": "// Dividing projected X/Y coordinates by w completes X/Y scaling"
+    },
+    {
+        "original": "//射影変換で3D座標を2Dのスクリーン座標に変換。",
+        "translated": "// Convert 3D coordinates to 2D screen coordinates with projection transformation."
+    },
+    {
+        "original": "//射影変換行列をセット",
+        "translated": "// Set Projection Transformation Matrix"
+    },
+    {
+        "original": "//射影変換行列を準備",
+        "translated": "// Prepare Projection Transformation Matrix"
+    },
+    {
+        "original": "//射影行列",
+        "translated": "// Projection Matrix"
+    },
+    {
+        "original": "//射影行列を生成",
+        "translated": "// Generate Projection Matrix"
+    },
+    {
+        "original": "//小さい方を返す",
+        "translated": "// Return smaller one"
+    },
+    {
+        "original": "//小数点以下の部分で補間するので整数ばかり渡してはダメ",
+        "translated": "// Don't pass only integers because interpolation is done on fractional part"
+    },
+    {
+        "original": "//小数点以下切り捨てで整数化",
+        "translated": "// Convert to integer by truncating decimals"
+    },
+    {
+        "original": "//少しでも掛け算を減らして高速化するために",
+        "translated": "// To speed up by reducing multiplication even a little"
+    },
+    {
+        "original": "//左上から右下への対角線を生成",
+        "translated": "// Generate diagonal from top-left to bottom-right"
+    },
+    {
+        "original": "//左上のルール判定用",
+        "translated": "// For top-left rule judgment"
+    },
+    {
+        "original": "//左側の明るい方の面を描画",
+        "translated": "// Draw brighter side on the left"
+    },
+    {
+        "original": "//左前                     //左後ろ",
+        "translated": "// Front Left              // Back Left"
+    },
+    {
+        "original": "//左右反転と上下反転を決める",
+        "translated": "// Determine horizontal flip and vertical flip"
+    },
+    {
+        "original": "//左手座標系",
+        "translated": "// Left-handed coordinate system"
+    },
+    {
+        "original": "//左辺と右辺だけを生成",
+        "translated": "// Generate only left and right sides"
+    },
+    {
+        "original": "//左辺辺だけを生成",
+        "translated": "// Generate only left side"
+    },
+    {
+        "original": "//左面(前)",
+        "translated": "// Left Face (Front)"
+    },
+    {
+        "original": "//左面(後)",
+        "translated": "// Left Face (Back)"
+    },
+    {
+        "original": "//平行移動",
+        "translated": "// Translation"
+    },
+    {
+        "original": "//平行移動行列とはこういうもの",
+        "translated": "// Translation matrix is like this"
+    },
+    {
+        "original": "//平行移動行列とはこういうもの(列優先での配置)",
+        "translated": "// Translation matrix is like this (column-major arrangement)"
+    },
+    {
+        "original": "//平行移動行列と合成",
+        "translated": "// Compose with Translation Matrix"
+    },
+    {
+        "original": "//平行移動行列の作成",
+        "translated": "// Creation of Translation Matrix"
+    },
+    {
+        "original": "//平行移動行列の合成は手動でやります",
+        "translated": "// Manual composition of translation matrix"
+    },
+    {
+        "original": "//平行移動行列を作成",
+        "translated": "// Create Translation Matrix"
+    },
+    {
+        "original": "//平面に垂直なベクトルnが得られます。",
+        "translated": "// Vector n perpendicular to plane is obtained."
+    },
+    {
+        "original": "//平面リングの位置情報を準備",
+        "translated": "// Prepare flat ring position info"
+    },
+    {
+        "original": "//平面リングの頂点リストを生成",
+        "translated": "// Generate flat ring vertex list"
+    },
+    {
+        "original": "//平面リングを並べる",
+        "translated": "// Arrange flat rings"
+    },
+    {
+        "original": "//平面リングオブジェクトの頂点リストを生成",
+        "translated": "// Generate flat ring object vertex list"
+    },
+    {
+        "original": "//平面リングオブジェクト管理人",
+        "translated": "// Flat Ring Object Manager"
+    },
+    {
+        "original": "//幹用のカラーリストを準備",
+        "translated": "// Prepare color list for trunk"
+    },
+    {
+        "original": "//床の回転",
+        "translated": "// Floor Rotation"
+    },
+    {
+        "original": "//床や見えない壁は何もしない",
+        "translated": "// Do nothing for floor or invisible walls"
+    },
+    {
+        "original": "//床回転用の行列を生成する",
+        "translated": "// Generate matrix for floor rotation"
+    },
+    {
+        "original": "//床回転用行列の初期化",
+        "translated": "// Initialize matrix for floor rotation"
+    },
+    {
+        "original": "//底面",
+        "translated": "// Bottom Surface"
+    },
+    {
+        "original": "//底面からはみ出ている部分を隠すマスクを生成",
+        "translated": "// Generate mask to hide parts protruding from bottom"
+    },
+    {
+        "original": "//底面ポリゴンの作成",
+        "translated": "// Create bottom polygon"
+    },
+    {
+        "original": "//度→ラジアン変換",
+        "translated": "// Degree -> Radian conversion"
+    },
+    {
+        "original": "//座標の偏りを調整して、中心に絵ができるように",
+        "translated": "// Adjust coordinate bias so picture is in center"
+    },
+    {
+        "original": "//座標はそのまま伝える",
+        "translated": "// Pass coordinates as is"
+    },
+    {
+        "original": "//座標分布の最大値を用いてスケールも計算",
+        "translated": "// Calculate scale using maximum value of coordinate distribution"
+    },
+    {
+        "original": "//座標変換",
+        "translated": "// Coordinate Transformation"
+    },
+    {
+        "original": "//座標変換と射影・ViewPort変換",
+        "translated": "// Coordinate Transformation and Projection/ViewPort Transformation"
+    },
+    {
+        "original": "//座標更新",
+        "translated": "// Update Coordinates"
+    },
+    {
+        "original": "//引用元：https://sbfl.net/blog/2017/06/01/javascript-reproducible-random/",
+        "translated": "// Source: https://sbfl.net/blog/2017/06/01/javascript-reproducible-random/"
+    },
+    {
+        "original": "//彩度を上げる",
+        "translated": "// Increase Swatch Saturation"
+    },
+    {
+        "original": "//影を付けないようにします",
+        "translated": "// Ensure no shadow is applied"
+    },
+    {
+        "original": "//影を付けるようにします",
+        "translated": "// Ensure shadow is applied"
+    },
+    {
+        "original": "//念のためHを補正",
+        "translated": "// Correct H just in case"
+    },
+    {
+        "original": "//成形します。",
+        "translated": "// Mold it."
+    },
+    {
+        "original": "//扇型トーラスオブジェクト管理人",
+        "translated": "// Fan-shaped Torus Object Manager"
+    },
+    {
+        "original": "//手前になるなら描画",
+        "translated": "// Draw if it comes to front"
+    },
+    {
+        "original": "//手前に来て見えなくなったら非表示にする",
+        "translated": "// Hide if it comes to front and becomes invisible"
+    },
+    {
+        "original": "//打ち上げアニメ",
+        "translated": "// Launch Animation"
+    },
+    {
+        "original": "//拡大",
+        "translated": "// Scale"
+    },
+    {
+        "original": "//拡大とその場回転",
+        "translated": "// Scale and In-place Rotation"
+    },
+    {
+        "original": "//拡大とその場回転と移動",
+        "translated": "// Scale, In-place Rotation, and Translation"
+    },
+    {
+        "original": "//拡大と移動と回転",
+        "translated": "// Scale, Translation, and Rotation"
+    }
+]

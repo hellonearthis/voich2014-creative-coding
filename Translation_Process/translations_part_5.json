@@ -1,0 +1,802 @@
+[
+    {
+        "original": "//3Dオブジェクト管理人のベース部分",
+        "translated": "// Base part of 3D Object Manager"
+    },
+    {
+        "original": "//3つの正三角形の中心座標を計算",
+        "translated": "// Calculate center coordinates of 3 equilateral triangles"
+    },
+    {
+        "original": "//3つの正三角形を描画",
+        "translated": "// Draw 3 equilateral triangles"
+    },
+    {
+        "original": "//3次元ベクトル管理人",
+        "translated": "// 3D Vector Manager"
+    },
+    {
+        "original": "//3次元行列管理人",
+        "translated": "// 3D Matrix Manager"
+    },
+    {
+        "original": "//4x4のマス目パターン",
+        "translated": "// 4x4 grid pattern"
+    },
+    {
+        "original": "//4方向を順番にチェック",
+        "translated": "// Check 4 directions in order"
+    },
+    {
+        "original": "//4次元ベクトル管理人",
+        "translated": "// 4D Vector Manager"
+    },
+    {
+        "original": "//4次元行列管理人",
+        "translated": "// 4D Matrix Manager"
+    },
+    {
+        "original": "//50個のcoolors.co URLからパレットリストを作成",
+        "translated": "// Create palette list from 50 coolors.co URLs"
+    },
+    {
+        "original": "//5x5のマス目パターン",
+        "translated": "// 5x5 grid pattern"
+    },
+    {
+        "original": "//60度になるように逆算する",
+        "translated": "// Calculate backwards to be 60 degrees"
+    },
+    {
+        "original": "//60度以上回転してたら逆回転にする",
+        "translated": "// Reverse rotation if rotated more than 60 degrees"
+    },
+    {
+        "original": "//60度傾ける",
+        "translated": "// Tilt 60 degrees"
+    },
+    {
+        "original": "//6x6のマス目パターン",
+        "translated": "// 6x6 grid pattern"
+    },
+    {
+        "original": "//8x8のマス目パターン",
+        "translated": "// 8x8 grid pattern"
+    },
+    {
+        "original": "//90度に傾いたまま",
+        "translated": "// Tilted at 90 degrees"
+    },
+    {
+        "original": "//AA TRAIN描画",
+        "translated": "// AA TRAIN Drawing"
+    },
+    {
+        "original": "//AA Trainの描画処理",
+        "translated": "// AA Train drawing processing"
+    },
+    {
+        "original": "//BLACKWORK風図形の円を描画",
+        "translated": "// Draw circle of BLACKWORK style shape"
+    },
+    {
+        "original": "//Bloomパス用の準備",
+        "translated": "// Preparation for Bloom pass"
+    },
+    {
+        "original": "//Bloom処理用のポスト処理",
+        "translated": "// Post-processing for Bloom effect"
+    },
+    {
+        "original": "//CanvasのBlurフィルタをかけて、拡大して加算合成します",
+        "translated": "// Apply Canvas Blur filter, enlarge and additive blend"
+    },
+    {
+        "original": "//CanvasのLINE描画で準備する",
+        "translated": "// Prepare with Canvas LINE drawing"
+    },
+    {
+        "original": "//CanvasのLINE描画処理",
+        "translated": "// Canvas LINE drawing processing"
+    },
+    {
+        "original": "//CanvasのLINE描画前処理",
+        "translated": "// Canvas LINE drawing pre-processing"
+    },
+    {
+        "original": "//CanvasのLINE描画後処理",
+        "translated": "// Canvas LINE drawing post-processing"
+    },
+    {
+        "original": "//Canvas要素から、ImageDataを取得しておく",
+        "translated": "// Get ImageData from Canvas element in advance"
+    },
+    {
+        "original": "//Canvas要素を生成して、ImageDataを取得しておく",
+        "translated": "// Generate Canvas element and get ImageData in advance"
+    },
+    {
+        "original": "//Colormindから5色のパレットを取得",
+        "translated": "// Get 5-color palette from Colormind"
+    },
+    {
+        "original": "//Colormindからのパレット取得",
+        "translated": "// Palette acquisition from Colormind"
+    },
+    {
+        "original": "//Cubeを並べる",
+        "translated": "// Arrange Cubes"
+    },
+    {
+        "original": "//Cubeオブジェクトの頂点と法線リストを生成",
+        "translated": "// Generate vertex and normal list of Cube object"
+    },
+    {
+        "original": "//Cubeチップを描画する左上座標を決める",
+        "translated": "// Determine top-left coordinates to draw Cube chip"
+    },
+    {
+        "original": "//EdgeFunctonの対象ピクセル座標のワーク",
+        "translated": "// Work for target pixel coordinates of EdgeFunction"
+    },
+    {
+        "original": "//FPSの平均とします(移動平均)",
+        "translated": "// Use average of FPS (moving average)"
+    },
+    {
+        "original": "//FPSの表示をON/OFFします",
+        "translated": "// Toggle FPS display ON/OFF"
+    },
+    {
+        "original": "//FPS履歴に追加",
+        "translated": "// Add to FPS history"
+    },
+    {
+        "original": "//FPS描画",
+        "translated": "// Draw FPS"
+    },
+    {
+        "original": "//FPS表示",
+        "translated": "// FPS Display"
+    },
+    {
+        "original": "//FPS計測",
+        "translated": "// FPS Measurement"
+    },
+    {
+        "original": "//HLSからRGBに変換",
+        "translated": "// Convert HLS to RGB"
+    },
+    {
+        "original": "//HSLからRGBに変換",
+        "translated": "// Convert HSL to RGB"
+    },
+    {
+        "original": "//HSLオブジェクトに変換します",
+        "translated": "// Convert to HSL object"
+    },
+    {
+        "original": "//HSLオブジェクトの配列に変換します",
+        "translated": "// Convert to array of HSL objects"
+    },
+    {
+        "original": "//L-systemでのコマンドをリセット",
+        "translated": "// Reset commands in L-system"
+    },
+    {
+        "original": "//LINE描画",
+        "translated": "// LINE Drawing"
+    },
+    {
+        "original": "//LINE描画アルゴリズムの選択",
+        "translated": "// Selection of LINE drawing algorithm"
+    },
+    {
+        "original": "//MVP(Model View Projection)変換用の行列を作成",
+        "translated": "// Create matrix for MVP (Model View Projection) transformation"
+    },
+    {
+        "original": "//MVP変換のうち、モデル変換と射影(Projection)変換までを行う",
+        "translated": "// Perform up to model transformation and projection transformation among MVP transformations"
+    },
+    {
+        "original": "//MVP変換までを行う",
+        "translated": "// Perform up to MVP transformation"
+    },
+    {
+        "original": "//MVP変換をするためのワーク",
+        "translated": "// Work for performing MVP transformation"
+    },
+    {
+        "original": "//MVP変換用の頂点ワークリストの準備",
+        "translated": "// Preparation of vertex work list for MVP transformation"
+    },
+    {
+        "original": "//NGなのでログを表示",
+        "translated": "// Display log because it is NG"
+    },
+    {
+        "original": "//OpenGL準拠の射影変換行列を作成します",
+        "translated": "// Create OpenGL compliant projection matrix"
+    },
+    {
+        "original": "//P5.js互換(整数だし、引数の値を含む数を返す",
+        "translated": "// P5.js compatible (returns integer including the argument value"
+    },
+    {
+        "original": "//P5.js互換定数",
+        "translated": "// P5.js compatible constants"
+    },
+    {
+        "original": "//PC側ならではの雰囲気にする",
+        "translated": "// Create an atmosphere unique to PC side"
+    },
+    {
+        "original": "//Processing互換メソッド",
+        "translated": "// Processing compatible methods"
+    },
+    {
+        "original": "//Processing互換定数",
+        "translated": "// Processing compatible constants"
+    },
+    {
+        "original": "//RGBオブジェクトに変換します",
+        "translated": "// Convert to RGB object"
+    },
+    {
+        "original": "//RGBオブジェクトの配列に変換します",
+        "translated": "// Convert to array of RGB objects"
+    },
+    {
+        "original": "//RGB値(それぞれ0～255)からHSLに変換します",
+        "translated": "// Convert RGB values (0-255 each) to HSL"
+    },
+    {
+        "original": "//Sayamaさんのワークショップ資料から引用",
+        "translated": "// Quoted from Sayama-san's workshop materials"
+    },
+    {
+        "original": "//TODO ★★★頂点インデックスに対応した境界線描画用のUV座標リストを作成",
+        "translated": "// TODO *** Create UV coordinate list for border drawing corresponding to vertex index"
+    },
+    {
+        "original": "//TODO ★視線ベクトルはView変換行列から作成する？",
+        "translated": "// TODO * Create view vector from View transformation matrix?"
+    },
+    {
+        "original": "//TODO　★光線ベクトルはMVP変換したものを",
+        "translated": "// TODO * Use MVP transformed light ray vector"
+    },
+    {
+        "original": "//UV情報がある場合は、Z同様に各頂点のUV座標も補間する",
+        "translated": "// If there is UV info, interpolate UV coordinates of each vertex like Z"
+    },
+    {
+        "original": "//Video録画の停止判定",
+        "translated": "// Video recording stop judgment"
+    },
+    {
+        "original": "//Video録画の準備",
+        "translated": "// Preparation for Video recording"
+    },
+    {
+        "original": "//Video録画準備と開始",
+        "translated": "// Video recording preparation and start"
+    },
+    {
+        "original": "//ViewPortを設定",
+        "translated": "// Set ViewPort"
+    },
+    {
+        "original": "//ViewPort変換",
+        "translated": "// ViewPort Transformation"
+    },
+    {
+        "original": "//ViewPort変換をかけるためにコピー作成",
+        "translated": "// Create copy to apply ViewPort transformation"
+    },
+    {
+        "original": "//ViewPort変換をかけるためのワーク",
+        "translated": "// Work to apply ViewPort transformation"
+    },
+    {
+        "original": "//ViewPort行列と射影行列をセット",
+        "translated": "// Set ViewPort matrix and Projection matrix"
+    },
+    {
+        "original": "//WebGLの準備",
+        "translated": "// WebGL Preparation"
+    },
+    {
+        "original": "//WebGL用のCanvasもスクリーンと同じサイズで用意",
+        "translated": "// Prepare Canvas for WebGL with same size as screen"
+    },
+    {
+        "original": "//WebGL用のcanvasから表示用の2Dcanvasに転送",
+        "translated": "// Transfer from WebGL canvas to display 2D canvas"
+    },
+    {
+        "original": "//Wikipediaより",
+        "translated": "// From Wikipedia"
+    },
+    {
+        "original": "//X-Y平面での多角形頂点ループ",
+        "translated": "// Polygon vertex loop on X-Y plane"
+    },
+    {
+        "original": "//XY平面オブジェクト管理人",
+        "translated": "// XY Plane Object Manager"
+    },
+    {
+        "original": "//XZ平面での基準とする座標をセット",
+        "translated": "// Set reference coordinates on XZ plane"
+    },
+    {
+        "original": "//XZ平面オブジェクト管理人",
+        "translated": "// XZ Plane Object Manager"
+    },
+    {
+        "original": "//Xでループ",
+        "translated": "// Loop by X"
+    },
+    {
+        "original": "//X座標だけ固定小数化",
+        "translated": "// Convert only X coordinate to fixed point"
+    },
+    {
+        "original": "//X座標でクリッピング",
+        "translated": "// Clipping by X coordinate"
+    },
+    {
+        "original": "//X座標を整数にする",
+        "translated": "// Convert X coordinate to integer"
+    },
+    {
+        "original": "//X軸回転行列とはこういうもの",
+        "translated": "// X-axis rotation matrix is like this"
+    },
+    {
+        "original": "//X軸回転行列とはこういうもの(列優先での配置)",
+        "translated": "// X-axis rotation matrix is like this (column-major arrangement)"
+    },
+    {
+        "original": "//X軸回転行列の作成(rはラジアン単位)",
+        "translated": "// Creation of X-axis rotation matrix (r is in radians)"
+    },
+    {
+        "original": "//Yでループ",
+        "translated": "// Loop by Y"
+    },
+    {
+        "original": "//Y座標だけ固定小数化",
+        "translated": "// Convert only Y coordinate to fixed point"
+    },
+    {
+        "original": "//Y座標の +0.5は回転の中心をずらすために付けています",
+        "translated": "// Y coordinate +0.5 is added to shift the center of rotation"
+    },
+    {
+        "original": "//Y座標の +shiftはX/Z軸回転の中心をずらすために付けています",
+        "translated": "// Y coordinate +shift is added to shift the center of X/Z axis rotation"
+    },
+    {
+        "original": "//Y座標の方向をスクリーン座標系に合わせるのと、X/Y/Zの各座標値を-1.0～1.0",
+        "translated": "// Matching Y coordinate direction to screen coordinate system, and X/Y/Z coordinate values to -1.0 to 1.0"
+    },
+    {
+        "original": "//Y座標を整数にする",
+        "translated": "// Convert Y coordinate to integer"
+    },
+    {
+        "original": "//Y範囲チェック",
+        "translated": "// Y range check"
+    },
+    {
+        "original": "//Y軸での回転",
+        "translated": "// Rotation on Y axis"
+    },
+    {
+        "original": "//Y軸を中心に回転",
+        "translated": "// Rotate around Y axis"
+    },
+    {
+        "original": "//Y軸中心(X-Z平面)の回転ループ",
+        "translated": "// Rotation loop around Y axis (X-Z plane)"
+    },
+    {
+        "original": "//Y軸回転は反時計回り(左回り)になるようにします",
+        "translated": "// Make Y axis rotation counter-clockwise (left rotation)"
+    },
+    {
+        "original": "//Y軸回転は時計回り(右回り)になるようにします",
+        "translated": "// Make Y axis rotation clockwise (right rotation)"
+    },
+    {
+        "original": "//Y軸回転行列の作成(rはラジアン単位)",
+        "translated": "// Creation of Y-axis rotation matrix (r is in radians)"
+    },
+    {
+        "original": "//Zバッファ",
+        "translated": "// Z buffer"
+    },
+    {
+        "original": "//Zバッファクリア",
+        "translated": "// Clear Z buffer"
+    },
+    {
+        "original": "//Zバッファ初期化用(setでINVALID_Z_VALUE埋め用)\t\t※なんかfillの方が速かったので、もう使わないと思う",
+        "translated": "// For Z buffer initialization (filling INVALID_Z_VALUE with set) * Some fill was faster, so I don't think I'll use it anymore"
+    },
+    {
+        "original": "//Z座標の様に境界線描用のUV座標を補間する",
+        "translated": "// Interpolate UV coordinates for border drawing like Z coordinates"
+    },
+    {
+        "original": "//Z方向に移動しつつ、X方向にゆれる",
+        "translated": "// Move in Z direction and sway in X direction"
+    },
+    {
+        "original": "//Z軸で45度回転させる",
+        "translated": "// Rotate 45 degrees on Z axis"
+    },
+    {
+        "original": "//Z軸回転",
+        "translated": "// Z axis rotation"
+    },
+    {
+        "original": "//Z軸回転で上から下に降りる回転を設定",
+        "translated": "// Set rotation descending from top to bottom by Z axis rotation"
+    },
+    {
+        "original": "//Z軸回転の角度を更新",
+        "translated": "// Update Z-axis rotation angle"
+    },
+    {
+        "original": "//Z軸回転行列の作成(rはラジアン単位)",
+        "translated": "// Creation of Z-axis rotation matrix (r is in radians)"
+    },
+    {
+        "original": "//Z軸回転角度取得",
+        "translated": "// Get Z-axis rotation angle"
+    },
+    {
+        "original": "//alphaは0.0 - 1.0",
+        "translated": "// alpha is 0.0 - 1.0"
+    },
+    {
+        "original": "//aspect\t幅基準のアスペクト比(W/H)",
+        "translated": "// aspect\tWidth-based aspect ratio (W/H)"
+    },
+    {
+        "original": "//aspect\t高さ基準のスクリーンのアスペクト比(H/W)",
+        "translated": "// aspect\tHeight-based screen aspect ratio (H/W)"
+    },
+    {
+        "original": "//ayatoさんのつぶやきProcessingのコードを分解して写経",
+        "translated": "// Decompose and transcribe ayato-san's Tweet Processing code"
+    },
+    {
+        "original": "//bloom_texture＆FrameBuffer",
+        "translated": "// bloom_texture & FrameBuffer"
+    },
+    {
+        "original": "//col1,col2は#rrggbb",
+        "translated": "// col1, col2 are #rrggbb"
+    },
+    {
+        "original": "//colは#rrggbb",
+        "translated": "// col is #rrggbb"
+    },
+    {
+        "original": "//const alpha = (random(0,100) < 20) ? (random(60,98) / 100) : 0.98;\t//最大100%にせずに、ほんのりしたやわらかさを出してるつもり",
+        "translated": "// const alpha = (random(0,100) < 20) ? (random(60,98) / 100) : 0.98;\t// Intending to create a slight softness without maxing out at 100%"
+    },
+    {
+        "original": "//const offset_xa = g_time / 5000;\t\t//こっちにするとカクカクだけど回転するよ",
+        "translated": "// const offset_xa = g_time / 5000;\t\t// If you do this, it rotates although it's choppy"
+    },
+    {
+        "original": "//coolersのURLからひとつ選ぶ",
+        "translated": "// Choose one from coolers URLs"
+    },
+    {
+        "original": "//coolors.co URLからデフォルトパレットを生成",
+        "translated": "// Generate default palette from coolors.co URL"
+    },
+    {
+        "original": "//coolors.co のURLから正規化されたHSLオブジェクト配列にします",
+        "translated": "// Convert coolors.co URL to normalized HSL object array"
+    },
+    {
+        "original": "//coolors.co のURLから正規化されたRGBオブジェクト配列にします",
+        "translated": "// Convert coolors.co URL to normalized RGB object array"
+    },
+    {
+        "original": "//cr  : カット面の半径",
+        "translated": "// cr  : Radius of cut surface"
+    },
+    {
+        "original": "//ctx.setLineDash([5,2]);\t\t\t//点線動かすと面白いけど動画だとモヤるのでやめた…",
+        "translated": "// ctx.setLineDash([5,2]);\t\t\t// Moving dotted lines is interesting, but it gets blurry in video so I stopped..."
+    },
+    {
+        "original": "//ctx.translateとrotateの代わりに自分で回転を計算",
+        "translated": "// Calculate rotation by yourself instead of ctx.translate and rotate"
+    },
+    {
+        "original": "//cvn : カット面の分割頂点数",
+        "translated": "// cvn : Number of divided vertices of cut surface"
+    },
+    {
+        "original": "//cvn角形の基本座標を設定",
+        "translated": "// Set basic coordinates of cvn-gon"
+    },
+    {
+        "original": "//data.set(this.aZero);\t\t//setする方がfillより速い？",
+        "translated": "// data.set(this.aZero);\t\t// Is set faster than fill?"
+    },
+    {
+        "original": "//data.set(this.aZero);\t\t//setする方がfillより速い？ → fillの方がちょっと速かった",
+        "translated": "// data.set(this.aZero);\t\t// Is set faster than fill? -> fill was slightly faster"
+    },
+    {
+        "original": "//draw_screenが表示用のキャンバスと同じになっていると",
+        "translated": "// If draw_screen is the same as the display canvas"
+    },
+    {
+        "original": "//farZ\t\t視点から視界の限界までの距離",
+        "translated": "// farZ\t\tDistance from viewpoint to limit of field of view"
+    },
+    {
+        "original": "//farZ\t\t視点から視界の限界までの距離(正の値をセットすること)",
+        "translated": "// farZ\t\tDistance from viewpoint to limit of field of view (Set a positive value)"
+    },
+    {
+        "original": "//fillStyleとして指定してから取り出す",
+        "translated": "// Specify as fillStyle then retrieve"
+    },
+    {
+        "original": "//fov\t\t視野角（ラジアン単位）",
+        "translated": "// fov\t\tField of view (in radians)"
+    },
+    {
+        "original": "//fov_h\t\t水平方向の視野角（ラジアン単位）",
+        "translated": "// fov_h\t\tHorizontal field of view (in radians)"
+    },
+    {
+        "original": "//fov_v\t\t垂直方向の視野角（ラジアン単位）",
+        "translated": "// fov_v\t\tVertical field of view (in radians)"
+    },
+    {
+        "original": "//fはフロアインデックス (0:迷路の壁 1:床 )",
+        "translated": "// f is floor index (0: Maze wall 1: Floor)"
+    },
+    {
+        "original": "//g_cntの大きさに合わせてちょっとずつ明るくもしておく",
+        "translated": "// Make it slightly brighter according to the size of g_cnt"
+    },
+    {
+        "original": "//g_linecap = (random(100) < 50) ? \"round\" : \"butt\";\t//角丸試してみたけど、なんかいまいちカッコよくなかったのでやめます",
+        "translated": "// g_linecap = (random(100) < 50) ? \"round\" : \"butt\";\t// I tried rounded corners, but it wasn't very cool so I'll stop"
+    },
+    {
+        "original": "//h,s,lは0.0～1.0",
+        "translated": "// h, s, l are 0.0-1.0"
+    },
+    {
+        "original": "//hslの形式で指定した色文字列をいったん",
+        "translated": "// Once process the color string specified in hsl format"
+    },
+    {
+        "original": "//ia  : 扇形の角度",
+        "translated": "// ia  : Angle of sector"
+    },
+    {
+        "original": "//if(eyeDot < 0.0)\t\t//Zバッファを使わないと上手いことカリングできなかったのでいったんコメント化",
+        "translated": "// if(eyeDot < 0.0)\t\t// Commented out for now because culling didn't work well without Z buffer"
+    },
+    {
+        "original": "//if(g_scale != 1.0){ blur_w = [ 3,6 ]; }\t//スマホはこっち",
+        "translated": "// if(g_scale != 1.0){ blur_w = [ 3,6 ]; }\t// Smartphone uses this"
+    },
+    {
+        "original": "//ir  : 扇形中心の半径",
+        "translated": "// ir  : Radius of sector center"
+    },
+    {
+        "original": "//ivn : 扇形の分割頂点数",
+        "translated": "// ivn : Number of divided vertices of sector"
+    },
+    {
+        "original": "//let   g_wait        = 1.0;\t\t\t\t//硬直時間",
+        "translated": "// let   g_wait        = 1.0;\t\t\t\t// Freeze time"
+    },
+    {
+        "original": "//let n = this.ridge(this.snoise(x,y),offset);\t//失敗した",
+        "translated": "// let n = this.ridge(this.snoise(x,y),offset);\t// Failed"
+    },
+    {
+        "original": "//m ＜ 1/2の場合 m = |x2 - x1| / |y2 - y1|",
+        "translated": "// In case m < 1/2, m = |x2 - x1| / |y2 - y1|"
+    },
+    {
+        "original": "//m ＜ 1/2の場合 m = |y2 - y1| / |x2 - x1|",
+        "translated": "// In case m < 1/2, m = |y2 - y1| / |x2 - x1|"
+    },
+    {
+        "original": "//mat4 に関連付けるには4回に分ける",
+        "translated": "// Divide into 4 times to associate with mat4"
+    },
+    {
+        "original": "//mtx_rotateX.rotateX(rad(90));\t\t//90度傾けて手前に起こす",
+        "translated": "// mtx_rotateX.rotateX(rad(90));\t\t// Tilt 90 degrees and raise to front"
+    },
+    {
+        "original": "//nearZ\t\t視点からスクリーンまでの距離",
+        "translated": "// nearZ\t\tDistance from viewpoint to screen"
+    },
+    {
+        "original": "//nearZ\t\t視点からスクリーンまでの距離(正の値をセットすること)",
+        "translated": "// nearZ\t\tDistance from viewpoint to screen (Set a positive value)"
+    },
+    {
+        "original": "//nは半球の分割数",
+        "translated": "// n is number of hemisphere divisions"
+    },
+    {
+        "original": "//n角形の基本座標を設定",
+        "translated": "// Set basic coordinates of n-gon"
+    },
+    {
+        "original": "//n角形の座標を設定",
+        "translated": "// Set coordinates of n-gon"
+    },
+    {
+        "original": "//n角形の頂点を頂上と底面の中心点とで結ぶことでポリゴンを",
+        "translated": "// By connecting vertices of n-gon with top and bottom center points, polygons are"
+    },
+    {
+        "original": "//n角形の頂点座標を設定",
+        "translated": "// Set vertex coordinates of n-gon"
+    },
+    {
+        "original": "//n角形を2つ重ねて中心点を加えた頂点のタイヤを4つ作ります",
+        "translated": "// Create 4 tires with vertices adding center point to two stacked n-gons"
+    },
+    {
+        "original": "//p5.js互換の書き方ができるように、noise関数を用意",
+        "translated": "// Prepare noise function to enable p5.js compatible writing"
+    },
+    {
+        "original": "//p5.js互換定数",
+        "translated": "// p5.js compatible constants"
+    },
+    {
+        "original": "//r,g,bは0.0～1.0",
+        "translated": "// r, g, b are 0.0-1.0"
+    },
+    {
+        "original": "//randomSeed(g_seed);\t//シードを固定して分割が毎回同じになるようにする",
+        "translated": "// randomSeed(g_seed);\t// Fix seed so division is same every time"
+    },
+    {
+        "original": "//random関数",
+        "translated": "// random function"
+    },
+    {
+        "original": "//requestAnimationFrameの準備(各種ブラウザ対応)",
+        "translated": "// Preparation of requestAnimationFrame (compatible with various browsers)"
+    },
+    {
+        "original": "//sc_ctx,sc_cvはブルーム処理をかけて上書きする元画像の2DContextとcanvasです",
+        "translated": "// sc_ctx, sc_cv are 2DContext and canvas of original image to be overwritten with bloom processing"
+    },
+    {
+        "original": "//sc_cvが表示用のキャンバスと同じになっていると",
+        "translated": "// If sc_cv is same as display canvas"
+    },
+    {
+        "original": "//sx,sy,szはそれぞれの軸での拡大率",
+        "translated": "// sx, sy, sz are scaling factors on respective axes"
+    },
+    {
+        "original": "//sx,syはそれぞれの軸での拡大率",
+        "translated": "// sx, sy are scaling factors on respective axes"
+    },
+    {
+        "original": "//t = 0.0 ～ 1.0 を入力してテクスチャのUV座標のuvを",
+        "translated": "// Input t = 0.0 - 1.0 to get texture UV coordinate uv"
+    },
+    {
+        "original": "//t = 0.0 ～ 1.0 を入力してテクスチャのUV座標のuを",
+        "translated": "// Input t = 0.0 - 1.0 to get texture UV coordinate u"
+    },
+    {
+        "original": "//t = 0.0 ～ 1.0 を入力してテクスチャのUV座標のvを",
+        "translated": "// Input t = 0.0 - 1.0 to get texture UV coordinate v"
+    },
+    {
+        "original": "//this.B      = 0;\t\t\t\t\t//頂点カラー(B)",
+        "translated": "// this.B      = 0;\t\t\t\t\t// Vertex Color (B)"
+    },
+    {
+        "original": "//this.G      = 0;\t\t\t\t\t//頂点カラー(G)",
+        "translated": "// this.G      = 0;\t\t\t\t\t// Vertex Color (G)"
+    },
+    {
+        "original": "//this.R      = 0;\t\t\t\t\t//頂点カラー(R)",
+        "translated": "// this.R      = 0;\t\t\t\t\t// Vertex Color (R)"
+    },
+    {
+        "original": "//this.aZBuffer.set(this.aZInvalid);\t//setする方がfillより速い？ → fillの方がちょっと速かった",
+        "translated": "// this.aZBuffer.set(this.aZInvalid);\t// Is set faster than fill? -> fill was slightly faster"
+    },
+    {
+        "original": "//topとbottomのラインも生成",
+        "translated": "// Generate top and bottom lines too"
+    },
+    {
+        "original": "//uniformデータの準備",
+        "translated": "// Preparation of uniform data"
+    },
+    {
+        "original": "//v3from\tカメラ（視点）の位置",
+        "translated": "// v3from\tCamera (Viewpoint) Position"
+    },
+    {
+        "original": "//v3to\t\t注視点",
+        "translated": "// v3to\t\tGaze Point"
+    },
+    {
+        "original": "//v3up\t\tカメラの上方向",
+        "translated": "// v3up\t\tCamera Up Direction"
+    },
+    {
+        "original": "//vecZ.copy(v3to);\t\t//vecZ = v3to - v3from の",
+        "translated": "// vecZ.copy(v3to);\t\t// of vecZ = v3to - v3from"
+    },
+    {
+        "original": "//vecZ.sub(v3from);\t\t//ベクトル計算(左手座標系用)",
+        "translated": "// vecZ.sub(v3from);\t\t// Vector calculation (for left-handed coordinate system)"
+    },
+    {
+        "original": "//wの値を1/wにして覚えて1に置き換え",
+        "translated": "// Remember w value as 1/w and replace with 1"
+    },
+    {
+        "original": "//wの値を1に置き換え",
+        "translated": "// Replace w value with 1"
+    },
+    {
+        "original": "//x,y は 0.0 ～ 1.0",
+        "translated": "// x, y are 0.0 - 1.0"
+    },
+    {
+        "original": "//y が下方に増加する左上角のスクリーン原点を反映するために",
+        "translated": "// To reflect screen origin at top left where y increases downwards"
+    },
+    {
+        "original": "//y 座標を反転する。この行列を適用した後も、頂点は同次である。",
+        "translated": "// Invert y coordinate. Even after applying this matrix, vertices are homogeneous."
+    },
+    {
+        "original": "//zはひとまず無視",
+        "translated": "// Ignore z for now"
+    },
+    {
+        "original": "//| -(vecX・from) -(vecY・from) -(vecZ・from) 1 |\t平行移動",
+        "translated": "//| -(vecX・from) -(vecY・from) -(vecZ・from) 1 |\tTranslation"
+    },
+    {
+        "original": "//| 0\t\t\t\t-Height / 2\t\t0\t\t\t0 |\tY座標のスケーリング＆上下反転",
+        "translated": "//| 0\t\t\t\t-Height / 2\t\t0\t\t\t0 |\tY scaling & Vertical flip"
+    },
+    {
+        "original": "//| 0\t\t\t\t0\t\t\t\t1\t\t\t0 | Z座標はそのまま",
+        "translated": "//| 0\t\t\t\t0\t\t\t\t1\t\t\t0 | Z coordinate remains as is"
+    },
+    {
+        "original": "//| Width / 2\t\t0\t\t\t\t0\t\t\t0 |\tX座標のスケーリング",
+        "translated": "//| Width / 2\t\t0\t\t\t\t0\t\t\t0 |\tX scaling"
+    }
+]

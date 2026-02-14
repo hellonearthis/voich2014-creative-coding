@@ -1,21 +1,21 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-<title>パパのぐるぐる正方形</title>
+<title>Papa's Spinning Square</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=320, user-scalable=no, initial-scale=1.0">
 <meta http-equiv="Cache-Control" content="no-cache">
 <!--
-	このデモは、JavaScriptでWebGLも使わずに、自力3D計算でオブジェクトを
-	表示しようという試みです。
+	This demo uses JavaScript without WebGL, calculating 3D manually to render objects
+	It is an attempt to display.
 	
-	今回は、JunKiyoshi(@junkiyoshi)さんの「ぐるぐる正方形」という作品を
-	元ネタにしてみました。
+	This time, referencing JunKiyoshi(@junkiyoshi)-san's work "Spinning Square"
+	Used as base material.
 	https://twitter.com/junkiyoshi/status/1195297498501275648?s=20
 	
-	オリジナル作者のJunKiyoshiさんに圧倒的感謝を！
+	Overwhelming thanks to the original author JunKiyoshi-san!
 	
-	(C)2020 ぼいち(@voich2014)
+	(C)2020 Voich(@voich2014)
 
 -->
 <style type="text/css">
@@ -66,39 +66,39 @@
 
 function rad(deg)
 {
-	//度→ラジアン変換
+	// Degree -> Radian conversion
 	return deg * Math.PI / 180;
 }
 
 function rnd(x)
 {
-	//乱数取得
+	// Get random number
 	return Math.floor(Math.random() * x);
 }
 
 function max(a,b)
 {
-	//大きい方を返す
+	// Return larger one
 	return Math.max(a,b);
 }
 
 function min(a,b)
 {
-	//小さい方を返す
+	// Return smaller one
 	return Math.min(a,b);
 }
 
-//3次元ベクトル管理人
+// 3D Vector Manager
 class VectorMan3
 {
-	//コンストラクタ
+	// Constructor
 	constructor(x = 0,y = 0,z = 0)
 	{
-		//プロパティの初期化
+		// Initialize properties
 		this.setValue(x,y,z);
 	}
 	
-	//値の一括セット
+	// Bulk set values
 	setValue(x,y,z)
 	{
 		this.x = x;
@@ -106,7 +106,7 @@ class VectorMan3
 		this.z = z;
 	}
 	
-	//コピー
+	// Copy
 	copy(v3)
 	{
 		this.x = v3.x;
@@ -114,12 +114,12 @@ class VectorMan3
 		this.z = v3.z;
 	}
 	
-	//単位ベクトルに変換
+	// Convert to unit vector
 	normalize()
 	{
-		//単位ベクトルとは、長さが1のベクトルのこと
-		//なので、各値を長さで割ってベクトルの長さが1
-		//になるようにする
+		// Unit vector is a vector with length 1
+		// So, divide each value by length so vector length is 1
+		// Make it so that
 		let x   = this.x;
 		let y   = this.y;
 		let z   = this.z;
@@ -130,25 +130,25 @@ class VectorMan3
 		this.z /= len;
 	}
 	
-	//内積を計算
+	// Calculate dot product
 	dotProduct(v)
 	{
-		//内積を取るとベクトルとベクトルのなす角度が求まる
+		// Taking dot product gives angle between vectors
 		
 		return (this.x * v.x + this.y * v.y + this.z * v.z);
 	}
 
-	//外積を計算し、格納
+	// Calculate cross product and store
 	crossProduct(v1,v2)
 	{
-		//外積は主に面に垂直な法線ベクトルを求めるために使用する
+		// Cross product is mainly used to find normal vector perpendicular to face
 
 		this.x = v1.y * v2.z - v1.z * v2.y;
 		this.y = v1.z * v2.x - v1.x * v2.z;
 		this.z = v1.x * v2.y - v1.y * v2.x;
 	}
 
-	//ベクトルを反転する
+	// Invert vector
 	invert()
 	{
 		this.x = -this.x;
@@ -156,7 +156,7 @@ class VectorMan3
 		this.z = -this.z;
 	}
 
-	//ベクトル同士の四則演算
+	// Arithmetic operations between vectors
 	add(v3)
 	{
 		this.x += v3.x;
@@ -207,17 +207,17 @@ class VectorMan3
 	}
 }
 
-//4次元ベクトル管理人
+// 4D Vector Manager
 class VectorMan4
 {
-	//コンストラクタ
+	// Constructor
 	constructor(x = 0,y = 0,z = 0,w = 1)
 	{
-		//プロパティの初期化
+		// Initialize properties
 		this.setValue(x,y,z,w);
 	}
 	
-	//値の一括セット
+	// Bulk set values
 	setValue(x,y,z,w)
 	{
 		this.x = x;
@@ -226,7 +226,7 @@ class VectorMan4
 		this.w = w;
 	}
 	
-	//コピー
+	// Copy
 	copy(v4)
 	{
 		this.x = v4.x;
@@ -235,12 +235,12 @@ class VectorMan4
 		this.w = v4.w;
 	}
 	
-	//単位ベクトルに変換
+	// Convert to unit vector
 	normalize()
 	{
-		//単位ベクトルとは、長さが1のベクトルのこと
-		//なので、各値を長さで割ってベクトルの長さが1
-		//になるようにする
+		// Unit vector is a vector with length 1
+		// So, divide each value by length so vector length is 1
+		// Make it so that
 		let x   = this.x;
 		let y   = this.y;
 		let z   = this.z;
@@ -253,7 +253,7 @@ class VectorMan4
 		this.w /= len;
 	}
 	
-	//ベクトル同士の四則演算
+	// Arithmetic operations between vectors
 	add(v4)
 	{
 		this.x += v4.x;
@@ -296,7 +296,7 @@ class VectorMan4
 	
 	mul_matrix(m4)
 	{
-		//行列との掛け算(列ベクトルとして計算(行列と縦に掛ける))
+		// Multiplication with matrix (Calculate as column vector (multiply vertically with matrix))
 		const xx = m4.m00 * this.x + m4.m10 * this.y + m4.m20 * this.z + m4.m30 * this.w;
 		const yy = m4.m01 * this.x + m4.m11 * this.y + m4.m21 * this.z + m4.m31 * this.w;
 		const zz = m4.m02 * this.x + m4.m12 * this.y + m4.m22 * this.z + m4.m32 * this.w;
@@ -311,17 +311,17 @@ class VectorMan4
 	}
 }
 
-//4次元行列管理人
+// 4D Matrix Manager
 class MatrixMan4
 {
-	//コンストラクタ
+	// Constructor
 	constructor()
 	{
-		//単位行列で初期化しておく
+		// Initialize with identity matrix in advance
 		this.initialize();
 	}
 	
-	//コピー
+	// Copy
 	copy(m4)
 	{
 		this.m00 = m4.m00; this.m01 = m4.m01; this.m02 = m4.m02; this.m03 = m4.m03;
@@ -330,10 +330,10 @@ class MatrixMan4
 		this.m30 = m4.m30; this.m31 = m4.m31; this.m32 = m4.m32; this.m33 = m4.m33;
 	}
 
-	//単位行列で初期化
+	// Initialize with identity matrix
 	initialize()
 	{
-		//単位行列とはこういうもの
+		// Identity matrix is like this
 		//| 1 0 0 0 |
 		//| 0 1 0 0 |
 		//| 0 0 1 0 |
@@ -345,13 +345,13 @@ class MatrixMan4
 		this.m30 = 0.0; this.m31 = 0.0; this.m32 = 0.0; this.m33 = 1.0;
 	}
 
-	//スケール変換行列の作成
+	// Creation of Scale Transformation Matrix
 	scale(sx,sy,sz)
 	{
-		//左手座標系
+		// Left-handed coordinate system
 
-		//スケール変換行列とはこういうもの
-		//sx,sy,szはそれぞれの軸での拡大率
+		// Scale transformation matrix is like this
+		// sx, sy, sz are scaling factors on respective axes
 		//| sx  0  0  0 |
 		//|  0 sy  0  0 |
 		//|  0  0 sz  0 | 
@@ -363,15 +363,15 @@ class MatrixMan4
 		this.m30 = 0.0; this.m31 = 0.0; this.m32 = 0.0; this.m33 = 1.0;
 	}
 	
-	//X軸回転行列の作成(rはラジアン単位)
+	// Creation of X-axis rotation matrix (r is in radians)
 	rotateX(r)
 	{
-		//左手座標系
+		// Left-handed coordinate system
 
 		const sinX = Math.sin(r);
 		const cosX = Math.cos(r);
 
-		//X軸回転行列とはこういうもの
+		// X-axis rotation matrix is like this
 		//| 1     0    0    0 |
 		//| 0  cosX sinX    0 |
 		//| 0 -sinX cosX    0 |
@@ -383,15 +383,15 @@ class MatrixMan4
 		this.m30 = 0.0; this.m31 = 0.0;  this.m32 = 0.0;  this.m33 = 1.0;
 	}
 	
-	//Y軸回転行列の作成(rはラジアン単位)
+	// Creation of Y-axis rotation matrix (r is in radians)
 	rotateY(r)
 	{
-		//左手座標系
+		// Left-handed coordinate system
 
 		const sinY = Math.sin(r);
 		const cosY = Math.cos(r);
 
-		//Ｙ軸回転行列とはこういうもの
+		// Y-axis rotation matrix is like this
 		//| cosY   0 -sinY    0 |
 		//|    0   1     0    0 |
 		//| sinY   0  cosY    0 |
@@ -403,15 +403,15 @@ class MatrixMan4
 		this.m30 = 0.0;  this.m31 = 0.0; this.m32 = 0.0;  this.m33 = 1.0;
 	}
 	
-	//Z軸回転行列の作成(rはラジアン単位)
+	// Creation of Z-axis rotation matrix (r is in radians)
 	rotateZ(r)
 	{
-		//左手座標系
+		// Left-handed coordinate system
 
 		const sinZ = Math.sin(r);
 		const cosZ = Math.cos(r);	
 
-		//Ｚ軸回転行列とはこういうもの
+		// Z-axis rotation matrix is like this
 		//|  cosZ sinZ   0   0 |
 		//| -sinZ cosZ   0   0 |
 		//|     0    0   1   0 |
@@ -423,12 +423,12 @@ class MatrixMan4
 		this.m30 = 0.0;  this.m31 = 0.0;  this.m32 = 0.0; this.m33 = 1.0;
 	}
 	
-	//平行移動行列の作成
+	// Creation of Translation Matrix
 	translate(dx,dy,dz)
 	{
-		//左手座標系
+		// Left-handed coordinate system
 
-		//平行移動行列とはこういうもの
+		// Translation matrix is like this
 		//|  1  0  0  0 |
 		//|  0  1  0  0 |
 		//|  0  0  1  0 |
@@ -440,52 +440,52 @@ class MatrixMan4
 		this.m30 =  dx; this.m31 =  dy; this.m32 =   dz; this.m33 = 1.0;
 	}
 	
-	//ビュー変換行列の作成
+	// Create View Transformation Matrix
 	view(v3from,v3to,v3up)
 	{
-		//オブジェクトをカメラから見た位置へ変換するための行列
+		// Matrix to transform object to position seen from camera
 	
-		//v3from	カメラ（視点）の位置
-		//v3to		注視点
-		//v3up		カメラの上方向
-		//左手座標系
-		let vecX = new VectorMan3();	//X軸ベクトル
-		let vecY = new VectorMan3();	//Y軸ベクトル
-		let vecZ = new VectorMan3();	//Z軸ベクトル
+		// v3from	Camera (Viewpoint) Position
+		// v3to		Gaze Point
+		// v3up		Camera Up Direction
+		// Left-handed coordinate system
+		let vecX = new VectorMan3();	// X-axis vector
+		let vecY = new VectorMan3();	// Y-axis vector
+		let vecZ = new VectorMan3();	// Z-axis vector
 
-		// 奥行きを示す Z方向ベクトルを取得する。
-	    // 視点から注視点までの差である。これは
-	    // 注視する方向 (通常+Z) である。
+		// Get Z direction vector indicating depth.
+	    // The difference from viewpoint to gaze point. This is
+	    // Direction to gaze (usually +Z).
 	    
-		//カメラ（視点）から注視点までのベクトルを算出
-		vecZ.copy(v3to);		//vecZ = v3to - v3from の
-		vecZ.sub(v3from);		//ベクトル計算
+		// Calculate vector from camera (viewpoint) to gaze point
+		vecZ.copy(v3to);		// of vecZ = v3to - v3from
+		vecZ.sub(v3from);		// Vector calculation
 		
-		vecZ.normalize();		//単位ベクトル化
+		vecZ.normalize();		// Normalization
 
-		// 注視する方向(Z方向ベクトル)と カメラの上方向を表すupベクトル
-		// の外積から直交するX方向ベクトル(通常+X)を算出し、さらにX方向
-		// ベクトルとZ方向ベクトルとの外積により、X-Z平面に直交するY方向
-		// ベクトル(通常+Y)を導きます。
+		// Direction to gaze (Z direction vector) and up vector representing camera's up direction
+		// Calculate orthogonal X direction vector (usually +X) from the cross product of, and further X direction
+		// By cross product of vector and Z direction vector, Y direction orthogonal to X-Z plane
+		// Derive vector (usually +Y).
 	    
-		vecX.crossProduct(v3up,vecZ);	//外積
-		vecX.normalize();				//単位ベクトル化
-		vecY.crossProduct(vecZ,vecX);	//外積
-		vecY.normalize();				//単位ベクトル化
+		vecX.crossProduct(v3up,vecZ);	// Cross product
+		vecX.normalize();				// Normalization
+		vecY.crossProduct(vecZ,vecX);	// Cross product
+		vecY.normalize();				// Normalization
 		
-		// 行列の構築を開始する。最初の 3 つの行には、
-	    // ビューを回転して注視点に向けるためのベクトルが含まれる。
+		// Start constructing matrix. In the first 3 rows,
+	    // Includes vector to rotate view to face gaze point.
 	    // point.
-		// 4番目の行には平行移動の値(各方向のベクトルとfromとの内積)
-		// が含まれる。 
-	    // 視点を中心とした回転が行われる。
+		// The 4th row contains translation values (dot product of direction vectors and from)
+		// is included. 
+	    // Rotation centered on viewpoint is performed.
 	    //
-		//| vecX.x        vecY.x        vecZ.x        0 |	回転
-		//| vecX.y        vecY.y        vecZ.z        0 |	回転
-		//| vecX.z        vecY.y        vecZ.z        0 |	回転
-		//| -(vecX・from) -(vecY・from) -(vecZ・from) 1 |	平行移動
+		//| vecX.x        vecY.x        vecZ.x        0 |	Rotation
+		//| vecX.y        vecY.y        vecZ.z        0 |	Rotation
+		//| vecX.z        vecY.y        vecZ.z        0 |	Rotation
+		//| -(vecX・from) -(vecY・from) -(vecZ・from) 1 |	Translation
 
-		//行列に当てはめる
+		// Apply to matrix
 		this.m00 = vecX.x; this.m01 = vecY.x; this.m02 = vecZ.x; this.m03 = 0.0;
 		this.m10 = vecX.y; this.m11 = vecY.y; this.m12 = vecZ.y; this.m13 = 0.0;
 		this.m20 = vecX.z; this.m21 = vecY.z; this.m22 = vecZ.z; this.m23 = 0.0;
@@ -495,17 +495,17 @@ class MatrixMan4
 		this.m33 =  1.0;
 	}
 	
-	//プロジェクション行列の作成
+	// Create Projection Matrix
 	projection(nearZ,farZ,fov,aspect)
 	{
-		//簡単に言うと、カメラに近いものは大きく、遠いものは小さくする行列
+		// Simply put, a matrix that makes things closer to camera larger and things further away smaller
 
-		//射影行列
-		//fov		視野角（ラジアン単位）
-		//aspect	高さ基準のスクリーンのアスペクト比(H/W)
-		//nearZ		視点からスクリーンまでの距離
-		//farZ		視点から視界の限界までの距離
-		//左手座標系
+		// Projection Matrix
+		// fov		Field of view (in radians)
+		// aspect	Height-based screen aspect ratio (H/W)
+		// nearZ		Distance from viewpoint to screen
+		// farZ		Distance from viewpoint to limit of field of view
+		// Left-handed coordinate system
 
 		const w = aspect * Math.cos(fov * 0.5) / Math.sin(fov * 0.5);
 		const h = 1.0    * Math.cos(fov * 0.5) / Math.sin(fov * 0.5);
@@ -526,17 +526,17 @@ class MatrixMan4
 		this.m33 = 0.0;
 	}
 	
-	//プロジェクション行列の作成その２
+	// Create Projection Matrix Part 2
 	projection2(nearZ,farZ,fov_h,fov_v)
 	{
-		//簡単に言うと、カメラに近いものは大きく、遠いものは小さくする行列
+		// Simply put, a matrix that makes things closer to camera larger and things further away smaller
 
-		//射影行列
-		//nearZ		視点からスクリーンまでの距離
-		//farZ		視点から視界の限界までの距離
-		//fov_h		水平方向の視野角（ラジアン単位）
-		//fov_v		垂直方向の視野角（ラジアン単位）
-		//左手座標系
+		// Projection Matrix
+		// nearZ		Distance from viewpoint to screen
+		// farZ		Distance from viewpoint to limit of field of view
+		// fov_h		Horizontal field of view (in radians)
+		// fov_v		Vertical field of view (in radians)
+		// Left-handed coordinate system
 
 	 	const w = (1.0 / Math.tan(fov_h * 0.5));	// 1/tan(x) == cot(x)
 		const h = (1.0 / Math.tan(fov_v * 0.5));	// 1/tan(x) == cot(x)
@@ -557,23 +557,23 @@ class MatrixMan4
 		this.m33 = 0.0;
 	}
 
-	//ビューポート行列の作成
+	// Create Viewport Matrix
 	viewPort(x,y,width,height)
 	{
-		//この行列は、ビューポートの寸法および指定の深度範囲に従って
-		//頂点をスケーリングし、その頂点をレンダリング ターゲット
-		//サーフェスの適切な位置座標に平行移動する。また、この行列は、
-		//y が下方に増加する左上角のスクリーン原点を反映するために 
-		//y 座標を反転する。この行列を適用した後も、頂点は同次である。
-		//つまり、頂点は依然として [x,y,z,w] 頂点として存在するので、
-		//ラスタライザに送る前に頂点を非同次にトランスフォームしなけ
-		//ればならない。
-		//（DirectX8.0日本語ヘルプより抜粋）
+		// This matrix follows viewport dimensions and specified depth range
+		// Scale vertices and render them to target
+		// Translate to appropriate position coordinates of surface. Also, this matrix
+		// To reflect screen origin at top left where y increases downwards 
+		// Invert y coordinate. Even after applying this matrix, vertices are homogeneous.
+		// In other words, since vertex still exists as [x,y,z,w] vertex,
+		// Must transform vertices non-homogeneously before sending to rasterizer
+		// must be.
+		// (Excerpt from DirectX 8.0 Japanese Help)
 		
-		//| Width / 2		0				0			0 |	X座標のスケーリング
-		//| 0				-Height / 2		0			0 |	Y座標のスケーリング＆上下反転
-		//| 0				0				1			0 | Z座標はそのまま
-		//| X + Width / 2	Height / 2 + Y	0			1 |	原点を画面の中心に平行移動
+		//| Width / 2		0				0			0 |	X scaling
+		//| 0				-Height / 2		0			0 |	Y scaling & Vertical flip
+		//| 0				0				1			0 | Z coordinate remains as is
+		//| X + Width / 2	Height / 2 + Y	0			1 |	Translate origin to center of screen
 
 		this.initialize();
 		
@@ -583,7 +583,7 @@ class MatrixMan4
 		this.m31 = height / 2.0 + y;
 	}
 
-	//行列同士の足し算
+	// Addition between matrices
 	add(m4)
 	{
 		this.m00 += m4.m00;
@@ -609,7 +609,7 @@ class MatrixMan4
 		return this;
 	}
 	
-	//行列同士の引き算
+	// Subtraction between matrices
 	sub(m4)
 	{
 		this.m00 -= m4.m00;
@@ -635,7 +635,7 @@ class MatrixMan4
 		return this;
 	}
 	
-	//行列同士の掛け算
+	// Multiplication between matrices
 	mul(m4)
 	{
 		const _00 = this.m00 * m4.m00 + this.m01 * m4.m10 + this.m02 * m4.m20 + this.m03 * m4.m30;
@@ -667,24 +667,24 @@ class MatrixMan4
 	}
 }
 
-//頂点情報管理人
+// Vertex Information Manager
 class VertexMan
 {
-	//コンストラクタ
+	// Constructor
 	constructor()
 	{
-		this.vv     = new VectorMan4();		//頂点座標(後々の座標変換時に都合が良いように4次にしてます)
-		this.vn     = new VectorMan3();		//頂点の法線ベクトル
-		this.use    = 0;					//ポリゴン組み合わせ時の頂点使用回数
-											//この頂点を利用する各ポリゴンの法線ベクトルを平均化して、
-											//この頂点の法線ベクトルを算出する際に利用されます。
-		this.R      = 0;					//頂点カラー(R)
-		this.G      = 0;					//頂点カラー(G)
-		this.B      = 0;					//頂点カラー(B)
-		this.active = false;				//簡易可視判定(true:見える)
+		this.vv     = new VectorMan4();		// Vertex coordinates (Made 4D for convenience during later coordinate transformation)
+		this.vn     = new VectorMan3();		// Vertex normal vector
+		this.use    = 0;					// Vertex usage count when combining polygons
+											// Average normal vectors of each polygon using this vertex,
+											// Used when calculating normal vector of this vertex.
+		this.R      = 0;					// Vertex Color (R)
+		this.G      = 0;					// Vertex Color (G)
+		this.B      = 0;					// Vertex Color (B)
+		this.active = false;				// Simple visibility check (true: visible)
 	}
 
-	//コピー
+	// Copy
 	copy(vtx)
 	{
 		this.vv.copy(vtx.vv);
@@ -696,7 +696,7 @@ class VertexMan
 		this.active = vtx.active;
 	}
 	
-	//頂点の法線ベクトルを計算
+	// Calculate vertex normal vector
 	calcVertexNormalVector()
 	{
 		vn.x /= this.use;
@@ -705,47 +705,47 @@ class VertexMan
 	}
 }
 
-const DEF_VERTEX_NUM_FOR_PRIMITIVE = 3;		//デフォルトの1プリミティブあたりの頂点数
-											//(デフォルトは三角形ポリゴンなので3)
-const DEF_TORUS_NUM                = 10;	//トーラスオブジェクトのデフォルト分割数
-const DEF_CYLINDER_NUM             = 10;	//シリンダー(円柱)オブジェクトのデフォルト分割数
+const DEF_VERTEX_NUM_FOR_PRIMITIVE = 3;		// Default number of vertices per primitive
+											// (Default is 3 since it's a triangle polygon)
+const DEF_TORUS_NUM                = 10;	// Default division count for torus object
+const DEF_CYLINDER_NUM             = 10;	// Default division count for cylinder object
 
-//3Dオブジェクト管理人のベース部分
+// Base part of 3D Object Manager
 class Obj3dManBase
 {
-	//コンストラクタ
+	// Constructor
 	constructor()
 	{
-		this.vertexList            = [];	//頂点データリスト
-		this.polyIndexList         = [];	//ポリゴンを形成する頂点のインデックスリスト
-		this.vertexNum             = 0;		//頂点数
+		this.vertexList            = [];	// Vertex data list
+		this.polyIndexList         = [];	// Index list of vertices forming polygons
+		this.vertexNum             = 0;		// Number of vertices
 		this.vertexNumForPrimitive
-		 = DEF_VERTEX_NUM_FOR_PRIMITIVE;	//1プリミティブあたりの頂点数(通常3=三角形ポリゴン)
-		this.primitiveNum          = 0;		//プリミティブの数
+		 = DEF_VERTEX_NUM_FOR_PRIMITIVE;	// Number of vertices per primitive (Usually 3 = Triangle Polygon)
+		this.primitiveNum          = 0;		// Number of primitives
 	}
 }
 
-//XY平面オブジェクト管理人
+// XY Plane Object Manager
 class SquareXYObjMan extends Obj3dManBase
 {
-	//コンストラクタ
+	// Constructor
 	constructor()
 	{
-		//初期化
+		// Initialization
 		super();
 		
-		//頂点リストを生成
+		// Generate Vertex List
 		this.create();
 	}
 
-	//オブジェクトの頂点リストを生成
+	// Generate object vertex list
 	create()
 	{
-		//データ領域の確保
-		const totalVertex    = 4;								//頂点の数
-		const totalPolygon   = 2;								//ポリゴンの数
-		const totalPolyIndex = totalPolygon *					//頂点インデックス
-							   this.vertexNumForPrimitive;		//情報の総数
+		// Secure data area
+		const totalVertex    = 4;								// Number of vertices
+		const totalPolygon   = 2;								// Number of polygons
+		const totalPolyIndex = totalPolygon *					// Vertex Index
+							   this.vertexNumForPrimitive;		// Total amount of info
 		this.vertexList = [];
 		for(let i = 0;i < totalVertex;++i)
 		{
@@ -755,43 +755,43 @@ class SquareXYObjMan extends Obj3dManBase
 		this.vertexNum     = totalVertex;
 		this.primitiveNum  = totalPolygon;
 
-		// 立方体の頂点は以下の順番で前と後ろの
-		// 計8点になります
+		// Cube vertices are front and back in following order
+		// Total 8 points
 		//
 		// 0-----3 
 		// |     |
 	    // |     |
 		// 1-----2
 		//
-		// 各辺の長さはとりあず1.0として適当に
-		// 拡大して使います
+		// Assuming length of each side is 1.0 appropriately for now
+		// Use enlarged
 		//
 		this.vertexList[0].vv.x = -0.5; this.vertexList[0].vv.y =  0.5; this.vertexList[0].vv.z = 0.0;
 		this.vertexList[1].vv.x = -0.5; this.vertexList[1].vv.y = -0.5; this.vertexList[1].vv.z = 0.0;
 		this.vertexList[2].vv.x =  0.5; this.vertexList[2].vv.y = -0.5; this.vertexList[2].vv.z = 0.0;
 		this.vertexList[3].vv.x =  0.5; this.vertexList[3].vv.y =  0.5; this.vertexList[3].vv.z = 0.0;
 		
-		// ポリゴン描画用に各頂点の描画順インデックスを作成
+		// Create drawing order index of each vertex for polygon drawing
 		//
-		// 三角形ポリゴンの面の向き(法線ベクトル)は、３頂点
-		// (A,B,C)があった時に、ベクトルとしてはAからBへ伸びる
-		// ベクトルとAからCへ伸びるベクトルが共にプラス方向
-		// だった場合(以下の図参照)、△ABCの法線ベクトルは
-		// 手前方向(+Y方向)になります。
+		// The face direction (normal vector) of a triangle polygon is determined by 3 vertices
+		// When there is (A,B,C), as a vector extending from A to B
+		// Vector and vector extending from A to C are both positive direction
+		// If it was (see figure below), the normal vector of triangle ABC is
+		// Becomes front direction (+Y direction).
 		//
 		//       B-----D
 		//  +Z   |＼　 |
 		//  |    |　＼ |
 		//  |    A-----C
 		//  |
-		//  +------+X (左手座標系　手前側が+Y)
+		//  +------+X (Left-handed coordinate system, +Y is the near side)
 		//
-	    // つまり、+Z方向を向いている視線に対して見える面
-		// (法線ベクトルと視線ベクトルが向き合う)を作ろう
-		// と思ったら、頂点の描画順はA,B,Cという順になる
-		// 必要があります。
-		// この法則に基づいて、もうひとつの△BCDの手前に
-		// 向ける頂点の描画順は、C,B,Dになります。
+	    // In other words, the face visible to the line of sight facing the +Z direction
+		// Let's make (normal vector and view vector face each other)
+		// I thought so, but the vertex drawing order is A, B, C
+		// There is a need.
+		// Based on this rule, in front of the other triangle BCD
+		// The drawing order of vertices to face is C, B, D.
 		//
 		const drawIndexList = 
 		[
@@ -804,27 +804,27 @@ class SquareXYObjMan extends Obj3dManBase
 	}
 }
 
-//XZ平面オブジェクト管理人
+// XZ Plane Object Manager
 class SquareXZObjMan extends Obj3dManBase
 {
-	//コンストラクタ
+	// Constructor
 	constructor()
 	{
-		//初期化
+		// Initialization
 		super();
 		
-		//頂点リストを生成
+		// Generate Vertex List
 		this.create();
 	}
 
-	//オブジェクトの頂点リストを生成
+	// Generate object vertex list
 	create()
 	{
-		//データ領域の確保
-		const totalVertex    = 4;								//頂点の数
-		const totalPolygon   = 2;								//ポリゴンの数
-		const totalPolyIndex = totalPolygon *					//頂点インデックス
-							   this.vertexNumForPrimitive;		//情報の総数
+		// Secure data area
+		const totalVertex    = 4;								// Number of vertices
+		const totalPolygon   = 2;								// Number of polygons
+		const totalPolyIndex = totalPolygon *					// Vertex Index
+							   this.vertexNumForPrimitive;		// Total amount of info
 		this.vertexList = [];
 		for(let i = 0;i < totalVertex;++i)
 		{
@@ -834,43 +834,43 @@ class SquareXZObjMan extends Obj3dManBase
 		this.vertexNum     = totalVertex;
 		this.primitiveNum  = totalPolygon;
 
-		// 立方体の頂点は以下の順番で前と後ろの
-		// 計8点になります
+		// Cube vertices are front and back in following order
+		// Total 8 points
 		//
 		// 0-----3 
 		// |     |
 	    // |     |
 		// 1-----2
 		//
-		// 各辺の長さはとりあず1.0として適当に
-		// 拡大して使います
+		// Assuming length of each side is 1.0 appropriately for now
+		// Use enlarged
 		//
 		this.vertexList[0].vv.x = -0.5; this.vertexList[0].vv.y = 0.0; this.vertexList[0].vv.z =  0.5;
 		this.vertexList[1].vv.x = -0.5; this.vertexList[1].vv.y = 0.0; this.vertexList[1].vv.z = -0.5;
 		this.vertexList[2].vv.x =  0.5; this.vertexList[2].vv.y = 0.0; this.vertexList[2].vv.z = -0.5;
 		this.vertexList[3].vv.x =  0.5; this.vertexList[3].vv.y = 0.0; this.vertexList[3].vv.z =  0.5;
 		
-		// ポリゴン描画用に各頂点の描画順インデックスを作成
+		// Create drawing order index of each vertex for polygon drawing
 		//
-		// 三角形ポリゴンの面の向き(法線ベクトル)は、３頂点
-		// (A,B,C)があった時に、ベクトルとしてはAからBへ伸びる
-		// ベクトルとAからCへ伸びるベクトルが共にプラス方向
-		// だった場合(以下の図参照)、△ABCの法線ベクトルは
-		// 手前方向(+Y方向)になります。
+		// The face direction (normal vector) of a triangle polygon is determined by 3 vertices
+		// When there is (A,B,C), as a vector extending from A to B
+		// Vector and vector extending from A to C are both positive direction
+		// If it was (see figure below), the normal vector of triangle ABC is
+		// Becomes front direction (+Y direction).
 		//
 		//       B-----D
 		//  +Z   |＼　 |
 		//  |    |　＼ |
 		//  |    A-----C
 		//  |
-		//  +------+X (左手座標系　手前側が+Y)
+		//  +------+X (Left-handed coordinate system, +Y is the near side)
 		//
-	    // つまり、+Z方向を向いている視線に対して見える面
-		// (法線ベクトルと視線ベクトルが向き合う)を作ろう
-		// と思ったら、頂点の描画順はA,B,Cという順になる
-		// 必要があります。
-		// この法則に基づいて、もうひとつの△BCDの手前に
-		// 向ける頂点の描画順は、C,B,Dになります。
+	    // In other words, the face visible to the line of sight facing the +Z direction
+		// Let's make (normal vector and view vector face each other)
+		// I thought so, but the vertex drawing order is A, B, C
+		// There is a need.
+		// Based on this rule, in front of the other triangle BCD
+		// The drawing order of vertices to face is C, B, D.
 		//
 		const drawIndexList = 
 		[
@@ -883,27 +883,27 @@ class SquareXZObjMan extends Obj3dManBase
 	}
 }
 
-//立方体オブジェクト管理人
+// Cube Object Manager
 class CubeObjMan extends Obj3dManBase
 {
-	//コンストラクタ
+	// Constructor
 	constructor()
 	{
-		//初期化
+		// Initialization
 		super();
 		
-		//頂点リストを生成
+		// Generate Vertex List
 		this.create();
 	}
 
-	//オブジェクトの頂点リストを生成
+	// Generate object vertex list
 	create()
 	{
-		//データ領域の確保
-		const totalVertex    = 4 * 2;							//頂点の数
-		const totalPolygon   = 6 * 2;							//ポリゴンの数
-		const totalPolyIndex = totalPolygon *					//頂点インデックス
-							   this.vertexNumForPrimitive;		//情報の総数
+		// Secure data area
+		const totalVertex    = 4 * 2;							// Number of vertices
+		const totalPolygon   = 6 * 2;							// Number of polygons
+		const totalPolyIndex = totalPolygon *					// Vertex Index
+							   this.vertexNumForPrimitive;		// Total amount of info
 		this.vertexList = [];
 		for(let i = 0;i < totalVertex;++i)
 		{
@@ -913,16 +913,16 @@ class CubeObjMan extends Obj3dManBase
 		this.vertexNum     = totalVertex;
 		this.primitiveNum  = totalPolygon;
 
-		// 立方体の頂点は以下の順番で前と後ろの
-		// 計8点になります
+		// Cube vertices are front and back in following order
+		// Total 8 points
 		//
 		// 0-----3 
 		// |     |
 	    // |     |
 		// 1-----2
 		//
-		// 各辺の長さはとりあず1.0として適当に
-		// 拡大して使います
+		// Assuming length of each side is 1.0 appropriately for now
+		// Use enlarged
 		//	
 		this.vertexList[0].vv.x = -0.5; this.vertexList[0].vv.y =  0.5; this.vertexList[0].vv.z = -0.5;
 		this.vertexList[1].vv.x = -0.5; this.vertexList[1].vv.y = -0.5; this.vertexList[1].vv.z = -0.5;
@@ -933,27 +933,27 @@ class CubeObjMan extends Obj3dManBase
 		this.vertexList[6].vv.x =  0.5; this.vertexList[6].vv.y = -0.5; this.vertexList[6].vv.z =  0.5;
 		this.vertexList[7].vv.x =  0.5; this.vertexList[7].vv.y =  0.5; this.vertexList[7].vv.z =  0.5;
 
-		// ポリゴン描画用に各頂点の描画順インデックスを作成
+		// Create drawing order index of each vertex for polygon drawing
 		//
-		// 三角形ポリゴンの面の向き(法線ベクトル)は、３頂点
-		// (A,B,C)があった時に、ベクトルとしてはAからBへ伸びる
-		// ベクトルとAからCへ伸びるベクトルが共にプラス方向
-		// だった場合(以下の図参照)、△ABCの法線ベクトルは
-		// 手前方向(-Z方向)になります。
+		// The face direction (normal vector) of a triangle polygon is determined by 3 vertices
+		// When there is (A,B,C), as a vector extending from A to B
+		// Vector and vector extending from A to C are both positive direction
+		// If it was (see figure below), the normal vector of triangle ABC is
+		// Becomes front direction (-Z direction).
 		// 
 		//       B-----D
 		//  +Y   |＼　 |
 		//  |    |　＼ |
 		//  |    A-----C
 		//  |
-		//  +------+X (左手座標系　向こう側が+Z)
+		//  +------+X (Left-handed coordinate system, +Z is the far side)
 		// 
-	    // つまり、+Z方向を向いている視線に対して見える面
-		// (法線ベクトルと視線ベクトルが向き合う)を作ろう
-		// と思ったら、頂点の描画順はA,B,Cという順になる
-		// 必要があります。
-		// この法則に基づいて、もうひとつの△BCDの手前に
-		// 向ける頂点の描画順は、C,B,Dになります。
+	    // In other words, the face visible to the line of sight facing the +Z direction
+		// Let's make (normal vector and view vector face each other)
+		// I thought so, but the vertex drawing order is A, B, C
+		// There is a need.
+		// Based on this rule, in front of the other triangle BCD
+		// The drawing order of vertices to face is C, B, D.
 		//
 		const drawIndexList = 
 		[
@@ -971,27 +971,27 @@ class CubeObjMan extends Obj3dManBase
 	}
 }
 
-//平面リングオブジェクト管理人
+// Flat Ring Object Manager
 class SquareRingObjMan extends Obj3dManBase
 {
-	//コンストラクタ
+	// Constructor
 	constructor()
 	{
-		//初期化
+		// Initialization
 		super();
 		
-		//頂点リストを生成
+		// Generate Vertex List
 		this.create();
 	}
 
-	//オブジェクトの頂点リストを生成
+	// Generate object vertex list
 	create()
 	{
-		//データ領域の確保
-		const totalVertex    = 4 * 2;							//頂点の数
-		const totalPolygon   = 4 * 2 * 2;						//ポリゴンの数
-		const totalPolyIndex = totalPolygon *					//頂点インデックス
-							   this.vertexNumForPrimitive;		//情報の総数
+		// Secure data area
+		const totalVertex    = 4 * 2;							// Number of vertices
+		const totalPolygon   = 4 * 2 * 2;						// Number of polygons
+		const totalPolyIndex = totalPolygon *					// Vertex Index
+							   this.vertexNumForPrimitive;		// Total amount of info
 		this.vertexList = [];
 		for(let i = 0;i < totalVertex;++i)
 		{
@@ -1001,23 +1001,23 @@ class SquareRingObjMan extends Obj3dManBase
 		this.vertexNum     = totalVertex;
 		this.primitiveNum  = totalPolygon;
 
-		// 平面リングの頂点は以下の順番で前と後ろの
-		// 計8点になります
-		// 頂点の位置は立方体と同じですが、ポリゴンとして
-		// 利用する面は、正面と背面を除いた、側面2個と上面と
+		// Vertices of plane ring are front and back in the following order
+		// Total 8 points
+		// Vertex positions are same as cube, but as polygon
+		// Surfaces to use are 2 side surfaces and top surface, excluding front and back surfaces
 		// 下面の計4つになります。1面に付きポリゴン2つ。
-		// かつ、内側も描画されるように内向きのポリゴンも
-		// 用意するので、さらに倍の、計4 * 2 * 2 = 16枚。
+		// and inward polygons so that the inside is also drawn
+		// Prepare ..., so double that, total 4 * 2 * 2 = 16 sheets.
 		//
 		// 0-----3  4-----7
-		// | 前  |  | 後  |
+		// | Front  |  | Back  |
 	    // |     |  |     |
 		// 1-----2  5-----6
 		//
-		// リングの円周となる正面から見た際の正方形の
-		// 各辺の長さはとりあず1.0として、リングの幅は
-		// 正方形の16分の1の0.0625にします。
-		// 表示する際には拡大して使います
+		// Square when viewed from the front, which becomes the circumference of the ring
+		// Assuming length of each side is 1.0 for now, ring width is
+		// Set to 0.0625, 1/16 of square.
+		// Use enlarged when displaying
 		//	
 		this.vertexList[0].vv.x = -0.5; this.vertexList[0].vv.y =  0.5; this.vertexList[0].vv.z = -0.0625/2;
 		this.vertexList[1].vv.x = -0.5; this.vertexList[1].vv.y = -0.5; this.vertexList[1].vv.z = -0.0625/2;
@@ -1028,42 +1028,42 @@ class SquareRingObjMan extends Obj3dManBase
 		this.vertexList[6].vv.x =  0.5; this.vertexList[6].vv.y = -0.5; this.vertexList[6].vv.z =  0.0625/2;
 		this.vertexList[7].vv.x =  0.5; this.vertexList[7].vv.y =  0.5; this.vertexList[7].vv.z =  0.0625/2;
 
-		// ポリゴン描画用に各頂点の描画順インデックスを作成
+		// Create drawing order index of each vertex for polygon drawing
 		//
-		// 三角形ポリゴンの面の向き(法線ベクトル)は、３頂点
-		// (A,B,C)があった時に、ベクトルとしてはAからBへ伸びる
-		// ベクトルとAからCへ伸びるベクトルが共にプラス方向
-		// だった場合(以下の図参照)、△ABCの法線ベクトルは
-		// 手前方向(-Z方向)になります。
+		// The face direction (normal vector) of a triangle polygon is determined by 3 vertices
+		// When there is (A,B,C), as a vector extending from A to B
+		// Vector and vector extending from A to C are both positive direction
+		// If it was (see figure below), the normal vector of triangle ABC is
+		// Becomes front direction (-Z direction).
 		// 
 		//       B-----D
 		//  +Y   |＼　 |
 		//  |    |　＼ |
 		//  |    A-----C
 		//  |
-		//  +------+X (左手座標系　向こう側が+Z)
+		//  +------+X (Left-handed coordinate system, +Z is the far side)
 		// 
-	    // つまり、+Z方向を向いている視線に対して見える面
-		// (法線ベクトルと視線ベクトルが向き合う)を作ろう
-		// と思ったら、頂点の描画順はA,B,Cという順になる
-		// 必要があります。
-		// この法則に基づいて、もうひとつの△BCDの手前に
-		// 向ける頂点の描画順は、C,B,Dになります。
+	    // In other words, the face visible to the line of sight facing the +Z direction
+		// Let's make (normal vector and view vector face each other)
+		// I thought so, but the vertex drawing order is A, B, C
+		// There is a need.
+		// Based on this rule, in front of the other triangle BCD
+		// The drawing order of vertices to face is C, B, D.
 		// 
-		// 今回は内向きの面も作るので、反対向きの法線を
-		// 持つポリゴンの頂点の描画順は、A,C,BとC,D,Bに
-		// なります。
+		// Since I'm making inward faces too this time, normal vectors in the opposite direction
+		// Drawing order of polygon vertices held becomes A,C,B and C,D,B
+		// It becomes.
 		//
 		const drawIndexList = 
 		[
-			0,4,3, 3,4,7,	//上面(表)
-			0,3,4, 3,7,4,	//上面(裏)
-			5,1,6, 6,1,2,	//下面(表)
-			5,6,1, 6,2,1,	//下面(裏)
-			1,5,0, 0,5,4,	//左面(表)
-			1,0,5, 0,4,5,	//左面(裏)
-			3,7,2, 2,7,6,	//右面(表)
-			3,2,7, 2,6,7	//右面(裏)
+			0,4,3, 3,4,7,	//Top Face (Front)
+			0,3,4, 3,7,4,	//Top Face (Back)
+			5,1,6, 6,1,2,	//Bottom Face (Front)
+			5,6,1, 6,2,1,	//Bottom Face (Back)
+			1,5,0, 0,5,4,	//Left Face (Front)
+			1,0,5, 0,4,5,	//Left Face (Back)
+			3,7,2, 2,7,6,	//Right Face (Front)
+			3,2,7, 2,6,7	//Right Face (Back)
 		];
 		for(let i = 0;i < totalPolyIndex;++i)
 		{
@@ -1072,27 +1072,27 @@ class SquareRingObjMan extends Obj3dManBase
 	}
 }
 
-//トーラスオブジェクト管理人
+// Torus Object Manager
 class TorusObjMan extends Obj3dManBase
 {
-	//コンストラクタ
+	// Constructor
 	constructor()
 	{
-		//初期化
+		// Initialization
 		super();
 		
-		//頂点リストを生成
+		// Generate Vertex List
 		this.create(DEF_TORUS_NUM);
 	}
 
-	//オブジェクトの頂点リストを生成
+	// Generate object vertex list
 	create(n)
 	{
-		//データ領域の確保
-		const totalVertex    = n * n;							//頂点の数
-		const totalPolygon   = totalVertex * 2;					//ポリゴンの数
-		const totalPolyIndex = totalPolygon *					//頂点インデックス
-							   this.vertexNumForPrimitive;		//情報の総数
+		// Secure data area
+		const totalVertex    = n * n;							// Number of vertices
+		const totalPolygon   = totalVertex * 2;					// Number of polygons
+		const totalPolyIndex = totalPolygon *					// Vertex Index
+							   this.vertexNumForPrimitive;		// Total amount of info
 		this.vertexList = [];
 		for(let i = 0;i < totalVertex;++i)
 		{
@@ -1103,17 +1103,17 @@ class TorusObjMan extends Obj3dManBase
 		this.primitiveNum  = totalPolygon;
 
 		//
-		// n角形の各頂点座標をY軸を中心に上から見てn角形になるように回転させて
-		// トーラス図形を完成させます
-		// これは、基本となるn角形をX-Y平面で作成し、X方向にn角形の直径分平行
-		// 移動させた後、Y軸を中心に360/n度分回転させることで座標が計算できます
+		// Rotate coordinates of each vertex of n-gon around Y-axis to form an n-gon looking from the top
+		// Complete the torus figure
+		// This creates a basic n-gon on the X-Y plane, translates it by the diameter of the n-gon in the X direction
+		// After moving, coordinates can be calculated by rotating 360/n degrees around Y axis
 		//
 
-		//n角形の基本座標を設定
+		// Set basic coordinates of n-gon
 		let baseVectors = [];
-		const radius    = 0.4;					//n角形の半径
-		let   angle     = 0.0;					//n角形の角度
-		let   addAngle  = (Math.PI * 2.0 / n);	//n角形の角度増分値
+		const radius    = 0.4;					// Radius of n-gon
+		let   angle     = 0.0;					// Angle of n-gon
+		let   addAngle  = (Math.PI * 2.0 / n);	// Angle increment value for n-gon
 		for(let i = 0;i < n;++i,angle += addAngle)
 		{
 			baseVectors.push(new VectorMan4());
@@ -1122,27 +1122,27 @@ class TorusObjMan extends Obj3dManBase
 			baseVectors[i].z = 0.0;
 		}
 
-		//基本図形をn角形の直径分X方向に平行移動させるための
-		//平行移動行列を作成
+		// To translate basic figure by n-gon diameter in X direction
+		// Create Translation Matrix
 		let mMove = new MatrixMan4();
 		mMove.translate(radius * 2.0,0.0,0.0);
 
-		//基本図形を平行移動させた後、Y軸を中心に回転させて
-		//トーラス図形の頂点座標を計算します
+		// After translating basic figure, rotate around Y axis
+		// Calculate vertex coordinates of torus shape
 		let index = 0;
 		angle = 0.0;
 		for(let i = 0;i < n;++i,angle += addAngle)
 		{
-			//回転行列を作成
+			// Create rotation matrix
 			let mRotate = new MatrixMan4();
 			mRotate.rotateY(angle);
 
-			//平行移動行列と合成
+			// Compose with Translation Matrix
 			let m = new MatrixMan4();
 			m = m.mul(mMove);
 			m = m.mul(mRotate);
 
-			//基本図形を変換して座標を作成
+			// Transform basic figure to create coordinates
 			for(let j = 0;j < n;++j)
 			{
 				this.vertexList[index].vv.copy(baseVectors[j]);
@@ -1150,43 +1150,43 @@ class TorusObjMan extends Obj3dManBase
 				index++;
 			}
 		}	
-		baseVectors = [];	//もう使わない
+		baseVectors = [];	// won't use anymore
 
-		//ポリゴン用頂点の描画順インデックスリストを作成
+		// Create drawing order index list of vertices for polygon
 		index = 0;
 		
-		//Y軸中心(X-Z平面)の回転ループ	
+		// Rotation loop around Y axis (X-Z plane)	
 		for(let xz = 0;xz < n;++xz)
 		{
-			const firstpos = n * xz;	//各多角形の最初の頂点のインデックス
+			const firstpos = n * xz;	// Index of first vertex of each polygon
 
-			//X-Y平面での多角形頂点ループ
+			// Polygon vertex loop on X-Y plane
 			//
-			// ポリゴンの表面が外側を向くように、以下の説明の要領で頂点の描画順を設定
+			// Set the vertex drawing order as explained below so that the polygon surface faces outward
 			//
-			// 三角形ポリゴンの面の向き(法線ベクトル)は、３頂点
-			// (A,B,C)があった時に、ベクトルとしてはAからBへ伸びる
-			// ベクトルとAからCへ伸びるベクトルが共にプラス方向
-			// だった場合(以下の図参照)、△ABCの法線ベクトルは
-			// 手前方向(-Z方向)になります。
+			// The face direction (normal vector) of a triangle polygon is determined by 3 vertices
+			// When there is (A,B,C), as a vector extending from A to B
+			// Vector and vector extending from A to C are both positive direction
+			// If it was (see figure below), the normal vector of triangle ABC is
+			// Becomes front direction (-Z direction).
 			// 
 			//       B-----D
 			//  +Y   |＼　 |
 			//  |    |　＼ |
 			//  |    A-----C
 			//  |
-			//  +------+X (左手座標系　向こう側が+Z)
+			//  +------+X (Left-handed coordinate system, +Z is the far side)
 			//
-			// つまり、+Z方向を向いている視線に対して見える面
-			// (法線ベクトルと視線ベクトルが向き合う)を作ろう
-			// と思ったら、頂点の描画順はA,B,Cという順になる
-			// 必要があります。
-			// この法則に基づいて、もうひとつの△BCDの手前に
-			// 向ける頂点の描画順は、C,B,Dになります。
+			// In other words, the face visible to the line of sight facing the +Z direction
+			// Let's make (normal vector and view vector face each other)
+			// I thought so, but the vertex drawing order is A, B, C
+			// There is a need.
+			// Based on this rule, in front of the other triangle BCD
+			// The drawing order of vertices to face is C, B, D.
 			//	
 			for(let xy = 0;xy < n;++xy)
 			{
-				//番号は4角形トーラスでのインデックス順
+				// Order is index order in tetragonal torus
 				this.polyIndexList[index++] =   firstpos +   xy;									//0
 				this.polyIndexList[index++] =   firstpos + ((xy + n - 1)  % n);						//3
 				this.polyIndexList[index++] =  (firstpos +  (xy + n    ))           % totalVertex;	//4
@@ -1198,31 +1198,31 @@ class TorusObjMan extends Obj3dManBase
 	}
 }
 
-//ねじれるトーラスオブジェクト管理人
+// Twisted Torus Object Manager
 class TwistTorusObjMan extends Obj3dManBase
 {
-	//コンストラクタ
+	// Constructor
 	constructor()
 	{
-		//初期化
+		// Initialization
 		super();
 		
-		//頂点リストを生成
+		// Generate Vertex List
 		this.create(8);
 		
-		//ねじれアクションカウンタ初期化
+		// Initialize Twist Action Counter
 		this.act_cnt = 0;
 	}
 	
-	//オブジェクトの頂点リストを生成
+	// Generate object vertex list
 	create(n)
 	{
-		//データ領域の確保
-		const r_n            = 16;								//断面の数
-		const totalVertex    = n * r_n;							//頂点の数
-		const totalPolygon   = totalVertex * 2;					//ポリゴンの数
-		const totalPolyIndex = totalPolygon *					//頂点インデックス
-							   this.vertexNumForPrimitive;		//情報の総数
+		// Secure data area
+		const r_n            = 16;								// Number of cross sections
+		const totalVertex    = n * r_n;							// Number of vertices
+		const totalPolygon   = totalVertex * 2;					// Number of polygons
+		const totalPolyIndex = totalPolygon *					// Vertex Index
+							   this.vertexNumForPrimitive;		// Total amount of info
 		this.vertexList = [];
 		for(let i = 0;i < totalVertex;++i)
 		{
@@ -1231,21 +1231,21 @@ class TwistTorusObjMan extends Obj3dManBase
 		this.polyIndexList   = new Array(totalPolyIndex);
 		this.vertexNum       = totalVertex;
 		this.primitiveNum    = totalPolygon;
-		this.unit_vertex_num = n;				//断面1つの頂点数
-		this.unit_round_num  = r_n;				//断面の個数
+		this.unit_vertex_num = n;				// Number of vertices per cross section
+		this.unit_round_num  = r_n;				// Number of cross sections
 		
 		//
-		// n角形の各頂点座標をY軸を中心に上から見てn角形になるように回転させて
-		// トーラス図形を完成させます
-		// これは、基本となるn角形をX-Y平面で作成し、X方向にin_radius分平行
-		// 移動させた後、Y軸を中心に360/r_n度分回転させることで座標が計算できます
+		// Rotate coordinates of each vertex of n-gon around Y-axis to form an n-gon looking from the top
+		// Complete the torus figure
+		// This creates a basic n-gon on the X-Y plane, translates it by in_radius in the X direction
+		// After moving, coordinates can be calculated by rotating 360/r_n degrees around Y axis
 		//
 
-		//n角形の基本座標を設定
+		// Set basic coordinates of n-gon
 		let baseVectors = [];
-		const radius    = 0.8;					//n角形の半径
-		let   angle     = 0.0;					//n角形の角度
-		let   addAngle  = (Math.PI * 2.0 / n);	//n角形の角度増分値
+		const radius    = 0.8;					// Radius of n-gon
+		let   angle     = 0.0;					// Angle of n-gon
+		let   addAngle  = (Math.PI * 2.0 / n);	// Angle increment value for n-gon
 		for(let i = 0;i < n;++i,angle += addAngle)
 		{
 			baseVectors.push(new VectorMan4());
@@ -1254,13 +1254,13 @@ class TwistTorusObjMan extends Obj3dManBase
 			baseVectors[i].z = 0.0;
 		}
 
-		//基本図形を内側の半径分平行移動させるための
-		//平行移動行列を作成
+		// To translate basic figure by inner radius
+		// Create Translation Matrix
 		const in_radius = 1.8;
 		let mMove = new MatrixMan4();
 		mMove.translate(in_radius,0.0,0.0);
 
-		//ねじれアクション用の情報配列を初期化しておく
+		// Initialize information array for Twist Action
 		this.act_info = [];
 		for(let i = 0;i < r_n;++i)
 		{
@@ -1268,23 +1268,23 @@ class TwistTorusObjMan extends Obj3dManBase
 			this.act_info.push(info);
 		}
 
-		//基本図形を平行移動させた後、Y軸を中心に回転させて
-		//トーラス図形の頂点座標を計算します
+		// After translating basic figure, rotate around Y axis
+		// Calculate vertex coordinates of torus shape
 		let index       = 0;
 		let r_angle     = 0.0;
-		let r_addAngle  = (Math.PI * 2.0 / r_n);	//n角形の角度増分値
+		let r_addAngle  = (Math.PI * 2.0 / r_n);	// Angle increment value for n-gon
 		for(let i = 0;i < r_n;++i,r_angle += r_addAngle)
 		{
-			//回転行列を作成
+			// Create rotation matrix
 			let mRotate = new MatrixMan4();
 			mRotate.rotateY(r_angle);
 
-			//平行移動行列と合成
+			// Compose with Translation Matrix
 			let m = new MatrixMan4();
 			m = m.mul(mMove);
 			m = m.mul(mRotate);
 
-			//基本図形を変換して座標を作成
+			// Transform basic figure to create coordinates
 			for(let j = 0;j < n;++j)
 			{
 				this.vertexList[index].vv.copy(baseVectors[j]);
@@ -1292,46 +1292,46 @@ class TwistTorusObjMan extends Obj3dManBase
 				index++;
 			}
 			
-			//配置情報を覚えておく
+			// Remember arrangement info
 			this.act_info[i].ry = r_angle;
 		}	
-		baseVectors = [];	//もう使わない
+		baseVectors = [];	// won't use anymore
 
-		//ポリゴン用頂点の描画順インデックスリストを作成
+		// Create drawing order index list of vertices for polygon
 		index = 0;
 		
-		//Y軸中心(X-Z平面)の回転ループ	
+		// Rotation loop around Y axis (X-Z plane)	
 		for(let xz = 0;xz < r_n;++xz)
 		{
-			const firstpos = n * xz;	//各多角形の最初の頂点のインデックス
+			const firstpos = n * xz;	// Index of first vertex of each polygon
 
-			//X-Y平面での多角形頂点ループ
+			// Polygon vertex loop on X-Y plane
 			//
-			// ポリゴンの表面が外側を向くように、以下の説明の要領で頂点の描画順を設定
+			// Set the vertex drawing order as explained below so that the polygon surface faces outward
 			//
-			// 三角形ポリゴンの面の向き(法線ベクトル)は、３頂点
-			// (A,B,C)があった時に、ベクトルとしてはAからBへ伸びる
-			// ベクトルとAからCへ伸びるベクトルが共にプラス方向
-			// だった場合(以下の図参照)、△ABCの法線ベクトルは
-			// 手前方向(-Z方向)になります。
+			// The face direction (normal vector) of a triangle polygon is determined by 3 vertices
+			// When there is (A,B,C), as a vector extending from A to B
+			// Vector and vector extending from A to C are both positive direction
+			// If it was (see figure below), the normal vector of triangle ABC is
+			// Becomes front direction (-Z direction).
 			// 
 			//       B-----D
 			//  +Y   |＼　 |
 			//  |    |　＼ |
 			//  |    A-----C
 			//  |
-			//  +------+X (左手座標系　向こう側が+Z)
+			//  +------+X (Left-handed coordinate system, +Z is the far side)
 			//
-			// つまり、+Z方向を向いている視線に対して見える面
-			// (法線ベクトルと視線ベクトルが向き合う)を作ろう
-			// と思ったら、頂点の描画順はA,B,Cという順になる
-			// 必要があります。
-			// この法則に基づいて、もうひとつの△BCDの手前に
-			// 向ける頂点の描画順は、C,B,Dになります。
+			// In other words, the face visible to the line of sight facing the +Z direction
+			// Let's make (normal vector and view vector face each other)
+			// I thought so, but the vertex drawing order is A, B, C
+			// There is a need.
+			// Based on this rule, in front of the other triangle BCD
+			// The drawing order of vertices to face is C, B, D.
 			//	
 			for(let xy = 0;xy < n;++xy)
 			{
-				//番号は4角形トーラスでのインデックス順
+				// Order is index order in tetragonal torus
 				this.polyIndexList[index++] =   firstpos +   xy;									//0
 				this.polyIndexList[index++] =   firstpos + ((xy + n - 1)  % n);						//3
 				this.polyIndexList[index++] =  (firstpos +  (xy + n    ))           % totalVertex;	//4
@@ -1342,34 +1342,34 @@ class TwistTorusObjMan extends Obj3dManBase
 		}
 	}
 	
-	//ねじれアクション
+	// Twist Action
 	action()
 	{
 		const r_n = this.unit_round_num;
 			
-		//アクションを決める
+		// Decide action
 		if(!(this.act_cnt++ % 100))
 		{
 			for(let i = 0;i < r_n;++i)
 			{
-				const unitAngle      = rad(2);						//1回の回転角度
-				this.act_info[i].dir = rnd(2) * (-1 * rnd(2));		//-1,0,1 のどれか
-				this.act_info[i].a   = unitAngle * (rnd(2) + 1)		//回転角をランダムで2倍にする
-									   * this.act_info[i].dir;		//方向はdirで決まる
+				const unitAngle      = rad(2);						// Angle per rotation
+				this.act_info[i].dir = rnd(2) * (-1 * rnd(2));		// One of -1, 0, 1
+				this.act_info[i].a   = unitAngle * (rnd(2) + 1)		// Randomly double the rotation angle
+									   * this.act_info[i].dir;		// Direction is determined by dir
 			}
 		}
 		
-		//すべての断面の頂点を回転させる
+		// Rotate vertices of all cross sections
 		const v_n = this.unit_vertex_num;
 		for(let i = 0;i < r_n;++i)
 		{
-			//いったんY軸での回転とX軸での平行移動を元に戻して、
-			//断面を中心に持ってきた後、Z軸回転して、再度平行
-			//移動と回転を掛ける行列を生成する
+			// Once revert rotation on Y axis and translation on X axis,
+			// After bringing cross section to center, rotate on Z axis, then translate again
+			// Generate matrix multiplying translation and rotation
 			//
-			// 掛ける順番は、
-			// 負のY軸回転→負の平行移動→Z軸回転→正の平行移動→正のY軸回転
-			// となる。
+			// Order of multiplication is,
+			// Negative Y-axis rotation -> Negative translation -> Z-axis rotation -> Positive translation -> Positive Y-axis rotation
+			// It becomes.
 			//
 			let m        = new MatrixMan4();
 			let mRYplus  = new MatrixMan4();
@@ -1385,7 +1385,7 @@ class TwistTorusObjMan extends Obj3dManBase
 			mTXplus.translate(tx,0.0,0.0);
 			mTXMinus.translate(-tx,0.0,0.0);
 			
-			//60度以上回転してたら逆回転にする
+			// Reverse rotation if rotated more than 60 degrees
 			if(Math.abs(this.act_info[i].r) >= Math.PI/3)
 			{
 				this.act_info[i].a   *= -1;
@@ -1395,7 +1395,7 @@ class TwistTorusObjMan extends Obj3dManBase
 			mRZ.rotateZ(this.act_info[i].a);
 			this.act_info[i].r += this.act_info[i].a;
 			
-			//合成
+			// Composition
 			m = m.mul(mRYminus);
 			m = m.mul(mTXMinus);
 			m = m.mul(mRZ);
@@ -1405,34 +1405,34 @@ class TwistTorusObjMan extends Obj3dManBase
 			const first = i * this.unit_vertex_num;
 			for(let j = 0;j < v_n;++j)
 			{
-				//頂点座標に適用する
+				// Apply to vertex coordinates
 				this.vertexList[first+j].vv.mul_matrix(m);
 			}
 		}
 	}
 }
 
-//円柱オブジェクト管理人
+// Cylinder Object Manager
 class CylinderObjMan extends Obj3dManBase
 {
-	//コンストラクタ
+	// Constructor
 	constructor()
 	{
-		//初期化
+		// Initialization
 		super();
 		
-		//頂点リストを生成
+		// Generate Vertex List
 		this.create(DEF_CYLINDER_NUM);
 	}
 
-	//オブジェクトの頂点リストを生成
+	// Generate object vertex list
 	create(n)
 	{
-		//データ領域の確保
-		const totalVertex    = n * 2;							//頂点の数
-		const totalPolygon   = totalVertex * 2;					//ポリゴンの数
-		const totalPolyIndex = totalPolygon *					//頂点インデックス
-							   this.vertexNumForPrimitive;		//情報の総数
+		// Secure data area
+		const totalVertex    = n * 2;							// Number of vertices
+		const totalPolygon   = totalVertex * 2;					// Number of polygons
+		const totalPolyIndex = totalPolygon *					// Vertex Index
+							   this.vertexNumForPrimitive;		// Total amount of info
 		this.vertexList = [];
 		for(let i = 0;i < totalVertex;++i)
 		{
@@ -1443,57 +1443,57 @@ class CylinderObjMan extends Obj3dManBase
 		this.primitiveNum  = totalPolygon;
 
 		//
-		// X-Z平面上にn角形の頂点を配置し、それをY軸に沿って広げることで円柱
-		// オブジェクトを作成します。
+		// A cylinder is created by placing vertices of an n-gon on the X-Z plane and expanding them along the Y axis
+		// Create object.
 		//
 		
-		//n角形の基本座標を設定
-		const radius   = 0.4;					//n角形の半径
-		let   angle    = 0.0;					//n角形の角度
-		let   addAngle = (Math.PI * 2.0 / n);	//n角形の角度増分値
+		// Set basic coordinates of n-gon
+		const radius   = 0.4;					// Radius of n-gon
+		let   angle    = 0.0;					// Angle of n-gon
+		let   addAngle = (Math.PI * 2.0 / n);	// Angle increment value for n-gon
 		for(let i = 0;i < n;++i,angle += addAngle)
 		{
-			this.vertexList[  i].vv.x = radius * Math.cos(angle);	//上側のn角形
+			this.vertexList[  i].vv.x = radius * Math.cos(angle);	// Upper n-gon
 			this.vertexList[  i].vv.z = radius * Math.sin(angle);
 			this.vertexList[  i].vv.y =  0.5;
-			this.vertexList[n+i].vv.x = radius * Math.cos(angle);	//下側のn角形
+			this.vertexList[n+i].vv.x = radius * Math.cos(angle);	// Lower n-gon
 			this.vertexList[n+i].vv.z = radius * Math.sin(angle);
 			this.vertexList[n+i].vv.y = -0.5;
 		}
 
-		//ポリゴン用頂点の描画順インデックスリストを作成
+		// Create drawing order index list of vertices for polygon
 		let index = 0;
 		
 		for(let i = 0;i < n;++i)
 		{
-			//X-Y平面での多角形頂点ループ
+			// Polygon vertex loop on X-Y plane
 			//
-			// ポリゴンの表面が外側を向くように、以下の説明の要領で頂点の描画順を設定
+			// Set the vertex drawing order as explained below so that the polygon surface faces outward
 			//
-			// 三角形ポリゴンの面の向き(法線ベクトル)は、３頂点
-			// (A,B,C)があった時に、ベクトルとしてはAからBへ伸びる
-			// ベクトルとAからCへ伸びるベクトルが共にプラス方向
-			// だった場合(以下の図参照)、△ABCの法線ベクトルは
-			// 手前方向(-Z方向)になります。
+			// The face direction (normal vector) of a triangle polygon is determined by 3 vertices
+			// When there is (A,B,C), as a vector extending from A to B
+			// Vector and vector extending from A to C are both positive direction
+			// If it was (see figure below), the normal vector of triangle ABC is
+			// Becomes front direction (-Z direction).
 			// 
 			//       B-----D
 			//  +Y   |＼　 |
 			//  |    |　＼ |
 			//  |    A-----C
 			//  |
-			//  +------+X (左手座標系　向こう側が+Z)
+			//  +------+X (Left-handed coordinate system, +Z is the far side)
 			//
-			// つまり、+Z方向を向いている視線に対して見える面
-			// (法線ベクトルと視線ベクトルが向き合う)を作ろう
-			// と思ったら、頂点の描画順はA,B,Cという順になる
-			// 必要があります。
-			// この法則に基づいて、もうひとつの△BCDの手前に
-			// 向ける頂点の描画順は、C,B,Dになります。
+			// In other words, the face visible to the line of sight facing the +Z direction
+			// Let's make (normal vector and view vector face each other)
+			// I thought so, but the vertex drawing order is A, B, C
+			// There is a need.
+			// Based on this rule, in front of the other triangle BCD
+			// The drawing order of vertices to face is C, B, D.
 			//	
 			
-			//番号は4角柱でのインデックス順
+			// Order is index order in quadrangular prism
 
-			//外向きポリゴンの作成
+			// Create outward polygon
 			this.polyIndexList[index++] =   i + n;				//4
 			this.polyIndexList[index++] =   i;					//0
 			this.polyIndexList[index++] =   (i + 1) % n + n;	//5
@@ -1501,7 +1501,7 @@ class CylinderObjMan extends Obj3dManBase
 			this.polyIndexList[index++] =   i;					//0
 			this.polyIndexList[index++] =   (i + 1) % n;		//1
 			
-			//内向きポリゴンの作成
+			// Create inward polygon
 			this.polyIndexList[index++] =   i + n;				//4
 			this.polyIndexList[index++] =   (i + 1) % n + n;	//5
 			this.polyIndexList[index++] =   i;					//0
@@ -1512,22 +1512,22 @@ class CylinderObjMan extends Obj3dManBase
 	}
 }
 
-const MAX_Z_POS             = 1000;			//描画許可するZ方向の最大値
-const INVALID_Z_VALUE       = 10000.0;		//無効なZ値
-const DEFAULT_AMBIENT_LIGHT = 0.2;			//デフォルトの環境光の値(R/G/B共通)
-const DEFAULT_DEFUSE_LIGHT  = 0.7;			//デフォルトの拡散光の値(R/G/B共通)
-const DEFAULT_LIGHT_X       = 1.0;			//デフォルトの光源ベクトルのX方向
-const DEFAULT_LIGHT_Y       = -1.0;			//デフォルトの光源ベクトルのY方向
-const DEFAULT_LIGHT_Z       = 1.0;			//デフォルトの光源ベクトルのZ方向
-											//↑座標じゃないよベクトル(方向)だよ
-											//  光源の向いている方向だよ
+const MAX_Z_POS             = 1000;			// Max Z direction value allowed for drawing
+const INVALID_Z_VALUE       = 10000.0;		// Invalid Z value
+const DEFAULT_AMBIENT_LIGHT = 0.2;			// Default ambient light value (Common for R/G/B)
+const DEFAULT_DEFUSE_LIGHT  = 0.7;			// Default diffuse light value (Common for R/G/B)
+const DEFAULT_LIGHT_X       = 1.0;			// Default light source vector X direction
+const DEFAULT_LIGHT_Y       = -1.0;			// Default light source vector Y direction
+const DEFAULT_LIGHT_Z       = 1.0;			// Default light source vector Z direction
+											// ^ It's not coordinates, it's a vector (direction)
+											//  It's the direction the light source is facing
 
 class RenderingMan
 {
-	//コンストラクタ
+	// Constructor
 	constructor(screen,offscreen,algo_label)
 	{
-		//初期化
+		// Initialization
 		this.sc             = screen;
 		this.sc_w           = screen.width;
 		this.sc_h           = screen.height;
@@ -1541,43 +1541,43 @@ class RenderingMan
 		this.mtx_projection = new MatrixMan4();
 		this.mtx_viewport   = new MatrixMan4();
 		
-		this.vEye           = new VectorMan3(0,0,1);					//Z+を向いてる視線ベクトル
-		this.vLight         = new VectorMan3(DEFAULT_LIGHT_X,			//光源方向ベクトル
+		this.vEye           = new VectorMan3(0,0,1);					// View vector facing Z+
+		this.vLight         = new VectorMan3(DEFAULT_LIGHT_X,			// Light source direction vector
 						  					 DEFAULT_LIGHT_Y,
 						  					 DEFAULT_LIGHT_Z);
-		this.vAmbientColor  = new VectorMan3(DEFAULT_AMBIENT_LIGHT,		//環境光色
+		this.vAmbientColor  = new VectorMan3(DEFAULT_AMBIENT_LIGHT,		// Ambient Light Color
 											 DEFAULT_AMBIENT_LIGHT,
 											 DEFAULT_AMBIENT_LIGHT);
-		this.vDiffuseColor = new VectorMan3(DEFAULT_DEFUSE_LIGHT,		//拡散光色
+		this.vDiffuseColor = new VectorMan3(DEFAULT_DEFUSE_LIGHT,		// Diffuse Light Color
 											DEFAULT_DEFUSE_LIGHT,
 											DEFAULT_DEFUSE_LIGHT);
 		
-		//最小・最大X座標値リスト
+		// Min/Max X coordinate value list
 		this.aMinX     = new Array(this.sc_h);
 		this.aMaxX     = new Array(this.sc_h);
 		
-		//各種Zバッファ
+		// Various Z buffers
 		this.aZBuffer  = new Array(this.sc_w * this.sc_h);
 		this.aMinZ     = new Array(this.sc_h);
 		this.aMaxZ     = new Array(this.sc_h);
 		
-		//レンダリング方法を初期化
+		// Initialize rendering method
 		this.setupFlatShading();
 	}
 	
-	//環境光色をセット
+	// Set ambient light color
 	setAmbientLightColor(r,g,b)
 	{
 		this.vAmbientColor  = new VectorMan3(r,g,b);
 	}
 	
-	//拡散光色をセット
+	// Set diffuse light color
 	setDefuseLightColor(r,g,b)
 	{
 		this.vDiffuseColor  = new VectorMan3(r,g,b);
 	}
 	
-	//CanvasのLINE描画で準備する
+	// Prepare with Canvas LINE drawing
 	setupContextLine()
 	{
 		this.funcDrawBegin     = this.drawBegin_context_line;
@@ -1588,35 +1588,35 @@ class RenderingMan
 		this.algo.innerText = "context.lineTo";
 	}
 	
-	//CanvasのLINE描画前処理
+	// Canvas LINE drawing pre-processing
 	drawBegin_context_line(ctx,sc_w,sc_h)
 	{
-		//画面クリア
+		// Screen Clear
 		ctx.clearRect(0,0,sc_w,sc_h);
 		
-		//ワイヤーの色を決める
+		// Determine wire color
 		ctx.strokeStyle = 'lime';
 		
-		//描画登録開始指示
+		// Instruction to start drawing registration
 		ctx.beginPath();
 	}
 	
-	//CanvasのLINE描画後処理
+	// Canvas LINE drawing post-processing
 	drawEnd_context_line(ctx,sc_w,sc_h)
 	{
-		//描画実施指示
+		// Instruction to execute drawing
 		ctx.stroke();
 	}
 	
-	//CanvasのLINE描画処理
+	// Canvas LINE drawing processing
 	drawLine_context_line(ctx,sc_w,sc_h,x1,y1,x2,y2)
 	{
-		//LINE描画
+		// LINE Drawing
 		ctx.moveTo(x1,y1);
 		ctx.lineTo(x2,y2);
 	}
 	
-	//ブレゼンハムのLINE描画で準備する
+	// Prepare with Bresenham LINE drawing
 	setupBresenhamLine()
 	{
 		this.funcDrawBegin     = this.drawBegin_bresenham;
@@ -1627,55 +1627,55 @@ class RenderingMan
 		this.algo.innerText = "bresenham line";
 	}
 	
-	//ブレゼンハムのLINE描画前処理
+	// Bresenham LINE drawing pre-processing
 	drawBegin_bresenham(ctx,sc_w,sc_h)
 	{
-		//高速にクリア
-		let data = this.offsc.data;	//いったんローカル変数に参照を移す
-		data.fill(0);				//0埋めするならforで回すより速い
+		// Fast Clear
+		let data = this.offsc.data;	// Move reference to local variable temporarily
+		data.fill(0);				// Faster than counting with for loop if zero-filling
 		
-		//ワイヤーの色を決める
+		// Determine wire color
 		this.line_color = { r: 0, g: 255, b: 0, a: 255 };
 	}
 	
-	//ブレゼンハムのLINE描画後処理
+	// Bresenham LINE drawing post-processing
 	drawEnd_bresenham(ctx,sc_w,sc_h)
 	{
-		//オフスクリーンを転送
+		// Transfer off-screen
 		ctx.putImageData(this.offsc,0,0);
 	}
 	
-	//ブレゼンハムのLINE描画処理
+	// Bresenham LINE drawing processing
 	drawLine_bresenham(ctx,sc_w,sc_h,x1,y1,x2,y2)
 	{
-		//整数化(重要！　これをやらないとImageDataへの書き込みで失敗する)
+		// Convert to integer (Important! if not done, writing to ImageData will fail)
 		x1 = Math.floor(x1);
 		y1 = Math.floor(y1);
 		x2 = Math.floor(x2);
 		y2 = Math.floor(y2);
 		
-		//パラメータ準備
+		// Parameter preparation
 		let dx   = Math.abs(x2 - x1);
 		let dy   = Math.abs(y2 - y1);
 		let addX = (x1 < x2) ? 1 : -1;
 		let addY = (y1 < y2) ? 1 : -1;
 
-		//クリッピング
+		// Clipping
 		if(((x1 < 0) && (x2 < 0)) || ((x1 >= sc_w) && (x2 >= sc_w)) ||
 		   ((y1 < 0) && (y2 < 0)) || ((y1 >= sc_h) && (y2 >= sc_h)))
 		{	return;	}
 		
 		if(dx > dy)
 		{
-			//Xでループ
+			// Loop by X
 			let diff = Math.floor(dy - dx / 2);
 
 			while(x1 != x2)
 			{
-				//点を描画
+				// Draw Point
 				this.drawPoint_bresenham(sc_w,sc_h,x1,y1,this.line_color);
 
-				//座標更新
+				// Update Coordinates
 				x1 += addX;
 				if(diff >= 0)
 				{
@@ -1687,15 +1687,15 @@ class RenderingMan
 		}
 		else
 		{
-			//Yでループ
+			// Loop by Y
 			let diff = Math.floor(dx - dy / 2);
 
 			while(y1 != y2)
 			{
-				//点を描画
+				// Draw Point
 				this.drawPoint_bresenham(sc_w,sc_h,x1,y1,this.line_color);
 
-				//座標更新
+				// Update Coordinates
 				y1 += addY;
 				if(diff >= 0)
 				{
@@ -1706,14 +1706,14 @@ class RenderingMan
 			}
 		}
 
-		//終点を描画
+		// Draw end point
 		this.drawPoint_bresenham(sc_w,sc_h,x2,y2,this.line_color);
 	}
 	
-	//ブレゼンハムLINE描画用の点描画
+	// Point drawing for Bresenham LINE drawing
 	drawPoint_bresenham(sc_w,sc_h,x,y,color)
 	{
-		//クリッピングして描画
+		// Clip and draw
 		if((x >= 0) && (x < sc_w) && (y >= 0) && (y < sc_h))
 		{
 			const pos = (sc_w << 2) * y + (x << 2);		// = (sc_w * 4) * y + (x * 4)
@@ -1724,7 +1724,7 @@ class RenderingMan
 		}
 	}
 	
-	//ダブルステップブレゼンハムのLINE描画で準備する
+	// Prepare with double-step Bresenham LINE drawing
 	setupDoubleStepBresenhamLine()
 	{
 		this.funcDrawBegin     = this.drawBegin_bresenham;
@@ -1735,106 +1735,106 @@ class RenderingMan
 		this.algo.innerText = "double-step bresenham line";
 	}
 	
-	//ダブルステップブレゼンハムのLINE描画処理
+	// Double-step Bresenham LINE drawing processing
 	drawLine_doublestep_bresenham(ctx,sc_w,sc_h,x1,y1,x2,y2)
 	{
-		//整数化(重要！　これをやらないとImageDataへの書き込みで失敗する)
+		// Convert to integer (Important! if not done, writing to ImageData will fail)
 		x1 = Math.floor(x1);
 		y1 = Math.floor(y1);
 		x2 = Math.floor(x2);
 		y2 = Math.floor(y2);
 		
-		//パラメータ準備
+		// Parameter preparation
 		let dx   = Math.abs(x2 - x1);
 		let dy   = Math.abs(y2 - y1);
 		let addX = (x1 < x2) ? 1 : -1;
 		let addY = (y1 < y2) ? 1 : -1;
-		let e,n,nn; //eは蓄積誤差値
+		let e,n,nn; // e is accumulated error value
 		
-		//クリッピング
+		// Clipping
 		if(((x1 < 0) && (x2 < 0)) || ((x1 >= sc_w) && (x2 >= sc_w)) ||
 		   ((y1 < 0) && (y2 < 0)) || ((y1 >= sc_h) && (y2 >= sc_h)))
 		{	return;	}
 		
-		//完全な横線のとき
+		// When completely horizontal line
 		if(dy == 0)
 		{
-			//両端から進むのでループは差分の半分
+			// Loop is half the difference since proceeding from both ends
 			n = dx >> 1;	//n = dx / 2;
 			
-			//描画ループ
+			// Drawing Loop
 			for(let i = 0;i <= n;++i)
 			{
-				//点を描画
+				// Draw Point
 				this.drawPoint_bresenham(sc_w,sc_h,x1,y1,this.line_color);
 				this.drawPoint_bresenham(sc_w,sc_h,x2,y2,this.line_color);
 				
-				//描画位置を更新
+				// Update drawing position
 				x1 += addX;
 				x2 -= addX;
 			}
 		
-			//描画量が奇数の場合は最後の１ピクセルを描画する
+			// Draw last 1 pixel if drawing amount is odd
 			if((dx & 0x01) == 0)
 			{
-				//点を描画
+				// Draw Point
 				this.drawPoint_bresenham(sc_w,sc_h,x1 - addX,y1,this.line_color);
 			}
 		}
-		//完全な縦線のとき
+		// When completely vertical line
 		else if(dx == 0)
 		{
-			//両端から進むのでループは差分の半分
+			// Loop is half the difference since proceeding from both ends
 			n = dy >> 1;	//n = dy / 2;
 			
-			//描画ループ
+			// Drawing Loop
 			for(let i = 0;i <= n;++i)
 			{
-				//点を描画
+				// Draw Point
 				this.drawPoint_bresenham(sc_w,sc_h,x1,y1,this.line_color);
 				this.drawPoint_bresenham(sc_w,sc_h,x2,y2,this.line_color);
 
-				//描画位置を更新
+				// Update drawing position
 				y1 += addY;
 				y2 -= addY;
 			}
 		
-			//描画量が奇数の場合は最後の１ピクセルを描画する
+			// Draw last 1 pixel if drawing amount is odd
 			if((dy & 0x01) == 0)
 			{
-				//点を描画
+				// Draw Point
 				this.drawPoint_bresenham(sc_w,sc_h,x1,y1 - addY,this.line_color);
 			}
 		}
 		else if(dx >= dy) 
 		{
-			//Ｘについてループする場合
+			// When looping for X
 
-			//誤差値を初期化
+			// Initialize error value
 			e = -dx;
 
-			//ループ回数の算出
+			// Calculation of loop count
 			n = (dx + 1) >> 2;	//n = (dx + 1) / 4;
 
-			//m ＜ 1/2の場合 m = |x2 - x1| / |y2 - y1|
+			// In case m < 1/2, m = |x2 - x1| / |y2 - y1|
 			if((dy << 2) < (dx << 1))
 			{
 				for(let i = 0;i < n;++i)
 				{
-					//誤差値を更新
+					// Update error value
 					e += (dy << 2);	//e += 4dy;
 					
 					if(e < 0)
 					{
-						//●●○
+						// ●●○
 
-						//２ピクセル同時に点を描画
+						// Draw points for 2 pixels simultaneously
 						this.drawPoint_bresenham(sc_w,sc_h,x1,y1,this.line_color);
 						this.drawPoint_bresenham(sc_w,sc_h,x2,y2,this.line_color);
 						this.drawPoint_bresenham(sc_w,sc_h,x1 + addX,y1,this.line_color);
 						this.drawPoint_bresenham(sc_w,sc_h,x2 - addX,y2,this.line_color);
 						
-						//描画位置の更新
+						// Update drawing position
 						x1 += (addX << 1);	//x1 += 2addX;
 						x2 -= (addX << 1);	//x2 -= 2addX;
 					}
@@ -1842,96 +1842,96 @@ class RenderingMan
 					{
 						if(e < (dy << 1))	//if(e < 2dy)
 						{
-							//　　○
-							//●●
+							//    ○
+							// ●●
 
-							//２ピクセル同時に点を描画
+							// Draw points for 2 pixels simultaneously
 							this.drawPoint_bresenham(sc_w,sc_h,x1,y1,this.line_color);
 							this.drawPoint_bresenham(sc_w,sc_h,x2,y2,this.line_color);
 							this.drawPoint_bresenham(sc_w,sc_h,x1 + addX,y1,this.line_color);
 							this.drawPoint_bresenham(sc_w,sc_h,x2 - addX,y2,this.line_color);
 							
-							//描画位置を更新
+							// Update drawing position
 							x1 += (addX << 1);	//x1 += 2addX;
 							x2 -= (addX << 1);	//x2 -= 2addX;
 							y1 += addY;
 							y2 -= addY;
 							
-							//誤差値を更新
+							// Update error value
 							e -= (dx << 1);		//e -= 2dx;
 						}
 						else
 						{
-							//　●○
-							//●
+							//  ●○
+							// ●
 
-							//２ピクセル同時に描画
+							// Draw 2 pixels simultaneously
 
-							//１ピクセル目を描画
+							// Draw 1st pixel
 							this.drawPoint_bresenham(sc_w,sc_h,x1,y1,this.line_color);
 							this.drawPoint_bresenham(sc_w,sc_h,x2,y2,this.line_color);
 							
-							//描画位置の更新
+							// Update drawing position
 							y1 += addY;
 							y2 -= addY;
 							
-							//２ピクセル目を描画
+							// Draw 2nd pixel
 							this.drawPoint_bresenham(sc_w,sc_h,x1 + addX,y1,this.line_color);
 							this.drawPoint_bresenham(sc_w,sc_h,x2 - addX,y2,this.line_color);
 
-							//描画位置を更新
+							// Update drawing position
 							x1 += (addX << 1);	//x1 += 2addX; 
 							x2 -= (addX << 1);	//x2 -= 2addX;
 								
-							//誤差値を更新
+							// Update error value
 							e -= (dx << 1);		//e -= 2dx;
 						}
 					}
 				}
 			}
-			// 1/2 ≦ m ≦ 1の場合 m = |y2 - y1| / |x2 - x1|
+			// Case 1/2 ≦ m ≦ 1: m = |y2 - y1| / |x2 - x1|
 			else
 			{
 				for(let i = 0;i < n;++i)
 				{
-					//誤差値を更新
+					// Update error value
 					e += ((dy << 2) - (dx << 1));	//e += 4dy - 2dx;
 					
 					if(e >= 0)
 					{	
-						//　　○
-						//　●
-						//●
+						//    ○
+						//  ●
+						// ●
 
-						//２ピクセル同時に描画
+						// Draw 2 pixels simultaneously
 						this.drawPoint_bresenham(sc_w,sc_h,x1,y1,this.line_color);
 						this.drawPoint_bresenham(sc_w,sc_h,x2,y2,this.line_color);
 						this.drawPoint_bresenham(sc_w,sc_h,x1 + addX,y1 + addY,this.line_color);
 						this.drawPoint_bresenham(sc_w,sc_h,x2 - addX,y2 - addY,this.line_color);
 
-						//描画位置を更新
+						// Update drawing position
 						x1 += (addX << 1);	//x1 += 2addX;
 						x2 -= (addX << 1);	//x2 -= 2addX;
 						y1 += (addY << 1);	//y1 += 2addY;
 						y2 -= (addY << 1);	//y2 -= 2addY;
 						
-						//誤差値を更新
+						// Update error value
 						e -= (dx << 1);		//e -= 2dx;
 					}
 					else
 					{
 						if(e < ((dy << 1) - (dx << 1)))	//if(e < 2dy - 2dx)
 						{
-							//　　○
-							//●●
+							//    ○
+							// ●●
 
-							//２ピクセル同時に描画
+							// Draw 2 pixels simultaneously
 							this.drawPoint_bresenham(sc_w,sc_h,x1,y1,this.line_color);
 							this.drawPoint_bresenham(sc_w,sc_h,x2,y2,this.line_color);
 							this.drawPoint_bresenham(sc_w,sc_h,x1 + addX,y1,this.line_color);
 							this.drawPoint_bresenham(sc_w,sc_h,x2 - addX,y2,this.line_color);
 
-							//描画位置を更新
+							// Update drawing position
 							x1 += (addX << 1);	//x1 += 2addX;
 							x2 -= (addX << 1);	//x2 -= 2addX;
 							y1 += addY;
@@ -1939,24 +1939,24 @@ class RenderingMan
 						}
 						else
 						{
-							//　●○
-							//●
+							//  ●○
+							// ●
 
-							//２ピクセル同時に描画
+							// Draw 2 pixels simultaneously
 							
-							//１ピクセル目を描画
+							// Draw 1st pixel
 							this.drawPoint_bresenham(sc_w,sc_h,x1,y1,this.line_color);
 							this.drawPoint_bresenham(sc_w,sc_h,x2,y2,this.line_color);
 
-							//描画位置を更新
+							// Update drawing position
 							y1 += addY;
 							y2 -= addY;
 							
-							//２ピクセル目を描画
+							// Draw 2nd pixel
 							this.drawPoint_bresenham(sc_w,sc_h,x1 + addX,y1,this.line_color);
 							this.drawPoint_bresenham(sc_w,sc_h,x2 - addX,y2,this.line_color);
 
-							//描画位置を更新
+							// Update drawing position
 							x1 += (addX << 1);	//x1 += 2addX;
 							x2 -= (addX << 1);	//x2 -= 2addX;
 						}
@@ -1964,63 +1964,63 @@ class RenderingMan
 				}
 			}
 
-			// ４ピクセル未満の端数分を描画
+			// Draw fractional part less than 4 pixels
 			
-			//ループ回数を算出
+			// Calculate loop count
 			n = ((dx + 1) % 4);
 			
 			for(let i = 0;i < n;++i)
 			{
-				//点を描画
+				// Draw Point
 				this.drawPoint_bresenham(sc_w,sc_h,x1,y1,this.line_color);
 				
-				//描画位置を更新
+				// Update drawing position
 				x1 += addX;
 				
-				//誤差値を更新
+				// Update error value
 				e += (dy << 1);		//e += 2dy;
 
 				if(e >= 0)
 				{
-					//描画位置を更新
+					// Update drawing position
 					y1 += addY;
 
-					//誤差値を更新
+					// Update error value
 					e -= (dx << 1);		//e -= 2dx;
 				}
 			}
 		}
 		else
 		{
-			//Ｙについてループ
+			// Loop for Y
 
-			//誤差値を初期化
+			// Initialize error value
 			e = -dy;
 
-			//ループ回数を算出
+			// Calculate loop count
 			n = (dy + 1) >> 2;	//n = (dy + 1) / 4;
 
-			//m ＜ 1/2の場合 m = |y2 - y1| / |x2 - x1|
+			// In case m < 1/2, m = |y2 - y1| / |x2 - x1|
 			if(dy >= (dx << 1))
 			{
 				for(let i = 0; i < n;++i)
 				{
-					//誤差値を更新
+					// Update error value
 					e += (dx << 2);	//e += 4dx;
 					
 					if(e < 0)
 					{
 						//○
-						//●
-						//● 
+						// ●
+						// ● 
 						
-						//２ピクセル同時に描画
+						// Draw 2 pixels simultaneously
 						this.drawPoint_bresenham(sc_w,sc_h,x1,y1,this.line_color);
 						this.drawPoint_bresenham(sc_w,sc_h,x2,y2,this.line_color);
 						this.drawPoint_bresenham(sc_w,sc_h,x1,y1 + addY,this.line_color);
 						this.drawPoint_bresenham(sc_w,sc_h,x2,y2 - addY,this.line_color);
 						
-						//描画位置を更新
+						// Update drawing position
 						y1 += (addY << 1);	//y1 += 2addY;
 						y2 -= (addY << 1);	//y2 -= 2addY;
 					}
@@ -2028,99 +2028,99 @@ class RenderingMan
 					{
 						if(e < (dx << 1))	//if(e < 2dx)
 						{
-							//　○
-							//●
-							//●
+							//  ○
+							// ●
+							// ●
 
-							//２ピクセル同時に描画
+							// Draw 2 pixels simultaneously
 							this.drawPoint_bresenham(sc_w,sc_h,x1,y1,this.line_color);
 							this.drawPoint_bresenham(sc_w,sc_h,x2,y2,this.line_color);
 							this.drawPoint_bresenham(sc_w,sc_h,x1,y1 + addY,this.line_color);
 							this.drawPoint_bresenham(sc_w,sc_h,x2,y2 - addY,this.line_color);
 
-							//描画位置を更新
+							// Update drawing position
 							y1 += (addY << 1);	//y1 += 2addY;
 							y2 -= (addY << 1);	//y2 -= 2addY;
 							x1 += addX;
 							x2 -= addX;
 							
-							//誤差値を更新
+							// Update error value
 							e -= (dy << 1);		//e -= 2dy;
 						}
 						else
 						{
-							//　○
-							//　●
-							//●
+							//  ○
+							//  ●
+							// ●
 
-							//２ピクセル同時に描画
+							// Draw 2 pixels simultaneously
 
-							//１ピクセル目を描画
+							// Draw 1st pixel
 							this.drawPoint_bresenham(sc_w,sc_h,x1,y1,this.line_color);
 							this.drawPoint_bresenham(sc_w,sc_h,x2,y2,this.line_color);
 							
-							//描画位置を更新
+							// Update drawing position
 							x1 += addX;
 							x2 -= addX;
 							
-							//２ピクセル目を描画
+							// Draw 2nd pixel
 							this.drawPoint_bresenham(sc_w,sc_h,x1,y1 + addY,this.line_color);
 							this.drawPoint_bresenham(sc_w,sc_h,x2,y2 - addY,this.line_color);
 							
-							//描画位置を更新
+							// Update drawing position
 							y1 += (addY << 1);	//y1 += 2addY;
 							y2 -= (addY << 1);	//y2 -= 2addY;
 							
-							//誤差値を更新
+							// Update error value
 							e -= (dy << 1);		//e -= 2dy;
 						}
 					}
 				}
 			}
-			// 1/2 ≦ m ≦ 1の場合 m = |y2 - y1| / |x2 - x1|
+			// Case 1/2 ≦ m ≦ 1: m = |y2 - y1| / |x2 - x1|
 			else
 			{
 				for(let i = 0;i < n;++i)
 				{
-					//誤差値の更新
+					// Update error value
 					e += (dx << 2) - (dy << 1);		//e += (4dx - 2dy);
 					
 					if(e >= 0)
 					{
-						//　　○
-						//　●
-						//●
+						//    ○
+						//  ●
+						// ●
 
-						//２ピクセル同時に描画
+						// Draw 2 pixels simultaneously
 						this.drawPoint_bresenham(sc_w,sc_h,x1,y1,this.line_color);
 						this.drawPoint_bresenham(sc_w,sc_h,x2,y2,this.line_color);
 						this.drawPoint_bresenham(sc_w,sc_h,x1 + addX,y1 + addY,this.line_color);
 						this.drawPoint_bresenham(sc_w,sc_h,x2 - addX,y2 - addY,this.line_color);
 						
-						//描画位置の更新
+						// Update drawing position
 						x1 += (addX << 1);	//x1 += 2addX;
 						x2 -= (addX << 1);	//x2 -= 2addX;
 						y1 += (addY << 1);	//y1 += 2addY;
 						y2 -= (addY << 1);	//y2 -= 2addY;
 						
-						//誤差値の更新
+						// Update error value
 						e -= (dy << 1);		//e -= 2dy;
 					}
 					else
 					{
 						if(((dx << 1) - (dy << 1)) > e)	//if((2dx - 2dy) > e)
 						{
-							//　○
-							//●　
-							//●
+							//  ○
+							// ●　
+							// ●
 
-							//２ピクセル同時に描画
+							// Draw 2 pixels simultaneously
 							this.drawPoint_bresenham(sc_w,sc_h,x1,y1,this.line_color);
 							this.drawPoint_bresenham(sc_w,sc_h,x2,y2,this.line_color);
 							this.drawPoint_bresenham(sc_w,sc_h,x1,y1 + addY,this.line_color);
 							this.drawPoint_bresenham(sc_w,sc_h,x2,y2 - addY,this.line_color);
 
-							//描画位置を更新
+							// Update drawing position
 							y1 += (addY << 1);	//y1 += 2addY;
 							y2 -= (addY << 1);	//y2 -= 2addY;
 							x1 += addX;
@@ -2128,25 +2128,25 @@ class RenderingMan
 						}
 						else
 						{
-							//　○
-							//　●
-							//●
+							//  ○
+							//  ●
+							// ●
 
-							//２ピクセル同時に描画
+							// Draw 2 pixels simultaneously
 
-							//１ピクセル目を描画
+							// Draw 1st pixel
 							this.drawPoint_bresenham(sc_w,sc_h,x1,y1,this.line_color);
 							this.drawPoint_bresenham(sc_w,sc_h,x2,y2,this.line_color);
 
-							//描画位置を更新
+							// Update drawing position
 							x1 += addX;
 							x2 -= addX;
 							
-							//２ピクセル目を描画
+							// Draw 2nd pixel
 							this.drawPoint_bresenham(sc_w,sc_h,x1,y1 + addY,this.line_color);
 							this.drawPoint_bresenham(sc_w,sc_h,x2,y2 - addY,this.line_color);
 							
-							//描画位置を更新
+							// Update drawing position
 							y1 += (addY << 1);	//y1 += 2addY;
 							y2 -= (addY << 1);	//y2 -= 2addY;
 						}
@@ -2154,35 +2154,35 @@ class RenderingMan
 				}
 			}
 
-			// ４ピクセル未満の端数分を描画 
+			// Draw fractional part less than 4 pixels 
 			
-			//ループ回数を算出
+			// Calculate loop count
 			n = ((dy + 1) % 4);
 
 			for(let i = 0;i < n;++i)
 			{
-				//点を描画
+				// Draw Point
 				this.drawPoint_bresenham(sc_w,sc_h,x1,y1,this.line_color);
 				
-				//描画位置を更新
+				// Update drawing position
 				y1 += addY;
 
-				//誤差値を更新
+				// Update error value
 				e += (dx << 1);		//e += 2dx;
 			
 				if(e >= 0)
 				{
-					//描画位置を更新
+					// Update drawing position
 					x1 += addX;
 
-					//誤差値を更新
+					// Update error value
 					e -= (dy << 1);	//e -= 2dy;
 				}
 			}
 		}
 	}
 	
-	//アンチエイリアス付きブレゼンハムのLINE描画で準備する
+	// Prepare with anti-aliased Bresenham LINE drawing
 	setupBresenhamLineAA()
 	{
 		this.funcDrawBegin = this.drawBegin_bresenham;
@@ -2194,7 +2194,7 @@ class RenderingMan
 	
 	getPixelColor(sc_w,sc_h,x,y)
 	{
-		//指定の座標の色を取得
+		// Get color of specified coordinate
 		
 		let color = { r:0, g:0, b:0, a:0 };
 		if((x >= 0) && (x < sc_w) && (y >= 0) && (y < sc_h))
@@ -2211,14 +2211,14 @@ class RenderingMan
 
 	calcAlphaBrendColor(dst_color,src_color,alpha)
 	{
-		//αブレンディング処理した色を計算
+		// Calculate color processed with alpha blending
 		//
-		// dst_color	描画先にある色
-		// src_color	描画色
-		// alpha		α値（固定小数の小数部16bit)
+		// dst_color	Color at the drawing destination
+		// src_color	Drawing color
+		// alpha		Alpha value (16bit fractional part of fixed point)
 		//
 		
-		//描画先にある色を(1 - α)、描画色をαでブレンド
+		// Blend color at drawing destination with (1 - alpha) and drawing color with alpha
 		let color = { r:0, g:0, b:0, a:255 };
 		
 		//
@@ -2235,16 +2235,16 @@ class RenderingMan
 		return color;
 	}
 
-	//アンチエイリアス付きブレゼンハムのLINE描画処理
+	// Anti-aliased Bresenham LINE drawing processing
 	drawLine_bresenham_aa(ctx,sc_w,sc_h,x1,y1,x2,y2)
 	{
-		//整数化(重要！　これをやらないとImageDataへの書き込みで失敗する)
+		// Convert to integer (Important! if not done, writing to ImageData will fail)
 		x1 = Math.floor(x1);
 		y1 = Math.floor(y1);
 		x2 = Math.floor(x2);
 		y2 = Math.floor(y2);
 		
-		//パラメータ準備
+		// Parameter preparation
 		const dx   = Math.abs(x2 - x1);
 		const dy   = Math.abs(y2 - y1);
 		const addX = (x1 < x2) ? 1 : -1;
@@ -2252,134 +2252,134 @@ class RenderingMan
 		let x,y,alpha;
 		let alpha_color = { r: this.line_color.r, g: this.line_color.g, b: this.line_color.b, a: 0 };
 		
-		//クリッピング
+		// Clipping
 		if(((x1 < 0) && (x2 < 0)) || ((x1 >= sc_w) && (x2 >= sc_w)) ||
 		   ((y1 < 0) && (y2 < 0)) || ((y1 >= sc_h) && (y2 >= sc_h)))
 		{	return;	}
 		
-		//完全な横線のとき
+		// When completely horizontal line
 		if(dy == 0)
 		{
-			//両端から進むのでループは差分の半分
+			// Loop is half the difference since proceeding from both ends
 			const n = dx >> 1;	//n = dx / 2;
 			
-			//描画ループ
+			// Drawing Loop
 			for(let i = 0;i <= n;++i)
 			{
-				//点を描画
+				// Draw Point
 				this.drawPoint_bresenham(sc_w,sc_h,x1,y1,this.line_color);
 				this.drawPoint_bresenham(sc_w,sc_h,x2,y2,this.line_color);
 				
-				//描画位置を更新
+				// Update drawing position
 				x1 += addX;
 				x2 -= addX;
 			}
 		
-			//描画量が奇数の場合は最後の１ピクセルを描画する
+			// Draw last 1 pixel if drawing amount is odd
 			if((dx & 0x01) == 0)
 			{
-				//点を描画
+				// Draw Point
 				this.drawPoint_bresenham(sc_w,sc_h,x1 - addX,y1,this.line_color);
 			}
 		}
-		//完全な縦線のとき
+		// When completely vertical line
 		else if(dx == 0)
 		{
-			//両端から進むのでループは差分の半分
+			// Loop is half the difference since proceeding from both ends
 			const n = dy >> 1;	//n = dy / 2;
 			
-			//描画ループ
+			// Drawing Loop
 			for(let i = 0;i <= n;++i)
 			{
-				//点を描画
+				// Draw Point
 				this.drawPoint_bresenham(sc_w,sc_h,x1,y1,this.line_color);
 				this.drawPoint_bresenham(sc_w,sc_h,x2,y2,this.line_color);
 
-				//描画位置を更新
+				// Update drawing position
 				y1 += addY;
 				y2 -= addY;
 			}
 		
-			//描画量が奇数の場合は最後の１ピクセルを描画する
+			// Draw last 1 pixel if drawing amount is odd
 			if((dy & 0x01) == 0)
 			{
-				//点を描画
+				// Draw Point
 				this.drawPoint_bresenham(sc_w,sc_h,x1,y1 - addY,this.line_color);
 			}
 		}
 		else if(dx > dy)
 		{
-			//Xでループ
+			// Loop by X
 			
-			//Y座標だけ固定小数化
+			// Convert only Y coordinate to fixed point
 			y1 = y1 << 16;
 			y2 = y2 << 16;
 			
-			//固定小数の誤差値を算出
+			// Calculate fixed-point error value
 			let e = (y2 - y1) / dx;
 
 			while(x1 != x2)
 			{
-				//α値を取得
+				// Get alpha value
 				alpha = (y1 & 0xFFFF);
 				
-				//Y座標を整数にする
+				// Convert Y coordinate to integer
 				y = y1 >> 16;
 
-				//ライン部を描画
+				// Draw line part
 				const color_line = this.calcAlphaBrendColor(this.getPixelColor(sc_w,sc_h,x1,y),this.line_color,0x10000-alpha);
 				this.drawPoint_bresenham(sc_w,sc_h,x1,y,color_line);
 
-				//アンチエイリアス部を描画
+				// Draw anti-aliased part
 				const color_anti = this.calcAlphaBrendColor(this.getPixelColor(sc_w,sc_h,x1,y+1),this.line_color,alpha);
 				this.drawPoint_bresenham(sc_w,sc_h,x1,y+1,color_anti);
 
-				//座標更新
+				// Update Coordinates
 				x1 += addX;
 				y1 += e;
 			}
 			
-			//終点を描画
+			// Draw end point
 			this.drawPoint_bresenham(sc_w,sc_h,x2,(y2 >> 16),this.line_color);
 		}
 		else
 		{
-			//Yでループ
+			// Loop by Y
 			
-			//X座標だけ固定小数化
+			// Convert only X coordinate to fixed point
 			x1 = x1 << 16;
 			x2 = x2 << 16;
 			
-			//固定小数の誤差値を算出
+			// Calculate fixed-point error value
 			let e = (x2 - x1) / dy;
 
 			while(y1 != y2)
 			{
-				//α値を取得
+				// Get alpha value
 				alpha = (x1 & 0xFFFF);
 				
-				//X座標を整数にする
+				// Convert X coordinate to integer
 				x = x1 >> 16;
 				
-				//ライン部を描画
+				// Draw line part
 				const color_line = this.calcAlphaBrendColor(this.getPixelColor(sc_w,sc_h,x,y1),this.line_color,0x10000-alpha);
 				this.drawPoint_bresenham(sc_w,sc_h,x,y1,color_line);
 
-				//アンチエイリアス部を描画
+				// Draw anti-aliased part
 				const color_anti = this.calcAlphaBrendColor(this.getPixelColor(sc_w,sc_h,x+1,y1),this.line_color,alpha);
 				this.drawPoint_bresenham(sc_w,sc_h,x+1,y1,color_anti);
 
-				//座標更新
+				// Update Coordinates
 				x1 += e;
 				y1 += addY;
 			}
 			
-			//終点を描画
+			// Draw end point
 			this.drawPoint_bresenham(sc_w,sc_h,(x2 >> 16),y2,this.line_color);
 		}
 	}
 	
-	//フラットシェーディングで準備する
+	// Prepare with flat shading
 	setupFlatShading()
 	{
 		this.funcDrawBegin     = this.drawBegin_flatshading;
@@ -2390,143 +2390,143 @@ class RenderingMan
 		this.algo.innerText = "Flat Shading";
 	}
 	
-	//フラットシェーディング描画前処理
+	// Flat shading drawing pre-processing
 	drawBegin_flatshading(ctx,sc_w,sc_h)
 	{
-		//高速にクリア
-		let data = this.offsc.data;	//いったんローカル変数に参照を移す
-		data.fill(0);				//0埋めするならforで回すより速い
+		// Fast Clear
+		let data = this.offsc.data;	// Move reference to local variable temporarily
+		data.fill(0);				// Faster than counting with for loop if zero-filling
 		
-		//Zバッファクリア
+		// Clear Z buffer
 		this.aZBuffer.fill(INVALID_Z_VALUE);
 	}
 	
 	
-	//ワールド変換行列をセット
+	// Set World Transformation Matrix
 	setWorldMatrix(m)
 	{
 		this.mtx_world.copy(m);
 	}
 	
-	//ビュー変換行列をセット
+	// Set View Transformation Matrix
 	setViewMatrix(m)
 	{
 		this.mtx_view.copy(m);
 	}
 	
-	//射影変換行列をセット
+	// Set Projection Transformation Matrix
 	setProjectionMatrix(m)
 	{
 		this.mtx_projection.copy(m);
 	}
 	
-	//ビューポート変換行列をセット
+	// Set Viewport Transformation Matrix
 	setViewPortMatrix(m)
 	{
 		this.mtx_viewport.copy(m);
 	}
 	
-	//描画前処理
+	// Pre-drawing processing
 	drawBegin()
 	{
 		this.funcDrawBegin(this.sc_ctx,this.sc_w,this.sc_h);
 	}
 	
-	//描画後処理
+	// Post-drawing processing
 	drawEnd()
 	{
 		this.funcDrawEnd(this.sc_ctx,this.sc_w,this.sc_h);
 	}
 	
-	//プリミティブの描画
+	// Draw Primitives
 	drawIndexedPrimitive(vertex_list,vertex_count,index_list,primitive_count)
 	{
 		//
-		// vertex_list		オブジェクトの頂点データリスト
-		// vertex_count		頂点リストの個数
-		// index_list		頂点順番リスト
-		// primitive_count	プリミティブの数
-		//					1プリミティブは3頂点の三角形なので
-		//					頂点順番リストの個数を3で割った数
+		// vertex_list		Object vertex data list
+		// vertex_count		Number of items in vertex list
+		// index_list		Vertex order list
+		// primitive_count	Number of primitives
+		//					Since one primitive is a triangle with 3 vertices
+		//					Number of vertex order lists divided by 3
 		//
 
-		//マスター行列を作成
+		// Create Master Matrix
 		let m = this.mtx_master;
 		m.initialize();
-		m.mul(this.mtx_world);		//ローカル座標の原点をワールド座標での
-									//位置に変換
-		m.mul(this.mtx_view)		//カメラの位置に合わせてワールド全体を
-									//移動・回転させる
+		m.mul(this.mtx_world);		// Origin of local coordinates in world coordinates
+									// Convert to position
+		m.mul(this.mtx_view)		// Adjust entire world to camera position
+									// Move/Rotate
 		
-		//座標変換と射影・ViewPort変換
+		// Coordinate Transformation and Projection/ViewPort Transformation
 		let dst_vertex_list = [];
 		
 		for(let i = 0;i < vertex_count;++i)
 		{
-			//座標変換
+			// Coordinate Transformation
 			//
-			//各3Dオブジェクトのローカル座標系からワールド座標系
-			//でのカメラから見えている風景になるように座標を変換する
+			// From local coordinate system of each 3D object to world coordinate system
+			// Transform coordinates so it becomes scenery seen from camera at
 			dst_vertex_list.push( new VertexMan());
 			dst_vertex_list[i].copy(vertex_list[i]);
 			dst_vertex_list[i].vv.mul_matrix(m);
 			
-			//実際に描画するスクリーンの座標系に変換
-			//(3Dオブジェクトの座標系はY座標のプラス方向が上向き
-			// だが、描画先のCanvasの座標系はY方向のプラス方向が
-			// 下向きになっているのでそれを変換するのと、実際の
-			// 描画先の表示範囲の幅・高さのピクセル数に合わせて
-			// 拡大縮小させる)		
+			// Trace to coordinate system of screen actually drawing
+			// (3D object coordinate system has positive Y direction upwards
+			// However, the coordinate system of the drawing destination Canvas has the positive Y direction
+			// Since it is facing down, convert it, and the actual
+			// According to the number of pixels of width and height of the display range of drawing destination
+			// Scale)		
 
-			//射影変換
+			// Projection Transformation
 			//
-			//射影変換で3D座標を2Dのスクリーン座標に変換。
-			//この射影変換では、視点からの見える範囲(視錘台)で区切って座標を正規化
-			//します。											
-			//これによって、見える範囲のX/Y/Zの値の範囲が-1.0～1.0に変換されるので、
-			//次のViewPort変換によって、描画先画面解像度に合わせて座標変換する必要
-			//があります。
+			// Convert 3D coordinates to 2D screen coordinates with projection transformation.
+			// In this projection transformation, normalize coordinates by delimiting visible range (frustum) from viewpoint
+			// Do.											
+			// By this, range of X/Y/Z values in visible range is converted to -1.0 - 1.0,
+			// Need to transform coordinates according to drawing destination screen resolution by next ViewPort transformation
+			// There is.
 			//
 			dst_vertex_list[i].vv.mul_matrix(this.mtx_projection);
 			
-			//射影変換したX/Y座標をwで割るとX/Yのスケーリングが完了します
+			// Dividing projected X/Y coordinates by w completes X/Y scaling
 			dst_vertex_list[i].vv.x /= dst_vertex_list[i].vv.w;
 			dst_vertex_list[i].vv.y /= dst_vertex_list[i].vv.w;
-			//スケーリング後はwの値が必要ないので1.0に初期化
+			// Since w value is not needed after scaling, initialize to 1.0
 			dst_vertex_list[i].vv.w = 1.0;
 
-			//ViewPort変換
+			// ViewPort Transformation
 			//
-			//Y座標の方向をスクリーン座標系に合わせるのと、X/Y/Zの各座標値を-1.0～1.0
-			//の範囲から画面の幅・高さのピクセル数に変換します。
+			// Matching Y coordinate direction to screen coordinate system, and X/Y/Z coordinate values to -1.0 to 1.0
+			// Convert from range of to number of pixels of screen width/height.
 			dst_vertex_list[i].vv.mul_matrix(this.mtx_viewport);
 		}
 
-		//ポリゴンの描画
+		// Draw Polygon
 		
 		this.funcDrawPrimitive(dst_vertex_list,index_list,primitive_count);
 
 	}
 	
-	//ポリゴンをワイヤーフレームで描画
+	// Draw polygon in wireframe
 	drawPolygonWithWireframe(vertex_list,index_list,primitive_count)
 	{
-		//プリミティブを順番に描画
+		// Draw primitives in order
 		let point_index = 0;
 		while(primitive_count > 0)
 		{
-			//ワイヤーフレームで三角形を描画
+			// Draw triangle in wireframe
 
 			let i1 = index_list[point_index    ];
 			let i2 = index_list[point_index + 1];
 			let i3 = index_list[point_index + 2];
 
-			//視点(カメラの位置)よりもZ座標が後ろのものは省く
+			// Omit items with Z coordinate behind viewpoint (camera position)
 			//
-			//※ビュー(カメラ)変換行列を通ってきた座標は、視点(カメラの位置)
-			//  の座標が(x,y,z)=(0.0,0.0,0.0)として変換されているので、Zが負の
-			//  値になっているということは、カメラよりも後ろに位置しているという
-			//  ことになります。
+			// * Coordinates passed through View (Camera) transformation matrix are viewpoint (camera position)
+			//  Because the coordinates are transformed as (x,y,z)=(0.0,0.0,0.0), Z is negative
+			//  Being a value means it is located behind the camera
+			//  This will be the case.
 			//
 			if(((vertex_list[i1].vv.z > 0.0) ||
 			    (vertex_list[i2].vv.z > 0.0) ||
@@ -2536,7 +2536,7 @@ class RenderingMan
 			    (vertex_list[i3].vv.z < MAX_Z_POS))
 			  )
 			{
-				//三角形を描画(ブレゼンハム)
+				// Draw triangle (Bresenham)
 				this.funcDrawLine(this.sc_ctx,this.sc_w,this.sc_h,
 								  vertex_list[i1].vv.x,vertex_list[i1].vv.y,
 						   		  vertex_list[i2].vv.x,vertex_list[i2].vv.y);
@@ -2550,23 +2550,23 @@ class RenderingMan
 								  vertex_list[i1].vv.x,vertex_list[i1].vv.y);
 			}
 
-			//インデックスを更新
+			// Update index
 			point_index += DEF_VERTEX_NUM_FOR_PRIMITIVE;
 
-			//プリミティブを減らす
+			// Reduce Primitives
 			primitive_count--;
 		}
 	}
 	
-	//三角ポリゴンの法線ベクトルを求める(左手座標系)
+	// Calculate normal vector of triangle polygon (left-handed coordinate system)
 	getNormalVectorFromPolygon(v1,v2,v3)
 	{
 		let n = new VectorMan3();
 		let a = new VectorMan3();
 		let b = new VectorMan3();
 
-		//頂点v1から頂点v2へ伸びるベクトルaと
-		//頂点v1から頂点v3へ伸びるベクトルbを求める
+		// Vector a extending from vertex v1 to vertex v2 and
+		// Calculate vector b extending from vertex v1 to vertex v3
 		a.x = v2.x - v1.x;
 		a.y = v2.y - v1.y;
 		a.z = v2.z - v1.z;
@@ -2574,18 +2574,18 @@ class RenderingMan
 		b.y = v3.y - v1.y;
 		b.z = v3.z - v1.z;
 
-		//ベクトルa,bの外積をとると、ベクトルa,bで成る
-		//平面に垂直なベクトルnが得られます。
+		// Taking cross product of vectors a,b results in
+		// Vector n perpendicular to plane is obtained.
 		n.crossProduct(a,b);
 
-		//このベクトルを単位ベクトル化したものが頂点v1,v2,v3から
-		//なる三角形ポリゴンの法線ベクトルとなります
+		// The unit vector version of this vector is from vertices v1, v2, v3
+		// Becomes normal vector of triangle polygon that becomes
 		n.normalize();
 
 		return n;
 	}
 	
-	//フラットシェーディング用スキャンライン(エッジチェック　ブレゼンハム版)
+	// Scanline for flat shading (Edge check Bresenham version)
 	scanlineForFlat(v1,v2)
 	{
 		let   x1   = Math.floor(v1.x);
@@ -2599,17 +2599,17 @@ class RenderingMan
 		
 		if(dx > dy)
 		{
-			//Xでループ
+			// Loop by X
 			let diff = Math.floor(dy - dx / 2);
 			let addZ = (v2.z - v1.z) / dx;
 			let Z    = v1.z;
 
 			while(x1 != x2)
 			{
-				//Y範囲チェック
+				// Y range check
 				if((y1 >= 0) && (y1 < this.sc_h))
 				{
-					//値書き込み
+					// Write value
 					if(this.aMinX[y1] > x1)
 					{
 						this.aMinX[y1] = x1;
@@ -2622,7 +2622,7 @@ class RenderingMan
 					}
 				}
 
-				//座標更新
+				// Update Coordinates
 				x1 += addX;
 				if(diff >= 0)
 				{
@@ -2635,17 +2635,17 @@ class RenderingMan
 		}
 		else
 		{
-			//Yでループ
+			// Loop by Y
 			let diff = Math.floor(dx - dy / 2);
 			let addZ = (v2.z - v1.z) / dy;
 			let Z    = v1.z;
 			
 			while(y1 != y2)
 			{
-				//Y範囲チェック
+				// Y range check
 				if((y1 >= 0) && (y1 < this.sc_h))
 				{
-					//値書き込み
+					// Write value
 					if(this.aMinX[y1] > x1)
 					{
 						this.aMinX[y1] = x1;
@@ -2658,7 +2658,7 @@ class RenderingMan
 					}
 				}
 
-				//座標更新
+				// Update Coordinates
 				y1 += addY;
 				if(diff >= 0)
 				{
@@ -2670,7 +2670,7 @@ class RenderingMan
 			}
 		}
 
-		//終点をチェック
+		// Check end point
 		if((y2 >= 0) && (y2 < this.sc_h))
 		{
 			if(this.aMinX[y2] > x2)
@@ -2686,25 +2686,25 @@ class RenderingMan
 		}
 	}
 	
-	//ポリゴンをフラットシェーディングで描画
+	// Draw polygon with flat shading
 	drawPolygonWithFlatShading(vertex_list,index_list,primitive_count)
 	{
-		//プリミティブを順番に描画
+		// Draw primitives in order
 		let point_index = 0;
 		while(primitive_count > 0)
 		{
-			//フラットシェーディングで三角形ポリゴンを描画
+			// Draw triangle polygon with flat shading
 			
 			let i1 = index_list[point_index    ];
 			let i2 = index_list[point_index + 1];
 			let i3 = index_list[point_index + 2];
 
-			//視点(カメラの位置)よりもZ座標が後ろのものは省く
+			// Omit items with Z coordinate behind viewpoint (camera position)
 			//
-			//※ビュー(カメラ)変換行列を通ってきた座標は、視点(カメラの位置)
-			//  の座標が(x,y,z)=(0.0,0.0,0.0)として変換されているので、Zが負の
-			//  値になっているということは、カメラよりも後ろに位置しているという
-			//  ことになります。
+			// * Coordinates passed through View (Camera) transformation matrix are viewpoint (camera position)
+			//  Because the coordinates are transformed as (x,y,z)=(0.0,0.0,0.0), Z is negative
+			//  Being a value means it is located behind the camera
+			//  This will be the case.
 			//
 			if(((vertex_list[i1].vv.z > 0.0) ||
 			    (vertex_list[i2].vv.z > 0.0) ||
@@ -2714,7 +2714,7 @@ class RenderingMan
 			    (vertex_list[i3].vv.z < MAX_Z_POS))
 			  )
 			{
-				//そもそも画面の範囲内にいない場合はスキップ
+				// Skip if not in screen range in the first place
 				const x1 = Math.abs(vertex_list[i1].vv.x);
 				const x2 = Math.abs(vertex_list[i2].vv.x);
 				const x3 = Math.abs(vertex_list[i3].vv.x);
@@ -2725,16 +2725,16 @@ class RenderingMan
 				if(((x1 >= this.sc_w) && (x2 >= this.sc_w) && (x3 >= this.sc_w)) ||
 				   ((y1 >= this.sc_h) && (y2 >= this.sc_h) && (y3 >= this.sc_h)) )
 				{
-					//次のポリゴン頂点インデックスへ
+					// To next polygon vertex index
 					point_index += DEF_VERTEX_NUM_FOR_PRIMITIVE;
 
-					//プリミティブを減らす
+					// Reduce Primitives
 					primitive_count--;
 					
 					continue;
 				}
 
-				//各ラインの最小・最大X座標値/Z値を初期化
+				// Initialize min/max X coordinate/Z value of each line
 				for(let i = 0;i < this.sc_h;++i)
 				{
 					this.aMinX[i] = this.sc_w;
@@ -2743,7 +2743,7 @@ class RenderingMan
 					this.aMaxZ[i] = INVALID_Z_VALUE;
 				}
 				
-				//ポリゴンのエッジをチェック		
+				// Check polygon edges		
 				this.scanlineForFlat(vertex_list[i1].vv,
 								     vertex_list[i2].vv);
 				this.scanlineForFlat(vertex_list[i2].vv,
@@ -2751,53 +2751,53 @@ class RenderingMan
 				this.scanlineForFlat(vertex_list[i3].vv,
 								     vertex_list[i1].vv);
 
-				//ポリゴンの法線を求めて、面の色を算出
+				// Calculate polygon normal and determine face color
 				//
-				//※今回のフラットシェーディングではこの時点で座標がViewPort変換
-				//　を済ませたもので送られてきます。
-				//　その結果、Y座標が上下反転したものとなり、普通に法線を求める
-				//  と、ポリゴン面の法線が表裏反転してしまいます。
-				//  というわけで、頂点の描画順をちょっと変えて、正しく法線が
-				//  得られるようになっているので、ちょっと考えてみてね。
+				// * In this flat shading, coordinates are ViewPort transformed at this point
+				//  is sent with ... completed.
+				//  As a result, Y coordinates are flipped upside down, so calculating normal normally
+				//  Then, the normal of the polygon face will be flipped inside out.
+				//  So, change the vertex drawing order slightly so that the normal is correct
+				//  You can obtain it, so please think about it.
 				//
 				let vNormal = this.getNormalVectorFromPolygon(vertex_list[i1].vv,
-															  vertex_list[i3].vv,	//←ここ
+															  vertex_list[i3].vv,	// <- Here
 															  vertex_list[i2].vv);
 				
-				//視線・光源とポリゴンの法線の内積をとる
+				// Take dot product of line of sight/light source and polygon normal
 				let vLight   = new VectorMan3( this.vLight.x,
-											  -this.vLight.y,	//光線ベクトルもY座標を反転
+											  -this.vLight.y,	//Invert Y coordinate of light ray vector too
 											   this.vLight.z);	
-				let lightDot = vNormal.dotProduct(vLight);		//光源ベクトルと
-																//法線ベクトルとの内積結果
-				const eyeDot = vNormal.dotProduct(this.vEye);	//視線ベクトルと
-																//法線ベクトルとの内積結果
+				let lightDot = vNormal.dotProduct(vLight);		// With light source vector
+																// Dot product result with normal vector
+				const eyeDot = vNormal.dotProduct(this.vEye);	// With line of sight vector
+																// Dot product result with normal vector
 				
 				//
-				// 内積の結果がマイナスの値の場合は、視線ベクトルとポリゴンの法線ベクトル
-				// とがだいたい向き合っていることを表し、結果が正の値の場合は、視線ベクトル
-				// と法線ベクトルがだいたい同じ方向を向いている、つまり、見えないことを表し
-				// ます。というわけで、向き合っているマイナスの値の場合のみ描画します。
-				// ※パースペクティブコレクトを行う場合、この判定は正しくない場合があるらしい…
+				// If the dot product result is a negative value, the line of sight vector and the polygon's normal vector
+				// Represents that they are roughly facing each other, and if the result is a positive value, the view vector
+				// and the normal vector are facing roughly the same direction, meaning it is invisible
+				// So, draw only if it's a negative value facing each other.
+				// * When performing perspective correction, this judgment may not be correct...
 				//
 				if(eyeDot < 0.0)
 				{
 					//
-					// 面の色を計算
-					// ※lightDotを光線とポリゴン面に対しての光の当たり具合の比率とし、
-					//   拡散光(Diffuse)の値を調整します。
-					//   ただし、ポリゴンの法線ベクトルと光線ベクトルとの内積結果は負の
-					//   値となるのでマイナスをかけて正に反転させます。
+					// Calculate surface color
+					// * lightDot is the ratio of light hitting the polygon surface relative to the light ray,
+					//   Adjust the diffuse light value.
+					//   However, the dot product result of the polygon's normal vector and the light ray vector is negative
+					//   value, so multiply by minus to invert it to positive.
 					//
-					//   もし、内積結果が正の数になった場合は光が当たらないことになるの
-					//   で、0に補正します。
+					//   If the dot product result becomes a positive number, it means light does not hit
+					//   So correct it to 0.
 					//
 					if(lightDot > 0.0){ lightDot = 0.0; }
 					let r = Math.floor((this.vAmbientColor.x + -lightDot * this.vDiffuseColor.x) * 255);
 					let g = Math.floor((this.vAmbientColor.y + -lightDot * this.vDiffuseColor.y) * 255);
 					let b = Math.floor((this.vAmbientColor.z + -lightDot * this.vDiffuseColor.z) * 255);
 
-					//0-255の範囲に飽和
+					// Saturate to range 0-255
 					if(r < 0){ r = 0; }
 					else if(r > 255){ r = 255; }
 					if(g < 0){ g = 0; }
@@ -2805,22 +2805,22 @@ class RenderingMan
 					if(b < 0){ b = 0; }
 					else if(b > 255){ b = 255; }
 
-					//色を設定
+					// Set color
 					const color = { r: r, g: g, b: b };
 
-					//各Y座標のZバッファを見ながらポリゴンを1ラインずつ
-					//塗りつぶして描画していきます
-					//(スキャンラインコンバージョン)
+					// Draw polygon one line at a time while looking at Z buffer of each Y coordinate
+					// Draw by filling
+					// (Scanline conversion)
 					for(let y = 0;y < this.sc_h;++y)
 					{
-						//バッファが未更新ならスキップ
+						// Skip if buffer is not updated
 						if(this.aMinX[y] == this.sc_w)
 						{	continue;	}
 
-						//描画先Y座標のアドレスを算出
+						// Calculate address of drawing destination Y coordinate
 						const pos = this.sc_w * y;
 
-						//補間するZ値の増分値を算出
+						// Calculate increment value of Z value to interpolate
 						const dx   = (this.aMaxX[y] - this.aMinX[y] + 1);
 						const addZ = (this.aMaxZ[y] - this.aMinZ[y]) / dx;
 						
@@ -2828,32 +2828,32 @@ class RenderingMan
 						for(let x = this.aMinX[y];
 							x <= this.aMaxX[y];++x,Z+=addZ)
 						{						
-							//X座標でクリッピング
+							// Clipping by X coordinate
 							if((x < 0) || (x >= this.sc_w))
 							{	continue;	}
 
-							//すでに描かれているピクセルのZ座標よりも
-							//手前になるなら描画
+							// Than Z coordinate of pixel already drawn
+							// Draw if it comes to front
 							if(this.aZBuffer[pos + x] > Z)
 							{
 								let c = { r: color.r, g: color.g, b: color.b, a: 255 };
 								
-								//エッジの場合は黒で描画(これだと不十分だったのでいったんやめる)
+								// Draw in black if edge (this was insufficient so stopped for now)
 								//if((x == this.aMinX[y]) || (x == this.aMaxX[y]))
 								//{	c = { r: 0, g: 0, b: 0, a: 255 };	}
 								
 								this.drawPoint_bresenham(this.sc_w,this.sc_h,x,y,c);
-								this.aZBuffer[pos + x] = Z;	//ピクセルのZ値を更新
+								this.aZBuffer[pos + x] = Z;	// Update Z value of pixel
 							}
 						}
 					}
 				}
 			}
 			
-			//次のポリゴン頂点インデックスへ
+			// To next polygon vertex index
 			point_index += DEF_VERTEX_NUM_FOR_PRIMITIVE;
 
-			//プリミティブを減らす
+			// Reduce Primitives
 			primitive_count--;
 		}
 	}
@@ -2861,30 +2861,30 @@ class RenderingMan
 }
 
 
-//グローバルオブジェクト
+// Global Object
 let g_game_width    = 320;
 let g_game_height   = 500;
 
-let g_offsc;							//自力描画用オフスクリーン
-let g_draw_algo;						//選択中の描画アルゴリズムインデックス
-let g_renderingman;						//レンダリング担当
+let g_offsc;							// Off-screen for manual drawing
+let g_draw_algo;						// Index of currently selected drawing algorithm
+let g_renderingman;						// Rendering Manager
 
-let g_obj;								//表示用オブジェクト
-let g_rY = 0;							//全体回転中の角度
+let g_obj;								// Object for display
+let g_rY = 0;							// Rotation angle during overall rotation
 
-const g_accel_add   = 0.02;				//毎ターンの加減速度
-const g_angle_unit  = 2;				//基準角速度[deg]
-const g_obj_delay   = 0.05;				//オブジェクトごとの遅延
-const g_obj_num     = 8;				//オブジェクトの数
-const g_wait        = 1.0;				//硬直時間
-let   g_accel_limit = 2.0;				//最大加速度
+const g_accel_add   = 0.02;				// Acceleration/deceleration per turn
+const g_angle_unit  = 2;				// Base angular velocity [deg]
+const g_obj_delay   = 0.05;				// Delay per object
+const g_obj_num     = 8;				// Number of objects
+const g_wait        = 1.0;				// Wait time
+let   g_accel_limit = 2.0;				// Maximum acceleration
 
-//各オブジェクト用
-let   g_accel       = [];				//現在の加速度
-let   g_next_accel  = [];				//次の開始加速度
-let   g_a_dir       = [];				//加速するする方向(加速/減速)
-let   g_r_dir       = [];				//回転する方向(順回転/逆回転)
-let   g_rz          = [];				//オブジェクトごとのZ回転角度
+// For each object
+let   g_accel       = [];				// Current acceleration
+let   g_next_accel  = [];				// Next start acceleration
+let   g_a_dir       = [];				// Acceleration direction (accelerate/decelerate)
+let   g_r_dir       = [];				// Rotation direction (forward/reverse)
+let   g_rz          = [];				// Z rotation angle per object
 
 let g_last_fps_time = 0;
 let g_fps_count     = 0;
@@ -2892,28 +2892,28 @@ let g_fps_count     = 0;
 function init_game()
 {
 	
-	//ゲームの初期化処理
+	// Game initialization processing
 	
-	//画面調整
+	// Screen Adjustment
 	adjust_screen();
 	
-	//ゲームに必要なオブジェクトの生成
+	// Generation of objects necessary for game
 	create_obj();
 	
-	//描画処理方法を準備
+	// Prepare drawing processing method
 	g_draw_algo = 4-1;
 	change_draw_algorithm();
 	window.onmousedown = change_draw_algorithm;
 	window.ontouchdown = change_draw_algorithm;
 	
-	//requestAnimationFrameの準備(各種ブラウザ対応)
+	// Preparation of requestAnimationFrame (compatible with various browsers)
 	let requestAnimationFrame = window.requestAnimationFrame       ||
                                 window.mozRequestAnimationFrame    ||
                                 window.webkitRequestAnimationFrame ||
                                 window.msRequestAnimationFrame;
     window.requestAnimationFrame = requestAnimationFrame;
     
-	//描画を登録
+	// Register drawing
 	window.requestAnimationFrame(render_game);
 	
 }
@@ -2921,14 +2921,14 @@ function init_game()
 function draw_fps()
 {
 	
-	//FPS計測
+	// FPS Measurement
 	
-	//現在時刻を取得
+	// Get current time
 	let now_time = Date.now();
 	
 	if((now_time - g_last_fps_time) >= 1000)
 	{
-		//FPS表示
+		// FPS Display
 		let fps_div = document.getElementById("fps");
 		fps_div.innerText = "FPS:"+(g_fps_count*(1000/(now_time - g_last_fps_time)));
 		
@@ -2941,21 +2941,21 @@ function draw_fps()
 
 function adjust_screen()
 {
-	//画面調整
+	// Screen Adjustment
 	
-	//ウインドウのサイズを取得
+	// Get window size
 	let window_w = window.innerWidth;
 	let window_h = window.innerHeight;
 	
-	//ウインドウ幅が十分に広い場合はPCだとして
-	//画面サイズを変更する
+	// Assuming it's a PC if window width is wide enough
+	// Change screen size
 	if((g_game_width * 2) <= window_w)
 	{
 		g_game_width  = 1280;
 		g_game_height = 720;
 	}
 	
-	//ゲームスクリーンを中央に配置
+	// Place game screen in center
 	let screen  = document.getElementById("game-screen");
 	let game_x  = (window_w - g_game_width) / 2;
 	let game_y  = (window_h - g_game_height) / 2;
@@ -2965,7 +2965,7 @@ function adjust_screen()
 	screen.width      = g_game_width;
 	screen.height     = g_game_height;
 
-	//オフスクリーン用のImageDataを作成
+	// Create ImageData for off-screen
 	let ctx = screen.getContext("2d");
 	g_offsc = ctx.createImageData(g_game_width,g_game_height);
 	
@@ -2973,14 +2973,14 @@ function adjust_screen()
 
 function create_obj()
 {
-	//オブジェクトの生成
+	// Object Generation
 	
-	//レンダリング担当の準備
-	const screen     = document.getElementById("game-screen");	//描画先canvas
+	// Prepare rendering handler
+	const screen     = document.getElementById("game-screen");	// Drawing destination canvas
 	const algo_label = document.getElementById("algo");
 	g_renderingman = new RenderingMan(screen,g_offsc,algo_label);
 	
-	//ViewPort行列と射影行列をセット
+	// Set ViewPort matrix and Projection matrix
 	let mtx_viewport   = new MatrixMan4();
 	let mtx_projection = new MatrixMan4();
 	
@@ -2989,7 +2989,7 @@ function create_obj()
 	g_renderingman.setViewPortMatrix(mtx_viewport);
 	g_renderingman.setProjectionMatrix(mtx_projection);
 	
-	//ビュー行列をセット
+	// Set View Matrix
 	let vFrom    = new VectorMan3(0.0,0.0,-25.0);
 	let vTo      = new VectorMan3(0.0,0.0,20.0);
 	let vUp      = new VectorMan3(0.0,1.0,0.0);
@@ -2998,11 +2998,11 @@ function create_obj()
 	mtx_view.view(vFrom,vTo,vUp);
 	g_renderingman.setViewMatrix(mtx_view);
 
-	//拡散光色をセット
+	// Set diffuse light color
 	g_renderingman.setDefuseLightColor(0.0,0.0,1.0);
 	
 		
-	//オブジェクトの準備
+	// Preparation of object
 	g_obj = new SquareRingObjMan();
 	for(let i = 0;i < g_obj_num;++i)
 	{
@@ -3017,29 +3017,29 @@ function create_obj()
 
 function change_draw_algorithm()
 {
-	//描画アルゴリズムの選択
+	// Selection of drawing algorithm
 	
 	g_draw_algo = (g_draw_algo + 1) % 5;
 	
 	switch(g_draw_algo)
 	{
-		case 0:	//ContextのLINE描画
+		case 0:	// Context LINE drawing
 			g_renderingman.setupContextLine();
 			break;
 			
-		case 1:	//ブレゼンハムLINE描画
+		case 1:	// Bresenham LINE Drawing
 			g_renderingman.setupBresenhamLine();
 			break;
 			
-		case 2:	//ダブルステップブレゼンハムLINE描画
+		case 2:	// Double Step Bresenham LINE Drawing
 			g_renderingman.setupDoubleStepBresenhamLine();
 			break;
 		
-		case 3:	//アンチエイリアス付きブレゼンハムLINE描画
+		case 3:	// Anti-aliased Bresenham LINE Drawing
 			g_renderingman.setupBresenhamLineAA();
 			break;
 			
-		case 4:	//フラットシェーディング描画
+		case 4:	// Flat Shading Drawing
 			g_renderingman.setupFlatShading();
 			break;
 	}
@@ -3048,35 +3048,35 @@ function change_draw_algorithm()
 
 function draw_wire()
 {
-	//ワイヤーフレームとかの描画処理
+	// Drawing processing for wireframes etc.
 	
-	//描画前処理
+	// Pre-drawing processing
 	g_renderingman.drawBegin();
 	
-	//オブジェクト全体に関係する行列を準備
+	// Prepare matrices related to entire object
 	let mtx_scale   = new MatrixMan4();
 	let mtx_rotateY = new MatrixMan4();
 	let mtx_move    = new MatrixMan4();
 	
-	//オブジェクトのサイズを16倍に拡大
+	// Enlarge object size by 16 times
 	mtx_scale.scale(16.0,16.0,16.0);
 	
-	//全体をY軸で回す
+	// Rotate whole around Y axis
 	mtx_rotateY.rotateY(rad(g_rY));
 	g_rY += 0.8;
 	g_rY = g_rY % 360;
 	
-	//ちょっと奥に配置
+	// Place slightly in the back
 	mtx_move.translate(0,0,20);
 
-	//オブジェクトを動かす
+	// Move object
 	for(let i = 0;i < g_obj_num;++i)
 	{
 		let mtx_world   = new MatrixMan4();
 		let mtx_pos     = new MatrixMan4();
 		let mtx_rotateZ = new MatrixMan4();
 		
-		//各自のZ軸回転
+		// Individual Z axis rotation
 		let z     = g_rz[i];
 		let accel = g_accel[i];
 		if(accel < 0){ accel = 0; }
@@ -3085,40 +3085,40 @@ function draw_wire()
 		mtx_rotateZ.rotateZ(rad(z));
 		mtx_world.mul(mtx_rotateZ);
 		
-		//各自のポジションに移動
-		const w = 1.0/(g_obj_num*2);	//ひとつ飛ばしで並べた時の幅
-		let pos = -0.5 + (i * 2) * w;	//正方形の1辺になるように配置する
+		// Move to individual position
+		const w = 1.0/(g_obj_num*2);	// Width when arranged with one skipped
+		let pos = -0.5 + (i * 2) * w;	// Arrange to become one side of a square
 		mtx_pos.translate(0,0,pos);
 		mtx_world.mul(mtx_pos);
 		
-		//拡大
+		// Scale
 		mtx_world.mul(mtx_scale);
 		
-		//横回転
+		// Horizontal Rotation
 		mtx_world.mul(mtx_rotateY);
 		
-		//奥に配置
+		// Place in back
 		mtx_world.mul(mtx_move);
 		
-		//レンダラにセット
+		// Set to renderer
 		g_renderingman.setWorldMatrix(mtx_world);
 		
-		//オブジェクトの描画
+		// Object Drawing
 		g_renderingman.drawIndexedPrimitive(g_obj.vertexList,g_obj.vertexNum,
 											g_obj.polyIndexList,g_obj.primitiveNum);
 											
 											
-		//速度更新
+		// Update velocity
 		g_accel[i] += (g_accel_add * g_a_dir[i]);
 		
-		//加速中に最大化速度になったら減速に切り替え
+		// Switch to deceleration if max speed reached during acceleration
 		if((g_a_dir[i] > 0) && (g_accel[i] >= g_accel_limit))
 		{
 			g_accel[i] = g_accel_limit;
 			g_a_dir[i] *= -1;
 		}
 		
-		//加速なしの状態がしばらく続いたら、加速度を更新して逆回転させる
+		// If state without acceleration continues for a while, update acceleration and rotate in reverse
 		if((i == 0) && (g_a_dir[i] < 0) && g_accel[i] < -g_wait)
 		{
 			g_accel_limit = rnd(4) + 1;
@@ -3126,21 +3126,21 @@ function draw_wire()
 			let d = rnd(6);
 			for(let j = 0;j < g_obj_num;++j)
 			{
-				//各オブジェクトの遅延を生成
+				// Generate delay for each object
 				g_next_accel[j].push(-(g_accel_limit / 3 + g_accel_add * d * j));
 			}
 			
-			//先頭のリングはここから逆回転スタート
+			// First ring starts reverse rotation from here
 			g_accel[0]  = g_next_accel[0][0];	g_next_accel[0].shift();
 			g_a_dir[0] *= -1;
 			g_r_dir[0] *= -1;
 			
-			//すでに全部加速が終わって角度がそろってる場合はリセットする
+			// Reset if all acceleration is finished and angles are aligned
 			if(g_accel[g_obj_num-1] <= 0)
 			{
 				for(let j = 1;j < g_obj_num;++j)
 				{
-					//ここから遅延を付けて逆回転スタート
+					// Start reverse rotation with delay from here
 					g_accel[j]  = g_next_accel[j][0];	g_next_accel[j].shift();
 					g_a_dir[j] *= -1;
 					g_r_dir[j] *= -1;
@@ -3151,7 +3151,7 @@ function draw_wire()
 		{
 			if(g_next_accel[i].length > 0)
 			{
-				//各オブジェクトに遅延を付けて、逆回転スタート
+				// Start reverse rotation with delay for each object
 				g_accel[i]  = g_next_accel[i][0];	g_next_accel[i].shift();
 				g_a_dir[i] *= -1;
 				g_r_dir[i] *= -1;
@@ -3159,7 +3159,7 @@ function draw_wire()
 		}
 	}
 
-	//描画後処理(画面に転送)
+	// Post-drawing processing (Transfer to screen)
 	g_renderingman.drawEnd();
 
 }
@@ -3167,15 +3167,15 @@ function draw_wire()
 function render_game()
 {
 	
-	//ゲームの描画処理
+	// Game drawing processing
 	
-	//ワイヤーフレームとかの描画
+	// Drawing wireframes etc.
 	draw_wire();
 	
-	//FPS描画
+	// Draw FPS
 	draw_fps();
 	
-	//次の描画呼び出しを登録
+	// Register next drawing call
 	window.requestAnimationFrame(render_game);
 
 }

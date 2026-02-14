@@ -1,22 +1,22 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-<title>パパのキラキラフラワー</title>
+<title>Papa's Sparkling Flower</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=320, user-scalable=no, initial-scale=1.0">
 <meta http-equiv="Cache-Control" content="no-cache">
 <!--
 
-	このデモでは、JavaScriptでポイントキラキラアートを描いてみました。
+	In this demo, I tried drawing point sparkling art in JavaScript.
 	
-	今回は、キラキラした花の様な模様にしてみました。
+	This time, I made it into a pattern like a sparkling flower.
 	
-	キラキラの光らせ方をはぅ君さん(@Hau_kun)のこちらの作品からヒントを得て、
-	ちょっと変えてみました。前より光り方がやわらなくなった気がします。
-	はぅ君さんに圧倒的感謝を！
+	Getting hints from this work by Hau-kun-san (@Hau_kun) on how to make it sparkle,
+	I changed it a bit. I feel like the way it shines has become softer than before.
+	Overwhelming thanks to Hau-kun-san!
 	https://twitter.com/Hau_kun/status/1401187413808979968?s=20
 	
-	Copyright (c) 2021 ぼいち(@voich2014 in Twitter)
+	Copyright (c) 2021 Voich (@voich2014 in Twitter)
 	
 	Released under the MIT license.
  	see https://opensource.org/licenses/MIT
@@ -30,16 +30,16 @@
 </style>
 <script type="text/javascript">
 
-//グローバルオブジェクト
+// Global Object
 let g_game_width    = 320;
 let g_game_height   = 500;
 
-let g_time          = 0;		//現在時刻[ms]
-let g_dtime         = 0;		//前回の描画からの経過時間[ms]
+let g_time          = 0;		// Current time [ms]
+let g_dtime         = 0;		// Elapsed time since last drawing [ms]
 
 let g_pn            = new Perlin();
 let g_screen_ctx    = null;
-let g_bloom_offscs  = [];		//ブルーム処理用オフスクリーンcanvas
+let g_bloom_offscs  = [];		// Off-screen canvas for Bloom processing
 let g_scale         = 1.0;
 let g_col_palettes  = [];
 
@@ -134,24 +134,24 @@ let g_cnt           = 0;
 function init()
 {
 	
-	//初期化処理
+	// Initialization processing
 	
-	//準備
+	// Preparation
 	setup();
 	
-	//クリックorタップでFPSの表示ON/OFF
+	// Toggle FPS display ON/OFF with click or tap
 	toggle_fps_visible();
 	window.onmousedown = toggle_fps_visible;
 	window.ontouchdown = toggle_fps_visible;
 	
-	//requestAnimationFrameの準備(各種ブラウザ対応)
+	// Preparation of requestAnimationFrame (compatible with various browsers)
 	let requestAnimationFrame = window.requestAnimationFrame       ||
                                 window.mozRequestAnimationFrame    ||
                                 window.webkitRequestAnimationFrame ||
                                 window.msRequestAnimationFrame;
     window.requestAnimationFrame = requestAnimationFrame;
     
-	//描画を登録
+	// Register drawing
 	window.requestAnimationFrame(render);
 	
 }
@@ -159,24 +159,24 @@ function init()
 function adjust_screen()
 {
 
-	//画面調整
+	// Screen Adjustment
 	
-	//ウインドウのサイズを取得
+	// Get window size
 	let window_w = window.innerWidth;
 	let window_h = window.innerHeight;
 	
-	//ウインドウ幅が十分に広い場合はPCだとして
-	//画面サイズを変更する
+	// Assuming it's a PC if window width is wide enough
+	// Change screen size
 	if((g_game_width * 2) <= window_w)
 	{
-		//PC側ならではの雰囲気にする
+		// Create an atmosphere unique to PC side
 		const       h = 600;
 		g_game_width  = 500 / 320 * h;
 		g_game_height = h;
 		g_scale       = h / 320;
 	}
 	
-	//ゲームスクリーンを中央に配置
+	// Place game screen in center
 	let screen  = document.getElementById("game-screen");
 	let game_x  = (window_w - g_game_width)  / 2;
 	let game_y  = (window_h - g_game_height) / 2;
@@ -191,15 +191,15 @@ function adjust_screen()
 function setup_obj()
 {
 
-	//オブジェクトの準備
+	// Preparation of object
 	
-	//メイン画面のContextを取得しておく
+	// Get Context of main screen in advance
 	const sc_w   = g_game_width;
 	const sc_h   = g_game_height;
 	const screen = document.getElementById("game-screen");
 	g_screen_ctx = screen.getContext("2d");
 	
-	//50個のcoolors.co URLからパレットリストを作成
+	// Create palette list from 50 coolors.co URLs
 	const urls = 
 	[
 		"https://coolors.co/485696-e7e7e7-f9c784-fc7a1e-f24c00",
@@ -267,20 +267,20 @@ function setup_obj()
 function setup_matrix()
 {
 	
-	//射影・ビュー変換行列の準備
+	// Preparation of Projection/View Transformation Matrix
 	
-	//射影行列を生成
+	// Generate Projection Matrix
 	let mtx_projection = new MatrixMan4();
 	mtx_projection.projectionOpenGL(NEAR_Z_POS,FAR_Z_POS,rad(60),g_game_width/g_game_height);
 	
-	//ビュー行列を生成
+	// Generate View Matrix
 	let vFrom    = new VectorMan3(0.0,0.0,100.0);
 	let vTo      = new VectorMan3(0.0,0.0,0.0);
 	let vUp      = new VectorMan3(0.0,1.0,0.0);
 	let mtx_view = new MatrixMan4();
 	mtx_view.view(vFrom,vTo,vUp);
 	
-	//合成行列を作っておく
+	// Create composition matrix
 	g_mtx_vp.initialize();
 	g_mtx_vp.mul(mtx_view);
 	g_mtx_vp.mul(mtx_projection);
@@ -289,7 +289,7 @@ function setup_matrix()
 
 function setup_bloom()
 {
-	//ブルーム処理用の準備
+	// Preparation for Bloom Processing
 	const sc_w = g_game_width;
 	const sc_h = g_game_height;
 	
@@ -318,32 +318,32 @@ function setup_bloom()
 
 function do_bloom(ctx,draw_screen)
 {
-	//ブルーム処理を実施
+	// Execute Bloom Processing
 	
-	//レンダリング後画像にフィルタをかける
+	// Apply filter to image after rendering
 	const sc_w = g_game_width;
 	const sc_h = g_game_height;
 	
 	//
-	// 簡易的なブルーム処理をやっています。
+	// Doing simple bloom processing.
 	//
-	// 高輝度部分だけ抜き出しではなく、全体が光って見えちゃうので、
-	// 本来のブルーム処理とはちょっと違うと思いますが、とりあえず
-	// 手軽に光らせたい場合には楽かも(*´ω｀*)
+	// Because it's not extracting only high luminance parts, but whole thing looks glowing,
+	// I think it's a bit different from original bloom processing, but anyway
+	// Might be easy if you want to make it glow easily (*´ω｀*)
 	//
 	
-	//複数段階の縦横2分の1ずつ解像度を下げたオフスクリーンキャンバスに
-	//CanvasのBlurフィルタをかけて、拡大して加算合成します
+	// To off-screen canvas with resolution lowered by half vertically and horizontally in multiple stages
+	// Apply Canvas Blur filter, enlarge and additive blend
 	const offsc_num = g_bloom_offscs.length;
 	let blur_w = [ 6,12 ];
 	for(let idx = 0;idx < offsc_num;++idx)
 	{
-		//画面に表示されているキャンバスから現在の状態を取得
+		// Get current state from canvas displayed on screen
 		let offsc = g_bloom_offscs[idx];
 		offsc.ctx.clearRect(0,0,offsc.cv_w,offsc.cv_h);
 		offsc.ctx.drawImage(draw_screen,0,0,sc_w,sc_h,0,0,offsc.cv_w,offsc.cv_h);
 
-		//縮小された絵にフィルタをかけながら画面に反映(加算合成)
+		// Reflect on screen (additive blending) while applying filter to reduced image
 		ctx.save();
 		ctx.globalAlpha = 1.0;
 		ctx.globalCompositeOperation = 'lighter';
@@ -351,31 +351,31 @@ function do_bloom(ctx,draw_screen)
 		ctx.drawImage(offsc.cv,0,0,offsc.cv_w,offsc.cv_h,0,0,sc_w,sc_h);
 		ctx.restore();
 		
-		//draw_screenが表示用のキャンバスと同じになっていると
-		//↑で合成したものをさらに取得して拡大するので、ぼかし
-		//がきつめにかけられてると思う。
+		// If draw_screen is the same as the display canvas
+		// ^ Get the composited result and enlarge it, so blur
+		// I think ... is applied tightly.
 	}
 }
 
 function setup()
 {
 	
-	//準備
+	// Preparation
 		
-	//画面調整
+	// Screen Adjustment
 	adjust_screen();
 	
-	//オブジェクトの準備
+	// Preparation of object
 	setup_obj();
 	
-	//変換行列の準備
+	// Preparation of Transformation Matrix
 	setup_matrix();
 	
-	//ブルーム処理の準備
+	// Preparation for Bloom Processing
 	setup_bloom();
 
-	//最初の値を決める
-	//※1回だとstartの値が不定になるのでreset()を2回呼びます
+	// Determine initial value
+	// * Calling reset() twice because start value becomes undefined if called once
 	g_next1_colors = g_col_palettes[random(0,g_col_palettes.length-1)|0].slice();
 	g_next2_colors = g_col_palettes[random(0,g_col_palettes.length-1)|0].slice();
 	reset();
@@ -386,7 +386,7 @@ function setup()
 function reset()
 {
 
-	//次の目標値を決める
+	// Determine next target value
 	
 	g_start_S      = g_next_S;
 	g_start_col    = g_next_col;
@@ -418,7 +418,7 @@ function reset()
 	g_next_sr      = random(MIN_sr   ,MAX_sr   )/1000;
 	g_next_mv      = random(MIN_mv   ,MAX_mv   )/1000;
 	
-	//パレットを決定(.slice()は配列の値渡しコピー)
+	// Determine palette (.slice() is pass-by-value copy of array)
 	g_start_colors = g_next1_colors.slice();
 	g_next1_colors = g_next2_colors.slice();
 	g_next2_colors = shuffle(g_col_palettes[random(0,g_col_palettes.length-1)|0].slice());
@@ -428,19 +428,19 @@ function reset()
 function draw_fps()
 {
 	
-	//FPS計測
+	// FPS Measurement
 	
-	//現在時刻を取得
+	// Get current time
 	let now_time = Date.now();
 	
 	if((now_time - g_last_fps_time) >= 1000)
 	{
-		//FPS履歴に追加
+		// Add to FPS history
 		g_fps_list.push(g_fps_count);
 		if(g_fps_list.length > 10)
 		{	
-			//先頭を削除して過去n回分までの
-			//FPSの平均とします(移動平均)
+			// Delete first and keep up to past n times
+			// Use average of FPS (moving average)
 			g_fps_list.shift();
 		}
 		let fps_ave = 0;
@@ -448,7 +448,7 @@ function draw_fps()
 		{	fps_ave += g_fps_list[i];	}
 		fps_ave /= g_fps_list.length;
 		
-		//FPS表示
+		// FPS Display
 		let fps_div = document.getElementById("fps");
 		let fps     = (fps_ave*(1000/(now_time - g_last_fps_time)));
 		fps_div.innerText = "FPS:"+fps;
@@ -463,12 +463,12 @@ function draw_fps()
 
 function toggle_fps_visible()
 {
-	//FPSの表示をON/OFFします
+	// Toggle FPS display ON/OFF
 	
-	//表示フラグを反転させる
+	// Invert display flag
 	g_fps_visible = !g_fps_visible;
 	
-	//表示フラグに合わせてvisible制御
+	// Control visible based on display flag
 	let fps_div = document.getElementById("fps");
 	fps_div.style.display = g_fps_visible ? "block" : "none";
 
@@ -477,16 +477,16 @@ function toggle_fps_visible()
 function draw()
 {
 
-	//描画コア
+	// Drawing Core
 	
-	//開始時刻保存
+	// Save start time
 	if(g_start_time == 0)
 	{
 		g_start_time = g_time;
 		g_next_time  = g_time + MORPH_TIME;
 	}
 	
-	//画面クリア
+	// Screen Clear
 	const sc_w = g_game_width;
 	const sc_h = g_game_height;
 	const ctx  = g_screen_ctx;
@@ -494,16 +494,16 @@ function draw()
 	
 	ctx.save();
 
-	//シーンの準備
+	// Preparation of scene
 	let time = (g_time - g_start_time) / MORPH_TIME;
 	if(time > 1.0){ time = 1.0; }
 	const e  = Ease.easeInOutExpo(time**16);
 	const ce = Ease.easeInSine(time);
 
-	//毎回の描画でnewをしたくないのと、グローバル変数の
-	//参照をローカル変数に持つと速いという話があったので
-	//高速化と言うか、たまにプチフリーズするのを避ける
-	//つもりで使います。効果があったかどうかは、よく分からないｗ
+	// Because I don't want to new every time drawing, and global variable
+	// Heard it's faster to hold reference in local variable
+	// More like avoiding occasional micro-freezes than speed up
+	// Intending to use it. Not sure if it was effective lol
 	let mtx_vp      = g_mtx_vp;
 	let mtx_scale   = g_mtx_scale;
 	let mtx_move    = g_mtx_move;
@@ -514,7 +514,7 @@ function draw()
 	let mtx_model   = g_mtx_model;
 	let vec_pos     = g_vec_pos;
 	
-	//このターンでのパラメータを計算
+	// Calculate parameters for this turn
 	const S         = (g_start_S     + e * (g_next_S      - g_start_S    )) * g_scale;
 	const add_col   = g_start_col    + e * (g_next_col    - g_start_col   );
 	const r_amp     = g_start_r_amp  + e * (g_next_r_amp  - g_start_r_amp );
@@ -545,7 +545,7 @@ function draw()
 	const rt = (g_dtime) / 5000;
 	g_rz += (rt * 1.2);
 
-	//高速化のための各種テーブルを準備
+	// Prepare various tables for speed optimization
 	const colors = [];
 	for(let i = 0;i < g_start_colors.length;++i)
 	{
@@ -581,18 +581,18 @@ function draw()
 	let c   = 0.0;
 	for(let i = 0;i < POINT_NUM;++i)
 	{
-		//円のサイズをノイズで決定
+		// Determine circle size with noise
 		n.push(Math.abs(g_pn.perlin(t + nx,0,tt) * r_amp) * g_scale);
 		nx += add_nx;
 
-		const ratio = 1 / ((1 + Math.sqrt(5)) / 2);	//黄金比
+		const ratio = 1 / ((1 + Math.sqrt(5)) / 2);	// Golden Ratio
 		const r     = sr * b * ratio;
 		const r2    = r / r_div;
 		const cc    = c + tt;
-		const x0    = r2 * Math.cos(cc) + r;	//XZ平面で螺旋回転してから並行移動
+		const x0    = r2 * Math.cos(cc) + r;	// Spiral rotate on XZ plane then translate
 		const y0    = 0;
 		const z0    = r2 * Math.sin(cc);
-		const px    = x0 * Math.cos(a)/* - y0 * Math.sin(a)*/;	//それをさらにZ軸で回転
+		const px    = x0 * Math.cos(a)/* - y0 * Math.sin(a)*/;	// Rotate it further on Z axis
 		const py    = x0 * Math.sin(a)/* + y0 * Math.cos(a)*/;
 		const pz    = z0;
 		nx2 += add_nx2;
@@ -608,17 +608,17 @@ function draw()
 	}
 	
 	
-	//描画するっす
+	// Going to draw!
 	ctx.globalCompositeOperation = 'lighter';
 	ctx.translate(sc_w / 2,sc_h / 2);
 	ctx.lineWidth = 0.0;
 
-	const tau = TAU - 0.04;	//あとちょっとで重なるのを避ける
+	const tau = TAU - 0.04;	// Avoid overlapping just a little bit before
 	for(let ra = 0;ra < tau;ra += add_ra)
 	{
 		mtx_rotateR.rotateZ(ra);
 		
-		//変換行列を先に合成しておく
+		// Compose transformation matrix first
 		mtx_model.copy(mtx_scale);
 		mtx_model.mul(mtx_move);
 		mtx_model.mul(mtx_rotateR);
@@ -630,14 +630,14 @@ function draw()
 		let col  = 0.0;
 		for(let i = 0;i < POINT_NUM;++i)
 		{
-			//色を選択します
+			// Select color
 			let pal = Math.floor(col) % colors.length;
 			col += add_col;
 			
 			ctx.beginPath();
 			ctx.fillStyle = hls_colors[pal];
 			
-			//座標変換
+			// Coordinate Transformation
 			vec_pos.setValue(x[i],y[i],z[i],1.0);
 			vec_pos.mul_matrix(mtx_model);
 			vec_pos.x /= vec_pos.w;
@@ -645,7 +645,7 @@ function draw()
 			vec_pos.x *= sc_w2;
 			vec_pos.y *= sc_h2;
 			
-			//点を描画
+			// Draw Point
 			ctx.globalAlpha=1.0-(n[i]/7);
 			ctx.arc(vec_pos.x,vec_pos.y,n[i],0,TAU,false);
 			ctx.fill();
@@ -654,13 +654,13 @@ function draw()
 	
 	ctx.restore();
 	
-	//ブルーム処理
+	// Bloom Processing
 	let screen = document.getElementById("game-screen");
 	do_bloom(ctx,screen);
 	
 	if(g_time >= g_next_time)
 	{
-		//次の区切り時刻を決めてリセット
+		// Determine next break time and reset
 		g_start_time = g_time;
 		g_next_time  = g_start_time + MORPH_TIME;
 		reset();
@@ -671,9 +671,9 @@ function draw()
 function render()
 {
 	
-	//毎ターンの描画処理
+	// Drawing processing for every turn
 	
-	//時間計算
+	// Time Calculation
 	const last_time = g_time;
 	g_time = (new Date).getTime();
 	if(last_time == 0)
@@ -681,13 +681,13 @@ function render()
 	else
 	{	g_dtime = g_time - last_time;	}
 	
-	//描画コア
+	// Drawing Core
 	draw();
 	
-	//FPS描画
+	// Draw FPS
 	draw_fps();
 	
-	//次の描画呼び出しを登録
+	// Register next drawing call
 	window.requestAnimationFrame(render);
 
 }

@@ -1,19 +1,19 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-<title>パパの無限瑪瑙</title>
+<title>Papa's Infinite Agate</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=320, user-scalable=no, initial-scale=1.0">
 <meta http-equiv="Cache-Control" content="no-cache">
 <!--
-	このデモでは、JavaScriptでどんどん拡大していく模様を描いてみました。
+	In this demo, I tried drawing a pattern that keeps expanding in JavaScript.
 	
-	イメージは、山田英春さん著の「奇妙で美しい石の世界」に出てくる、
-	縞模様の瑪瑙の断面です。
+	The image is from "The World of Strange and Beautiful Stones" by Hideharu Yamada,
+	It is a cross section of striped agate.
 	https://www.chikumashobo.co.jp/product/9784480069672/
 	
 	
-	Copyright (c) 2021 ぼいち(@voich2014 in Twitter)
+	Copyright (c) 2021 Voich (@voich2014 in Twitter)
 	
 	Released under the MIT license.
  	see https://opensource.org/licenses/MIT
@@ -27,12 +27,12 @@
 </style>
 <script type="text/javascript">
 
-//グローバルオブジェクト
+// Global Object
 let g_game_width    = 320;
 let g_game_height   = 500;
 
-let g_time          = 0;		//現在時刻[ms]
-let g_dtime         = 0;		//前回の描画からの経過時間[ms]
+let g_time          = 0;		// Current time [ms]
+let g_dtime         = 0;		// Elapsed time since last drawing [ms]
 
 const TAU           = 2.0 * Math.PI;
 let g_pn            = new Perlin();
@@ -69,24 +69,24 @@ let g_cnt           = 0;
 function init()
 {
 	
-	//初期化処理
+	// Initialization processing
 	
-	//準備
+	// Preparation
 	setup();
 	
-	//クリックorタップでFPSの表示ON/OFF
+	// Toggle FPS display ON/OFF with click or tap
 	toggle_fps_visible();
 	window.onmousedown = toggle_fps_visible;
 	window.ontouchdown = toggle_fps_visible;
 	
-	//requestAnimationFrameの準備(各種ブラウザ対応)
+	// Preparation of requestAnimationFrame (compatible with various browsers)
 	let requestAnimationFrame = window.requestAnimationFrame       ||
                                 window.mozRequestAnimationFrame    ||
                                 window.webkitRequestAnimationFrame ||
                                 window.msRequestAnimationFrame;
     window.requestAnimationFrame = requestAnimationFrame;
     
-	//描画を登録
+	// Register drawing
 	window.requestAnimationFrame(render);
 	
 }
@@ -94,21 +94,21 @@ function init()
 function adjust_screen()
 {
 
-	//画面調整
+	// Screen Adjustment
 	
-	//ウインドウのサイズを取得
+	// Get window size
 	let window_w = window.innerWidth;
 	let window_h = window.innerHeight;
 	
-	//ウインドウ幅が十分に広い場合はPCだとして
-	//画面サイズを変更する
+	// Assuming it's a PC if window width is wide enough
+	// Change screen size
 	if((g_game_width * 2) <= window_w)
 	{
 		g_game_width  = 600;
 		g_game_height = 600;
 	}
 	
-	//ゲームスクリーンを中央に配置
+	// Place game screen in center
 	let screen  = document.getElementById("game-screen");
 	let game_x  = (window_w - g_game_width)  / 2;
 	let game_y  = (window_h - g_game_height) / 2;
@@ -123,15 +123,15 @@ function adjust_screen()
 function setup_obj()
 {
 
-	//オブジェクトの準備
+	// Preparation of object
 	
-	//メイン画面のContextを取得しておく
+	// Get Context of main screen in advance
 	const sc_w   = g_game_width;
 	const sc_h   = g_game_height;
 	const screen = document.getElementById("game-screen");
 	g_screen_ctx = screen.getContext("2d");
 	
-	//coolors.co URLからデフォルトパレットを生成
+	// Generate default palette from coolors.co URL
 	const url1    = "https://coolors.co/3c1518-69140e-a44200-d58936-fff94f";
 	const url2    = "https://coolors.co/e4572e-17bebb-ffc914-2e282a-76b041";
 	g_def1_colors = createPaletteNHSL(url1);
@@ -142,15 +142,15 @@ function setup_obj()
 function setup()
 {
 	
-	//準備
+	// Preparation
 		
-	//画面調整
+	// Screen Adjustment
 	adjust_screen();
 	
-	//オブジェクトの準備
+	// Preparation of object
 	setup_obj();
 
-	//最初の値を決める
+	// Determine initial value
 	g_next1_colors = g_def1_colors.slice();
 	g_next2_colors = g_def2_colors.slice();
 	g_colors       = g_def1_colors.slice();
@@ -161,15 +161,15 @@ function setup()
 function reset()
 {
 
-	//次の目標値を決める
+	// Determine next target value
 	
-	//パレットを決定
-	g_start_colors = g_next1_colors.slice();	//配列の値渡しコピー
-	g_next1_colors = g_next2_colors.slice();	//配列の値渡しコピー
-	g_next2_colors = g_def1_colors.slice();		//次のパレットの初期値とする
+	// Determine palette
+	g_start_colors = g_next1_colors.slice();	// Pass-by-value copy of array
+	g_next1_colors = g_next2_colors.slice();	// Pass-by-value copy of array
+	g_next2_colors = g_def1_colors.slice();		// Set as initial value of next palette
 	getColormind(function(palette)
 	{
-		//Colormindから5色のパレットを取得
+		// Get 5-color palette from Colormind
 		g_next2_colors = rgbAA2hslNA(palette);		
 	});
 	
@@ -178,19 +178,19 @@ function reset()
 function init_obj()
 {
 	
-	//縞模様オブジェクトの初期化
+	// Initialize Stripe Pattern Object
 	
-	//クリア
+	// Clear
 	g_obj = [];
 	
-	//開始時刻の準備
+	// Preparation of start time
 	let start_time = g_time - STRIPE_STRIDE * OBJ_NUM;
 	
 	g_nx = start_time;
 	g_ny = start_time;
 	g_nz = start_time;
 	
-	//すべてのオブジェクト情報を埋める
+	// Fill all object information
 	for(let i = 0;i < OBJ_NUM;++i)
 	{
 		g_obj.push(create_obj(start_time));
@@ -202,7 +202,7 @@ function init_obj()
 function create_obj(start_time)
 {
 	
-	//縞模様オブジェクト情報の生成
+	// Generate Stripe Pattern Object Info
 	
 	const idx = Math.floor(start_time / STRIPE_STRIDE);
 	const col = g_colors[idx % g_colors.length];
@@ -233,12 +233,12 @@ function create_obj(start_time)
 function update_obj()
 {
 
-	//縞模様オブジェクト情報の更新
+	// Update Stripe Pattern Object Info
 	
 	let need_sort = false;
 	for(let i = 0;i < g_obj.length;++i)
 	{
-		//十分に時間が経った場合にリセット
+		// Reset if enough time has passed
 		const info = g_obj[i];
 		if(info.end_time <= g_time)
 		{
@@ -247,7 +247,7 @@ function update_obj()
 		}
 	}
 	
-	//古い時刻のものから描画するようにソート
+	// Sort to draw from oldest time
 	if(need_sort)
 	{
 		g_obj.sort(function(a,b){
@@ -262,19 +262,19 @@ function update_obj()
 function draw_fps()
 {
 	
-	//FPS計測
+	// FPS Measurement
 	
-	//現在時刻を取得
+	// Get current time
 	let now_time = Date.now();
 	
 	if((now_time - g_last_fps_time) >= 1000)
 	{
-		//FPS履歴に追加
+		// Add to FPS history
 		g_fps_list.push(g_fps_count);
 		if(g_fps_list.length > 10)
 		{	
-			//先頭を削除して過去n回分までの
-			//FPSの平均とします(移動平均)
+			// Delete first and keep up to past n times
+			// Use average of FPS (moving average)
 			g_fps_list.shift();
 		}
 		let fps_ave = 0;
@@ -282,7 +282,7 @@ function draw_fps()
 		{	fps_ave += g_fps_list[i];	}
 		fps_ave /= g_fps_list.length;
 		
-		//FPS表示
+		// FPS Display
 		let fps_div = document.getElementById("fps");
 		let fps     = (fps_ave*(1000/(now_time - g_last_fps_time)));
 		fps_div.innerText = "FPS:"+fps;
@@ -297,12 +297,12 @@ function draw_fps()
 
 function toggle_fps_visible()
 {
-	//FPSの表示をON/OFFします
+	// Toggle FPS display ON/OFF
 	
-	//表示フラグを反転させる
+	// Invert display flag
 	g_fps_visible = !g_fps_visible;
 	
-	//表示フラグに合わせてvisible制御
+	// Control visible based on display flag
 	let fps_div = document.getElementById("fps");
 	fps_div.style.display = g_fps_visible ? "block" : "none";
 
@@ -311,19 +311,19 @@ function toggle_fps_visible()
 function draw()
 {
 
-	//描画コア
+	// Drawing Core
 	
-	//開始時刻保存
+	// Save start time
 	if(g_start_time == 0)
 	{
 		g_start_time = g_time;
 		g_next_time  = g_time + MORPH_TIME;
 		
-		//オブジェクトの初期化
+		// Object Initialization
 		init_obj();
 	}
 	
-	//色の準備
+	// Preparation of colors
 	let time = (g_time - g_start_time) / MORPH_TIME;
 	if(time > 1.0){ time = 1.0; }
 	const ce = Ease.easeInSine(time);
@@ -343,7 +343,7 @@ function draw()
 		g_colors.push(col);
 	}
 
-	//画面クリア
+	// Screen Clear
 	const sc_w = g_game_width;
 	const sc_h = g_game_height;
 	const ctx  = g_screen_ctx;
@@ -353,7 +353,7 @@ function draw()
 	
 	ctx.translate(sc_w / 2,sc_h / 2);
 	
-	//縞模様オブジェクトの描画
+	// Draw Stripe Pattern Object
 	for(let i = 0;i < g_obj.length;++i)
 	{
 		const info = g_obj[i];
@@ -381,13 +381,13 @@ function draw()
 	
 	ctx.restore();
 	
-	//縞模様オブジェクト情報の更新
+	// Update Stripe Pattern Object Info
 	update_obj();
 	
-	//色変更時刻チェック
+	// Color change time check
 	if(g_time >= g_next_time)
 	{
-		//次の区切り時刻を決めてリセット
+		// Determine next break time and reset
 		g_start_time = g_time;
 		g_next_time  = g_start_time + MORPH_TIME;
 		reset();
@@ -398,9 +398,9 @@ function draw()
 function render()
 {
 	
-	//毎ターンの描画処理
+	// Drawing processing for every turn
 	
-	//時間計算
+	// Time Calculation
 	const last_time = g_time;
 	g_time = (new Date).getTime();
 	if(last_time == 0)
@@ -408,13 +408,13 @@ function render()
 	else
 	{	g_dtime = g_time - last_time;	}
 	
-	//描画コア
+	// Drawing Core
 	draw();
 	
-	//FPS描画
+	// Draw FPS
 	draw_fps();
 	
-	//次の描画呼び出しを登録
+	// Register next drawing call
 	window.requestAnimationFrame(render);
 
 }

@@ -1,53 +1,53 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-<title>パパのマンデルブロ集合</title>
+<title>Papa's Mandelbrot Set</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=320, user-scalable=no, initial-scale=1.0">
 <meta http-equiv="Cache-Control" content="no-cache">
 <!--
-	このデモは、マンデルブロ集合をJavaScriptのCanvasで描画します。
+	This demo draws Mandelbrot Sets on JavaScript Canvas.
 	
-	マンデルブロ集合(Wikipedia)
+	Mandelbrot Set (Wikipedia)
 	https://ja.wikipedia.org/wiki/%E3%83%9E%E3%83%B3%E3%83%87%E3%83%AB%E3%83%96%E3%83%AD%E9%9B%86%E5%90%88
 	
-	マンデルブロ集合は、Wikipediaによると、以下の漸化式(ぜんかしき)によって
-	定義されるとありますが…
+	According to Wikipedia, the Mandelbrot set is defined by the following recurrence formula
+	It is written that it is defined...
 	
 	Zn+1 = Zn^2 + C
 	Z0   = 0
 	
-	よくわからないので、下記のサイトの説明を参考に実装しました。
-	ありがとうございます！
+	I don't understand it well, so I implemented it referencing the explanation on the site below.
+	Thank you!
 	https://wgld.org/d/glsl/g005.html
 	http://turanegaku.hateblo.jp/entry/2016/02/06/020958
 	https://azisava.sakura.ne.jp/mandelbrot/algorithm.html
 	https://www.programmingmat.jp/soft_dev/mandjs.html
 	https://woodhero2357.hatenablog.com/entry/2018/06/06/235830
 	
-	マンデルブロ集合とは、ある計算を繰り返した時に、発散しない
-	点の集合ということみたいです。
+	The Mandelbrot set is defined as the set of points that do not diverge when a certain calculation is repeated
+	It seems to mean a set of points.
 	
-	ここで言う発散とは無限に値が大きくなる状態のことを言うそうです。
-	逆に発散しない値は、値が動かなかったり、+側と-側で行ったり来たり
-	するような値で、これを振動すると言うようです。
+	Divergence here means a state where the value becomes infinitely large.
+	Conversely, values that do not diverge do not move, or go back and forth between + and - sides
+	values that do that, and this is called oscillation.
 	
-	つまり、マンデルブロ集合はある回数計算を繰り返しても発散しなかった
-	部分を表したものということです。
+	In other words, the Mandelbrot set did not diverge even after repeating calculation a certain number of times
+	It means it represents the part.
 	
-	マンデルブロ集合の色は、ある回数内の計算内で発散してしまうと判断
-	されるまでの回数などで決めるようです。
-	発散しない場合、計算回数はMax値になります。
+	The color of the Mandelbrot set is determined by judging if it diverges within a certain number of calculations
+	It seems to be decided by the number of times until it happens.
+	If it does not diverge, the calculation count becomes the Max value.
 	
-	発散してるかどうかは、↑の解説サイトを参考にすると、
-	複素数z = a+bi として、√(a*a+b*b) > 2 という条件のようですが、
-	平方根の計算を省いて、(a*a+b*b) > 4 で判定します。
-	(4より大きいと発散する値だと判断する)
+	Whether it is diverging or not, referencing the explanation site above,
+	It seems the condition is √(a*a+b*b) > 2, where complex number z = a+bi,
+	Omitting square root calculation, judge by (a*a+b*b) > 4.
+	(Values larger than 4 are considered to diverge)
 	
-	マンデルブロ集合、難しいですね(*´ω｀*)
+	Mandelbrot set is difficult, isn't it (*´ω｀*)
 	
 	
-	(C)2020 ぼいち(@voich2014)
+	(C)2020 Voich(@voich2014)
 
 -->
 <style type="text/css">
@@ -100,30 +100,30 @@
 -->
 </style>
 
-<!-- 自前ライブラリ群 -->
+<!-- Self-made Libraries -->
 <script type="text/javascript">
 
 function rad(deg)
 {
-	//度→ラジアン変換
+	// Degree -> Radian conversion
 	return deg * Math.PI / 180;
 }
 
 function rnd(x)
 {
-	//乱数取得
+	// Get random number
 	return Math.floor(Math.random() * x);
 }
 
 function max(a,b)
 {
-	//大きい方を返す
+	// Return larger one
 	return Math.max(a,b);
 }
 
 function min(a,b)
 {
-	//小さい方を返す
+	// Return smaller one
 	return Math.min(a,b);
 }
 
@@ -140,16 +140,16 @@ function lerpColor(col1,col2,x)
 
 function hsl2rgb(h,s,l)
 {
-	//HSLからRGBに変換
+	// Convert HSL to RGB
 	//
-	//  h(hue)       : 色相  0-359の値[度]
-	//  s(saturation): 彩度  0-1.0の値[%]
-	//  l(lightness) : 明度  0-1.0の値[%]
+	//  h(hue)       : Hue  Value from 0-359 [degrees]
+	//  s(saturation): Saturation  Value from 0-1.0 [%]
+	//  l(lightness) : Lightness  Value from 0-1.0 [%]
 	//
 	let max,min;
 	let r,g,b;
 	
-	//念のためHを補正
+	// Correct H just in case
 	h = h % 360;
 
 	if(l < 0.5)
@@ -207,16 +207,16 @@ function hsl2rgb(h,s,l)
 	return { r:r/255, g: g/255, b: b/255 };
 }
 
-//パーリンノイズクラス
+// Perlin Noise Class
 //https://gist.github.com/Flafla2/f0260a861be0ebdeef76
-//↑のC#のソースを参考に雑に移植しています。
-//ご利用は自己責任でお願いします。
+// ^ Roughly ported referring to the C# source above.
+// Please use at your own risk.
 class Perlin
 {
-	//コンストラクタ
+	// Constructor
 	constructor(repeat = -1)
 	{
-		//メンバの初期化
+		// Initialize members
 		this.repeat = repeat;
 		
 		const permutation =
@@ -287,7 +287,7 @@ class Perlin
 		return a + x * (b - a);
 	}
 	
-	//パーリンノイズ取得(0.0～1.0の値が返ります)
+	// Get Perlin Noise (Returns value 0.0-1.0)
 	perlin(x,y,z)
 	{
 		if(this.repeat > 0)
@@ -358,15 +358,15 @@ class Perlin
 	
 }
 
-//疑似シェーダ関数クラス
+// Pseudo Shader Function Class
 //https://www.khronos.org/registry/OpenGL-Refpages/gl4/
 //https://yrlab.zatunen.com/webgl/noise/noise.html
-//これらのサイトを参考にシェーダ内で利用できる関数を
-//模倣したものです。
-//ご利用は自己責任でお願いします。
+// Functions available in shader referring to these sites
+// It is an imitation.
+// Please use at your own risk.
 class SL
 {
-	//コンストラクタ
+	// Constructor
 	constructor()
 	{
 	}
@@ -403,7 +403,7 @@ class SL
 	
 	static random(x,y)
 	{
-		//0.0 ～ 1.0の乱数を返す
+		// Return random number 0.0 - 1.0
 		return this.fract(this.sin(this.dot2(x,y,12.9898,78.233)) * 43758.5453);
 	}
 	
@@ -423,7 +423,7 @@ class SL
 	
 	static interpolation(f)
 	{
-		// 0.0 ～ 1.0の補間式、5次のものがアーティファクト少なくていいらしい
+		// Interpolation formula from 0.0 to 1.0, 5th order seems to have fewer artifacts
 		//return f * f * (3.0 - 2.0 * f);
 		return f * f * f * (f * (6.0 * f - 15.0) + 10.0);
 	}
@@ -445,7 +445,7 @@ class SL
 	
 	static mixCol(col1,col2,a)
 	{
-		//r,g,bは0.0～1.0
+		// r, g, b are 0.0-1.0
 		
 		const aa  = 1.0 - a;
 		const col =
@@ -460,7 +460,7 @@ class SL
 	
 	static rotate2d(angle,x,y)
 	{
-		//Z軸回転
+		// Z axis rotation
 		const rx =  x * Math.cos(angle) + y * Math.sin(angle);
 		const ry = -x * Math.sin(angle) + y * Math.cos(angle);
 		return { x:rx,y:ry };
@@ -468,7 +468,7 @@ class SL
 	
 	static smoothstep(edge0,edge1,x)
 	{
-		//Wikipediaより
+		// From Wikipedia
 	    // Scale, bias and saturate x to 0..1 range
 	    x = this.clamp((x - edge0) / (edge1 - edge0),0.0,1.0);
 	    // Evaluate polynomial
@@ -476,13 +476,13 @@ class SL
 	}
 }
 
-//ブロックノイズクラス
+// Block Noise Class
 //https://yrlab.zatunen.com/webgl/noise/noise.html
-//↑の記事を参考に実装しています。
-//ご利用は自己責任でお願いします。
+// ^ Implemented referring to the article above.
+// Please use at your own risk.
 class BlockNoise
 {
-	//コンストラクタ
+	// Constructor
 	constructor()
 	{
 	}
@@ -496,13 +496,13 @@ class BlockNoise
 	
 }
 
-//バリューノイズクラス
+// Value Noise Class
 //https://yrlab.zatunen.com/webgl/noise/noise.html
-//↑の記事を参考に実装しています。
-//ご利用は自己責任でお願いします。
+// ^ Implemented referring to the article above.
+// Please use at your own risk.
 class ValueNoise
 {
-	//コンストラクタ
+	// Constructor
 	constructor()
 	{
 	}
@@ -525,13 +525,13 @@ class ValueNoise
 	
 }
 
-//セルラーノイズクラス
+// Cellular Noise Class
 //https://yrlab.zatunen.com/webgl/noise/noise.html
-//↑の記事を参考に実装しています。
-//ご利用は自己責任でお願いします。
+// ^ Implemented referring to the article above.
+// Please use at your own risk.
 class CellularNoise
 {
-	//コンストラクタ
+	// Constructor
 	constructor()
 	{
 	}
@@ -558,20 +558,20 @@ class CellularNoise
 			}
 		}
 		
-		o = Math.min(Math.pow(o * 1.0,3.0),1.0);	//値の勾配を調整
+		o = Math.min(Math.pow(o * 1.0,3.0),1.0);	// Adjust gradient of value
 		
 		return o
 	}
 	
 }
 
-//反転セルラーノイズクラス
+// Inverted Cellular Noise Class
 //https://yrlab.zatunen.com/webgl/noise/noise.html
-//↑の記事を参考に実装しています。
-//ご利用は自己責任でお願いします。
+// ^ Implemented referring to the article above.
+// Please use at your own risk.
 class InverseCellularNoise
 {
-	//コンストラクタ
+	// Constructor
 	constructor()
 	{
 	}
@@ -583,16 +583,16 @@ class InverseCellularNoise
 	
 }
 
-//ドメインワーピングクラス
+// Domain Warping Class
 //https://qiita.com/edo_m18/items/e4d7a084cdbbfdc7863c
-//↑の記事を参考に実装しています。
-//ご利用は自己責任でお願いします。
+// ^ Implemented referring to the article above.
+// Please use at your own risk.
 class DomainWarping
 {
-	//コンストラクタ
+	// Constructor
 	constructor()
 	{
-		//メンバの初期化
+		// Initialize members
 		this.pn        = new Perlin();
 		this.noise     = this.perlin_noise;
 		this.octaves   = 5;
@@ -653,7 +653,7 @@ class DomainWarping
 	
 	getColor(x,y,t)
 	{
-		//x,y は 0.0 ～ 1.0
+		// x, y are 0.0 - 1.0
 		
 		let color = { r:0.0,g:0.0,b:0.0 };
 		
@@ -661,7 +661,7 @@ class DomainWarping
 		q.x = this.fbm(x,y);
 		q.y = this.fbm(x + 1.0,y + 1.0);
 		
-		//1.7や9.2は任意の数値です。特別な意味はないです。
+		// 1.7 and 9.2 are arbitrary numbers. No special meaning.
     	let r = { x:0,y:0 };
     	const add_qx  = (4.0 * q.x);
     	const add_qy  = (4.0 * q.y);
@@ -692,16 +692,16 @@ class DomainWarping
 
 }
 
-//ウッドテクスチャクラス
+// Wood Texture Class
 //https://thebookofshaders.com/edit.php#11/wood.frag
-//↑の記事を参考に実装しています。
-//ご利用は自己責任でお願いします。
+// ^ Implemented referring to the article above.
+// Please use at your own risk.
 class WoodTexture
 {
-	//コンストラクタ
+	// Constructor
 	constructor()
 	{
-		//メンバの初期化
+		// Initialize members
 		this.pn        = new Perlin();
 		this.mp        = { x:3.0,y:10.0 }; 
 		this.lp        = 0.5;
@@ -737,7 +737,7 @@ class WoodTexture
 	
 	getColor(x,y,t)
 	{
-		//x,y は 0.0 ～ 1.0
+		// x, y are 0.0 - 1.0
 		
 		let pos = { x:x * this.mp.x,y:y * this.mp.y };
 		
@@ -759,16 +759,16 @@ class WoodTexture
 
 }
 
-//リッジ(尾根)テクスチャクラス
+// Ridge Texture Class
 //https://thebookofshaders.com/edit.php#13/ridge.frag
-//↑の記事を参考に実装しています。
-//ご利用は自己責任でお願いします。
+// ^ Implemented referring to the article above.
+// Please use at your own risk.
 class RidgeTexture
 {
-	//コンストラクタ
+	// Constructor
 	constructor()
 	{
-		//メンバの初期化
+		// Initialize members
 		this.pn        = new Perlin();
 		this.gain      = 0.5;
 		this.offset    = 0.9;
@@ -798,7 +798,7 @@ class RidgeTexture
 		this.baseColor.b = color.b;
 	}
 
-// 失敗した…
+// Failed...
 //	mod289_3d(x,y,z)
 //	{
 //		const xx = x - Math.floor(x * (1.0 / 289.0)) * 289.0;
@@ -926,7 +926,7 @@ class RidgeTexture
 	
 	getColor(x,y,t)
 	{
-		//x,y は 0.0 ～ 1.0
+		// x, y are 0.0 - 1.0
 		
 		const lacunarity = 2.0;
 		const gain       = this.gain;
@@ -939,7 +939,7 @@ class RidgeTexture
 		let prev = 1.0;
 		for(let i = 0;i < octaves;++i)
 		{
-			//let n = this.ridge(this.snoise(x,y),offset);	//失敗した
+			// let n = this.ridge(this.snoise(x,y),offset);	// Failed
 			let n = this.ridge(g_pn.perlin(x,y,t),offset);
 			sum  += n * amp;
 			sum  += n * amp * prev;
@@ -960,16 +960,16 @@ class RidgeTexture
 
 }
 
-//タービュランス(乱気流)テクスチャクラス
+// Turbulence Texture Class
 //https://thebookofshaders.com/edit.php#13/turbulence.frag
-//↑の記事を参考に実装しています。
-//ご利用は自己責任でお願いします。
+// ^ Implemented referring to the article above.
+// Please use at your own risk.
 class TurbulenceTexture
 {
-	//コンストラクタ
+	// Constructor
 	constructor()
 	{
-		//メンバの初期化
+		// Initialize members
 		this.pn        = new Perlin();
 		this.gain      = 2;
 		this.octaves   = 3;
@@ -993,13 +993,13 @@ class TurbulenceTexture
 		this.baseColor.b = color.b;
 	}
 
-	//ほんとは、RidgeTextureと同じsnoiseを使うのですが、
-	//再現が上手く出来なかったので、これもパーリンノイズ
-	//で代用します
+	// Actually, I use the same snoise as RidgeTexture, but
+	// Couldn't reproduce well, so this is also Perlin Noise
+	// Substitute with
 	
 	getColor(x,y,t)
 	{
-		//x,y は 0.0 ～ 1.0
+		// x, y are 0.0 - 1.0
 		
 		const gain    = this.gain;
 		const octaves = this.octaves;
@@ -1026,16 +1026,16 @@ class TurbulenceTexture
 
 }
 
-//スプラッターテクスチャクラス
+// Splatter Texture Class
 //https://thebookofshaders.com/edit.php#11/splatter.frag
-//↑の記事を参考に実装しています。
-//ご利用は自己責任でお願いします。
+// ^ Implemented referring to the article above.
+// Please use at your own risk.
 class SplatterTexture
 {
-	//コンストラクタ
+	// Constructor
 	constructor()
 	{
-		//メンバの初期化
+		// Initialize members
 		this.pn        = new Perlin();
 		this.gain      = 10;
 		this.baseColor = { r:1.0,g:1.0,b:1.0 };
@@ -1055,7 +1055,7 @@ class SplatterTexture
 
 	getColor(x,y,t)
 	{
-		//x,y は 0.0 ～ 1.0
+		// x, y are 0.0 - 1.0
 		
 		const gain = this.gain;
 		
@@ -1078,13 +1078,13 @@ class SplatterTexture
 
 }
 
-//イージング関数クラス
+// Easing Function Class
 //https://easings.net/ja#
-//↑のソースを参考に雑に移植しています。
-//ご利用は自己責任でお願いします。
+// ^ Roughly ported referring to the source above.
+// Please use at your own risk.
 class Ease
 {
-	//コンストラクタ
+	// Constructor
 	constructor()
 	{
 	}
@@ -1301,13 +1301,13 @@ class Ease
 
 
 
-//グローバルオブジェクト
+// Global Object
 let g_game_width    = 320;
 let g_game_height   = 320;
 
-let g_pn     = new Perlin();			//パーリンノイズ生成用
-let g_time   = 0;						//現在時刻[ms]
-let g_dtime  = 0;						//前回の描画からの経過時間[ms]
+let g_pn     = new Perlin();			// For generating Perlin Noise
+let g_time   = 0;						// Current time [ms]
+let g_dtime  = 0;						// Elapsed time since last drawing [ms]
 
 const MORPH_TIME    = 3000;
 let g_screen_ctx    = null;
@@ -1334,19 +1334,19 @@ let g_cnt = 0;
 function init()
 {
 	
-	//初期化処理
+	// Initialization processing
 	
-	//準備
+	// Preparation
 	setup();
 	
-	//requestAnimationFrameの準備(各種ブラウザ対応)
+	// Preparation of requestAnimationFrame (compatible with various browsers)
 	let requestAnimationFrame = window.requestAnimationFrame       ||
                                 window.mozRequestAnimationFrame    ||
                                 window.webkitRequestAnimationFrame ||
                                 window.msRequestAnimationFrame;
     window.requestAnimationFrame = requestAnimationFrame;
     
-	//描画を登録
+	// Register drawing
 	window.requestAnimationFrame(render);
 	
 }
@@ -1354,21 +1354,21 @@ function init()
 function adjust_screen()
 {
 
-	//画面調整
+	// Screen Adjustment
 	
-	//ウインドウのサイズを取得
+	// Get window size
 	let window_w = window.innerWidth;
 	let window_h = window.innerHeight;
 	
-	//ウインドウ幅が十分に広い場合はPCだとして
-	//画面サイズを変更する
+	// Assuming it's a PC if window width is wide enough
+	// Change screen size
 	if((g_game_width * 2) <= window_w)
 	{
 		g_game_width  = 480;
 		g_game_height = 480;
 	}
 	
-	//ゲームスクリーンを中央に配置
+	// Place game screen in center
 	let screen  = document.getElementById("game-screen");
 	let game_x  = (window_w - g_game_width)  / 2;
 	let game_y  = (window_h - g_game_height) / 2;
@@ -1378,11 +1378,11 @@ function adjust_screen()
 	screen.width      = g_game_width;
 	screen.height     = g_game_height;
 
-	//オフスクリーン用のImageDataを作成
+	// Create ImageData for off-screen
 	let ctx = screen.getContext("2d");
 	g_offsc = ctx.createImageData(g_game_width,g_game_height);
 	
-	//最初にアルファ値が255になるように埋める
+	// Fill so alpha value becomes 255 at first
 	g_offsc.data.fill(255);
 	
 }
@@ -1390,9 +1390,9 @@ function adjust_screen()
 function setup_obj()
 {
 
-	//オブジェクトの準備
+	// Preparation of object
 	
-	//メイン画面のContextを取得しておく
+	// Get Context of main screen in advance
 	const screen = document.getElementById("game-screen");
 	g_screen_ctx = screen.getContext("2d");
 	
@@ -1401,12 +1401,12 @@ function setup_obj()
 function setup()
 {
 	
-	//準備
+	// Preparation
 		
-	//画面調整
+	// Screen Adjustment
 	adjust_screen();
 	
-	//オブジェクトの準備
+	// Preparation of object
 	setup_obj();
 
 }
@@ -1414,19 +1414,19 @@ function setup()
 function draw_fps()
 {
 	
-	//FPS計測
+	// FPS Measurement
 	
-	//現在時刻を取得
+	// Get current time
 	let now_time = Date.now();
 	
 	if((now_time - g_last_fps_time) >= 1000)
 	{
-		//FPS履歴に追加
+		// Add to FPS history
 		g_fps_list.push(g_fps_count);
 		if(g_fps_list.length > 10)
 		{	
-			//先頭を削除して過去n回分までの
-			//FPSの平均とします(移動平均)
+			// Delete first and keep up to past n times
+			// Use average of FPS (moving average)
 			g_fps_list.shift();
 		}
 		let fps_ave = 0;
@@ -1434,7 +1434,7 @@ function draw_fps()
 		{	fps_ave += g_fps_list[i];	}
 		fps_ave /= g_fps_list.length;
 		
-		//FPS表示
+		// FPS Display
 		let fps_div = document.getElementById("fps");
 		let fps     = (fps_ave*(1000/(now_time - g_last_fps_time)));
 		fps_div.innerText = "FPS:"+fps;
@@ -1450,9 +1450,9 @@ function draw_fps()
 function draw()
 {
 
-	//描画コア
+	// Drawing Core
 	
-	//開始時刻保存
+	// Save start time
 	if(g_start_time  == 0)
 	{
 		g_start_time = g_time;
@@ -1461,29 +1461,29 @@ function draw()
 	
 	if((g_time - g_last_draw) >= 100)
 	{
-		//経過時間計算
+		// Calculate elapsed time
 		const t  = (g_time - g_start_time);
 		const tz = g_cnt / 100;
 		const tp = 2 + g_cnt / 10;
 		
-		//画面キャンバスの全ピクセルについて判定して色付け
+		// Determine and color all pixels of screen canvas
 		const sc_w     = g_game_width;
 		const sc_h     = g_game_height;
-		let   zoom     = 0.25 + Math.pow(tz,tp);	//拡大率
+		let   zoom     = 0.25 + Math.pow(tz,tp);	// Scale factor
 		let   data     = g_offsc.data;
 		let   pos_list = [];
-		for(let i = 0;i < sc_h;++i)		//複素平面の虚軸
+		for(let i = 0;i < sc_h;++i)		// Imaginary axis of complex plane
 		{
 			let i_pos = sc_w * i;
-			for(let r = 0;r < sc_w;++r)	//複素平面の実軸
+			for(let r = 0;r < sc_w;++r)	// Real axis of complex plane
 			{
-				//画面の解像度で正規化して利用
+				// Normalize by screen resolution and use
 				const tr = ((r / sc_w) - 0.6 ) / zoom;
 				const ti = ((i / sc_w) - 0.25) / zoom;
 				cr = g_pos_r + tr;
 				ci = g_pos_i + ti;
 				
-				//発散するまでの回数を調べる
+				// Check number of times until divergence
 				const CALC_MAX = 240;
 				let x = 0;
 				let y = 0;
@@ -1495,23 +1495,23 @@ function draw()
 					x = xx;
 					y = yy;
 					
-					//発散すると判断できるか？
+					// Can be determined to diverge?
 					if(((x * x) + (y * y)) > 4)
 					{	break;	}
 				}
 			
-				//発散しなかったら黒
+				// Black if did not diverge
 				let col = { r:0.0,g:0.0,b:0.0 };
 				if(n < CALC_MAX)
 				{
-					//発散がMAX回数に近いほど暗くする
-					//g_cntの大きさに合わせてちょっとずつ明るくもしておく
+					// Make darker as divergence gets closer to MAX count
+					// Make it slightly brighter according to the size of g_cnt
 					const MAX_L = 1.0;
 					const nr    = n / CALC_MAX;
 					col = hsl2rgb(g_base_hue + nr * 360 + tr * 120 + ti * 180,1.0,
 								  (nr > 0.8) ? (nr * 0.25) : (MAX_L - nr * MAX_L + (g_cnt / 4000)));
 					
-					//かろうじて発散するところを覚えておく
+					// Remember where it barely diverges
 					if((0.88 < nr) && (nr < 0.9))
 					{
 						pos_list.push({ r:tr,i:ti });
@@ -1525,7 +1525,7 @@ function draw()
 			}
 		}
 		
-		//ターゲット位置を決定する
+		// Determine target position
 		const MOVE_TIMES = 100;
 		if((g_pos_r == 0) && (g_pos_i == 0))
 		{
@@ -1536,25 +1536,25 @@ function draw()
 			g_pos_di   = g_target_i / MOVE_TIMES;
 		}
 		
-		//ターゲットの更新
+		// Update target
 		if(g_cnt < MOVE_TIMES)
 		{
 			g_pos_r+= g_pos_dr;
 			g_pos_i+= g_pos_di;
 		}
 		
-		//ターゲット終了チェック
+		// Target completion check
 		if((g_cnt > 200) && (g_target_end == 0))
 		{
 			g_target_end = g_time;
 		}
 		
-		//メイン画面用キャンバスを更新
+		// Update canvas for main screen
 		g_screen_ctx.putImageData(g_offsc,0,0);
 		g_last_draw = g_time;
 		g_cnt++;
 		
-		//フェードイン
+		// Fade In
 		if(t < 500)
 		{
 			g_screen_ctx.save();
@@ -1562,13 +1562,13 @@ function draw()
 			g_screen_ctx.fillRect(0,0,sc_w,sc_h);
 			g_screen_ctx.restore();
 		}
-		//フェードアウト
+		// Fade Out
 		if(g_target_end != 0)
 		{
 			let fo = (g_time - g_target_end) / 1000;
 			if(fo >= 1.0)
 			{
-				//リセットを掛けておく
+				// Apply reset
 				g_start_time = 0;
 				g_pos_r      = 0;
 				g_pos_i      = 0;
@@ -1590,9 +1590,9 @@ function draw()
 function render()
 {
 	
-	//毎ターンの描画処理
+	// Drawing processing for every turn
 	
-	//時間計算
+	// Time Calculation
 	const last_time = g_time;
 	g_time = (new Date).getTime();
 	if(last_time == 0)
@@ -1600,13 +1600,13 @@ function render()
 	else
 	{	g_dtime = g_time - last_time;	}
 	
-	//描画コア
+	// Drawing Core
 	draw();
 	
-	//FPS描画
+	// Draw FPS
 	draw_fps();
 	
-	//次の描画呼び出しを登録
+	// Register next drawing call
 	window.requestAnimationFrame(render);
 
 }

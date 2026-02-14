@@ -1,0 +1,802 @@
+[
+    {
+        "original": "//簡単に言うと、カメラに近いものは大きく、遠いものは小さくする行列",
+        "translated": "// Simply put, a matrix that makes things closer to camera larger and things further away smaller"
+    },
+    {
+        "original": "//素敵なのを描画",
+        "translated": "// Draw something wonderful"
+    },
+    {
+        "original": "//終点をチェック",
+        "translated": "// Check end point"
+    },
+    {
+        "original": "//終点を描画",
+        "translated": "// Draw end point"
+    },
+    {
+        "original": "//経過時刻から現在の速度を計算",
+        "translated": "// Calculate current speed from elapsed time"
+    },
+    {
+        "original": "//経過時間で位置を決定",
+        "translated": "// Determine position by elapsed time"
+    },
+    {
+        "original": "//経過時間を算出",
+        "translated": "// Calculate elapsed time"
+    },
+    {
+        "original": "//経過時間を計算",
+        "translated": "// Calculate elapsed time"
+    },
+    {
+        "original": "//経過時間決定",
+        "translated": "// Determine elapsed time"
+    },
+    {
+        "original": "//経過時間計算",
+        "translated": "// Calculate elapsed time"
+    },
+    {
+        "original": "//線分の透明度を決めます",
+        "translated": "// Determine transparency of line segment"
+    },
+    {
+        "original": "//線路に沿ってカメラ位置を設定",
+        "translated": "// Set camera position along the track"
+    },
+    {
+        "original": "//線路の左右に配置するスプライトを設定",
+        "translated": "// Set sprites to place on left and right of track"
+    },
+    {
+        "original": "//線路スプライトの位置を設定",
+        "translated": "// Set position of track sprite"
+    },
+    {
+        "original": "//縞模様オブジェクトの初期化",
+        "translated": "// Initialize Stripe Pattern Object"
+    },
+    {
+        "original": "//縞模様オブジェクトの描画",
+        "translated": "// Draw Stripe Pattern Object"
+    },
+    {
+        "original": "//縞模様オブジェクト情報の更新",
+        "translated": "// Update Stripe Pattern Object Info"
+    },
+    {
+        "original": "//縞模様オブジェクト情報の生成",
+        "translated": "// Generate Stripe Pattern Object Info"
+    },
+    {
+        "original": "//縦に検索",
+        "translated": "// Search vertically"
+    },
+    {
+        "original": "//縦方向ぼかし",
+        "translated": "// Vertical Blur"
+    },
+    {
+        "original": "//縦方向／横方向の2パスでガウスぼかしを掛ける",
+        "translated": "// Apply Gaussian blur in 2 passes: vertical/horizontal"
+    },
+    {
+        "original": "//縦線(Z方向)のラインを描画",
+        "translated": "// Draw vertical line (Z direction)"
+    },
+    {
+        "original": "//縮小された絵にフィルタをかけながら画面に反映(加算合成)",
+        "translated": "// Reflect on screen (additive blending) while applying filter to reduced image"
+    },
+    {
+        "original": "//繰り返しパラメータを探す",
+        "translated": "// Search for repeat parameters"
+    },
+    {
+        "original": "//背景が白固定なので、濃い目の色を選びました",
+        "translated": "// Since background is fixed to white, I chose a darker color"
+    },
+    {
+        "original": "//背景の星空を準備",
+        "translated": "// Prepare background starry sky"
+    },
+    {
+        "original": "//背景色で塗りつぶす",
+        "translated": "// Fill with background color"
+    },
+    {
+        "original": "//背面",
+        "translated": "// Back Face"
+    },
+    {
+        "original": "//自分と直近の履歴のキー以外の近くの座標を集める",
+        "translated": "// Collect nearby coordinates other than self and keys of recent history"
+    },
+    {
+        "original": "//色の器を準備",
+        "translated": "// Prepare container for colors"
+    },
+    {
+        "original": "//色の準備",
+        "translated": "// Preparation of colors"
+    },
+    {
+        "original": "//色の違う部分を検索して、境界線の座標リストを作ります",
+        "translated": "// Search for parts with different colors and create list of boundary coordinates"
+    },
+    {
+        "original": "//色の選択",
+        "translated": "// Color Selection"
+    },
+    {
+        "original": "//色をキャッシュから取得",
+        "translated": "// Get color from cache"
+    },
+    {
+        "original": "//色を打つ",
+        "translated": "// Apply color"
+    },
+    {
+        "original": "//色を決める",
+        "translated": "// Determine color"
+    },
+    {
+        "original": "//色を設定",
+        "translated": "// Set color"
+    },
+    {
+        "original": "//色を選択します",
+        "translated": "// Select color"
+    },
+    {
+        "original": "//色キャッシュクリア",
+        "translated": "// Clear color cache"
+    },
+    {
+        "original": "//色付判定計算",
+        "translated": "// Calculate coloring judgment"
+    },
+    {
+        "original": "//色変化時刻チェック",
+        "translated": "// Color change time check"
+    },
+    {
+        "original": "//色変更",
+        "translated": "// Color Change"
+    },
+    {
+        "original": "//色変更時刻チェック",
+        "translated": "// Color change time check"
+    },
+    {
+        "original": "//花火の要素はここで決めます",
+        "translated": "// Decide firework elements here"
+    },
+    {
+        "original": "//花火アニメ",
+        "translated": "// Fireworks Animation"
+    },
+    {
+        "original": "//草",
+        "translated": "// Grass"
+    },
+    {
+        "original": "//落下させる",
+        "translated": "// Make it fall"
+    },
+    {
+        "original": "//落下中なら加速させる",
+        "translated": "// Accelerate if falling"
+    },
+    {
+        "original": "//落下終了後はその場で待機",
+        "translated": "// Wait there after fall ends"
+    },
+    {
+        "original": "//落下開始までは動かない",
+        "translated": "// Don't move until fall starts"
+    },
+    {
+        "original": "//葉っぱになる部分なので、濃い色のグラデーションなどを選びました",
+        "translated": "// Since it becomes leaves, I chose dark color gradations etc."
+    },
+    {
+        "original": "//薄い背景に混じらないような濃いめの色を選びました",
+        "translated": "// Chose a darker color that won't blend into the light background"
+    },
+    {
+        "original": "//行列との掛け算(列ベクトルとして計算(行列と縦に掛ける))",
+        "translated": "// Multiplication with matrix (Calculate as column vector (multiply vertically with matrix))"
+    },
+    {
+        "original": "//行列との掛け算(列優先の場合は行列側を行ベクトルとして横にかける)",
+        "translated": "// Multiplication with matrix (In case of column-major, multiply horizontally treating matrix side as row vector)"
+    },
+    {
+        "original": "//行列に当てはめる",
+        "translated": "// Apply to matrix"
+    },
+    {
+        "original": "//行列同士の引き算",
+        "translated": "// Subtraction between matrices"
+    },
+    {
+        "original": "//行列同士の掛け算",
+        "translated": "// Multiplication between matrices"
+    },
+    {
+        "original": "//行列同士の足し算",
+        "translated": "// Addition between matrices"
+    },
+    {
+        "original": "//表示タイミングじゃないものは見えない位置にする",
+        "translated": "// Place items not at display timing in invisible position"
+    },
+    {
+        "original": "//表示テスト用の最初のオブジェクトをセット",
+        "translated": "// Set first object for display test"
+    },
+    {
+        "original": "//表示フラグに合わせてvisible制御",
+        "translated": "// Control visible based on display flag"
+    },
+    {
+        "original": "//表示フラグを反転させる",
+        "translated": "// Invert display flag"
+    },
+    {
+        "original": "//表示画像を作成",
+        "translated": "// Create display image"
+    },
+    {
+        "original": "//表示画像を生成",
+        "translated": "// Generate display image"
+    },
+    {
+        "original": "//表示画像用のキャンバスを準備",
+        "translated": "// Prepare canvas for display image"
+    },
+    {
+        "original": "//表示画像転送",
+        "translated": "// Transfer display image"
+    },
+    {
+        "original": "//表示画面と同じサイズのオフスクリーンを生成",
+        "translated": "// Generate off-screen of same size as display screen"
+    },
+    {
+        "original": "//補間するZ値の増分値を算出",
+        "translated": "// Calculate increment value of Z value to interpolate"
+    },
+    {
+        "original": "//補間で回転分割数が増えていく際に位置が近すぎると",
+        "translated": "// If positions are too close when rotation division count increases by interpolation"
+    },
+    {
+        "original": "//補間で回転数が増えていく際に位置が近すぎると",
+        "translated": "// If positions are too close when rotation count increases by interpolation"
+    },
+    {
+        "original": "//複数段階の縦横2分の1ずつ解像度を下げたオフスクリーンキャンバスに",
+        "translated": "// To off-screen canvas with resolution lowered by half vertically and horizontally in multiple stages"
+    },
+    {
+        "original": "//見える範囲になるので、最大値が±1.0になるように座標値を補正します。",
+        "translated": "// Since it becomes visible range, correct coordinate values so max value is +/- 1.0."
+    },
+    {
+        "original": "//見え方小さいので2D的にズームして微調整",
+        "translated": "// Since appearance is small, zoom in 2D and fine tune"
+    },
+    {
+        "original": "//視点(カメラの位置)よりもZ座標が後ろのものは省く",
+        "translated": "// Omit items with Z coordinate behind viewpoint (camera position)"
+    },
+    {
+        "original": "//視線とポリゴンの法線の内積をとる",
+        "translated": "// Take dot product of line of sight and polygon normal"
+    },
+    {
+        "original": "//視線・光源とポリゴンの法線の内積をとる",
+        "translated": "// Take dot product of line of sight/light source and polygon normal"
+    },
+    {
+        "original": "//視野角に対してrzの位置での見える",
+        "translated": "// Visible at rz position relative to field of view"
+    },
+    {
+        "original": "//角度が0と90度の場合に半径は1.0倍だが、45度の時はp_ratio倍に",
+        "translated": "// Radius is 1.0x when angle is 0 and 90 degrees, but p_ratio times when 45 degrees"
+    },
+    {
+        "original": "//計算しきってしまいます。",
+        "translated": "// Calculate completely."
+    },
+    {
+        "original": "//計算のしやすさを考慮して、中心の点は後ろに持って",
+        "translated": "// Considering ease of calculation, bring center point to back"
+    },
+    {
+        "original": "//計算のしやすさを考慮して、頂上と中心の点は後ろに持って",
+        "translated": "// Considering ease of calculation, bring top and center points to back"
+    },
+    {
+        "original": "//設定更新",
+        "translated": "// Update settings"
+    },
+    {
+        "original": "//誤差値の更新",
+        "translated": "// Update error value"
+    },
+    {
+        "original": "//誤差値を初期化",
+        "translated": "// Initialize error value"
+    },
+    {
+        "original": "//誤差値を更新",
+        "translated": "// Update error value"
+    },
+    {
+        "original": "//調整用",
+        "translated": "// For adjustment"
+    },
+    {
+        "original": "//謎のいきものを描画",
+        "translated": "// Draw mysterious creature"
+    },
+    {
+        "original": "//謎のいきものを描画(歩いてるつもり)",
+        "translated": "// Draw mysterious creature (intending to walk)"
+    },
+    {
+        "original": "//起点を登録",
+        "translated": "// Register starting point"
+    },
+    {
+        "original": "//車のサイズを調整",
+        "translated": "// Adjust car size"
+    },
+    {
+        "original": "//車オブジェクトの描画",
+        "translated": "// Draw Car Object"
+    },
+    {
+        "original": "//近そうな座標を覚えておく",
+        "translated": "// Remember coordinates that seem close"
+    },
+    {
+        "original": "//迷路が完成したかをチェック",
+        "translated": "// Check if maze is completed"
+    },
+    {
+        "original": "//迷路が完成したので、次に0度になる時間を計算",
+        "translated": "// Maze completed, calculate time until it becomes 0 degrees next"
+    },
+    {
+        "original": "//迷路のサイズは必ず奇数にする",
+        "translated": "// Maze size must be odd"
+    },
+    {
+        "original": "//迷路の壁にだけテクスチャを貼る",
+        "translated": "// Apply texture only to maze walls"
+    },
+    {
+        "original": "//迷路の壁の部分だけ表示させる",
+        "translated": "// Display only maze wall parts"
+    },
+    {
+        "original": "//迷路の外になったら穴掘りしない",
+        "translated": "// Don't dig if outside the maze"
+    },
+    {
+        "original": "//迷路の描画",
+        "translated": "// Draw Maze"
+    },
+    {
+        "original": "//迷路をリセット",
+        "translated": "// Reset Maze"
+    },
+    {
+        "original": "//迷路を探索しておく",
+        "translated": "// Explore maze in advance"
+    },
+    {
+        "original": "//迷路を探索する",
+        "translated": "// Explore maze"
+    },
+    {
+        "original": "//迷路作成",
+        "translated": "// Create Maze"
+    },
+    {
+        "original": "//迷路配列を初期化",
+        "translated": "// Initialize maze array"
+    },
+    {
+        "original": "//透明部分は描画しない",
+        "translated": "// Do not draw transparent parts"
+    },
+    {
+        "original": "//通路だったのでここにする",
+        "translated": "// Was a passage so set here"
+    },
+    {
+        "original": "//通路情報を取得",
+        "translated": "// Get passage info"
+    },
+    {
+        "original": "//速すぎると良さが半減するので",
+        "translated": "// Because if too fast, the goodness is halved"
+    },
+    {
+        "original": "//速度によって伸ばす",
+        "translated": "// Stretch by speed"
+    },
+    {
+        "original": "//速度を0にする",
+        "translated": "// Set velocity to 0"
+    },
+    {
+        "original": "//速度更新",
+        "translated": "// Update velocity"
+    },
+    {
+        "original": "//進める通路が1箇所しかないのでそっちに進む",
+        "translated": "// Proceed there since there is only one passable passage"
+    },
+    {
+        "original": "//進める通路が2箇所以上あるので分岐点",
+        "translated": "// Branch point since there are 2 or more passable passages"
+    },
+    {
+        "original": "//進める通路が来た道しか無いので行き止まり",
+        "translated": "// Dead end since only passable passage is the way came"
+    },
+    {
+        "original": "//過去のフレームを半透明合成する",
+        "translated": "// Composite past frames semi-transparently"
+    },
+    {
+        "original": "//道路のサイズを調整",
+        "translated": "// Adjust road size"
+    },
+    {
+        "original": "//道路を移動させる",
+        "translated": "// Move road"
+    },
+    {
+        "original": "//道路オブジェクトの描画",
+        "translated": "// Draw Road Object"
+    },
+    {
+        "original": "//選定済みのIDからランダムチョイス",
+        "translated": "// Randomly choose from pre-selected IDs"
+    },
+    {
+        "original": "//配列は、中心1ピクセル+幅半分の個数になります。9x9 =1+4 = 5個",
+        "translated": "// Array will be center 1 pixel + half width count. 9x9 = 1+4 = 5 items"
+    },
+    {
+        "original": "//配置",
+        "translated": "// Arrangement"
+    },
+    {
+        "original": "//配置情報を覚えておく",
+        "translated": "// Remember arrangement info"
+    },
+    {
+        "original": "//配色を決める",
+        "translated": "// Determine color scheme"
+    },
+    {
+        "original": "//配色色を決定します",
+        "translated": "// Determine color scheme colors"
+    },
+    {
+        "original": "//重なって光りすぎるのを緩和する補正",
+        "translated": "// Correction to mitigate excessive glowing when overlapping"
+    },
+    {
+        "original": "//重ねた時に白飛びしない様に、暗すぎず明るすぎない色を選びました",
+        "translated": "// Chose colors not too dark and not too bright so they don't blow out when overlapped"
+    },
+    {
+        "original": "//重心座標でUVを求めて、1/wを掛けることで、",
+        "translated": "// By finding UV with barycentric coordinates and multiplying by 1/w,"
+    },
+    {
+        "original": "//重心座標でwを求める",
+        "translated": "// Calculate w with barycentric coordinates"
+    },
+    {
+        "original": "//閉じたので検索終わり",
+        "translated": "// Closed so search end"
+    },
+    {
+        "original": "//開始時刻の準備",
+        "translated": "// Preparation of start time"
+    },
+    {
+        "original": "//開始時刻保存",
+        "translated": "// Save start time"
+    },
+    {
+        "original": "//障害物があるので、横にランダムに移動",
+        "translated": "// Randomly move horizontally because there is an obstacle"
+    },
+    {
+        "original": "//障害物が無いので落下",
+        "translated": "// Fall because there is no obstacle"
+    },
+    {
+        "original": "//障害物図形を作成",
+        "translated": "// Create obstacle figure"
+    },
+    {
+        "original": "//障害物図形を設定",
+        "translated": "// Set obstacle figure"
+    },
+    {
+        "original": "//障害物図形データに追加",
+        "translated": "// Add to obstacle figure data"
+    },
+    {
+        "original": "//障害物図形用のキャンバスを準備",
+        "translated": "// Prepare canvas for obstacle figure"
+    },
+    {
+        "original": "//非表示対象だった場合はスキップ",
+        "translated": "// Skip if it was subject to hiding"
+    },
+    {
+        "original": "//頂上と底面の中心点の頂点座標を設定します",
+        "translated": "// Set vertex coordinates of top and bottom center points"
+    },
+    {
+        "original": "//頂上の1点と底面の中心の1点を決め、X-Z平面上に配置した、",
+        "translated": "// Decide 1 point on top and 1 point on bottom center, and placed on X-Z plane,"
+    },
+    {
+        "original": "//頂点v1から頂点v2へ伸びるベクトルaと",
+        "translated": "// Vector a extending from vertex v1 to vertex v2 and"
+    },
+    {
+        "original": "//頂点v1から頂点v3へ伸びるベクトルbを求める",
+        "translated": "// Calculate vector b extending from vertex v1 to vertex v3"
+    },
+    {
+        "original": "//頂点の法線ベクトルを計算",
+        "translated": "// Calculate vertex normal vector"
+    },
+    {
+        "original": "//頂点をスケーリングし、その頂点をレンダリング ターゲット",
+        "translated": "// Scale vertices and render them to target"
+    },
+    {
+        "original": "//頂点インデックスに対応したテクスチャ描画用のUV座標リストを作成",
+        "translated": "// Create UV coordinate list for texture drawing corresponding to vertex index"
+    },
+    {
+        "original": "//頂点インデックスに対応した境界線描画用のUV座標リストを作成",
+        "translated": "// Create UV coordinate list for border drawing corresponding to vertex index"
+    },
+    {
+        "original": "//頂点シェーダ",
+        "translated": "// Vertex Shader"
+    },
+    {
+        "original": "//頂点シェーダとフラグメントシェーダの生成(コンパイルまでしておく)",
+        "translated": "// Generation of Vertex Shader and Fragment Shader (compile as well)"
+    },
+    {
+        "original": "//頂点バッファに流し込むための配列を生成しておく",
+        "translated": "// Generate array to pour into vertex buffer in advance"
+    },
+    {
+        "original": "//頂点リストを生成",
+        "translated": "// Generate Vertex List"
+    },
+    {
+        "original": "//頂点座標に適用する",
+        "translated": "// Apply to vertex coordinates"
+    },
+    {
+        "original": "//頂点座標を変換して次につなげる",
+        "translated": "// Transform vertex coordinates and connect to next"
+    },
+    {
+        "original": "//頂点情報管理人",
+        "translated": "// Vertex Information Manager"
+    },
+    {
+        "original": "//頂点毎のUV座標情報の準備",
+        "translated": "// Preparation of UV coordinate info per vertex"
+    },
+    {
+        "original": "//順番に描画できるように近い位置の座標をリスト化していきます",
+        "translated": "// List coordinates of nearby positions so they can be drawn in order"
+    },
+    {
+        "original": "//領域の高さをグリッドにスナップさせる",
+        "translated": "// Snap area height to grid"
+    },
+    {
+        "original": "//高さが足りない場合はスキップ",
+        "translated": "// Skip if height is insufficient"
+    },
+    {
+        "original": "//高確率でだんだん透明になる軌跡を描きます",
+        "translated": "// Draw trail that becomes transparent with high probability"
+    },
+    {
+        "original": "//高解像度用のキャンバスを準備",
+        "translated": "// Prepare canvas for high resolution"
+    },
+    {
+        "original": "//高速にクリア",
+        "translated": "// Fast Clear"
+    },
+    {
+        "original": "//高速化と言うか、たまにプチフリーズするのを避ける",
+        "translated": "// More like avoiding occasional micro-freezes than speed up"
+    },
+    {
+        "original": "//高速化のための各種テーブルを準備",
+        "translated": "// Prepare various tables for speed optimization"
+    },
+    {
+        "original": "//高速化のため拡大と並行移動行列は手動で作り、",
+        "translated": "// For speed, create scaling and translation matrix manually,"
+    },
+    {
+        "original": "//高速化のため拡大と回転行列を必要最低限の計算で合成します",
+        "translated": "// For speed, compose scaling and rotation matrix with minimum calculation"
+    },
+    {
+        "original": "//高速化のため拡大と移動行列は手動で作り、",
+        "translated": "// For speed, create scaling and translation matrix manually,"
+    },
+    {
+        "original": "//黒で塗りつぶす",
+        "translated": "// Fill with black"
+    },
+    {
+        "original": "//（DirectX8.0日本語ヘルプより抜粋）",
+        "translated": "// (Excerpt from DirectX 8.0 Japanese Help)"
+    },
+    {
+        "original": "//（最初は落ち着くまですごく速く動いたりします）",
+        "translated": "// (At first it might move very fast until it settles)"
+    },
+    {
+        "original": "//１ピクセル目を描画",
+        "translated": "// Draw 1st pixel"
+    },
+    {
+        "original": "//２ピクセル同時に描画",
+        "translated": "// Draw 2 pixels simultaneously"
+    },
+    {
+        "original": "//２ピクセル同時に点を描画",
+        "translated": "// Draw points for 2 pixels simultaneously"
+    },
+    {
+        "original": "//２ピクセル目を描画",
+        "translated": "// Draw 2nd pixel"
+    },
+    {
+        "original": "//Ｘについてループする場合",
+        "translated": "// When looping for X"
+    },
+    {
+        "original": "//Ｙについてループ",
+        "translated": "// Loop for Y"
+    },
+    {
+        "original": "//Ｙ軸回転行列とはこういうもの",
+        "translated": "// Y-axis rotation matrix is like this"
+    },
+    {
+        "original": "//Ｙ軸回転行列とはこういうもの(列優先での配置)",
+        "translated": "// Y-axis rotation matrix is like this (column-major arrangement)"
+    },
+    {
+        "original": "//Ｚ軸回転行列とはこういうもの",
+        "translated": "// Z-axis rotation matrix is like this"
+    },
+    {
+        "original": "//Ｚ軸回転行列とはこういうもの(列優先での配置)",
+        "translated": "// Z-axis rotation matrix is like this (column-major arrangement)"
+    },
+    {
+        "original": "//ｎ角円オブジェクト管理人",
+        "translated": "// n-gon Circle Object Manager"
+    },
+    {
+        "original": "//ｎ角錐オブジェクト管理人",
+        "translated": "// n-gonal Pyramid Object Manager"
+    },
+    {
+        "original": "0, 0, 1,  0, 0, 1,  0, 0, 1,  0, 0, 1,  0, 0, 1,  0, 0, 1,\t\t//正面",
+        "translated": "0, 0, 1,  0, 0, 1,  0, 0, 1,  0, 0, 1,  0, 0, 1,  0, 0, 1,\t\t//Front"
+    },
+    {
+        "original": "0, 0,-1,  0, 0,-1,  0, 0,-1,  0, 0,-1,  0, 0,-1,  0, 0,-1,  \t//背面",
+        "translated": "0, 0,-1,  0, 0,-1,  0, 0,-1,  0, 0,-1,  0, 0,-1,  0, 0,-1,  \t//Back"
+    },
+    {
+        "original": "0, 1, 0,  0, 1, 0,  0, 1, 0,  0, 1, 0,  0, 1, 0,  0, 1, 0,\t\t//天面",
+        "translated": "0, 1, 0,  0, 1, 0,  0, 1, 0,  0, 1, 0,  0, 1, 0,  0, 1, 0,\t\t//Top"
+    },
+    {
+        "original": "0, 1, 2, 3, 4, 5,\t//左前面",
+        "translated": "0, 1, 2, 3, 4, 5,\t//Front Left"
+    },
+    {
+        "original": "0,-1, 0,  0,-1, 0,  0,-1, 0,  0,-1, 0,  0,-1, 0,  0,-1, 0  \t//底面",
+        "translated": "0,-1, 0,  0,-1, 0,  0,-1, 0,  0,-1, 0,  0,-1, 0,  0,-1, 0  \t//Bottom"
+    },
+    {
+        "original": "0,1,2,2,1,3,\t//正面",
+        "translated": "0,1,2,2,1,3,\t//Front"
+    },
+    {
+        "original": "0,1,3,3,1,4,\t//正面(上)",
+        "translated": "0,1,3,3,1,4,\t//Front (Top)"
+    },
+    {
+        "original": "0,1,4, 4,1,5,\t//左面(裏)",
+        "translated": "0,1,4, 4,1,5,\t//Left Face (Back)"
+    },
+    {
+        "original": "0,11,1,1,11,2,\t//右面(前)",
+        "translated": "0,11,1,1,11,2,\t//Right Face (Front)"
+    },
+    {
+        "original": "0,3,4, 3,7,4,\t//上面(裏)",
+        "translated": "0,3,4, 3,7,4,\t//Top Face (Back)"
+    },
+    {
+        "original": "0,4,3, 3,4,7,\t//上面(表)",
+        "translated": "0,4,3, 3,4,7,\t//Top Face (Front)"
+    },
+    {
+        "original": "1, 0, 0,  1, 0, 0,  1, 0, 0,  1, 0, 0,  1, 0, 0,  1, 0, 0, \t//右側面",
+        "translated": "1, 0, 0,  1, 0, 0,  1, 0, 0,  1, 0, 0,  1, 0, 0,  1, 0, 0, \t//Right Side"
+    },
+    {
+        "original": "1,0,5, 0,4,5,\t//左面(裏)",
+        "translated": "1,0,5, 0,4,5,\t//Left Face (Back)"
+    },
+    {
+        "original": "1,2,4,4,2,5,\t//正面(下)",
+        "translated": "1,2,4,4,2,5,\t//Front (Bottom)"
+    },
+    {
+        "original": "1,5,0, 0,5,4,\t//左面(表)",
+        "translated": "1,5,0, 0,5,4,\t//Left Face (Front)"
+    },
+    {
+        "original": "1,5,3,3,5,7\t\t//下面",
+        "translated": "1,5,3,3,5,7\t\t//Bottom Face"
+    },
+    {
+        "original": "12,13,14,15,16,17,\t//左背面",
+        "translated": "12,13,14,15,16,17,\t//Back Left"
+    },
+    {
+        "original": "18,19,20,21,22,23\t//右背面",
+        "translated": "18,19,20,21,22,23\t//Back Right"
+    },
+    {
+        "original": "2,3,4,4,3,5,\t//右面",
+        "translated": "2,3,4,4,3,5,\t//Right Face"
+    },
+    {
+        "original": "2,3,6, 6,3,7,\t//右面(表)",
+        "translated": "2,3,6, 6,3,7,\t//Right Face (Front)"
+    }
+]

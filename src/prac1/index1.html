@@ -1,23 +1,23 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-<title>パパの練習1(円弧の華)</title>
+<title>Papa's Practice 1 (Flower of Arcs)</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=320, user-scalable=no, initial-scale=1.0">
 <meta http-equiv="Cache-Control" content="no-cache">
 <!--
-	このデモでは、JavaScriptで画面を分割するパターンを練習します。
+	In this demo, I practice screen splitting patterns in JavaScript.
 	
-	練習1では分割パターンを斜めにしてみました。
-	中の図形は、グラデーション円弧を組み合わせたものです。
-	また、CSSでの額装にも挑戦しています。
+	In Practice 1, I tried making the division pattern diagonal.
+	The shape inside is a combination of gradient arcs.
+	Also, I am trying framing with CSS.
 	
-	額装の雰囲気は、中山 哲法さん(@tetunori_lego)の
-	「p5.jsで作品を額縁にかざる方法」を参考にさせて頂きました。
-	ありがとうございます！ 額の内側に影を落とすのもポイントですね。
+	The atmosphere of framing is from Tetsunori Nakayama-san (@tetunori_lego)
+	I referenced "How to display works in a frame with p5.js".
+	Thank you! Casting a shadow on the inside of the frame is also a key point.
 	https://qiita.com/tetunori_lego/items/bb80ba9ec4ec941428e3
 	
-	Copyright (c) 2021-2025 ぼいち(@voich2014 in Twitter)
+	Copyright (c) 2021-2025 Voich (@voich2014 in Twitter)
 	
 	Released under the MIT license.
  	see https://opensource.org/licenses/MIT
@@ -55,16 +55,16 @@
 </style>
 <script type="text/javascript">
 
-//グローバルオブジェクト
+// Global Object
 let g_game_width    = 250;
 let g_game_height   = 250;
 
-let g_time          = 0;		//現在時刻[ms]
-let g_dtime         = 0;		//前回の描画からの経過時間[ms]
+let g_time          = 0;		// Current time [ms]
+let g_dtime         = 0;		// Elapsed time since last drawing [ms]
 
 let g_pn            = new Perlin();
 let g_screen_ctx    = null;
-let g_bloom_offscs  = [];		//ブルーム処理用オフスクリーンcanvas
+let g_bloom_offscs  = [];		// Off-screen canvas for Bloom processing
 
 const MORPH_TIME    = 8000;
 const FADE_TIME     = 200;
@@ -89,24 +89,24 @@ let g_cnt           = 0;
 function init()
 {
 	
-	//初期化処理
+	// Initialization processing
 	
-	//準備
+	// Preparation
 	setup();
 	
-	//クリックorタップでFPSの表示ON/OFF
+	// Toggle FPS display ON/OFF with click or tap
 	toggle_fps_visible();
 	window.onmousedown = toggle_fps_visible;
 	window.ontouchdown = toggle_fps_visible;
 	
-	//requestAnimationFrameの準備(各種ブラウザ対応)
+	// Preparation of requestAnimationFrame (compatible with various browsers)
 	let requestAnimationFrame = window.requestAnimationFrame       ||
                                 window.mozRequestAnimationFrame    ||
                                 window.webkitRequestAnimationFrame ||
                                 window.msRequestAnimationFrame;
     window.requestAnimationFrame = requestAnimationFrame;
     
-	//描画を登録
+	// Register drawing
 	window.requestAnimationFrame(render);
 	
 }
@@ -114,14 +114,14 @@ function init()
 function adjust_screen()
 {
 
-	//画面調整
+	// Screen Adjustment
 	
-	//ウインドウのサイズを取得
+	// Get window size
 	let window_w = window.innerWidth;
 	let window_h = window.innerHeight;
 	
-	//ウインドウ幅が十分に広い場合はPCだとして
-	//画面サイズを変更する
+	// Assuming it's a PC if window width is wide enough
+	// Change screen size
 	if((g_game_width * 2) <= window_w)
 	{
 		g_game_width  = 600;
@@ -129,7 +129,7 @@ function adjust_screen()
 		g_scale       = 1.0;
 	}
 	
-	//ゲームスクリーンを中央に配置
+	// Place game screen in center
 	let screen  = document.getElementById("game-screen");
 	let game_x  = (window_w - g_game_width)  / 2;
 	let game_y  = (window_h - g_game_height) / 2;
@@ -139,7 +139,7 @@ function adjust_screen()
 	screen.width      = g_game_width;
 	screen.height     = g_game_height;
 	
-	//画面の幅に合わせて額縁の幅を比率で決める
+	// Determine frame width by ratio according to screen width
 	const bw = (g_game_width * 0.05) | 0;
 	const pw = (g_game_width * 0.10) | 0;
 	screen.style.borderWidth = bw+"px";
@@ -150,15 +150,15 @@ function adjust_screen()
 function setup_obj()
 {
 
-	//オブジェクトの準備
+	// Preparation of object
 	
-	//メイン画面のContextを取得しておく
+	// Get Context of main screen in advance
 	const sc_w   = g_game_width;
 	const sc_h   = g_game_height;
 	const screen = document.getElementById("game-screen");
 	g_screen_ctx = screen.getContext("2d");
 	
-	//カラーリストの生成
+	// Generate color list
 	const urls = 
 	[
 		"https://coolors.co/320e3b-e56399-7f96ff-a6cfd5-dbfcff",
@@ -226,7 +226,7 @@ function setup_obj()
 
 function setup_bloom()
 {
-	//ブルーム処理用の準備
+	// Preparation for Bloom Processing
 	const sc_w = g_game_width;
 	const sc_h = g_game_height;
 	
@@ -256,32 +256,32 @@ function setup_bloom()
 
 function do_bloom(ctx,draw_screen)
 {
-	//ブルーム処理を実施
+	// Execute Bloom Processing
 	
-	//レンダリング後画像にフィルタをかける
+	// Apply filter to image after rendering
 	const sc_w = g_game_width;
 	const sc_h = g_game_height;
 	
 	//
-	// 簡易的なブルーム処理をやっています。
+	// Doing simple bloom processing.
 	//
-	// 高輝度部分だけ抜き出しではなく、全体が光って見えちゃうので、
-	// 本来のブルーム処理とはちょっと違うと思いますが、とりあえず
-	// 手軽に光らせたい場合には楽かも(*´ω｀*)
+	// Because it's not extracting only high luminance parts, but whole thing looks glowing,
+	// I think it's a bit different from original bloom processing, but anyway
+	// Might be easy if you want to make it glow easily (*´ω｀*)
 	//
 	
-	//複数段階の縦横2分の1ずつ解像度を下げたオフスクリーンキャンバスに
-	//CanvasのBlurフィルタをかけて、拡大して加算合成します
+	// To off-screen canvas with resolution lowered by half vertically and horizontally in multiple stages
+	// Apply Canvas Blur filter, enlarge and additive blend
 	const offsc_num = g_bloom_offscs.length;
 	let blur_w = [ 5,10 ];
 	for(let idx = 0;idx < offsc_num;++idx)
 	{
-		//画面に表示されているキャンバスから現在の状態を取得
+		// Get current state from canvas displayed on screen
 		let offsc = g_bloom_offscs[idx];
 		offsc.ctx.clearRect(0,0,offsc.cv_w,offsc.cv_h);
 		offsc.ctx.drawImage(draw_screen,0,0,sc_w,sc_h,0,0,offsc.cv_w,offsc.cv_h);
 
-		//縮小された絵にフィルタをかけながら画面に反映(加算合成)
+		// Reflect on screen (additive blending) while applying filter to reduced image
 		ctx.save();
 		ctx.globalAlpha = 1.0;
 		ctx.globalCompositeOperation = 'lighter';
@@ -289,27 +289,27 @@ function do_bloom(ctx,draw_screen)
 		ctx.drawImage(offsc.cv,0,0,offsc.cv_w,offsc.cv_h,0,0,sc_w,sc_h);
 		ctx.restore();
 		
-		//draw_screenが表示用のキャンバスと同じになっていると
-		//↑で合成したものをさらに取得して拡大するので、ぼかし
-		//がきつめにかけられてると思う。
+		// If draw_screen is the same as the display canvas
+		// ^ Get the composited result and enlarge it, so blur
+		// I think ... is applied tightly.
 	}
 }
 
 function setup()
 {
 	
-	//準備
+	// Preparation
 		
-	//画面調整
+	// Screen Adjustment
 	adjust_screen();
 	
-	//オブジェクトの準備
+	// Preparation of object
 	setup_obj();
 	
-	//ブルーム処理の準備
+	// Preparation for Bloom Processing
 	setup_bloom();
 
-	//最初の値を決める
+	// Determine initial value
 	reset();
 	
 }
@@ -317,13 +317,13 @@ function setup()
 function reset()
 {
 
-	//乱数のシード値を決定
+	// Determine random seed value
 	g_seed = rnd(1234);
 
-	//標準のパレットを決定
+	// Determine standard palette
 	g_col = g_col_list[random(0,g_col_list.length-1)|0];
 	
-	//パレットランダムモード選択
+	// Select palette random mode
 	g_col_rnd = 1;//(random(0,100) < 60) ? 1 : 0;
 	
 }
@@ -331,19 +331,19 @@ function reset()
 function draw_fps()
 {
 	
-	//FPS計測
+	// FPS Measurement
 	
-	//現在時刻を取得
+	// Get current time
 	let now_time = Date.now();
 	
 	if((now_time - g_last_fps_time) >= 1000)
 	{
-		//FPS履歴に追加
+		// Add to FPS history
 		g_fps_list.push(g_fps_count);
 		if(g_fps_list.length > 10)
 		{	
-			//先頭を削除して過去n回分までの
-			//FPSの平均とします(移動平均)
+			// Delete first and keep up to past n times
+			// Use average of FPS (moving average)
 			g_fps_list.shift();
 		}
 		let fps_ave = 0;
@@ -351,7 +351,7 @@ function draw_fps()
 		{	fps_ave += g_fps_list[i];	}
 		fps_ave /= g_fps_list.length;
 		
-		//FPS表示
+		// FPS Display
 		let fps_div = document.getElementById("fps");
 		let fps     = (fps_ave*(1000/(now_time - g_last_fps_time)));
 		fps_div.innerText = "FPS:"+fps;
@@ -366,18 +366,18 @@ function draw_fps()
 
 function toggle_fps_visible()
 {
-	//FPSの表示をON/OFFします
+	// Toggle FPS display ON/OFF
 	
-	//表示フラグを反転させる
+	// Invert display flag
 	g_fps_visible = !g_fps_visible;
 	
-	//表示フラグに合わせてvisible制御
+	// Control visible based on display flag
 	let fps_div = document.getElementById("fps");
 	fps_div.style.display = g_fps_visible ? "block" : "none";
 
 }
 
-//Sayamaさんのワークショップ資料から引用
+// Quoted from Sayama-san's workshop materials
 //PCDJapan_WS_Generative Illustrations
 //https://www.openprocessing.org/sketch/1102169
 function separateGrid(x, y, w, h, n, mi,ma)
@@ -396,7 +396,7 @@ function separateGrid(x, y, w, h, n, mi,ma)
 				separateGrid(dx, dy, dw, dh, n, mi, ma);
 			}
 			else{
-				//描画命令
+				// Drawing command
 				drawSuteki(dx,dy,dw,dh);
 			}
 		}
@@ -409,9 +409,9 @@ const TYPE_TRI   = 2;
 
 function drawSuteki(x,y,w,h)
 {
-	//素敵なのを描画
+	// Draw something wonderful
 		
-	//パラメータ準備
+	// Parameter preparation
 	const ctx   = g_screen_ctx;
 	const cx    = x + w / 2;
 	const cy    = y + h / 2;
@@ -427,7 +427,7 @@ function drawSuteki(x,y,w,h)
 	
 	if(g_col_rnd)
 	{
-		//ランダムパレットモード
+		// Random Palette Mode
 		const pal = shuffle(g_col_list[random(0,g_col_list.length-1)|0].slice());
 		backcol = pal[0];
 		palette = pal.slice(1);
@@ -464,7 +464,7 @@ function drawSuteki(x,y,w,h)
 		info.col2 = palette[(pos.length + 1) % palette.length];
 		pa += add_pa;
 		
-		const alpha = (random(0,100) < 20) ? (random(60,98) / 100) : 0.98;	//最大100%にせずに、ほんのりしたやわらかさを出してるつもり
+		const alpha = (random(0,100) < 20) ? (random(60,98) / 100) : 0.98;	// Intending to create slight softness by not making it max 100%
 		info.alpha  = alpha;	
 		
 		pos.push(info);
@@ -474,7 +474,7 @@ function drawSuteki(x,y,w,h)
 	
 	if(g_col_rnd)
 	{
-		//ランダムパレットモードは背景色を個別に描画
+		// Random Palette Mode draws background color individually
 		ctx.fillStyle = backcol;
 		ctx.fillRect(x,y,w,h);
 	}
@@ -500,7 +500,7 @@ function drawSuteki(x,y,w,h)
 			ctx.rotate(ra + p.a);
 			ctx.beginPath();
 			
-			//円弧の傾きに合わせてグラデーションを作成
+			// Create gradation according to arc tilt
 			const sx  = p.x + p.r * Math.cos(p.rs);
 			const sy  = p.y + p.r * Math.sin(p.rs);
 			const ex  = p.x + p.r * Math.cos(p.re);
@@ -528,16 +528,16 @@ function drawSuteki(x,y,w,h)
 function draw()
 {
 
-	//描画コア
+	// Drawing Core
 	
-	//開始時刻保存
+	// Save start time
 	if(g_start_time == 0)
 	{
 		g_start_time = g_time;
 		g_next_time  = g_time + MORPH_TIME;
 	}
 	
-	//画面クリア
+	// Screen Clear
 	const sc_w = g_game_width;
 	const sc_h = g_game_height;
 	const ctx  = g_screen_ctx;
@@ -558,20 +558,20 @@ function draw()
 	ctx.rotate(rad(45));
 	ctx.translate(-sc_w2*scale,-sc_h2*scale);
 	
-	randomSeed(g_seed);	//シードを固定して分割が毎回同じになるようにする
+	randomSeed(g_seed);	// Fix seed so divisions are same every time
 	separateGrid(0,0,sc_w*scale,sc_h*scale,div_n,min_w,max_w);
 	//drawSuteki(0,0,sc_w,sc_h);
 
 	ctx.restore();
 	
-	//ブルーム処理
+	// Bloom Processing
 	//let screen = document.getElementById("game-screen");
 	//do_bloom(ctx,screen);
 
 /*	
 	ctx.save();
 	
-	//フェートイン・アウト
+	// Fade In/Out
 	const time_ms = g_time - g_start_time;
 	if(time_ms < FADE_TIME)
 	{
@@ -589,10 +589,10 @@ function draw()
 	ctx.restore();
 */
 	
-	//色変更時刻チェック
+	// Color change time check
 	if(g_time >= g_next_time)
 	{
-		//次の区切り時刻を決めてリセット
+		// Determine next break time and reset
 		g_start_time = g_time;
 		g_next_time  = g_start_time + MORPH_TIME;
 		reset();
@@ -603,9 +603,9 @@ function draw()
 function render()
 {
 	
-	//毎ターンの描画処理
+	// Drawing processing for every turn
 	
-	//時間計算
+	// Time Calculation
 	const last_time = g_time;
 	g_time = (new Date).getTime();
 	if(last_time == 0)
@@ -613,13 +613,13 @@ function render()
 	else
 	{	g_dtime = g_time - last_time;	}
 	
-	//描画コア
+	// Drawing Core
 	draw();
 	
-	//FPS描画
+	// Draw FPS
 	draw_fps();
 	
-	//次の描画呼び出しを登録
+	// Register next drawing call
 	window.requestAnimationFrame(render);
 
 }

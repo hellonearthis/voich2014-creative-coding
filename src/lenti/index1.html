@@ -1,31 +1,31 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-<title>パパのレンチキュラー</title>
+<title>Papa's Lenticular</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=320, user-scalable=no, initial-scale=1.0">
 <meta http-equiv="Cache-Control" content="no-cache">
 <!--
 
-	このデモは、JavaScriptでWebGLも使わずに、自力3D計算でオブジェクトを
-	表示しようという試みです。
+	This demo uses JavaScript without WebGL, calculating 3D manually to render objects
+	It is an attempt to display.
 	
-	今回は、Yusuke Nakayaさん(@s14garnet)が紹介されていた、こちらの
-	作品にヒントを得てレンチキュラーレンズ的なものを作ってみました。
+	This time, this introduced by Yusuke Nakaya-san (@s14garnet)
+	Getting hints from the work, I tried making something like a lenticular lens.
 	https://twitter.com/s14garnet/status/1302927433134301185?s=20
 
-	原理としては、こちらの安川ダンボール工業所さんの
-	「左右で違う絵柄が見える巻きダンボール」と同じものになると思います。
+	As a principle, this Yasukawa Cardboard Industry's
+	I think it will be the same thing as "Rolled cardboard that shows different pictures on left and right".
 	http://www.yasukawadanbouru.co.jp/case/lionimpala/
 	
-	写真素材は以下のサイトからお借りしました。
+	Photo materials were borrowed from the following site.
 	https://www.pexels.com/cats/
 	https://www.pexels.com/photo/orange-cat-stretching-3643714/
 	https://www.pexels.com/photo/animal-animal-photography-big-big-cat-572861/
 
-	Yusuke Nakayaさんと写真の撮影者のみなさんに圧倒的感謝を！
+	Overwhelming thanks to Yusuke Nakaya-san and all the photographers!
 	
-	(C)2020 ぼいち(@voich2014)
+	(C)2020 Voich(@voich2014)
 
 -->
 <link rel="stylesheet" href="./../vlib/vl_common_v1.0.0.css">
@@ -34,22 +34,22 @@
 
 <script type="text/javascript">
 
-//グローバルオブジェクト
+// Global Object
 let g_game_width    = 320;
 let g_game_height   = 500;
 
-let g_offsc;				//自力描画用オフスクリーン
-let g_draw_algo;			//選択中の描画アルゴリズムインデックス
-let g_renderingman;			//レンダリング担当
+let g_offsc;				// Off-screen for manual drawing
+let g_draw_algo;			// Index of currently selected drawing algorithm
+let g_renderingman;			// Rendering Manager
 
-let g_plate_model;			//ポリ板用モデル情報
-let g_pos    = [];			//ポリ板位置情報
-let g_time   = 0;			//現在時刻[ms]
-let g_dtime  = 0;			//前回の描画からの経過時間[ms]
+let g_plate_model;			// Model info for polygon plate
+let g_pos    = [];			// Polygon plate position info
+let g_time   = 0;			// Current time [ms]
+let g_dtime  = 0;			// Elapsed time since last drawing [ms]
 
 let g_pn = new Perlin();
 
-//Processing互換定数
+// Processing compatible constants
 const TAU = 2.0 * Math.PI;
 
 const X_DIV_NUM      = 50;
@@ -79,25 +79,25 @@ let g_cnt            = 0;
 function init()
 {
 	
-	//初期化処理
+	// Initialization processing
 	
-	//準備
+	// Preparation
 	setup();
 	
-	//描画処理方法を準備
+	// Prepare drawing processing method
 	g_draw_algo = -1;
 	change_draw_algorithm();
 	window.onmousedown = change_draw_algorithm;
 	window.ontouchdown = change_draw_algorithm;
 	
-	//requestAnimationFrameの準備(各種ブラウザ対応)
+	// Preparation of requestAnimationFrame (compatible with various browsers)
 	let requestAnimationFrame = window.requestAnimationFrame       ||
                                 window.mozRequestAnimationFrame    ||
                                 window.webkitRequestAnimationFrame ||
                                 window.msRequestAnimationFrame;
     window.requestAnimationFrame = requestAnimationFrame;
     
-	//描画を登録
+	// Register drawing
 	window.requestAnimationFrame(render);
 	
 }
@@ -105,21 +105,21 @@ function init()
 function adjust_screen()
 {
 
-	//画面調整
+	// Screen Adjustment
 	
-	//ウインドウのサイズを取得
+	// Get window size
 	let window_w = window.innerWidth;
 	let window_h = window.innerHeight;
 	
-	//ウインドウ幅が十分に広い場合はPCだとして
-	//画面サイズを変更する
+	// Assuming it's a PC if window width is wide enough
+	// Change screen size
 	if((g_game_width * 2) <= window_w)
 	{
 		g_game_width  = 1280;
 		g_game_height = 720;
 	}
 	
-	//ゲームスクリーンを中央に配置
+	// Place game screen in center
 	let screen  = document.getElementById("game-screen");
 	let game_x  = (window_w - g_game_width)  / 2;
 	let game_y  = (window_h - g_game_height) / 2;
@@ -129,7 +129,7 @@ function adjust_screen()
 	screen.width      = g_game_width;
 	screen.height     = g_game_height;
 
-	//オフスクリーン用のImageDataを作成
+	// Create ImageData for off-screen
 	let ctx = screen.getContext("2d");
 	g_offsc = ctx.createImageData(g_game_width,g_game_height);
 
@@ -138,12 +138,12 @@ function adjust_screen()
 function setup_renderer()
 {
 
-	//レンダリング担当の準備
-	const screen     = document.getElementById("game-screen");	//描画先canvas
+	// Prepare rendering handler
+	const screen     = document.getElementById("game-screen");	// Drawing destination canvas
 	const algo_label = document.getElementById("algo");
 	g_renderingman   = new RenderingMan(screen,g_offsc,algo_label);
 	
-	//ViewPort行列と射影行列をセット
+	// Set ViewPort matrix and Projection matrix
 	let mtx_viewport   = new MatrixMan4();
 	let mtx_projection = new MatrixMan4();
 	
@@ -152,7 +152,7 @@ function setup_renderer()
 	g_renderingman.setViewPortMatrix(mtx_viewport);
 	g_renderingman.setProjectionMatrix(mtx_projection);
 	
-	//ビュー行列をセット
+	// Set View Matrix
 	let vFrom    = new VectorMan3(0.0,0.0,50.0);
 	let vTo      = new VectorMan3(0.0,0.0,0.0);
 	let vUp      = new VectorMan3(0.0,1.0,0.0);
@@ -161,10 +161,10 @@ function setup_renderer()
 	mtx_view.view(vFrom,vTo,vUp);
 	g_renderingman.setViewMatrix(mtx_view);
 
-	//拡散光色をセット
+	// Set diffuse light color
 	g_renderingman.setDefuseLightColor(0.8,0.8,0.8);
 	
-	//光源ベクトルをセット
+	// Set light source vector
 	const lx = (g_game_width == 1280) ? -1.0 : -2.0;
 	g_renderingman.setLightVector(lx,1.5,-1.0);
 	
@@ -173,16 +173,16 @@ function setup_renderer()
 function setup_obj()
 {
 
-	//オブジェクトの準備
+	// Preparation of object
 	g_plate_model = new SquareXYObjMan();
 	
-	//テクスチャの登録
+	// Register texture
 	let tex_neko = document.getElementById("tex_neko");
 	let tex_tora = document.getElementById("tex_tora");
 	g_renderingman.registerTexture("neko",tex_neko);
 	g_renderingman.registerTexture("tora",tex_tora);
 	
-	//プレートの位置情報を準備
+	// Prepare plate position info
 	g_pos = [];
 	const u_unit = 1.0 / X_DIV_NUM;
 	const w_unit = W_SCALE / X_DIV_NUM;
@@ -229,15 +229,15 @@ function setup_obj()
 function setup()
 {
 	
-	//準備
+	// Preparation
 		
-	//画面調整
+	// Screen Adjustment
 	adjust_screen();
 	
-	//レンダリング担当の準備
+	// Prepare rendering handler
 	setup_renderer();
 	
-	//オブジェクトの準備
+	// Preparation of object
 	setup_obj();
 
 }
@@ -245,19 +245,19 @@ function setup()
 function draw_fps()
 {
 	
-	//FPS計測
+	// FPS Measurement
 	
-	//現在時刻を取得
+	// Get current time
 	let now_time = Date.now();
 	
 	if((now_time - g_last_fps_time) >= 1000)
 	{
-		//FPS履歴に追加
+		// Add to FPS history
 		g_fps_list.push(g_fps_count);
 		if(g_fps_list.length > 10)
 		{	
-			//先頭を削除して過去n回分までの
-			//FPSの平均とします(移動平均)
+			// Delete first and keep up to past n times
+			// Use average of FPS (moving average)
 			g_fps_list.shift();
 		}
 		let fps_ave = 0;
@@ -265,7 +265,7 @@ function draw_fps()
 		{	fps_ave += g_fps_list[i];	}
 		fps_ave /= g_fps_list.length;
 		
-		//FPS表示
+		// FPS Display
 		let fps_div = document.getElementById("fps");
 		let fps     = (fps_ave*(1000/(now_time - g_last_fps_time)));
 		fps_div.innerText = "FPS:"+fps;
@@ -281,29 +281,29 @@ function draw_fps()
 function change_draw_algorithm()
 {
 
-	//描画アルゴリズムの選択
+	// Selection of drawing algorithm
 	
 	g_draw_algo = (g_draw_algo + 1) % 1;
 	
 	switch(g_draw_algo)
 	{
-		case 0:	//フラットシェーディング描画
+		case 0:	// Flat Shading Drawing
 			g_renderingman.setupFlatShading();
 			break;
 
-		case 1:	//ContextのLINE描画
+		case 1:	// Context LINE drawing
 			g_renderingman.setupContextLine();
 			break;
 			
-		case 2:	//ブレゼンハムLINE描画
+		case 2:	// Bresenham LINE Drawing
 			g_renderingman.setupBresenhamLine();
 			break;
 			
-		case 3:	//ダブルステップブレゼンハムLINE描画
+		case 3:	// Double Step Bresenham LINE Drawing
 			g_renderingman.setupDoubleStepBresenhamLine();
 			break;
 		
-		case 4:	//アンチエイリアス付きブレゼンハムLINE描画
+		case 4:	// Anti-aliased Bresenham LINE Drawing
 			g_renderingman.setupBresenhamLineAA();
 			break;
 	}
@@ -313,19 +313,19 @@ function change_draw_algorithm()
 function draw()
 {
 
-	//描画コア
+	// Drawing Core
 	
-	//開始時刻保存
+	// Save start time
 	if(g_start_time  == 0)
 	{
 		g_start_time = g_time;
 		g_next_time  = g_time + MORPH_TIME;
 	}
 	
-	//描画前処理
+	// Pre-drawing processing
 	g_renderingman.drawBegin(/*g_renderingman.clearForBlur*/);
 
-	//オブジェクトを動かす
+	// Move object
 	let mtx_scale   = new MatrixMan4();
 	let mtx_offset  = new MatrixMan4();
 	let mtx_rotateX = new MatrixMan4();
@@ -338,37 +338,37 @@ function draw()
 	if(time > 1.0){ time = 1.0; }
 	const e = Ease.easeInExpo(time**5);
 		
-	//オブジェクトのサイズを調整
+	// Adjust object size
 	mtx_scale.scale(WS,HS,1.0);
 	
-	//回転行列作成
+	// Create Rotation Matrix
 	const angle = g_time * ANGLE_PER_TIME;
 	mtx_rotateX.rotateY(rad(angle));
 	mtx_rotateZ.rotateZ(rad(angle*3));
 	
-	//たくさんポリ板を並べる
+	// Arrange many poly boards
 	for(let i = 0;i < g_pos.length;i+=1)
 	{
-		//位置情報取得
+		// Get position info
 		const pos = g_pos[i];
 		
-		//モデル変換行列の初期化
+		// Initialize model transformation matrix
 		mtx_model.initialize();
 		
-		//移動行列作成
+		// Create Translation Matrix
 		const x = pos.x;
 		const y = pos.y;
 		const z = 0.0;
 		mtx_pos.translate(x,y,z);
 		
-		//60度傾ける
+		// Tilt 60 degrees
 		let ox = OFFSET_X_UNIT*(((i/2)&1)?1:-1);
 		let oz = OFFSET_Z_UNIT*((i&1)?-1:1);
 		let ra = 60*(((i/2)&1)?1:-1)*((i&1)?2:1);
 		mtx_offset.translate(ox,0,oz);
 		mtx_rotateY.rotateY(rad(ra));
 
-		//拡大と移動と回転
+		// Scale, Translation, and Rotation
 		mtx_model.mul(mtx_scale);
 		mtx_model.mul(mtx_rotateY);
 		mtx_model.mul(mtx_pos);
@@ -376,27 +376,27 @@ function draw()
 		mtx_model.mul(mtx_rotateX);
 		mtx_model.mul(mtx_rotateZ);
 		
-		//レンダラにセット
+		// Set to renderer
 		g_renderingman.setModelMatrix(mtx_model);
 		
-		//テクスチャの選択
+		// Texture selection
 		g_renderingman.selectTexture(pos.tex);
 
 		
-		//オブジェクトの描画
+		// Object Drawing
 		g_renderingman.drawIndexedPrimitive(g_plate_model.vertexList,g_plate_model.vertexNum,
 											g_plate_model.polyIndexList,g_plate_model.primitiveNum,
 											null,null,pos.uv);
 	
 	}
 	
-	//描画後処理(画面に転送)
+	// Post-drawing processing (Transfer to screen)
 	g_renderingman.drawEnd(/*g_renderingman.postBloom*/);
 	
-	//変形終了時刻チェック
+	// Deformation end time check
 	if(g_time >= g_next_time)
 	{
-		//次の区切り時刻を決めてリセット
+		// Determine next break time and reset
 		g_start_time = g_time;
 		g_next_time  = g_start_time + MORPH_TIME;
 	}
@@ -406,9 +406,9 @@ function draw()
 function render()
 {
 	
-	//毎ターンの描画処理
+	// Drawing processing for every turn
 	
-	//時間計算
+	// Time Calculation
 	const last_time = g_time;
 	g_time = (new Date).getTime();
 	if(last_time == 0)
@@ -416,13 +416,13 @@ function render()
 	else
 	{	g_dtime = g_time - last_time;	}
 	
-	//描画コア
+	// Drawing Core
 	draw();
 	
-	//FPS描画
+	// Draw FPS
 	draw_fps();
 	
-	//次の描画呼び出しを登録
+	// Register next drawing call
 	window.requestAnimationFrame(render);
 
 }

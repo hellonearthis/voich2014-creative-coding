@@ -1,12 +1,12 @@
 ﻿/*
 
-	ここで実装するJavaScriptのクラスや関数はぼいちが個人的に
-	利用する	目的で移植したものなので、汎用的なライブラリ
-	を意識したものでは無いため、ご利用は自己責任でお願いします。
+	The JavaScript classes and functions implemented here are for Voich's personal use
+	Ported for the purpose of using, so general-purpose library
+	Please use at your own risk as it is not intended to be.
 	
 	vl_common_v1.6.0.js
 	
-	Copyright (c) 2020 ぼいち(@voich2014 in Twitter)
+	Copyright (c) 2020 Voich (@voich2014 in Twitter)
 	
 	Released under the MIT license.
  	see https://opensource.org/licenses/MIT
@@ -14,29 +14,29 @@
 
 */
 
-// 自前ライブラリ群
+// Self-made libraries
 
 function rad(deg)
 {
-	//度→ラジアン変換
+	// Degree -> Radian conversion
 	return deg * Math.PI / 180;
 }
 
 function rnd(x)
 {
-	//乱数取得
+	// Get random number
 	return Math.floor(Math.random() * x);
 }
 
 function max(a,b)
 {
-	//大きい方を返す
+	// Return larger one
 	return Math.max(a,b);
 }
 
 function min(a,b)
 {
-	//小さい方を返す
+	// Return smaller one
 	return Math.min(a,b);
 }
 
@@ -53,7 +53,7 @@ function lerpColor(col1,col2,x)
 
 function lerpHSL(col1,col2,a)
 {
-	//h,s,lは0.0～1.0
+	// h, s, l are 0.0-1.0
 		
 	const aa  = 1.0 - a;
 	const col =
@@ -68,16 +68,16 @@ function lerpHSL(col1,col2,a)
 
 function hsl2rgb(h,s,l)
 {
-	//HSLからRGBに変換
+	// Convert HSL to RGB
 	//
-	//  h(hue)       : 色相  0-359の値[度]
-	//  s(saturation): 彩度  0-1.0の値[%]
-	//  l(lightness) : 明度  0-1.0の値[%]
+	//  h(hue)       : Hue  Value from 0-359 [degrees]
+	//  s(saturation): Saturation  Value from 0-1.0 [%]
+	//  l(lightness) : Lightness  Value from 0-1.0 [%]
 	//
 	let max,min;
 	let r,g,b;
 	
-	//念のためHを補正
+	// Correct H just in case
 	h = h % 360;
 
 	if(l < 0.5)
@@ -136,17 +136,17 @@ function hsl2rgb(h,s,l)
 }
 
 //
-// こちらのサイトのサンプルコードを参考に実装しました。
+// Implemented with reference to the sample code on this site.
 // https://lab.syncer.jp/Web/JavaScript/Snippet/68/
 //
 function rgb2hsl(r,g,b)
 {
 
-	//RGB値(それぞれ0～255)からHSLに変換します
+	// Convert RGB values (0-255 each) to HSL
 	//
-	// { h:0.0～1.0, s:0.0～1.0, l:0.0～1.0 }
+	// { h:0.0-1.0, s:0.0-1.0, l:0.0-1.0 }
 	//
-	// を返します。
+	// Returns.
 	//
 	
 	r = r / 255;
@@ -184,16 +184,16 @@ function rgb2hsl(r,g,b)
 
 }
 
-//パーリンノイズクラス
+// Perlin Noise Class
 //https://gist.github.com/Flafla2/f0260a861be0ebdeef76
-//↑のC#のソースを参考に雑に移植しています。
-//ご利用は自己責任でお願いします。
+// ^ Roughly ported referring to the C# source above.
+// Please use at your own risk.
 class Perlin
 {
-	//コンストラクタ
+	// Constructor
 	constructor(repeat = -1)
 	{
-		//メンバの初期化
+		// Initialize members
 		this.repeat = repeat;
 		
 		const permutation =
@@ -264,7 +264,7 @@ class Perlin
 		return a + x * (b - a);
 	}
 	
-	//パーリンノイズ取得(0.0～1.0の値が返ります)
+	// Get Perlin Noise (Returns value 0.0-1.0)
 	perlin(x,y,z)
 	{
 		if(this.repeat > 0)
@@ -335,16 +335,16 @@ class Perlin
 	
 }
 
-//シンプレックスノイズクラス
+// Simplex Noise Class
 //http://weber.itn.liu.se/~stegu/simplexnoise/simplexnoise.pdf
-//↑の3D noiseのソースを参考に移植しています。
-//ご利用は自己責任でお願いします。
+// ^ Ported referring to the 3D noise source above.
+// Please use at your own risk.
 class SimplexNoise
 {
-	//コンストラクタ
+	// Constructor
 	constructor()
 	{
-		//メンバ初期化
+		// Member initialization
 		this.grad3 =
 		[
 			[1,1,0],[-1,1,0],[1,-1,0],[-1,-1,0],
@@ -483,24 +483,24 @@ class SimplexNoise
 		// The result is scaled to stay just inside [-1,1]
 		const v = 32.0*(n0 + n1 + n2 + n3);
 		
-		//オリジナルは、-1.0 ～ 1.0 までの値を取るので、0.0 ～ 1.0 に変換します
+		// Original takes values from -1.0 to 1.0, so convert to 0.0 to 1.0
 		//
-		// 調べてみると、だいたい、-0.95 ～ 0.95 の値を返してきていたので、
-		// 変換すると、0.025 ～ 0.975 の値を返すようになります。
+		// When checked, it returned values roughly between -0.95 and 0.95, so
+		// When converted, it returns a value between 0.025 and 0.975.
 		//
 		return (v + 1.0) / 2.0;
 	}
 }
 
-//疑似シェーダ関数クラス
+// Pseudo Shader Function Class
 //https://www.khronos.org/registry/OpenGL-Refpages/gl4/
 //https://yrlab.zatunen.com/webgl/noise/noise.html
-//これらのサイトを参考にシェーダ内で利用できる関数を
-//模倣したものです。
-//ご利用は自己責任でお願いします。
+// Functions available in shader referring to these sites
+// It is an imitation.
+// Please use at your own risk.
 class SL
 {
-	//コンストラクタ
+	// Constructor
 	constructor()
 	{
 	}
@@ -537,7 +537,7 @@ class SL
 	
 	static random(x,y)
 	{
-		//0.0 ～ 1.0の乱数を返す
+		// Return random number 0.0 - 1.0
 		return this.fract(this.sin(this.dot2(x,y,12.9898,78.233)) * 43758.5453);
 	}
 	
@@ -557,7 +557,7 @@ class SL
 	
 	static interpolation(f)
 	{
-		// 0.0 ～ 1.0の補間式、5次のものがアーティファクト少なくていいらしい
+		// Interpolation formula from 0.0 to 1.0, 5th order seems to have fewer artifacts
 		//return f * f * (3.0 - 2.0 * f);
 		return f * f * f * (f * (6.0 * f - 15.0) + 10.0);
 	}
@@ -579,7 +579,7 @@ class SL
 	
 	static mixCol(col1,col2,a)
 	{
-		//r,g,bは0.0～1.0
+		// r, g, b are 0.0-1.0
 		
 		const aa  = 1.0 - a;
 		const col =
@@ -594,7 +594,7 @@ class SL
 	
 	static rotate2d(angle,x,y)
 	{
-		//Z軸回転
+		// Z axis rotation
 		const rx =  x * Math.cos(angle) + y * Math.sin(angle);
 		const ry = -x * Math.sin(angle) + y * Math.cos(angle);
 		return { x:rx,y:ry };
@@ -602,7 +602,7 @@ class SL
 	
 	static smoothstep(edge0,edge1,x)
 	{
-		//Wikipediaより
+		// From Wikipedia
 	    // Scale, bias and saturate x to 0..1 range
 	    x = this.clamp((x - edge0) / (edge1 - edge0),0.0,1.0);
 	    // Evaluate polynomial
@@ -610,13 +610,13 @@ class SL
 	}
 }
 
-//ブロックノイズクラス
+// Block Noise Class
 //https://yrlab.zatunen.com/webgl/noise/noise.html
-//↑の記事を参考に実装しています。
-//ご利用は自己責任でお願いします。
+// ^ Implemented referring to the article above.
+// Please use at your own risk.
 class BlockNoise
 {
-	//コンストラクタ
+	// Constructor
 	constructor()
 	{
 	}
@@ -630,13 +630,13 @@ class BlockNoise
 	
 }
 
-//バリューノイズクラス
+// Value Noise Class
 //https://yrlab.zatunen.com/webgl/noise/noise.html
-//↑の記事を参考に実装しています。
-//ご利用は自己責任でお願いします。
+// ^ Implemented referring to the article above.
+// Please use at your own risk.
 class ValueNoise
 {
-	//コンストラクタ
+	// Constructor
 	constructor()
 	{
 	}
@@ -659,13 +659,13 @@ class ValueNoise
 	
 }
 
-//セルラーノイズクラス
+// Cellular Noise Class
 //https://yrlab.zatunen.com/webgl/noise/noise.html
-//↑の記事を参考に実装しています。
-//ご利用は自己責任でお願いします。
+// ^ Implemented referring to the article above.
+// Please use at your own risk.
 class CellularNoise
 {
-	//コンストラクタ
+	// Constructor
 	constructor()
 	{
 	}
@@ -692,20 +692,20 @@ class CellularNoise
 			}
 		}
 		
-		o = Math.min(Math.pow(o * 1.0,3.0),1.0);	//値の勾配を調整
+		o = Math.min(Math.pow(o * 1.0,3.0),1.0);	// Adjust gradient of value
 		
 		return o
 	}
 	
 }
 
-//反転セルラーノイズクラス
+// Inverted Cellular Noise Class
 //https://yrlab.zatunen.com/webgl/noise/noise.html
-//↑の記事を参考に実装しています。
-//ご利用は自己責任でお願いします。
+// ^ Implemented referring to the article above.
+// Please use at your own risk.
 class InverseCellularNoise
 {
-	//コンストラクタ
+	// Constructor
 	constructor()
 	{
 	}
@@ -717,16 +717,16 @@ class InverseCellularNoise
 	
 }
 
-//ドメインワーピングクラス
+// Domain Warping Class
 //https://qiita.com/edo_m18/items/e4d7a084cdbbfdc7863c
-//↑の記事を参考に実装しています。
-//ご利用は自己責任でお願いします。
+// ^ Implemented referring to the article above.
+// Please use at your own risk.
 class DomainWarping
 {
-	//コンストラクタ
+	// Constructor
 	constructor()
 	{
-		//メンバの初期化
+		// Initialize members
 		this.pn        = new Perlin();
 		this.noise     = this.perlin_noise;
 		this.octaves   = 5;
@@ -787,7 +787,7 @@ class DomainWarping
 	
 	getColor(x,y,t)
 	{
-		//x,y は 0.0 ～ 1.0
+		// x, y are 0.0 - 1.0
 		
 		let color = { r:0.0,g:0.0,b:0.0 };
 		
@@ -795,7 +795,7 @@ class DomainWarping
 		q.x = this.fbm(x,y);
 		q.y = this.fbm(x + 1.0,y + 1.0);
 		
-		//1.7や9.2は任意の数値です。特別な意味はないです。
+		// 1.7 and 9.2 are arbitrary numbers. No special meaning.
     	let r = { x:0,y:0 };
     	const add_qx  = (4.0 * q.x);
     	const add_qy  = (4.0 * q.y);
@@ -826,16 +826,16 @@ class DomainWarping
 
 }
 
-//ウッドテクスチャクラス
+// Wood Texture Class
 //https://thebookofshaders.com/edit.php#11/wood.frag
-//↑の記事を参考に実装しています。
-//ご利用は自己責任でお願いします。
+// ^ Implemented referring to the article above.
+// Please use at your own risk.
 class WoodTexture
 {
-	//コンストラクタ
+	// Constructor
 	constructor()
 	{
-		//メンバの初期化
+		// Initialize members
 		this.pn        = new Perlin();
 		this.mp        = { x:3.0,y:10.0 }; 
 		this.lp        = 0.5;
@@ -871,7 +871,7 @@ class WoodTexture
 	
 	getColor(x,y,t)
 	{
-		//x,y は 0.0 ～ 1.0
+		// x, y are 0.0 - 1.0
 		
 		let pos = { x:x * this.mp.x,y:y * this.mp.y };
 		
@@ -893,16 +893,16 @@ class WoodTexture
 
 }
 
-//リッジ(尾根)テクスチャクラス
+// Ridge Texture Class
 //https://thebookofshaders.com/edit.php#13/ridge.frag
-//↑の記事を参考に実装しています。
-//ご利用は自己責任でお願いします。
+// ^ Implemented referring to the article above.
+// Please use at your own risk.
 class RidgeTexture
 {
-	//コンストラクタ
+	// Constructor
 	constructor()
 	{
-		//メンバの初期化
+		// Initialize members
 		this.pn        = new Perlin();
 		this.gain      = 0.5;
 		this.offset    = 0.9;
@@ -942,7 +942,7 @@ class RidgeTexture
 	
 	getColor(x,y,t)
 	{
-		//x,y は 0.0 ～ 1.0
+		// x, y are 0.0 - 1.0
 		
 		const lacunarity = 2.0;
 		const gain       = this.gain;
@@ -975,16 +975,16 @@ class RidgeTexture
 
 }
 
-//タービュランス(乱気流)テクスチャクラス
+// Turbulence Texture Class
 //https://thebookofshaders.com/edit.php#13/turbulence.frag
-//↑の記事を参考に実装しています。
-//ご利用は自己責任でお願いします。
+// ^ Implemented referring to the article above.
+// Please use at your own risk.
 class TurbulenceTexture
 {
-	//コンストラクタ
+	// Constructor
 	constructor()
 	{
-		//メンバの初期化
+		// Initialize members
 		this.pn        = new Perlin();
 		this.gain      = 2;
 		this.octaves   = 3;
@@ -1008,13 +1008,13 @@ class TurbulenceTexture
 		this.baseColor.b = color.b;
 	}
 
-	//ほんとは、RidgeTextureと同じsnoiseを使うのですが、
-	//再現が上手く出来なかったので、これもパーリンノイズ
-	//で代用します
+	// Actually, I use the same snoise as RidgeTexture, but
+	// Couldn't reproduce well, so this is also Perlin Noise
+	// Substitute with
 	
 	getColor(x,y,t)
 	{
-		//x,y は 0.0 ～ 1.0
+		// x, y are 0.0 - 1.0
 		
 		const gain    = this.gain;
 		const octaves = this.octaves;
@@ -1041,16 +1041,16 @@ class TurbulenceTexture
 
 }
 
-//スプラッターテクスチャクラス
+// Splatter Texture Class
 //https://thebookofshaders.com/edit.php#11/splatter.frag
-//↑の記事を参考に実装しています。
-//ご利用は自己責任でお願いします。
+// ^ Implemented referring to the article above.
+// Please use at your own risk.
 class SplatterTexture
 {
-	//コンストラクタ
+	// Constructor
 	constructor()
 	{
-		//メンバの初期化
+		// Initialize members
 		this.pn        = new Perlin();
 		this.gain      = 10;
 		this.baseColor = { r:1.0,g:1.0,b:1.0 };
@@ -1070,7 +1070,7 @@ class SplatterTexture
 
 	getColor(x,y,t)
 	{
-		//x,y は 0.0 ～ 1.0
+		// x, y are 0.0 - 1.0
 		
 		const gain = this.gain;
 		
@@ -1093,13 +1093,13 @@ class SplatterTexture
 
 }
 
-//イージング関数クラス
+// Easing Function Class
 //https://easings.net/ja#
-//↑のソースを参考に雑に移植しています。
-//ご利用は自己責任でお願いします。
+// ^ Roughly ported referring to the source above.
+// Please use at your own risk.
 class Ease
 {
-	//コンストラクタ
+	// Constructor
 	constructor()
 	{
 	}
@@ -1315,8 +1315,8 @@ class Ease
 }
 
 //
-// 以下の、 https://coolors.co/ で作成した色見本から、パレット配列を
-// 生成するコードは、takawo shunsukeさん(@takawo)の作品からお借りしました。
+// Create a palette array from the color sample created at https://coolors.co/ below
+// The generation code was borrowed from takawo shunsuke-san (@takawo)'s work.
 //
 function createPalette(_url) {
 	let slash_index = _url.lastIndexOf('/');
@@ -1330,7 +1330,7 @@ function createPalette(_url) {
 
 function createPaletteN(_url)
 {
-	//coolors.co のURLから正規化されたRGBオブジェクト配列にします
+	// Convert coolors.co URL to normalized RGB object array
 	let slash_index = _url.lastIndexOf('/');
 	let pallate_str = _url.slice(slash_index + 1);
 	let arr = pallate_str.split('-');
@@ -1346,7 +1346,7 @@ function createPaletteN(_url)
 
 function createPaletteNHSL(_url)
 {
-	//coolors.co のURLから正規化されたHSLオブジェクト配列にします
+	// Convert coolors.co URL to normalized HSL object array
 	let slash_index = _url.lastIndexOf('/');
 	let pallate_str = _url.slice(slash_index + 1);
 	let arr = pallate_str.split('-');
@@ -1362,22 +1362,22 @@ function createPaletteNHSL(_url)
 
 function rgbA2rgbN(rgb)
 {
-	//0～255のRGB配列を正規化された
-	//RGBオブジェクトに変換します	
+	// Normalized array of RGB 0-255
+	// Convert to RGB object	
 	return { r:rgb[0]/255, g:rgb[1]/255, b:rgb[2]/255 };
 }
 
 function rgbA2hslN(rgb)
 {
-	//0～255のRGB配列を正規化された
-	//HSLオブジェクトに変換します	
+	// Normalized array of RGB 0-255
+	// Convert to HSL object	
 	return rgb2hsl(rgb[0],rgb[1],rgb[2]);
 }
 
 function rgbAA2rgbNA(rgb_array)
 {
-	//0～255のRGB配列の配列を正規化された
-	//RGBオブジェクトの配列に変換します
+	// Normalized array of arrays of RGB 0-255
+	// Convert to array of RGB objects
 	let col = [];
 	for(let i = 0;i < rgb_array.length;++i)
 	{
@@ -1388,8 +1388,8 @@ function rgbAA2rgbNA(rgb_array)
 
 function rgbAA2hslNA(rgb_array)
 {
-	//0～255のRGB配列の配列を正規化された
-	//HSLオブジェクトの配列に変換します
+	// Normalized array of arrays of RGB 0-255
+	// Convert to array of HSL objects
 	let col = [];
 	for(let i = 0;i < rgb_array.length;++i)
 	{
@@ -1399,8 +1399,8 @@ function rgbAA2hslNA(rgb_array)
 }
 
 //
-// シャッフルメソッドはp5.jsのリファレンスを参考に、下記の
-// サイトのコードを利用しています。
+// Shuffle method refers to p5.js reference, see below
+// Using the site's code.
 // https://bost.ocks.org/mike/shuffle/
 //
 function shuffle(array) {
@@ -1423,7 +1423,7 @@ function shuffle(array) {
 
 function mixPalette(col1,col2,a)
 {
-	//col1,col2は#rrggbb
+	// col1, col2 are #rrggbb
 	const r1 = parseInt(col1.substr(1,2),16);
 	const g1 = parseInt(col1.substr(3,2),16);
 	const b1 = parseInt(col1.substr(5,2),16);
@@ -1444,7 +1444,7 @@ function mixPalette(col1,col2,a)
 
 function color2rgb(col)
 {
-	//colは#rrggbb
+	// col is #rrggbb
 	const r = parseInt(col.substr(1,2),16);
 	const g = parseInt(col.substr(3,2),16);
 	const b = parseInt(col.substr(5,2),16);
@@ -1454,10 +1454,10 @@ function color2rgb(col)
 
 function getColormind(ok_func,ng_func = null)
 {
-	//Colormindからのパレット取得
+	// Palette acquisition from Colormind
 	
 	//
-	// http://colormind.io/api-access/ のサンプルを元に実装しています。
+	// Implemented based on the sample at http://colormind.io/api-access/ .
 	//
 	
 	const url = "http://colormind.io/api/";
@@ -1474,7 +1474,7 @@ function getColormind(ok_func,ng_func = null)
 		{
 			const palette = JSON.parse(http.responseText).result;
 			
-			//リクエスト成功
+			// Request Succeeded
 			if(ok_func != null)
 			{
 				ok_func(palette);
@@ -1482,7 +1482,7 @@ function getColormind(ok_func,ng_func = null)
 		}
 		else if(http.readyState == 4)
 		{
-			//リクエスト失敗
+			// Request Failed
 			if(ng_func != null)
 			{
 				ng_func(http.status);
@@ -1490,7 +1490,7 @@ function getColormind(ok_func,ng_func = null)
 		}
 	}
 	
-	//リクエスト送信
+	// Send Request
 	http.open("POST", url, true);
 	http.send(JSON.stringify(data));
 

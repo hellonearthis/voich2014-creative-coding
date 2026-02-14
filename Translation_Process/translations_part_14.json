@@ -1,0 +1,802 @@
+[
+    {
+        "original": "let   g_a_dir       = [];\t\t\t\t//加速するする方向(加速/減速)",
+        "translated": "let   g_a_dir       = [];\t\t\t\t// Acceleration direction (accelerate/decelerate)"
+    },
+    {
+        "original": "let   g_accel       = [];\t\t\t\t//現在の加速度",
+        "translated": "let   g_accel       = [];\t\t\t\t// Current acceleration"
+    },
+    {
+        "original": "let   g_accel_limit = 2.0;\t\t\t\t//最大加速度",
+        "translated": "let   g_accel_limit = 2.0;\t\t\t\t// Maximum acceleration"
+    },
+    {
+        "original": "let   g_mtx_move;\t\t\t\t\t\t//オブジェクト全体の移動行列",
+        "translated": "let   g_mtx_move;\t\t\t\t\t\t// Translation matrix for entire object"
+    },
+    {
+        "original": "let   g_mtx_scale;\t\t\t\t\t\t//オブジェクト全体の拡大行列",
+        "translated": "let   g_mtx_scale;\t\t\t\t\t\t// Scaling matrix for entire object"
+    },
+    {
+        "original": "let   g_next_accel  = [];\t\t\t\t//次の開始加速度",
+        "translated": "let   g_next_accel  = [];\t\t\t\t// Next start acceleration"
+    },
+    {
+        "original": "let   g_r_dir       = [];\t\t\t\t//回転する方向(順回転/逆回転)",
+        "translated": "let   g_r_dir       = [];\t\t\t\t// Rotation direction (forward/reverse)"
+    },
+    {
+        "original": "let   g_rz          = [];\t\t\t\t//オブジェクトごとのZ回転角度",
+        "translated": "let   g_rz          = [];\t\t\t\t// Z rotation angle per object"
+    },
+    {
+        "original": "let   zoom     = 0.25 + Math.pow(tz,tp);\t//拡大率",
+        "translated": "let   zoom     = 0.25 + Math.pow(tz,tp);\t// Scale factor"
+    },
+    {
+        "original": "let   zoom     = 1.0/*0.25*/ + Math.pow(tz,tp);\t//拡大率",
+        "translated": "let   zoom     = 1.0/*0.25*/ + Math.pow(tz,tp);\t// Scale factor"
+    },
+    {
+        "original": "let   zoom     = 1.0;\t\t\t//拡大率",
+        "translated": "let   zoom     = 1.0;\t\t\t// Scale factor"
+    },
+    {
+        "original": "let area = this.edgeFunction(v1,v2,v3);\t//比率計算するための分母となる",
+        "translated": "let area = this.edgeFunction(v1,v2,v3);\t// Becomes denominator for ratio calculation"
+    },
+    {
+        "original": "let cube_chip = document.getElementById(\"cube-chip\");\t//スプライト用canvas",
+        "translated": "let cube_chip = document.getElementById(\"cube-chip\");\t// Canvas for sprite"
+    },
+    {
+        "original": "let data = this.offsc.data;\t//いったんローカル変数に参照を移す",
+        "translated": "let data = this.offsc.data;\t// Move reference to local variable temporarily"
+    },
+    {
+        "original": "let e,n,nn; //eは蓄積誤差値",
+        "translated": "let e,n,nn; // e is accumulated error value"
+    },
+    {
+        "original": "let fixed_keys = [];\t//処理済みキーリスト",
+        "translated": "let fixed_keys = [];\t// Processed key list"
+    },
+    {
+        "original": "let g_RY   = 0;\t\t\t\t\t\t\t//現在の横振り回転角度",
+        "translated": "let g_RY   = 0;\t\t\t\t\t\t\t// Current horizontal swing rotation angle"
+    },
+    {
+        "original": "let g_aPos = [];\t\t\t\t\t\t//各オブジェクトの位置情報など",
+        "translated": "let g_aPos = [];\t\t\t\t\t\t// Position info etc. for each object"
+    },
+    {
+        "original": "let g_addY = 1;\t\t\t\t\t\t\t//横振り回転の増加量",
+        "translated": "let g_addY = 1;\t\t\t\t\t\t\t// Increment of horizontal swing rotation"
+    },
+    {
+        "original": "let g_block_h_num       = BLOCK_H_NUM;\t//ブロックの行個数",
+        "translated": "let g_block_h_num       = BLOCK_H_NUM;\t// Number of block rows"
+    },
+    {
+        "original": "let g_block_h_num      = BLOCK_H_NUM;\t//ブロックの行個数",
+        "translated": "let g_block_h_num      = BLOCK_H_NUM;\t// Number of block rows"
+    },
+    {
+        "original": "let g_block_model;\t\t\t\t\t\t//ブロック用モデル情報",
+        "translated": "let g_block_model;\t\t\t\t\t\t// Model info for block"
+    },
+    {
+        "original": "let g_block_num        = g_block_w_num * g_block_h_num;\t//ブロックの総数",
+        "translated": "let g_block_num        = g_block_w_num * g_block_h_num;\t// Total number of blocks"
+    },
+    {
+        "original": "let g_block_w_num       = BLOCK_W_NUM;\t//ブロックの列個数",
+        "translated": "let g_block_w_num       = BLOCK_W_NUM;\t// Number of block columns"
+    },
+    {
+        "original": "let g_block_w_num      = BLOCK_W_NUM;\t//ブロックの列個数",
+        "translated": "let g_block_w_num      = BLOCK_W_NUM;\t// Number of block columns"
+    },
+    {
+        "original": "let g_blocks            = [];\t\t\t//ブロック管理用",
+        "translated": "let g_blocks            = [];\t\t\t// For block management"
+    },
+    {
+        "original": "let g_blocks           = [];\t\t\t//ブロック管理用",
+        "translated": "let g_blocks           = [];\t\t\t// For block management"
+    },
+    {
+        "original": "let g_blocks = [];\t\t\t\t\t\t//各オブジェクトの位置情報など",
+        "translated": "let g_blocks = [];\t\t\t\t\t\t// Position info etc. for each object"
+    },
+    {
+        "original": "let g_bloom         = [];\t\t//Bloom処理用のテクスチャとフレームバッファ",
+        "translated": "let g_bloom         = [];\t\t// Texture and frame buffer for Bloom processing"
+    },
+    {
+        "original": "let g_bloom_offscs   = [];\t\t//ブルーム処理用オフスクリーンcanvas",
+        "translated": "let g_bloom_offscs   = [];\t\t// Off-screen canvas for Bloom processing"
+    },
+    {
+        "original": "let g_bloom_offscs  = [];\t\t//ブルーム処理用オフスクリーンcanvas",
+        "translated": "let g_bloom_offscs  = [];\t\t// Off-screen canvas for Bloom processing"
+    },
+    {
+        "original": "let g_bloom_offscs  = [];\t//ブルーム処理用オフスクリーンcanvas",
+        "translated": "let g_bloom_offscs  = [];\t// Off-screen canvas for Bloom processing"
+    },
+    {
+        "original": "let g_blur_cnt      = 0;\t\t//ブラー処理用カウンタ",
+        "translated": "let g_blur_cnt      = 0;\t\t// Counter for blur processing"
+    },
+    {
+        "original": "let g_blur_front    = 0;\t\t//ブラーcanvasの先頭フレーム",
+        "translated": "let g_blur_front    = 0;\t\t// Leading frame of blur canvas"
+    },
+    {
+        "original": "let g_blur_offscs   = [];\t\t//ブラー処理用オフスクリーンcanvas",
+        "translated": "let g_blur_offscs   = [];\t\t// Off-screen canvas for blur processing"
+    },
+    {
+        "original": "let g_car_model;\t\t\t\t\t\t//くるま用モデル情報",
+        "translated": "let g_car_model;\t\t\t\t\t\t// Model info for car"
+    },
+    {
+        "original": "let g_color             = 0;\t\t\t//ブロックの色",
+        "translated": "let g_color             = 0;\t\t\t// Block color"
+    },
+    {
+        "original": "let g_colorbuff     = null;\t\t//インスタンス毎の色バッファ",
+        "translated": "let g_colorbuff     = null;\t\t// Color buffer per instance"
+    },
+    {
+        "original": "let g_colorbuff    = null;\t\t//インスタンス毎の色バッファ",
+        "translated": "let g_colorbuff    = null;\t\t// Color buffer per instance"
+    },
+    {
+        "original": "let g_cube_model;\t\t\t\t\t\t//立方体用モデル情報",
+        "translated": "let g_cube_model;\t\t\t\t\t\t// Model info for cube"
+    },
+    {
+        "original": "let g_cube_model;\t\t\t//立方体用モデル情報",
+        "translated": "let g_cube_model;\t\t\t// Model info for cube"
+    },
+    {
+        "original": "let g_draw_algo;\t\t\t\t\t\t//選択中の描画アルゴリズムインデックス",
+        "translated": "let g_draw_algo;\t\t\t\t\t\t// Index of currently selected drawing algorithm"
+    },
+    {
+        "original": "let g_draw_algo;\t\t\t//選択中の描画アルゴリズムインデックス",
+        "translated": "let g_draw_algo;\t\t\t// Index of currently selected drawing algorithm"
+    },
+    {
+        "original": "let g_dtime          = 0;\t\t//前回の描画からの経過時間[ms]",
+        "translated": "let g_dtime          = 0;\t\t// Elapsed time since last drawing [ms]"
+    },
+    {
+        "original": "let g_dtime         = 0;\t\t//前回の描画からの経過時間[ms]",
+        "translated": "let g_dtime         = 0;\t\t// Elapsed time since last drawing [ms]"
+    },
+    {
+        "original": "let g_dtime  = 0;\t\t\t\t\t\t//前回の描画からの経過時間[ms]",
+        "translated": "let g_dtime  = 0;\t\t\t\t\t\t// Elapsed time since last drawing [ms]"
+    },
+    {
+        "original": "let g_dtime  = 0;\t\t\t\t//前回の描画からの経過時間[ms]",
+        "translated": "let g_dtime  = 0;\t\t\t\t// Elapsed time since last drawing [ms]"
+    },
+    {
+        "original": "let g_dtime  = 0;\t\t\t//前回の描画からの経過時間[ms]",
+        "translated": "let g_dtime  = 0;\t\t\t// Elapsed time since last drawing [ms]"
+    },
+    {
+        "original": "let g_edge_color;\t\t\t\t\t\t//オブジェクトの境界線色",
+        "translated": "let g_edge_color;\t\t\t\t\t\t// Border color of object"
+    },
+    {
+        "original": "let g_enable_rec = false;\t//動画キャプチャ有効フラグ",
+        "translated": "let g_enable_rec = false;\t// Video capture enable flag"
+    },
+    {
+        "original": "let g_gaus_filter  = [];\t\t//ガウシアンフィルタ情報",
+        "translated": "let g_gaus_filter  = [];\t\t// Gaussian filter info"
+    },
+    {
+        "original": "let g_last1_model;\t\t\t\t\t\t//端っこモデル情報",
+        "translated": "let g_last1_model;\t\t\t\t\t\t// Edge model info"
+    },
+    {
+        "original": "let g_last2_model;\t\t\t\t\t\t//端っこモデル情報",
+        "translated": "let g_last2_model;\t\t\t\t\t\t// Edge model info"
+    },
+    {
+        "original": "let g_lastPos;\t\t\t\t\t\t\t//最後に配置した位置",
+        "translated": "let g_lastPos;\t\t\t\t\t\t\t// Last placed position"
+    },
+    {
+        "original": "let g_last_action       = 0;\t\t\t//最後に動いていた時刻",
+        "translated": "let g_last_action       = 0;\t\t\t// Time last moved"
+    },
+    {
+        "original": "let g_last_action      = 0;\t\t\t\t//最後に動いていた時刻",
+        "translated": "let g_last_action      = 0;\t\t\t\t// Time last moved"
+    },
+    {
+        "original": "let g_last_check        = 0;\t\t\t//最後にチェックした時刻",
+        "translated": "let g_last_check        = 0;\t\t\t// Time last checked"
+    },
+    {
+        "original": "let g_last_check       = 0;\t\t\t\t//最後にチェックした時刻",
+        "translated": "let g_last_check       = 0;\t\t\t\t// Time last checked"
+    },
+    {
+        "original": "let g_last_color_change = 0;\t\t\t//最後に色を変えた時刻",
+        "translated": "let g_last_color_change = 0;\t\t\t// Time color was last changed"
+    },
+    {
+        "original": "let g_line_algo;\t\t\t\t\t\t//選択中のLine描画アルゴリズムインデックス",
+        "translated": "let g_line_algo;\t\t\t\t\t\t// Index of currently selected Line drawing algorithm"
+    },
+    {
+        "original": "let g_line_algo;\t\t\t\t//選択中のLine描画アルゴリズムインデックス",
+        "translated": "let g_line_algo;\t\t\t\t// Index of currently selected Line drawing algorithm"
+    },
+    {
+        "original": "let g_main          = {};\t\t//メインシーンをレンダリングするテクスチャとフレームバッファ",
+        "translated": "let g_main          = {};\t\t// Texture and frame buffer to render main scene"
+    },
+    {
+        "original": "let g_modelbuff     = null;\t\t//インスタンス毎のモデル変換行列バッファ",
+        "translated": "let g_modelbuff     = null;\t\t// Model transformation matrix buffer per instance"
+    },
+    {
+        "original": "let g_modelbuff    = null;\t\t//インスタンス毎のモデル変換行列バッファ",
+        "translated": "let g_modelbuff    = null;\t\t// Model transformation matrix buffer per instance"
+    },
+    {
+        "original": "let g_mtx_scale;\t\t\t\t\t\t//オブジェクト全体の拡大行列",
+        "translated": "let g_mtx_scale;\t\t\t\t\t\t// Scaling matrix for entire object"
+    },
+    {
+        "original": "let g_obj;\t\t\t\t\t\t\t\t//表示用オブジェクト",
+        "translated": "let g_obj;\t\t\t\t\t\t\t\t// Object for display"
+    },
+    {
+        "original": "let g_obj;\t\t\t\t\t\t//テスト表示用オブジェクト",
+        "translated": "let g_obj;\t\t\t\t\t\t// Object for test display"
+    },
+    {
+        "original": "let g_objs                 = [];\t\t//オブジェクト管理",
+        "translated": "let g_objs                 = [];\t\t// Object management"
+    },
+    {
+        "original": "let g_offsc;\t\t\t\t\t\t\t//自力描画用オフスクリーン",
+        "translated": "let g_offsc;\t\t\t\t\t\t\t// Off-screen for manual drawing"
+    },
+    {
+        "original": "let g_offsc;\t\t\t\t\t\t\t//自力直線描画用オフスクリーン",
+        "translated": "let g_offsc;\t\t\t\t\t\t\t// Off-screen for manual line drawing"
+    },
+    {
+        "original": "let g_offsc;\t\t\t\t\t//自力直線描画用オフスクリーン",
+        "translated": "let g_offsc;\t\t\t\t\t// Off-screen for manual line drawing"
+    },
+    {
+        "original": "let g_offsc;\t\t\t\t//自力描画用オフスクリーン",
+        "translated": "let g_offsc;\t\t\t\t// Off-screen for manual drawing"
+    },
+    {
+        "original": "let g_offsc_ctx;\t\t\t\t\t\t//オフスクリーン用Context",
+        "translated": "let g_offsc_ctx;\t\t\t\t\t\t// Context for off-screen"
+    },
+    {
+        "original": "let g_offsc_cv;\t\t\t\t\t\t\t//オフスクリーン用Canvas",
+        "translated": "let g_offsc_cv;\t\t\t\t\t\t\t// Canvas for off-screen"
+    },
+    {
+        "original": "let g_plate_model;\t\t\t//ポリ板用モデル情報",
+        "translated": "let g_plate_model;\t\t\t// Model info for polygon plate"
+    },
+    {
+        "original": "let g_player = {};\t\t\t\t\t\t//プレイヤー情報",
+        "translated": "let g_player = {};\t\t\t\t\t\t// Player info"
+    },
+    {
+        "original": "let g_player_model;\t\t\t\t\t\t//プレイヤー用モデル情報",
+        "translated": "let g_player_model;\t\t\t\t\t\t// Model info for player"
+    },
+    {
+        "original": "let g_pn     = new Perlin();\t\t\t//パーリンノイズ生成用",
+        "translated": "let g_pn     = new Perlin();\t\t\t// For generating Perlin Noise"
+    },
+    {
+        "original": "let g_pn   = new Perlin();\t\t\t\t//パーリンノイズ生成用",
+        "translated": "let g_pn   = new Perlin();\t\t\t\t// For generating Perlin Noise"
+    },
+    {
+        "original": "let g_pos    = [];\t\t\t//ポリ板位置情報",
+        "translated": "let g_pos    = [];\t\t\t// Polygon plate position info"
+    },
+    {
+        "original": "let g_rX                   = 0;\t\t\t//オブジェクト全体のX軸回転角度",
+        "translated": "let g_rX                   = 0;\t\t\t// X-axis rotation angle for entire object"
+    },
+    {
+        "original": "let g_rX = 0;\t\t\t\t\t//テスト表示回転中の角度",
+        "translated": "let g_rX = 0;\t\t\t\t\t// Rotation angle during test display"
+    },
+    {
+        "original": "let g_rY                   = 0;\t\t\t//オブジェクト全体のY軸回転角度",
+        "translated": "let g_rY                   = 0;\t\t\t// Y-axis rotation angle for entire object"
+    },
+    {
+        "original": "let g_rY = 0;\t\t\t\t\t\t\t//全体回転中の角度",
+        "translated": "let g_rY = 0;\t\t\t\t\t\t\t// Rotation angle during overall rotation"
+    },
+    {
+        "original": "let g_rZ                   = 0;\t\t\t//オブジェクト全体のZ軸回転角度",
+        "translated": "let g_rZ                   = 0;\t\t\t// Z-axis rotation angle for entire object"
+    },
+    {
+        "original": "let g_rec_max    = 8;\t\t//キャプチャするターン数",
+        "translated": "let g_rec_max    = 8;\t\t// Number of turns to capture"
+    },
+    {
+        "original": "let g_renderingman;\t\t\t\t\t\t//レンダリング担当",
+        "translated": "let g_renderingman;\t\t\t\t\t\t// Rendering Manager"
+    },
+    {
+        "original": "let g_renderingman;\t\t\t\t//レンダリング担当",
+        "translated": "let g_renderingman;\t\t\t\t// Rendering Manager"
+    },
+    {
+        "original": "let g_renderingman;\t\t\t//レンダリング担当",
+        "translated": "let g_renderingman;\t\t\t// Rendering Manager"
+    },
+    {
+        "original": "let g_road_model;\t\t\t\t\t\t//道路用モデル情報",
+        "translated": "let g_road_model;\t\t\t\t\t\t// Model info for road"
+    },
+    {
+        "original": "let g_route   = [];\t\t\t\t\t\t//ルートリスト",
+        "translated": "let g_route   = [];\t\t\t\t\t\t// Route list"
+    },
+    {
+        "original": "let g_rt     = new RidgeTexture();\t\t//尾根テクスチャ生成用",
+        "translated": "let g_rt     = new RidgeTexture();\t\t// For generating Ridge Texture"
+    },
+    {
+        "original": "let g_sphere_model;\t\t\t\t\t\t//球体用モデル情報",
+        "translated": "let g_sphere_model;\t\t\t\t\t\t// Model info for sphere"
+    },
+    {
+        "original": "let g_st     = new SplatterTexture();\t//スプラッターテクスチャ生成用",
+        "translated": "let g_st     = new SplatterTexture();\t// For generating Splatter Texture"
+    },
+    {
+        "original": "let g_state  = {};\t\t\t\t\t\t//状態管理",
+        "translated": "let g_state  = {};\t\t\t\t\t\t// State management"
+    },
+    {
+        "original": "let g_texs          = {};\t\t//テクスチャまとめ",
+        "translated": "let g_texs          = {};\t\t// Texture collection"
+    },
+    {
+        "original": "let g_time           = 0;\t\t//現在時刻[ms]",
+        "translated": "let g_time           = 0;\t\t// Current time [ms]"
+    },
+    {
+        "original": "let g_time          = 0;\t\t//現在時刻[ms]",
+        "translated": "let g_time          = 0;\t\t// Current time [ms]"
+    },
+    {
+        "original": "let g_time   = 0;\t\t\t\t\t\t//現在時刻[ms]",
+        "translated": "let g_time   = 0;\t\t\t\t\t\t// Current time [ms]"
+    },
+    {
+        "original": "let g_time   = 0;\t\t\t\t//現在時刻[ms]",
+        "translated": "let g_time   = 0;\t\t\t\t// Current time [ms]"
+    },
+    {
+        "original": "let g_time   = 0;\t\t\t//現在時刻[ms]",
+        "translated": "let g_time   = 0;\t\t\t// Current time [ms]"
+    },
+    {
+        "original": "let g_tt     = new TurbulenceTexture();\t//乱気流テクスチャ生成用",
+        "translated": "let g_tt     = new TurbulenceTexture();\t// For generating Turbulence Texture"
+    },
+    {
+        "original": "let g_wall_model;\t\t\t\t\t\t//壁背景用モデル情報",
+        "translated": "let g_wall_model;\t\t\t\t\t\t// Model info for wall background"
+    },
+    {
+        "original": "let g_wt     = new WoodTexture();\t\t//木目テクスチャ生成用",
+        "translated": "let g_wt     = new WoodTexture();\t\t// For generating Wood Texture"
+    },
+    {
+        "original": "let lightDot = vNormal.dotProduct(this.vLight);\t//光源ベクトルと",
+        "translated": "let lightDot = vNormal.dotProduct(this.vLight);\t// With light source vector"
+    },
+    {
+        "original": "let lightDot = vNormal.dotProduct(vLight);\t\t//光源ベクトルと",
+        "translated": "let lightDot = vNormal.dotProduct(vLight);\t\t// With light source vector"
+    },
+    {
+        "original": "let min_dist    = nw ** 4;\t//とりあえず大きな値にしておく",
+        "translated": "let min_dist    = nw ** 4;\t// Set to large value for now"
+    },
+    {
+        "original": "let path_list  = [];\t//閉じれるパスリスト",
+        "translated": "let path_list  = [];\t// List of paths that can be closed"
+    },
+    {
+        "original": "let pos = -0.5 + (i * 2) * w;\t//正方形の1辺になるように配置する",
+        "translated": "let pos = -0.5 + (i * 2) * w;\t// Arrange to become one side of a square"
+    },
+    {
+        "original": "let px = 1,py = 1;\t//決まらなかった時の初期値",
+        "translated": "let px = 1,py = 1;\t// Initial value when not decided"
+    },
+    {
+        "original": "let r_addAngle  = (Math.PI * 2.0 / r_n);\t//n角形の角度増分値",
+        "translated": "let r_addAngle  = (Math.PI * 2.0 / r_n);\t// Angle increment value for n-gon"
+    },
+    {
+        "original": "let screen      = document.getElementById(\"game-screen\");\t//描画先canvas",
+        "translated": "let screen      = document.getElementById(\"game-screen\");\t// Drawing destination canvas"
+    },
+    {
+        "original": "let screen    = document.getElementById(\"game-screen\");\t//描画先canvas",
+        "translated": "let screen    = document.getElementById(\"game-screen\");\t// Drawing destination canvas"
+    },
+    {
+        "original": "let slit_canvas = document.getElementById(\"slit-canvas\");\t//スリットアニメ用canvas",
+        "translated": "let slit_canvas = document.getElementById(\"slit-canvas\");\t// Canvas for slit animation"
+    },
+    {
+        "original": "let slit_canvas = document.getElementById(\"slit-canvas\");\t//スリットアニメ用描画先",
+        "translated": "let slit_canvas = document.getElementById(\"slit-canvas\");\t// Drawing destination for slit animation"
+    },
+    {
+        "original": "let slit_mask   = document.getElementById(\"slit-mask\");\t\t//スリットマスク用canvas",
+        "translated": "let slit_mask   = document.getElementById(\"slit-mask\");\t\t// Canvas for slit mask"
+    },
+    {
+        "original": "let slit_mask   = document.getElementById(\"slit-mask\");\t\t//スリットマスク用描画先",
+        "translated": "let slit_mask   = document.getElementById(\"slit-mask\");\t\t// Drawing destination for slit mask"
+    },
+    {
+        "original": "let slit_work   = document.getElementById(\"slit-work\");\t\t//スリットアニメ用一時描画先",
+        "translated": "let slit_work   = document.getElementById(\"slit-work\");\t\t// Temporary drawing destination for slit animation"
+    },
+    {
+        "original": "let vecX = new VectorMan3();\t//X軸ベクトル",
+        "translated": "let vecX = new VectorMan3();\t// X-axis vector"
+    },
+    {
+        "original": "let vecY = new VectorMan3();\t//Y軸ベクトル",
+        "translated": "let vecY = new VectorMan3();\t// Y-axis vector"
+    },
+    {
+        "original": "let vecZ = new VectorMan3();\t//Z軸ベクトル",
+        "translated": "let vecZ = new VectorMan3();\t// Z-axis vector"
+    },
+    {
+        "original": "let w0     = this.edgeFunction(v2,v3,this.target_p);\t//v2からpに伸びるベクトルとv2からv3に伸びるベクトルとの外積で、v1の頂点情報の比率に使える",
+        "translated": "let w0     = this.edgeFunction(v2,v3,this.target_p);\t// Cross product of vector v2->p and vector v2->v3, usable for v1 vertex info ratio"
+    },
+    {
+        "original": "let w0   = this.edgeFunction(v2,v3,p);\t//v2からpに伸びるベクトルとv2からv3に伸びるベクトルとの外積で、v1の頂点情報の比率に使える",
+        "translated": "let w0   = this.edgeFunction(v2,v3,p);\t// Cross product of vector v2->p and vector v2->v3, usable for v1 vertex info ratio"
+    },
+    {
+        "original": "let w1     = this.edgeFunction(v3,v1,this.target_p);\t//v3からpに伸びるベクトルとv3からv1に伸びるベクトルとの外積で、v2の頂点情報の比率に使える",
+        "translated": "let w1     = this.edgeFunction(v3,v1,this.target_p);\t// Cross product of vector v3->p and vector v3->v1, usable for v2 vertex info ratio"
+    },
+    {
+        "original": "let w1   = this.edgeFunction(v3,v1,p);\t//v3からpに伸びるベクトルとv3からv1に伸びるベクトルとの外積で、v2の頂点情報の比率に使える",
+        "translated": "let w1   = this.edgeFunction(v3,v1,p);\t// Cross product of vector v3->p and vector v3->v1, usable for v2 vertex info ratio"
+    },
+    {
+        "original": "let w2     = this.edgeFunction(v1,v2,this.target_p);\t//v1からpに伸びるベクトルとv1からv2に伸びるベクトルとの外積で、v3の上店情報の比率に使える",
+        "translated": "let w2     = this.edgeFunction(v1,v2,this.target_p);\t// Cross product of vector v1->p and vector v1->v2, usable for v3 vertex info ratio"
+    },
+    {
+        "original": "let w2   = this.edgeFunction(v1,v2,p);\t//v1からpに伸びるベクトルとv1からv2に伸びるベクトルとの外積で、v3の上店情報の比率に使える",
+        "translated": "let w2   = this.edgeFunction(v1,v2,p);\t// Cross product of vector v1->p and vector v1->v2, usable for v3 vertex info ratio"
+    },
+    {
+        "original": "m.mul(this.mtx_model);\t\t//ローカル座標の原点をワールド座標での",
+        "translated": "m.mul(this.mtx_model);\t\t// Origin of local coordinates in world coordinates"
+    },
+    {
+        "original": "m.mul(this.mtx_projection);\t//射影変換して見える範囲に座標を正規化する",
+        "translated": "m.mul(this.mtx_projection);\t// Project and normalize coordinates to visible range"
+    },
+    {
+        "original": "m.mul(this.mtx_view)\t\t//カメラの位置に合わせてワールド全体を",
+        "translated": "m.mul(this.mtx_view)\t\t// Adjust entire world to camera position"
+    },
+    {
+        "original": "m.mul(this.mtx_world);\t\t//ローカル座標の原点をワールド座標での",
+        "translated": "m.mul(this.mtx_world);\t\t// Origin of local coordinates in world coordinates"
+    },
+    {
+        "original": "mRotate.rotateY(-angle);\t\t//時計回り(右回り)に回す",
+        "translated": "mRotate.rotateY(-angle);\t\t// Rotate clockwise (right turn)"
+    },
+    {
+        "original": "mRotate.rotateY(-r_angle);\t\t//時計回り(右回り)に回す",
+        "translated": "mRotate.rotateY(-r_angle);\t\t// Rotate clockwise (right turn)"
+    },
+    {
+        "original": "masataka hakozakiさんに圧倒的感謝を！",
+        "translated": "Overwhelming thanks to masataka hakozaki-san!"
+    },
+    {
+        "original": "mtx_model.m[12] = or;\t\t\t//平行移動合成",
+        "translated": "mtx_model.m[12] = or;\t\t\t// Compose translation"
+    },
+    {
+        "original": "mtx_rotateX.rotateX(rad(90));\t\t//90度傾けて手前に起こす",
+        "translated": "mtx_rotateX.rotateX(rad(90));\t\t// Tilt 90 degrees and raise to front"
+    },
+    {
+        "original": "neko800(@nekohachi1)さんの作品",
+        "translated": "neko800 (@nekohachi1)-san's work"
+    },
+    {
+        "original": "neko800さんのAA TRAIN https://twitter.com/nekohachi1/status/1197642791079182337",
+        "translated": "neko800-san's AA TRAIN https://twitter.com/nekohachi1/status/1197642791079182337"
+    },
+    {
+        "original": "neko800さんのプチコン4 オリジナル版 https://twitter.com/nekohachi1/status/1196444460868980736",
+        "translated": "neko800-san's SmileBASIC 4 Original Version https://twitter.com/nekohachi1/status/1196444460868980736"
+    },
+    {
+        "original": "o = Math.min(Math.pow(o * 1.0,3.0),1.0);\t//値の勾配を調整",
+        "translated": "o = Math.min(Math.pow(o * 1.0,3.0),1.0);\t// Adjust gradient of value"
+    },
+    {
+        "original": "obj.rot_z = (t < 0.4) ? 0 : (g_pn.perlin(elapsed_time / 10,obj.x * 100,0) * 15);\t//跳ねた後のフラフラ",
+        "translated": "obj.rot_z = (t < 0.4) ? 0 : (g_pn.perlin(elapsed_time / 10,obj.x * 100,0) * 15);\t// Wobble after bouncing"
+    },
+    {
+        "original": "out float tex_idx;\t\t\t//この頂点のテクスチャインデックス",
+        "translated": "out float tex_idx;\t\t\t// Texture index of this vertex"
+    },
+    {
+        "original": "out vec2  tex_uv;\t\t\t//この頂点のテクスチャ座標",
+        "translated": "out vec2  tex_uv;\t\t\t// Texture coordinates of this vertex"
+    },
+    {
+        "original": "out vec3 v_color;\t\t\t//出力色",
+        "translated": "out vec3 v_color;\t\t\t// Output color"
+    },
+    {
+        "original": "out vec4 f_color;\t\t\t\t//フラグメントシェーダとしての出力色",
+        "translated": "out vec4 f_color;\t\t\t\t// Output color as fragment shader"
+    },
+    {
+        "original": "out vec4 f_color;\t\t\t//フラグメントシェーダとしての出力色",
+        "translated": "out vec4 f_color;\t\t\t// Output color as fragment shader"
+    },
+    {
+        "original": "p5.jsを使わない場合、文字のアウトラインを取得する方法は標準で用意されていないので、",
+        "translated": "Since there is no standard way to get text outline without using p5.js,"
+    },
+    {
+        "original": "pos = calc_pos(0,t1,t2);\t//最後をつなげる",
+        "translated": "pos = calc_pos(0,t1,t2);\t// Connect end"
+    },
+    {
+        "original": "randomSeed(g_seed);\t//シードを固定してランダム結果が毎回同じになるようにする",
+        "translated": "randomSeed(g_seed);\t// Fix seed so random results are same every time"
+    },
+    {
+        "original": "randomSeed(g_seed);\t//シードを固定して分割が毎回同じになるようにする",
+        "translated": "randomSeed(g_seed);\t// Fix seed so divisions are same every time"
+    },
+    {
+        "original": "takawo先生、いつもお世話になっております！",
+        "translated": "Thank you for everything always, Takawo-sensei!"
+    },
+    {
+        "original": "this.B      = 0;\t\t\t\t\t//頂点カラー(B)",
+        "translated": "this.B      = 0;\t\t\t\t\t// Vertex Color (B)"
+    },
+    {
+        "original": "this.G      = 0;\t\t\t\t\t//頂点カラー(G)",
+        "translated": "this.G      = 0;\t\t\t\t\t// Vertex Color (G)"
+    },
+    {
+        "original": "this.R      = 0;\t\t\t\t\t//頂点カラー(R)",
+        "translated": "this.R      = 0;\t\t\t\t\t// Vertex Color (R)"
+    },
+    {
+        "original": "this.aCZBuffer = new Array(this.sc_w * this.sc_h);\t//中央Z値バッファ",
+        "translated": "this.aCZBuffer = new Array(this.sc_w * this.sc_h);\t// Center Z value buffer"
+    },
+    {
+        "original": "this.aCZBuffer[pos + x] = centerZ;\t\t//ピクセルのポリゴン中央Z値を更新",
+        "translated": "this.aCZBuffer[pos + x] = centerZ;\t\t// Update polygon center Z value of pixel"
+    },
+    {
+        "original": "this.aDpBuffer = new Array(this.sc_w * this.sc_h);\t//内積値バッファ",
+        "translated": "this.aDpBuffer = new Array(this.sc_w * this.sc_h);\t// Dot product value buffer"
+    },
+    {
+        "original": "this.aDpBuffer[pos + x] = -lightDot;\t//ピクセルの内積値を更新",
+        "translated": "this.aDpBuffer[pos + x] = -lightDot;\t// Update dot product value of pixel"
+    },
+    {
+        "original": "this.aZBuffer = new Float32Array(this.sc_w * this.sc_h);\t//Float32Arrayにした方が速い",
+        "translated": "this.aZBuffer = new Float32Array(this.sc_w * this.sc_h);\t// Faster with Float32Array"
+    },
+    {
+        "original": "this.aZBuffer [pos + x] = Z;\t\t\t//ピクセルのZ値を更新",
+        "translated": "this.aZBuffer [pos + x] = Z;\t\t\t// Update Z value of pixel"
+    },
+    {
+        "original": "this.aZBuffer [pos + x] = Z;\t//ピクセルのZ値を更新",
+        "translated": "this.aZBuffer [pos + x] = Z;\t// Update Z value of pixel"
+    },
+    {
+        "original": "this.aZBuffer[pos + x] = Z;\t//ピクセルのZ値を更新",
+        "translated": "this.aZBuffer[pos + x] = Z;\t// Update Z value of pixel"
+    },
+    {
+        "original": "this.act_info[i].a   = unitAngle * (rnd(2) + 1)\t\t//回転角をランダムで2倍にする",
+        "translated": "this.act_info[i].a   = unitAngle * (rnd(2) + 1)\t\t// Randomly double the rotation angle"
+    },
+    {
+        "original": "this.act_info[i].dir = rnd(2) * (-1 * rnd(2));\t\t//-1,0,1 のどれか",
+        "translated": "this.act_info[i].dir = rnd(2) * (-1 * rnd(2));\t\t// One of -1, 0, 1"
+    },
+    {
+        "original": "this.active = false;\t\t\t\t//簡易可視判定(true:見える)",
+        "translated": "this.active = false;\t\t\t\t// Simple visibility check (true: visible)"
+    },
+    {
+        "original": "this.m20 = (r + l) / (r - l); //実質0",
+        "translated": "this.m20 = (r + l) / (r - l); // Effectively 0"
+    },
+    {
+        "original": "this.m21 = (t + b) / (t - b); //実質0",
+        "translated": "this.m21 = (t + b) / (t - b); // Effectively 0"
+    },
+    {
+        "original": "this.m[ 8] = (r + l) / (r - l); //実質0",
+        "translated": "this.m[ 8] = (r + l) / (r - l); // Effectively 0"
+    },
+    {
+        "original": "this.m[ 9] = (t + b) / (t - b); //実質0",
+        "translated": "this.m[ 9] = (t + b) / (t - b); // Effectively 0"
+    },
+    {
+        "original": "this.polyIndexList         = [];\t//ポリゴンを形成する頂点のインデックスリスト",
+        "translated": "this.polyIndexList         = [];\t// Index list of vertices forming polygons"
+    },
+    {
+        "original": "this.polyIndexList[index++] = firstpos + n * 2 + 1;\t\t\t\t//中心点(外側)",
+        "translated": "this.polyIndexList[index++] = firstpos + n * 2 + 1;\t\t\t\t// Center Point (Outer)"
+    },
+    {
+        "original": "this.polyIndexList[index++] = firstpos + n * 2;\t\t\t\t\t//中心点(内側)",
+        "translated": "this.polyIndexList[index++] = firstpos + n * 2;\t\t\t\t\t// Center Point (Inner)"
+    },
+    {
+        "original": "this.primitiveNum          = 0;\t\t//プリミティブの数",
+        "translated": "this.primitiveNum          = 0;\t\t// Number of primitives"
+    },
+    {
+        "original": "this.tire_n          = n;\t\t\t\t\t\t\t\t//タイヤの分割数",
+        "translated": "this.tire_n          = n;\t\t\t\t\t\t\t\t// Tire divisions"
+    },
+    {
+        "original": "this.unit_round_num  = r_n;\t\t\t\t//断面の個数",
+        "translated": "this.unit_round_num  = r_n;\t\t\t\t// Number of cross sections"
+    },
+    {
+        "original": "this.unit_vertex_num = n;\t\t\t\t//断面1つの頂点数",
+        "translated": "this.unit_vertex_num = n;\t\t\t\t// Number of vertices per cross section"
+    },
+    {
+        "original": "this.use    = 0;\t\t\t\t\t//ポリゴン組み合わせ時の頂点使用回数",
+        "translated": "this.use    = 0;\t\t\t\t\t// Vertex usage count when combining polygons"
+    },
+    {
+        "original": "this.vAmbientColor  = new VectorMan3(DEFAULT_AMBIENT_LIGHT,\t\t\t//環境光色",
+        "translated": "this.vAmbientColor  = new VectorMan3(DEFAULT_AMBIENT_LIGHT,\t\t\t// Ambient Light Color"
+    },
+    {
+        "original": "this.vAmbientColor  = new VectorMan3(DEFAULT_AMBIENT_LIGHT,\t\t//環境光色",
+        "translated": "this.vAmbientColor  = new VectorMan3(DEFAULT_AMBIENT_LIGHT,\t\t// Ambient Light Color"
+    },
+    {
+        "original": "this.vAmbientColorTex = new VectorMan3(DEFAULT_AMBIENT_LIGHT * 255,\t//環境光色(テクスチャ用)",
+        "translated": "this.vAmbientColorTex = new VectorMan3(DEFAULT_AMBIENT_LIGHT * 255,\t// Ambient Light Color (For Texture)"
+    },
+    {
+        "original": "this.vDiffuseColor = new VectorMan3(DEFAULT_DEFUSE_LIGHT,\t\t\t//拡散光色",
+        "translated": "this.vDiffuseColor = new VectorMan3(DEFAULT_DEFUSE_LIGHT,\t\t\t// Diffuse Light Color"
+    },
+    {
+        "original": "this.vDiffuseColor = new VectorMan3(DEFAULT_DEFUSE_LIGHT,\t\t//拡散光色",
+        "translated": "this.vDiffuseColor = new VectorMan3(DEFAULT_DEFUSE_LIGHT,\t\t// Diffuse Light Color"
+    },
+    {
+        "original": "this.vEye           = new VectorMan3(0,0,-1);\t\t\t\t\t\t//Z-を向いてる視線ベクトル(右手座標系用)",
+        "translated": "this.vEye           = new VectorMan3(0,0,-1);\t\t\t\t\t\t// View vector facing Z- (for right-handed coordinate system)"
+    },
+    {
+        "original": "this.vEye           = new VectorMan3(0,0,-1);\t\t\t\t\t//Z-を向いてる視線ベクトル(右手座標系用)",
+        "translated": "this.vEye           = new VectorMan3(0,0,-1);\t\t\t\t\t// View vector facing Z- (for right-handed coordinate system)"
+    },
+    {
+        "original": "this.vEye           = new VectorMan3(0,0,1);\t\t\t\t\t//Z+を向いてる視線ベクトル",
+        "translated": "this.vEye           = new VectorMan3(0,0,1);\t\t\t\t\t// View vector facing Z+"
+    },
+    {
+        "original": "this.vEye           = new VectorMan3(0,0,1);\t//Z+を向いてる視線ベクトル",
+        "translated": "this.vEye           = new VectorMan3(0,0,1);\t// View vector facing Z+"
+    },
+    {
+        "original": "this.vLight         = new VectorMan3(DEFAULT_LIGHT_X,\t\t\t\t//光源方向ベクトル",
+        "translated": "this.vLight         = new VectorMan3(DEFAULT_LIGHT_X,\t\t\t\t// Light source direction vector"
+    },
+    {
+        "original": "this.vLight         = new VectorMan3(DEFAULT_LIGHT_X,\t\t\t//光源方向ベクトル",
+        "translated": "this.vLight         = new VectorMan3(DEFAULT_LIGHT_X,\t\t\t// Light source direction vector"
+    },
+    {
+        "original": "this.vertexList            = [];\t//頂点データリスト",
+        "translated": "this.vertexList            = [];\t// Vertex data list"
+    },
+    {
+        "original": "this.vertexList[  i].vv.x = radius * Math.cos(-angle);\t//上側のn角形",
+        "translated": "this.vertexList[  i].vv.x = radius * Math.cos(-angle);\t// Upper n-gon"
+    },
+    {
+        "original": "this.vertexList[  i].vv.x = radius * Math.cos(angle);\t//上側のn角形",
+        "translated": "this.vertexList[  i].vv.x = radius * Math.cos(angle);\t// Upper n-gon"
+    },
+    {
+        "original": "this.vertexList[n+i].vv.x = radius * Math.cos(-angle);\t//下側のn角形",
+        "translated": "this.vertexList[n+i].vv.x = radius * Math.cos(-angle);\t// Lower n-gon"
+    },
+    {
+        "original": "this.vertexList[n+i].vv.x = radius * Math.cos(angle);\t//下側のn角形",
+        "translated": "this.vertexList[n+i].vv.x = radius * Math.cos(angle);\t// Lower n-gon"
+    },
+    {
+        "original": "this.vertexNum             = 0;\t\t//頂点数",
+        "translated": "this.vertexNum             = 0;\t\t// Number of vertices"
+    },
+    {
+        "original": "this.vertexNumForPrimitive;\t\t//情報の総数",
+        "translated": "this.vertexNumForPrimitive;\t\t// Total amount of info"
+    },
+    {
+        "original": "this.vn     = new VectorMan3();\t\t//頂点の法線ベクトル",
+        "translated": "this.vn     = new VectorMan3();\t\t// Vertex normal vector"
+    },
+    {
+        "original": "this.vv     = new VectorMan4();\t\t//頂点座標(後々の座標変換時に都合が良いように4次にしてます)",
+        "translated": "this.vv     = new VectorMan4();\t\t// Vertex coordinates (Made 4D for convenience during later coordinate transformation)"
+    },
+    {
+        "original": "tomoqさんに圧倒的感謝を！",
+        "translated": "Overwhelming thanks to tomoq-san!"
+    },
+    {
+        "original": "u, u, u,  u,-u, u,  u, u,-u,  u, u,-u,  u,-u, u,  u,-u,-u,\t\t//右側面",
+        "translated": "u, u, u,  u,-u, u,  u, u,-u,  u, u,-u,  u,-u, u,  u,-u,-u,\t\t//Right Side"
+    },
+    {
+        "original": "u, u,-u,  u,-u,-u, -u, u,-u, -u, u,-u,  u,-u,-u, -u,-u,-u,\t\t//背面",
+        "translated": "u, u,-u,  u,-u,-u, -u, u,-u, -u, u,-u,  u,-u,-u, -u,-u,-u,\t\t//Back Face"
+    }
+]

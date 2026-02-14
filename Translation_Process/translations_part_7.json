@@ -1,0 +1,802 @@
+[
+    {
+        "original": "//ガウシアンフィルタ頂点シェーダ",
+        "translated": "// Gaussian Filter Vertex Shader"
+    },
+    {
+        "original": "//キャッシュに色情報をセット",
+        "translated": "// Set color information to cache"
+    },
+    {
+        "original": "//キャッシュ作成",
+        "translated": "// Create cache"
+    },
+    {
+        "original": "//キャプチャした動画のダウンロードリンクを追加",
+        "translated": "// Add download link for captured video"
+    },
+    {
+        "original": "//キャンバスのサイズを取得",
+        "translated": "// Get canvas size"
+    },
+    {
+        "original": "//キラキラワームホールを指定の領域に描く",
+        "translated": "// Draw sparkling wormhole in specified area"
+    },
+    {
+        "original": "//キラキラ回転水晶を指定の領域に描く",
+        "translated": "// Draw sparkling rotating crystal in specified area"
+    },
+    {
+        "original": "//クォータニオンからの回転行列作成",
+        "translated": "// Create rotation matrix from quaternion"
+    },
+    {
+        "original": "//クォータニオンのx,y,z,wを計算",
+        "translated": "// Calculate quaternion x, y, z, w"
+    },
+    {
+        "original": "//クォータニオン管理人",
+        "translated": "// Quaternion Manager"
+    },
+    {
+        "original": "//クリア",
+        "translated": "// Clear"
+    },
+    {
+        "original": "//クリア色設定",
+        "translated": "// Set clear color"
+    },
+    {
+        "original": "//クリックorタップでFPSの表示ON/OFF",
+        "translated": "// Toggle FPS display ON/OFF with click or tap"
+    },
+    {
+        "original": "//クリックイベントを発生させる",
+        "translated": "// Trigger click event"
+    },
+    {
+        "original": "//クリッピング",
+        "translated": "// Clipping"
+    },
+    {
+        "original": "//クリッピングして描画",
+        "translated": "// Clip and draw"
+    },
+    {
+        "original": "//グラデーションになるパレットを選んでみました",
+        "translated": "// I chose a palette that becomes a gradation"
+    },
+    {
+        "original": "//グラデーション作成",
+        "translated": "// Create gradation"
+    },
+    {
+        "original": "//グリッドに合わせた:右左辺の無い四角を生成",
+        "translated": "// Generate square without right and left sides aligned to grid"
+    },
+    {
+        "original": "//グリッドに合わせた☓を生成",
+        "translated": "// Generate X aligned to grid"
+    },
+    {
+        "original": "//グリッドに合わせた☓を続きで作成",
+        "translated": "// Continue creating X aligned to grid"
+    },
+    {
+        "original": "//グリッドに合わせた四角を生成",
+        "translated": "// Generate square aligned to grid"
+    },
+    {
+        "original": "//グリッドに合わせた左辺の無い四角を生成",
+        "translated": "// Generate square aligned to grid without left side"
+    },
+    {
+        "original": "//グリッドの角度を可視化する場合はこの部分だけを使います",
+        "translated": "// Use only this part when visualizing grid angle"
+    },
+    {
+        "original": "//グリッドパターンを生成",
+        "translated": "// Generate grid pattern"
+    },
+    {
+        "original": "//グローバルオブジェクト",
+        "translated": "// Global Object"
+    },
+    {
+        "original": "//ゲームに必要なオブジェクトの生成",
+        "translated": "// Generation of objects necessary for game"
+    },
+    {
+        "original": "//ゲームの初期化処理",
+        "translated": "// Game initialization processing"
+    },
+    {
+        "original": "//ゲームの描画処理",
+        "translated": "// Game drawing processing"
+    },
+    {
+        "original": "//ゲームスクリーンを中央に配置",
+        "translated": "// Place game screen in center"
+    },
+    {
+        "original": "//コピー",
+        "translated": "// Copy"
+    },
+    {
+        "original": "//コマンド文字に展開ルールがあるならそれに置き換える",
+        "translated": "// Replace command character with expansion rule if exists"
+    },
+    {
+        "original": "//コンストラクタ",
+        "translated": "// Constructor"
+    },
+    {
+        "original": "//コンパイルできたかをチェック",
+        "translated": "// Check if compiled successfully"
+    },
+    {
+        "original": "//コンボボックスでノイズタイプ選択",
+        "translated": "// Select noise type with combo box"
+    },
+    {
+        "original": "//コンボボックスの位置合わせ",
+        "translated": "// Align combo box position"
+    },
+    {
+        "original": "//ゴールするまで探索する",
+        "translated": "// Search until reaching goal"
+    },
+    {
+        "original": "//ゴールに着いたか？",
+        "translated": "// Reached goal?"
+    },
+    {
+        "original": "//ゴールのはず",
+        "translated": "// Should be goal"
+    },
+    {
+        "original": "//ゴールの穴への落下スタート",
+        "translated": "// Start falling into goal hole"
+    },
+    {
+        "original": "//サーフェスの適切な位置座標に平行移動する。また、この行列は、",
+        "translated": "// Translate to appropriate position coordinates of surface. Also, this matrix"
+    },
+    {
+        "original": "//シェーダでの描画実行",
+        "translated": "// Execute drawing with shader"
+    },
+    {
+        "original": "//シェーダにパラメータをセット",
+        "translated": "// Set parameters to shader"
+    },
+    {
+        "original": "//シェーダの準備",
+        "translated": "// Preparation of shader"
+    },
+    {
+        "original": "//シェーダをコンパイルする",
+        "translated": "// Compile shader"
+    },
+    {
+        "original": "//シェーダをリンク",
+        "translated": "// Link shader"
+    },
+    {
+        "original": "//シェーダ生成",
+        "translated": "// Shader Generation"
+    },
+    {
+        "original": "//シェーダ類の準備",
+        "translated": "// Preparation of shaders"
+    },
+    {
+        "original": "//シンプレックスノイズクラス",
+        "translated": "// Simplex Noise Class"
+    },
+    {
+        "original": "//シード値は常に2つになるようにします",
+        "translated": "// Ensure seed values are always two"
+    },
+    {
+        "original": "//シード固定の乱数で各ポイントオブジェクトのパラメータを決定",
+        "translated": "// Determine parameters of each point object with seed-fixed random numbers"
+    },
+    {
+        "original": "//シーンの準備",
+        "translated": "// Preparation of scene"
+    },
+    {
+        "original": "//ジュリア集合のr(実軸)の範囲は、-1.6 ～ 1.6",
+        "translated": "// Range of r (real axis) of Julia set is -1.6 to 1.6"
+    },
+    {
+        "original": "//スクロールで見える分2回描きます",
+        "translated": "// Draw twice for scroll visibility"
+    },
+    {
+        "original": "//スクロールの移動量を計算",
+        "translated": "// Calculate scroll movement amount"
+    },
+    {
+        "original": "//スケーリング後はwの値が必要ないので1.0に初期化",
+        "translated": "// Since w value is not needed after scaling, initialize to 1.0"
+    },
+    {
+        "original": "//スケール変換行列とはこういうもの",
+        "translated": "// Scale transformation matrix is like this"
+    },
+    {
+        "original": "//スケール変換行列の作成",
+        "translated": "// Creation of Scale Transformation Matrix"
+    },
+    {
+        "original": "//スタートのタイミングを図る",
+        "translated": "// Time the start"
+    },
+    {
+        "original": "//ストレンジアトラクターのIDを決定",
+        "translated": "// Determine ID of Strange Attractor"
+    },
+    {
+        "original": "//ストレンジアトラクター関連の設定",
+        "translated": "// Strange Attractor related settings"
+    },
+    {
+        "original": "//スプライトのチップを準備",
+        "translated": "// Prepare sprite chips"
+    },
+    {
+        "original": "//スプライトオブジェクト情報の初期化",
+        "translated": "// Initialize sprite object information"
+    },
+    {
+        "original": "//スプライトモデルの種類",
+        "translated": "// Types of sprite models"
+    },
+    {
+        "original": "//スプラッターテクスチャクラス",
+        "translated": "// Splatter Texture Class"
+    },
+    {
+        "original": "//スマホだとgetImageData時にフリーズする場合があるので遅延実行",
+        "translated": "// Delayed execution because smartphone might freeze during getImageData"
+    },
+    {
+        "original": "//スマホでランダムサーチするとたまにフリーズするので、",
+        "translated": "// Because random search on smartphone sometimes freezes,"
+    },
+    {
+        "original": "//スマホに雰囲気合わせるバージョン",
+        "translated": "// Version to match atmosphere to smartphone"
+    },
+    {
+        "original": "//スライダーの位置合わせ",
+        "translated": "// Align slider position"
+    },
+    {
+        "original": "//スライダーの値を反映",
+        "translated": "// Reflect slider value"
+    },
+    {
+        "original": "//スリットアニメの描画先とワークをスクリーンと同じサイズにする",
+        "translated": "// Make slit animation drawing destination and work same size as screen"
+    },
+    {
+        "original": "//スリットアニメを配置",
+        "translated": "// Place slit animation"
+    },
+    {
+        "original": "//スリットアニメーションの描画処理",
+        "translated": "// Slit animation drawing processing"
+    },
+    {
+        "original": "//スリットアニメ描画",
+        "translated": "// Draw slit animation"
+    },
+    {
+        "original": "//スリットマスクの生成",
+        "translated": "// Generate slit mask"
+    },
+    {
+        "original": "//スリットマスクを配置",
+        "translated": "// Place slit mask"
+    },
+    {
+        "original": "//セルラーノイズクラス",
+        "translated": "// Cellular Noise Class"
+    },
+    {
+        "original": "//タイトルの位置合わせ",
+        "translated": "// Align title position"
+    },
+    {
+        "original": "//タイヤの側面(内側)",
+        "translated": "// Tire side (inner)"
+    },
+    {
+        "original": "//タイヤの側面(外側)",
+        "translated": "// Tire side (outer)"
+    },
+    {
+        "original": "//タイヤの表面",
+        "translated": "// Tire surface"
+    },
+    {
+        "original": "//タイヤを回転させる",
+        "translated": "// Rotate tire"
+    },
+    {
+        "original": "//タイヤ分少し浮かす",
+        "translated": "// Float slightly by tire amount"
+    },
+    {
+        "original": "//タイヤ部分の座標を設定",
+        "translated": "// Set coordinates of tire part"
+    },
+    {
+        "original": "//タイヤ部分の描画順インデックスを作成",
+        "translated": "// Create drawing order index of tire part"
+    },
+    {
+        "original": "//ターゲットの更新",
+        "translated": "// Update target"
+    },
+    {
+        "original": "//ターゲット位置を決定する",
+        "translated": "// Determine target position"
+    },
+    {
+        "original": "//ターゲット終了チェック",
+        "translated": "// Target completion check"
+    },
+    {
+        "original": "//ターゲット選択",
+        "translated": "// Target selection"
+    },
+    {
+        "original": "//タービュランス(乱気流)テクスチャクラス",
+        "translated": "// Turbulence Texture Class"
+    },
+    {
+        "original": "//ダウンロード時のファイル名を指定",
+        "translated": "// Specify filename when downloading"
+    },
+    {
+        "original": "//ダブルクリックで画像として保存",
+        "translated": "// Save as image on double click"
+    },
+    {
+        "original": "//ダブルステップブレゼンハムのLINE描画で準備する",
+        "translated": "// Prepare with double-step Bresenham LINE drawing"
+    },
+    {
+        "original": "//ダブルステップブレゼンハムのLINE描画の関数を準備",
+        "translated": "// Prepare double-step Bresenham LINE drawing function"
+    },
+    {
+        "original": "//ダブルステップブレゼンハムのLINE描画処理",
+        "translated": "// Double-step Bresenham LINE drawing processing"
+    },
+    {
+        "original": "//ダメだった通路を削除",
+        "translated": "// Delete passage that didn't work"
+    },
+    {
+        "original": "//チェック周期の確認",
+        "translated": "// Check check period"
+    },
+    {
+        "original": "//チルトシフト処理",
+        "translated": "// Tilt-shift processing"
+    },
+    {
+        "original": "//テクスチャから色を取得",
+        "translated": "// Get color from texture"
+    },
+    {
+        "original": "//テクスチャとフレームバッファの生成",
+        "translated": "// Generate texture and framebuffer"
+    },
+    {
+        "original": "//テクスチャの登録",
+        "translated": "// Register texture"
+    },
+    {
+        "original": "//テクスチャの透過機能ON/OFF",
+        "translated": "// Toggle texture transparency ON/OFF"
+    },
+    {
+        "original": "//テクスチャの選択",
+        "translated": "// Texture selection"
+    },
+    {
+        "original": "//テクスチャインデックスを計算",
+        "translated": "// Calculate texture index"
+    },
+    {
+        "original": "//テクスチャ座標を計算",
+        "translated": "// Calculate texture coordinates"
+    },
+    {
+        "original": "//テクスチャ管理情報",
+        "translated": "// Texture management information"
+    },
+    {
+        "original": "//テクスチャ選択",
+        "translated": "// Select texture"
+    },
+    {
+        "original": "//テクスチャ配列を用意",
+        "translated": "// Prepare texture array"
+    },
+    {
+        "original": "//テスト用",
+        "translated": "// For testing"
+    },
+    {
+        "original": "//デバッグ用パラメータ表示",
+        "translated": "// Display parameters for debugging"
+    },
+    {
+        "original": "//デフォルトから選択させる",
+        "translated": "// Let select from default"
+    },
+    {
+        "original": "//デフォルトのLINE描画の関数を準備",
+        "translated": "// Prepare default LINE drawing function"
+    },
+    {
+        "original": "//デフォルトのLINE描画処理",
+        "translated": "// Default LINE drawing processing"
+    },
+    {
+        "original": "//デフォルトのLINE描画前処理",
+        "translated": "// Default LINE drawing pre-processing"
+    },
+    {
+        "original": "//デフォルトのLINE描画後処理",
+        "translated": "// Default LINE drawing post-processing"
+    },
+    {
+        "original": "//デフォルトのa,bパラメータ値を準備",
+        "translated": "// Prepare default a, b parameter values"
+    },
+    {
+        "original": "//データ領域の確保",
+        "translated": "// Secure data area"
+    },
+    {
+        "original": "//トーラスオブジェクト管理人",
+        "translated": "// Torus Object Manager"
+    },
+    {
+        "original": "//トーラス図形の頂点座標を計算します",
+        "translated": "// Calculate vertex coordinates of torus shape"
+    },
+    {
+        "original": "//ドミノの初期位置を設定",
+        "translated": "// Set initial position of domino"
+    },
+    {
+        "original": "//ドミノの移動を制御",
+        "translated": "// Control movement of domino"
+    },
+    {
+        "original": "//ドミノの移動制御",
+        "translated": "// Domino movement control"
+    },
+    {
+        "original": "//ドメインワーピングクラス",
+        "translated": "// Domain Warping Class"
+    },
+    {
+        "original": "//ノイズでポイントを決める",
+        "translated": "// Determine points with noise"
+    },
+    {
+        "original": "//ノイズによる乱れを付加",
+        "translated": "// Add disturbance by noise"
+    },
+    {
+        "original": "//ノイズの2次元テクスチャを生成",
+        "translated": "// Generate 2D texture of noise"
+    },
+    {
+        "original": "//ノイズテクスチャの更新",
+        "translated": "// Update noise texture"
+    },
+    {
+        "original": "//ノイズ値の0.0～1.0を0～2πの1周の角度に変換",
+        "translated": "// Convert 0.0-1.0 noise value to 0-2pi full circle angle"
+    },
+    {
+        "original": "//ノイズ値取得",
+        "translated": "// Get noise value"
+    },
+    {
+        "original": "//ノイズ円の座標計算",
+        "translated": "// Calculate coordinates of noise circle"
+    },
+    {
+        "original": "//バッファが未更新ならスキップ",
+        "translated": "// Skip if buffer is not updated"
+    },
+    {
+        "original": "//バッファオブジェクトとデータを準備しておく",
+        "translated": "// Prepare buffer object and data"
+    },
+    {
+        "original": "//バッファオブジェクトを関連付ける",
+        "translated": "// Associate buffer object"
+    },
+    {
+        "original": "//バリューノイズクラス",
+        "translated": "// Value Noise Class"
+    },
+    {
+        "original": "//パスの座標数の2倍までは許容します",
+        "translated": "// Allow up to twice the number of path coordinates"
+    },
+    {
+        "original": "//パス毎のオブジェクト数をカウントしていきます",
+        "translated": "// Count number of objects per path"
+    },
+    {
+        "original": "//パターンごとの頂点リストを生成",
+        "translated": "// Generate vertex list per pattern"
+    },
+    {
+        "original": "//パターンに追加",
+        "translated": "// Add to pattern"
+    },
+    {
+        "original": "//パターン毎のグリッドセットの数からマスの辺のサイズを計算",
+        "translated": "// Calculate side size of grid from number of grid sets per pattern"
+    },
+    {
+        "original": "//パターン毎のグリッド頂点リストを生成",
+        "translated": "// Generate grid vertex list per pattern"
+    },
+    {
+        "original": "//パターン追加処理",
+        "translated": "// Pattern addition processing"
+    },
+    {
+        "original": "//パラメータa,bを決定",
+        "translated": "// Determine parameters a, b"
+    },
+    {
+        "original": "//パラメータの意味",
+        "translated": "// Meaning of parameters"
+    },
+    {
+        "original": "//パラメータリセット",
+        "translated": "// Parameter reset"
+    },
+    {
+        "original": "//パラメータ決定",
+        "translated": "// Parameter determination"
+    },
+    {
+        "original": "//パラメータ準備",
+        "translated": "// Parameter preparation"
+    },
+    {
+        "original": "//パラメータ設定",
+        "translated": "// Parameter setting"
+    },
+    {
+        "original": "//パレットを決定",
+        "translated": "// Determine palette"
+    },
+    {
+        "original": "//パレットを決定(.slice()は配列の値渡しコピー)",
+        "translated": "// Determine palette (.slice() is pass-by-value copy of array)"
+    },
+    {
+        "original": "//パレットランダムモード選択",
+        "translated": "// Select palette random mode"
+    },
+    {
+        "original": "//パースペクティブコレクトをする",
+        "translated": "// Perform Perspective Correction"
+    },
+    {
+        "original": "//パーリンノイズクラス",
+        "translated": "// Perlin Noise Class"
+    },
+    {
+        "original": "//パーリンノイズ取得(0.0～1.0の値が返ります)",
+        "translated": "// Get Perlin Noise (Returns value 0.0-1.0)"
+    },
+    {
+        "original": "//ビューポート変換行列をセット",
+        "translated": "// Set Viewport Transformation Matrix"
+    },
+    {
+        "original": "//ビューポート行列の作成",
+        "translated": "// Create Viewport Matrix"
+    },
+    {
+        "original": "//ビュー変換行列の作成",
+        "translated": "// Create View Transformation Matrix"
+    },
+    {
+        "original": "//ビュー変換行列をセット",
+        "translated": "// Set View Transformation Matrix"
+    },
+    {
+        "original": "//ビュー変換行列を準備",
+        "translated": "// Prepare View Transformation Matrix"
+    },
+    {
+        "original": "//ビュー行列をセット",
+        "translated": "// Set View Matrix"
+    },
+    {
+        "original": "//ビュー行列を生成",
+        "translated": "// Generate View Matrix"
+    },
+    {
+        "original": "//ピクセルの中心のZ座標を補間する",
+        "translated": "// Interpolate Z coordinate of pixel center"
+    },
+    {
+        "original": "//ピクセル値検索用のImageDataを作成",
+        "translated": "// Create ImageData for pixel value search"
+    },
+    {
+        "original": "//フェートイン",
+        "translated": "// Fade In"
+    },
+    {
+        "original": "//フェートイン・アウト",
+        "translated": "// Fade In/Out"
+    },
+    {
+        "original": "//フェードアウト",
+        "translated": "// Fade Out"
+    },
+    {
+        "original": "//フェードイン",
+        "translated": "// Fade In"
+    },
+    {
+        "original": "//フェードイン・アウト",
+        "translated": "// Fade In/Out"
+    },
+    {
+        "original": "//フラグメントシェーダ",
+        "translated": "// Fragment Shader"
+    },
+    {
+        "original": "//フラットシェーディングで三角形ポリゴンを描画",
+        "translated": "// Draw triangle polygon with flat shading"
+    },
+    {
+        "original": "//フラットシェーディングで準備する",
+        "translated": "// Prepare with flat shading"
+    },
+    {
+        "original": "//フラットシェーディング描画前処理",
+        "translated": "// Flat shading drawing pre-processing"
+    },
+    {
+        "original": "//フラットシェーディング用スキャンライン(エッジチェック　ブレゼンハム版)",
+        "translated": "// Scanline for flat shading (Edge check Bresenham version)"
+    },
+    {
+        "original": "//フレームバッファとテクスチャを作成",
+        "translated": "// Create FrameBuffer and Texture"
+    },
+    {
+        "original": "//ブラー処理",
+        "translated": "// Blur Processing"
+    },
+    {
+        "original": "//ブラー処理の準備",
+        "translated": "// Preparation for Blur Processing"
+    },
+    {
+        "original": "//ブラー処理を実施",
+        "translated": "// Execute Blur Processing"
+    },
+    {
+        "original": "//ブラー処理用の準備",
+        "translated": "// Preparation for Blur Processing"
+    },
+    {
+        "original": "//ブラー用のクリア処理",
+        "translated": "// Clear processing for Blur"
+    },
+    {
+        "original": "//ブルーム処理",
+        "translated": "// Bloom Processing"
+    },
+    {
+        "original": "//ブルーム処理のためのオフスクリーンを準備",
+        "translated": "// Prepare off-screen for Bloom Processing"
+    },
+    {
+        "original": "//ブルーム処理のためのオフスクリーンを準備する",
+        "translated": "// Prepare off-screen for Bloom Processing"
+    },
+    {
+        "original": "//ブルーム処理の準備",
+        "translated": "// Preparation for Bloom Processing"
+    },
+    {
+        "original": "//ブルーム処理を実施",
+        "translated": "// Execute Bloom Processing"
+    },
+    {
+        "original": "//ブルーム処理用の準備",
+        "translated": "// Preparation for Bloom Processing"
+    },
+    {
+        "original": "//ブレゼンハムLINE描画用の点描画",
+        "translated": "// Point drawing for Bresenham LINE drawing"
+    },
+    {
+        "original": "//ブレゼンハムのLINE描画で準備する",
+        "translated": "// Prepare with Bresenham LINE drawing"
+    },
+    {
+        "original": "//ブレゼンハムのLINE描画の関数を準備",
+        "translated": "// Prepare Bresenham LINE drawing function"
+    },
+    {
+        "original": "//ブレゼンハムのLINE描画処理",
+        "translated": "// Bresenham LINE drawing processing"
+    },
+    {
+        "original": "//ブレゼンハムのLINE描画前処理",
+        "translated": "// Bresenham LINE drawing pre-processing"
+    },
+    {
+        "original": "//ブレゼンハムのLINE描画後処理",
+        "translated": "// Bresenham LINE drawing post-processing"
+    },
+    {
+        "original": "//ブレゼンハム直線描画用の点描画",
+        "translated": "// Point drawing for Bresenham line drawing"
+    },
+    {
+        "original": "//ブロックが動いてるかをチェック",
+        "translated": "// Check if block is moving"
+    },
+    {
+        "original": "//ブロックのサイズを調整",
+        "translated": "// Adjust block size"
+    },
+    {
+        "original": "//ブロックの並びを生成",
+        "translated": "// Generate block arrangement"
+    },
+    {
+        "original": "//ブロックの情報を取得",
+        "translated": "// Get block information"
+    },
+    {
+        "original": "//ブロックの押し出しを制御",
+        "translated": "// Control block extrusion"
+    },
+    {
+        "original": "//ブロックの押し出し開始時刻とターン完了時刻決定",
+        "translated": "// Determine block extrusion start time and turn completion time"
+    },
+    {
+        "original": "//ブロックの移動を制御",
+        "translated": "// Control block movement"
+    },
+    {
+        "original": "//ブロックの移動制御",
+        "translated": "// Block movement control"
+    },
+    {
+        "original": "//ブロックの長さを計算",
+        "translated": "// Calculate block length"
+    }
+]

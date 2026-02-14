@@ -44,12 +44,12 @@ let g_start_colors  = [];
 let g_next_colors   = [];
 
 let g_canvas        = null;		//メインCanvas
-let g_bloom_offscs  = [];		//ブルーム処理用オフスクリーンcanvas
+let g_bloom_offscs  = [];		// Off-screen canvas for Bloom processing
 
 
 function setup_bloom()
 {
-	//ブルーム処理用の準備
+	// Preparation for Bloom Processing
 	
 	let scale = 0.5;
 	let blur_w = [ 5,14 ];
@@ -73,31 +73,31 @@ function setup_bloom()
 
 function do_bloom()
 {
-	//ブルーム処理を実施
+	// Execute Bloom Processing
 	
-	//レンダリング後画像にフィルタをかける
+	// Apply filter to image after rendering
 	
 	//
-	// 簡易的なブルーム処理をやっています。
+	// Doing simple bloom processing.
 	//
-	// 高輝度部分だけ抜き出しではなく、全体が光って見えちゃうので、
-	// 本来のブルーム処理とはちょっと違うと思いますが、とりあえず
-	// 手軽に光らせたい場合には楽かも(*´ω｀*)
+	// Because it's not extracting only high luminance parts, but whole thing looks glowing,
+	// I think it's a bit different from original bloom processing, but anyway
+	// Might be easy if you want to make it glow easily (*´ω｀*)
 	//
 	const ctx = drawingContext;
 	const cv  = g_canvas;
 	
-	//複数段階の縦横2分の1ずつ解像度を下げたオフスクリーンキャンバスに
-	//CanvasのBlurフィルタをかけて、拡大して加算合成します
+	// To off-screen canvas with resolution lowered by half vertically and horizontally in multiple stages
+	// Apply Canvas Blur filter, enlarge and additive blend
 	const offsc_num = g_bloom_offscs.length;
 	for(let idx = 0;idx < offsc_num;++idx)
 	{
-		//画面に表示されているキャンバスから現在の状態を取得
+		// Get current state from canvas displayed on screen
 		let offsc = g_bloom_offscs[idx];
 		offsc.cv.clear();
 		offsc.cv.image(cv,0,0,offsc.cv_w,offsc.cv_h,0,0,SC_W,SC_H);
 
-		//縮小された絵にフィルタをかけながら画面に反映(加算合成)
+		// Reflect on screen (additive blending) while applying filter to reduced image
 		ctx.save();
 		ctx.globalAlpha = 1.0;
 		ctx.globalCompositeOperation = 'lighter';
@@ -178,11 +178,11 @@ function setup()
 		g_stack_colors.push(createPaletteNHSL(urls[i]));
 	}
 	
-	//ブルーム処理の準備
+	// Preparation for Bloom Processing
 	setup_bloom();
 
-	//最初の値を決める
-	//※1回だとstartの値が不定になるのでreset()を2回呼びます
+	// Determine initial value
+	// * Calling reset() twice because start value becomes undefined if called once
 	reset();
 	reset();
 	
@@ -190,7 +190,7 @@ function setup()
 
 function reset() 
 {
-	//次の目標値を決める
+	// Determine next target value
 	
 	g_start_S  = g_next_S;
 	g_start_a  = g_next_a;
@@ -210,8 +210,8 @@ function reset()
 	g_next_r   = random(MIN_r *1000,MAX_r *1000)/1000;
 	g_next_nx  = random(MIN_nx*1000,MAX_nx*1000)/1000;
 	
-	//パレットを決定
-	g_start_colors = g_next_colors.slice();	//配列の値渡しコピー
+	// Determine palette
+	g_start_colors = g_next_colors.slice();	// Pass-by-value copy of array
 	g_next_colors  = shuffle(g_stack_colors[floor(random(0,g_stack_colors.length-1))]);	//シャッフルしてクローンをコピー
   
 }
@@ -219,7 +219,7 @@ function reset()
 function draw() 
 {
   
-	//開始時刻保存
+	// Save start time
 	const g_time = (new Date).getTime();//frameCount * 1000 / FRAME_RATE;
 	if(g_start_time == 0)
 	{
@@ -227,13 +227,13 @@ function draw()
 		g_next_time  = g_time + MORPH_TIME;
 	}
   
-	//画面クリア
+	// Screen Clear
 	clear();
 	background(0);
   
 	push();
   
-	//シーンの準備
+	// Preparation of scene
 	let time = (g_time - g_start_time) / MORPH_TIME;
 	if(time > 1.0){ time = 1.0; }
 	const e  = easeInOutExpo(time**10);
@@ -244,7 +244,7 @@ function draw()
 	let mtx_model   = new MatrixMan3();
 	let vec_pos     = new VectorMan2();
 
-	//このターンでのパラメータを計算
+	// Calculate parameters for this turn
 	const S         = (g_start_S + e * (g_next_S - g_start_S));
 	const add_a     = round(Math.PI / (g_start_a + e * (g_next_a - g_start_a)),4);
 	const add_c     = g_start_c  + e * (g_next_c - g_start_c);
@@ -259,7 +259,7 @@ function draw()
 	const tt        = t / 4;
 	const ta        = t / 10;
 	
-	//高速化のための各種テーブルを準備
+	// Prepare various tables for speed optimization
 	let colors = [];
 	for(let i = 0;i < g_start_colors.length;++i)
 	{
@@ -285,7 +285,7 @@ function draw()
 		rgb_colors.push(color(rgb.r*255,rgb.g*255,rgb.b*255));
 	}
 	
-	//フェードイン・フェードアウト
+	// Fade In・フェードアウト
 	let fadeAlpha = 0.0;
 	if(time < 0.1)
 	{
@@ -308,7 +308,7 @@ function draw()
 	drawingContext.globalAlpha = fadeAlpha;
 	
 	
-	//描画開始
+	// Drawing開始
 	translate(SC_W / 2,SC_H / 2);
 	
 	mtx_scale.scale(S,S);
@@ -323,22 +323,22 @@ function draw()
 		let ly = 0;
 		for(let i = 0;i < POINT_NUM;++i)
 		{
-			//色を選択します
+			// Select color
 			let pal = floor(c) % colors.length;
 			c += add_c;
 			
 			fill(rgb_colors[pal]);
 			
-			//円のサイズをノイズで決定
+			// Determine circle size with noise
 			const n = noise(t + nx,0,tt) * r_amp;
 			nx += add_nx;
 			
-			//移動行列作成
+			// Create Translation Matrix
 			//
-			// グモウスキー・ミラの写像
+			// Gumowski-Mira Map
 			//
-			// Wikipediaで紹介されている、f2とg1が組み合わされた方の
-			// 式を利用します。
+			// The one combining f2 and g1 introduced on Wikipedia
+			// Use formula.
 			// https://ja.wikipedia.org/wiki/%E3%82%B0%E3%83%A2%E3%82%A6%E3%82%B9%E3%82%AD%E3%83%BC%E3%83%BB%E3%83%9F%E3%83%A9%E3%81%AE%E5%86%99%E5%83%8F
 			//
 			const lx2 = lx * lx;
@@ -350,7 +350,7 @@ function draw()
 			ly = y;
 			vec_pos.setValue(x,-y);
 
-			//高速化のため拡大と回転行列を必要最低限の計算で合成します
+			// For speed, compose scaling and rotation matrix with minimum calculation
 			mtx_model.copy(mtx_scale);
 			
 			const _00 = mtx_model.m[0] * mtx_rotateZ.m[0];
@@ -364,7 +364,7 @@ function draw()
 			mtx_model.m[3] = _10; mtx_model.m[4] = _11;
 			mtx_model.m[6] = _20; mtx_model.m[7] = _21;
 
-			//座標変換
+			// Coordinate Transformation
 			vec_pos.mul_matrix(mtx_model);
 			
 			//円を描画
@@ -374,12 +374,12 @@ function draw()
 	
 	pop();
 	
-	//ブルーム処理
+	// Bloom Processing
 	do_bloom();
 	
 	if(g_time >= g_next_time)
 	{
-		//次の区切り時刻を決めてリセット
+		// Determine next break time and reset
 		g_start_time = g_time;
 		g_next_time  = g_start_time + MORPH_TIME;
 		reset();
@@ -399,12 +399,12 @@ function clamp(x,a,b)
 }
 
 //
-// 以下の、 https://coolors.co/ で作成した色見本から、パレット配列を
-// 生成するコードは、takawo shunsukeさん(@takawo)の作品からお借りしました。
+// Create a palette array from the color sample created at https://coolors.co/ below
+// The generation code was borrowed from takawo shunsuke-san (@takawo)'s work.
 //
 function createPaletteNHSL(_url) 
 {
-	//coolors.co のURLから正規化されたHSLオブジェクト配列にします
+	// Convert coolors.co URL to normalized HSL object array
 	let slash_index = _url.lastIndexOf('/');
 	let pallate_str = _url.slice(slash_index + 1);
 	let arr = pallate_str.split('-');
@@ -421,16 +421,16 @@ function createPaletteNHSL(_url)
 
 function hsl2rgb(h,s,l)
 {
-	//HSLからRGBに変換
+	// Convert HSL to RGB
 	//
-	//  h(hue)       : 色相  0-359の値[度]
-	//  s(saturation): 彩度  0-1.0の値[%]
-	//  l(lightness) : 明度  0-1.0の値[%]
+	//  h(hue)       : Hue  Value from 0-359 [degrees]
+	//  s(saturation): Saturation  Value from 0-1.0 [%]
+	//  l(lightness) : Lightness  Value from 0-1.0 [%]
 	//
 	let max,min;
 	let r,g,b;
 	
-	//念のためHを補正
+	// Correct H just in case
 	h = h % 360;
 
 	if(l < 0.5)
@@ -489,17 +489,17 @@ function hsl2rgb(h,s,l)
 }
 
 //
-// こちらのサイトのサンプルコードを参考に実装しました。
+// Implemented with reference to the sample code on this site.
 // https://lab.syncer.jp/Web/JavaScript/Snippet/68/
 //
 function rgb2hsl(r, g, b) 
 {
 
-	//RGB値(それぞれ0～255)からHSLに変換します
+	// Convert RGB values (0-255 each) to HSL
 	//
-	// { h:0.0～1.0, s:0.0～1.0, l:0.0～1.0 }
+	// { h:0.0-1.0, s:0.0-1.0, l:0.0-1.0 }
 	//
-	// を返します。
+	// Returns.
 	//
 
 	r = r / 255;
@@ -551,37 +551,37 @@ function easeInSine(x)
 	return 1 - cos((x * Math.PI) / 2);
 }
 
-//2次元ベクトル管理人
-//※とりあえず必要最低限だけ実装。あとは必要になったら…
+// 2D Vector Manager
+// * Implemented only the bare minimum for now. The rest when needed...
 class VectorMan2
 {
-	//コンストラクタ
+	// Constructor
 	constructor(x = 0,y = 0)
 	{
-		//プロパティの初期化
+		// Initialize properties
 		this.setValue(x,y);
 	}
 	
-	//値の一括セット
+	// Bulk set values
 	setValue(x,y)
 	{
 		this.x = x;
 		this.y = y;
 	}
 	
-	//コピー
+	// Copy
 	copy(v2)
 	{
 		this.x = v2.x;
 		this.y = v2.y;
 	}
 	
-	//単位ベクトルに変換
+	// Convert to unit vector
 	normalize()
 	{
-		//単位ベクトルとは、長さが1のベクトルのこと
-		//なので、各値を長さで割ってベクトルの長さが1
-		//になるようにする
+		// Unit vector is a vector with length 1
+		// So, divide each value by length so vector length is 1
+		// Make it so that
 		const x   = this.x;
 		const y   = this.y;
 		let len   = Math.sqrt(x*x + y*y);
@@ -594,14 +594,14 @@ class VectorMan2
 		}
 	}
 	
-	//ベクトルを反転する
+	// Invert vector
 	invert()
 	{
 		this.x = -this.x;
 		this.y = -this.y;
 	}
 
-	//ベクトル同士の四則演算
+	// Arithmetic operations between vectors
 	add(v2)
 	{
 		this.x += v2.x;
@@ -636,10 +636,10 @@ class VectorMan2
 	
 	mul_matrix(m3)
 	{
-		//列優先での掛け算		
+		// Column-major multiplication		
 		
 		//
-		// m3の中のデータ列(列優先のデータ順)
+		// Data sequence in m3 (column-major data order)
 		//
 		// [0]:m00 [3]:m01 [6]:m02
 		// [1]:m10 [4]:m11 [7]:m12
@@ -654,21 +654,21 @@ class VectorMan2
 		return this;
 	}
 	
-	//1次元配列で2次元ベクトルを返す
+	// Return 2D vector in 1D array
 	exportSingleArray()
 	{
 		return [ this.x, this.y ];
 	}
 }
 
-//3次元行列管理人
-//※とりあえず必要最低限だけ実装。あとは必要になったら…
+// 3D Matrix Manager
+// * Implemented only the bare minimum for now. The rest when needed...
 class MatrixMan3
 {
-	//コンストラクタ
+	// Constructor
 	constructor()
 	{
-		//列優先データ順で格納します
+		// Store in column-major data order
 		//
 		// [0]:m00 [3]:m01 [6]:m02
 		// [1]:m10 [4]:m11 [7]:m12
@@ -677,20 +677,20 @@ class MatrixMan3
 		
 		this.m = new Float32Array(9);
 		
-		//単位行列で初期化しておく
+		// Initialize with identity matrix in advance
 		this.initialize();
 	}
 	
-	//コピー
+	// Copy
 	copy(m3)
 	{
 		this.m.set(m3.m);
 	}
 
-	//単位行列で初期化
+	// Initialize with identity matrix
 	initialize()
 	{
-		//単位行列とはこういうもの
+		// Identity matrix is like this
 		//| 1 0 0 |
 		//| 0 1 0 |
 		//| 0 0 1 |
@@ -700,11 +700,11 @@ class MatrixMan3
 		this.m[2] = 0.0; this.m[5] = 0.0; this.m[8] = 1.0;
 	}
 
-	//スケール変換行列の作成
+	// Creation of Scale Transformation Matrix
 	scale(sx,sy)
 	{
-		//スケール変換行列とはこういうもの
-		//sx,syはそれぞれの軸での拡大率
+		// Scale transformation matrix is like this
+		// sx, sy are scaling factors on respective axes
 		//| sx  0  0  |
 		//|  0 sy  0  |
 		//|  0  0  1  |
@@ -714,13 +714,13 @@ class MatrixMan3
 		this.m[2] = 0.0; this.m[5] = 0.0; this.m[8] = 1.0; 
 	}
 	
-	//X軸回転行列の作成(rはラジアン単位)
+	// Creation of X-axis rotation matrix (r is in radians)
 	rotateX(r)
 	{
 		const sinX = Math.sin(r);
 		const cosX = Math.cos(r);
 		
-		//X軸回転行列とはこういうもの(列優先での配置)
+		// X-axis rotation matrix is like this (column-major arrangement)
 		//| 1    0     0 |
 		//| 0 cosX -sinX |
 		//| 0 sinX  cosX |
@@ -730,13 +730,13 @@ class MatrixMan3
 		this.m[2] = 0.0; this.m[5] = sinX; this.m[8] =  cosX;
 	}
 	
-	//Y軸回転行列の作成(rはラジアン単位)
+	// Creation of Y-axis rotation matrix (r is in radians)
 	rotateY(r)
 	{
 		const sinY = Math.sin(r);
 		const cosY = Math.cos(r);
 
-		//Ｙ軸回転行列とはこういうもの(列優先での配置)
+		// Y-axis rotation matrix is like this (column-major arrangement)
 		//|  cosY   0 sinY |
 		//|     0   1    0 |
 		//| -sinY   0 cosY |
@@ -746,13 +746,13 @@ class MatrixMan3
 		this.m[2] = -sinY; this.m[5] = 0.0; this.m[8] = cosY;
 	}
 	
-	//Z軸回転行列の作成(rはラジアン単位)
+	// Creation of Z-axis rotation matrix (r is in radians)
 	rotateZ(r)
 	{
 		const sinZ = Math.sin(r);
 		const cosZ = Math.cos(r);	
 
-		//Ｚ軸回転行列とはこういうもの(列優先での配置)
+		// Z-axis rotation matrix is like this (column-major arrangement)
 		//| cosZ -sinZ   0 |
 		//| sinZ  cosZ   0 |
 		//|    0     0   1 |
@@ -762,10 +762,10 @@ class MatrixMan3
 		this.m[2] =  0.0; this.m[5] =   0.0; this.m[8] = 1.0;
 	}
 	
-	//平行移動行列の作成
+	// Creation of Translation Matrix
 	translate(tx,ty)
 	{
-		//平行移動行列とはこういうもの(列優先での配置)
+		// Translation matrix is like this (column-major arrangement)
 		//|  1  0 tx |
 		//|  0  1 ty |
 		//|  0  0  1 |
@@ -775,7 +775,7 @@ class MatrixMan3
 		this.m[2] = 0.0; this.m[5] = 0.0; this.m[8] = 1.0;
 	}
 
-	//行列同士の足し算
+	// Addition between matrices
 	add(m3)
 	{
 		this.m[0] += m3.m[0];
@@ -793,7 +793,7 @@ class MatrixMan3
 		return this;
 	}
 	
-	//行列同士の引き算
+	// Subtraction between matrices
 	sub(m3)
 	{
 		this.m[0] -= m3.m[0];
@@ -811,7 +811,7 @@ class MatrixMan3
 		return this;
 	}
 	
-	//行列同士の掛け算
+	// Multiplication between matrices
 	mul(m3)
 	{
 		const _00 = this.m[0] * m3.m[0] + this.m[1] * m3.m[3] + this.m[2] * m3.m[6];

@@ -1,64 +1,64 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-<title>パパのレンチキュラーR(WebGL)</title>
+<title>Papa's Lenticular R (WebGL)</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=320, user-scalable=no, initial-scale=1.0">
 <meta http-equiv="Cache-Control" content="no-cache">
 <!--
 
-	このデモは、JavaScriptでWebGLを使って、3Dの不思議アートに挑戦
-	しています。
+	This demo uses JavaScript and WebGL to challenge 3D mystery art
+	Doing.
 	
-	今回は、Yusuke Nakayaさん(@s14garnet)が紹介されていた、こちらの
-	作品にヒントを得てレンチキュラーレンズ的なものを作ってみました。
+	This time, this introduced by Yusuke Nakaya-san (@s14garnet)
+	Getting hints from the work, I tried making something like a lenticular lens.
 	https://twitter.com/s14garnet/status/1302927433134301185?s=20
 
-	原理としては、こちらの安川ダンボール工業所さんの
-	「左右で違う絵柄が見える巻きダンボール」と同じものになると思います。
+	As a principle, this Yasukawa Cardboard Industry's
+	I think it will be the same thing as "Rolled cardboard that shows different pictures on left and right".
 	http://www.yasukawadanbouru.co.jp/case/lionimpala/
 	
-	写真素材は以下のサイトからお借りしました。
+	Photo materials were borrowed from the following site.
 	https://www.pexels.com/cats/
 	https://www.pexels.com/photo/orange-cat-stretching-3643714/
 	https://www.pexels.com/photo/animal-animal-photography-big-big-cat-572861/
 
-	Yusuke Nakayaさんと写真の撮影者のみなさんに圧倒的感謝を！
+	Overwhelming thanks to Yusuke Nakaya-san and all the photographers!
 	
-	(C)2020 ぼいち(@voich2014)
+	(C)2020 Voich(@voich2014)
 
 -->
 <link rel="stylesheet" href="./../vlib/vl_common_v1.0.0.css">
 <script type="text/javascript" src="./../vlib/vl_common_v1.2.0.js"></script>
 <script type="text/javascript" src="./../vlib/vl_3d_v1.0.1.js"></script>
 
-<!-- WebGLのシェーダ定義 -->
+<!-- WebGL Shader Definition -->
 <script id="vshader-main" type="x-shader/x-vertex">#version 300 es
-	//頂点シェーダ
-	in vec3  vtx_pos;			//頂点の座標
-	in float vtx_idx;			//頂点インデックス
-	in float ins_idx;			//この頂点を含むインスタンスのインデックス
-	in mat4 obj_model;			//インスタンス毎のモデル変換行列
+	// Vertex Shader
+	in vec3  vtx_pos;			// Vertex coordinates
+	in float vtx_idx;			// Vertex index
+	in float ins_idx;			// Index of instance containing this vertex
+	in mat4 obj_model;			// Model transformation matrix per instance
     
-	out float tex_idx;			//この頂点のテクスチャインデックス	
-	out vec2  tex_uv;			//この頂点のテクスチャ座標
+	out float tex_idx;			// Texture index of this vertex	
+	out vec2  tex_uv;			// Texture coordinates of this vertex
 	
-	uniform float x_div_num;	//横方向の分割数
+	uniform float x_div_num;	// Horizontal division count
 	
-	uniform mat4 view;			//ビュー変換行列
-	uniform mat4 proj;			//射影変換行列
-//	uniform vec3 light_dir;		//光源の方向(正規化済み)
+	uniform mat4 view;			// View transformation matrix
+	uniform mat4 proj;			// Projection transformation matrix
+//	uniform vec3 light_dir;		//Direction of light source (normalized)
 	
 	void main(void)
 	{
-		//頂点座標を変換して次につなげる
+		// Transform vertex coordinates and connect to next
 		gl_Position = proj * view * obj_model * vec4(vtx_pos,1.0);
 	    
-		//テクスチャインデックスを計算
+		// Calculate texture index
 		float t = floor(vtx_idx / 6.0);
 		tex_idx = t;
 		
-		//テクスチャ座標を計算
+		// Calculate texture coordinates
 		float i      = ins_idx;
 		float n      = x_div_num - 1.0;
 		float u_unit = 1.0 / x_div_num;
@@ -72,7 +72,7 @@
 		float u_idx = floor(t / 2.0) * 6.0 + m_idx;
 		float v_idx = m_idx;
 		
-		//なんか変数でのインデックス指定ができなかったので苦肉の策
+		// Last resort because index specification with variable didn't work
 		float uval = 0.0;
 		float vval = 0.0;
 		if     (u_idx ==  0.0){ uval = u[ 0]; }
@@ -99,22 +99,22 @@
 </script>
 
 <script id="fshader-main" type="x-shader/x-fragment">#version 300 es
-    //フラグメントシェーダ
+    // Fragment Shader
     precision mediump float;
     precision mediump sampler2DArray;
     
-    in float tex_idx;				//テクスチャインデックス	
-	in vec2  tex_uv;				//テクスチャ座標
+    in float tex_idx;				// Texture index	
+	in vec2  tex_uv;				// Texture coordinates
     
-    uniform sampler2DArray atex;	//テクスチャ配列
+    uniform sampler2DArray atex;	// Texture array
    
-    out vec4 f_color;				//フラグメントシェーダとしての出力色
+    out vec4 f_color;				// Output color as fragment shader
     
     void main(void)
     {
-    	//各面に割り当てられたテクスチャの色を取得
+    	// Get texture color assigned to each face
     	float tidx = mod(floor(tex_idx),2.0);
-    	if(tex_idx > 2.0){ tidx = 1.0; }	//時々最後4.0を超えてくる時があるようなので補正
+    	if(tex_idx > 2.0){ tidx = 1.0; }	// Correction because sometimes it seems to exceed 4.0 at the end
     	vec3 color = texture(atex,vec3(tex_uv,tidx)).rgb;
    
    		f_color = vec4(clamp(color,0.0,1.0),1.0);
@@ -123,7 +123,7 @@
 
 <script type="text/javascript">
 
-//グローバルオブジェクト
+// Global Object
 let g_game_width    = 320;
 let g_game_height   = 500;
 
@@ -131,17 +131,17 @@ let g_webgl_screen  = null;
 let g_gl            = null;
 let g_prog_main     = null;
 let g_vbo_main      = {};
-let g_texs          = {};		//テクスチャまとめ
-let g_modelbuff    = null;		//インスタンス毎のモデル変換行列バッファ
+let g_texs          = {};		// Texture collection
+let g_modelbuff    = null;		// Model transformation matrix buffer per instance
 
-let g_plate_model;			//ポリ板用モデル情報
-let g_pos    = [];			//ポリ板位置情報
-let g_time   = 0;			//現在時刻[ms]
-let g_dtime  = 0;			//前回の描画からの経過時間[ms]
+let g_plate_model;			// Model info for polygon plate
+let g_pos    = [];			// Polygon plate position info
+let g_time   = 0;			// Current time [ms]
+let g_dtime  = 0;			// Elapsed time since last drawing [ms]
 
 let g_pn = new Perlin();
 
-//Processing互換定数
+// Processing compatible constants
 const TAU = 2.0 * Math.PI;
 
 const X_DIV_NUM      = 100;
@@ -179,19 +179,19 @@ let g_cnt            = 0;
 function init()
 {
 	
-	//初期化処理
+	// Initialization processing
 	
-	//準備
+	// Preparation
 	setup();
 
-	//requestAnimationFrameの準備(各種ブラウザ対応)
+	// Preparation of requestAnimationFrame (compatible with various browsers)
 	let requestAnimationFrame = window.requestAnimationFrame       ||
                                 window.mozRequestAnimationFrame    ||
                                 window.webkitRequestAnimationFrame ||
                                 window.msRequestAnimationFrame;
     window.requestAnimationFrame = requestAnimationFrame;
     
-	//描画を登録
+	// Register drawing
 	window.requestAnimationFrame(render);
 	
 }
@@ -199,21 +199,21 @@ function init()
 function adjust_screen()
 {
 
-	//画面調整
+	// Screen Adjustment
 	
-	//ウインドウのサイズを取得
+	// Get window size
 	let window_w = window.innerWidth;
 	let window_h = window.innerHeight;
 	
-	//ウインドウ幅が十分に広い場合はPCだとして
-	//画面サイズを変更する
+	// Assuming it's a PC if window width is wide enough
+	// Change screen size
 	if((g_game_width * 2) <= window_w)
 	{
 		g_game_width  = 1280;
 		g_game_height = 720;
 	}
 	
-	//ゲームスクリーンを中央に配置
+	// Place game screen in center
 	let screen  = document.getElementById("game-screen");
 	let game_x  = (window_w - g_game_width)  / 2;
 	let game_y  = (window_h - g_game_height) / 2;
@@ -223,7 +223,7 @@ function adjust_screen()
 	screen.width      = g_game_width;
 	screen.height     = g_game_height;
 
-	//WebGL用のCanvasもスクリーンと同じサイズで用意
+	// Prepare Canvas for WebGL with same size as screen
 	g_webgl_screen        = document.createElement("canvas");
 	g_webgl_screen.width  = g_game_width;
 	g_webgl_screen.height = g_game_height;
@@ -232,20 +232,20 @@ function adjust_screen()
 
 function create_shader(id,type)
 {
-	//シェーダ生成
+	// Shader Generation
 	let shader_src = document.getElementById(id);
 	let shader     = g_gl.createShader(type);
 	
-	//生成したシェーダにソースを割り当てる
+	// Assign source to generated shader
 	g_gl.shaderSource(shader,shader_src.text);
 	
-	//シェーダをコンパイルする
+	// Compile shader
 	g_gl.compileShader(shader);
 	
-	//コンパイルできたかをチェック
+	// Check if compiled successfully
 	if(!g_gl.getShaderParameter(shader,g_gl.COMPILE_STATUS))
 	{
-		//NGなのでログを表示
+		// Display log because it is NG
 		alert(g_gl.getShaderInfoLog(shader));
 	}
 	
@@ -254,38 +254,38 @@ function create_shader(id,type)
 
 function setup_shader()
 {
-	//シェーダ類の準備
+	// Preparation of shaders
 	
-	//深度テストとカリングを有効化
-	//クリア色設定
+	// Enable depth test and culling
+	// Set clear color
 	g_gl.enable(g_gl.DEPTH_TEST);
     g_gl.depthFunc(g_gl.LEQUAL);
     g_gl.enable(g_gl.CULL_FACE);
 	g_gl.clearColor(0,0,0,1);
 	
-	//頂点シェーダとフラグメントシェーダの生成(コンパイルまでしておく)
+	// Generation of Vertex Shader and Fragment Shader (compile as well)
 	let vs_main = create_shader('vshader-main',g_gl.VERTEX_SHADER);
 	let fs_main = create_shader('fshader-main',g_gl.FRAGMENT_SHADER);
 	
-	//プログラムオブジェクトの生成
+	// Generate program object
 	g_prog_main = g_gl.createProgram();
 	
-	//プログラムオブジェクトにシェーダを割り当てる
+	// Assign shader to program object
 	g_gl.attachShader(g_prog_main,vs_main);
 	g_gl.attachShader(g_prog_main,fs_main);
 
-	//シェーダをリンク
+	// Link shader
 	g_gl.linkProgram(g_prog_main);
 		
-	//リンクできたかをチェック
+	// Check if linked successfully
 	if(g_gl.getProgramParameter(g_prog_main,g_gl.LINK_STATUS))
 	{
-		//プログラムオブジェクトの利用開始
+		// Start using program object
 		g_gl.useProgram(g_prog_main);
 	}
 	else
     {
-		//NGなのでログを表示
+		// Display log because it is NG
 		alert(g_gl.getProgramInfoLog(g_prog_main));
     }
 
@@ -293,14 +293,14 @@ function setup_shader()
 
 function setup_view_projection()
 {
-	//カメラと射影行列の準備
+	// Preparation of Camera and Projection Matrix
 	const sc_w           = g_game_width;
 	const sc_h           = g_game_height;
 	const uloc_view      = g_gl.getUniformLocation(g_prog_main,'view');
 	const uloc_proj      = g_gl.getUniformLocation(g_prog_main,'proj');
 //	const uloc_light_dir = g_gl.getUniformLocation(g_prog_main,'light_dir');
 	
-	//ビュー変換行列を準備
+	// Prepare View Transformation Matrix
 	let vFrom    = new VectorMan3(0.0,0.0,50.0);
 	let vTo      = new VectorMan3(0.0,0.0,0.0);
 	let vUp      = new VectorMan3(0.0,1.0,0.0);
@@ -308,28 +308,28 @@ function setup_view_projection()
 	mtx_view.view(vFrom,vTo,vUp);
 	g_gl.uniformMatrix4fv(uloc_view,false,mtx_view.m);
 
-	//射影変換行列を準備
+	// Prepare Projection Transformation Matrix
 	let mtx_projection = new MatrixMan4();
 	mtx_projection.projectionOpenGL(10,1000,rad(60),sc_w/sc_h);
 	g_gl.uniformMatrix4fv(uloc_proj,false,mtx_projection.m);
 	
-//	//光源の情報を登録
+//	//Register light source information
 //	let light_dir = new VectorMan3(0,0,10.0);
 //	light_dir.normalize();
 //	g_gl.uniform3fv(uloc_light_dir,light_dir.exportSingleArray());
 	
-	//ViewPortを設定
+	// Set ViewPort
     g_gl.viewport(0,0,sc_w,sc_h);
 	
 }
 
 function create_square_ring()
 {
-	//平面リングの頂点リストを生成
+	// Generate flat ring vertex list
 	
 	//
-	// 座標移動の計算がしやすいように、左端中央を原点
-	// として座標を設定します
+	// Left end center as origin to make coordinate movement calculation easier
+	// Set coordinates as
 	//
 	
 	const z = 0.0;
@@ -338,18 +338,18 @@ function create_square_ring()
 	const r = 1.0 * Math.sin(rad(60));
 	let vertex = 
 	[
-		z, h, z, z,-h, z, h,h, r, h,h, r, z,-h, z, h,-h, r, 	//左前面
-		h, h, r, h,-h, r, f,h, z, f,h, z, h,-h, r, f,-h, z,		//右前面
-		h, h,-r, h,-h,-r, z,h, z, z,h, z, h,-h,-r, z,-h, z,		//左背面
-		f, h, z, f,-h, z, h,h,-r, h,h,-r, f,-h, z, h,-h,-r		//右背面
+		z, h, z, z,-h, z, h,h, r, h,h, r, z,-h, z, h,-h, r, 	//Front Left
+		h, h, r, h,-h, r, f,h, z, f,h, z, h,-h, r, f,-h, z,		//Front Right
+		h, h,-r, h,-h,-r, z,h, z, z,h, z, h,-h,-r, z,-h, z,		//Back Left
+		f, h, z, f,-h, z, h,h,-r, h,h,-r, f,-h, z, h,-h,-r		//Back Right
 	];
 	
 	let index =
 	[
-		 0, 1, 2, 3, 4, 5,	//左前面
-		 6, 7, 8, 9,10,11,	//右前面
-		12,13,14,15,16,17,	//左背面
-		18,19,20,21,22,23	//右背面
+		 0, 1, 2, 3, 4, 5,	//Front Left
+		 6, 7, 8, 9,10,11,	//Front Right
+		12,13,14,15,16,17,	//Back Left
+		18,19,20,21,22,23	//Back Right
 	];
 	
 	return { vertex,index };
@@ -357,9 +357,9 @@ function create_square_ring()
 
 function setup_obj()
 {
-	//オブジェクトの準備
+	// Preparation of object
 	
-	//平面リングオブジェクトの頂点リストを生成
+	// Generate flat ring object vertex list
 	let obj = create_square_ring();
 	
 	const inst_num = X_DIV_NUM;
@@ -367,7 +367,7 @@ function setup_obj()
 	for(let i = 0;i < inst_num;++i)
 	{	ins_idx_data.push(i);	}
 	
-	//バッファオブジェクトとデータを準備しておく
+	// Prepare buffer object and data
 	g_vbo_main.vtx_pos_buff   = g_gl.createBuffer();
 	g_vbo_main.vtx_pos_data   = new Float32Array(obj.vertex);
 	g_vbo_main.vtx_idx_buff   = g_gl.createBuffer();
@@ -379,7 +379,7 @@ function setup_obj()
 	g_modelbuff = new Float32Array(16 * inst_num);
 	
 	
-	//バッファオブジェクトを関連付ける
+	// Associate buffer object
 	const aloc_vtx_pos   = g_gl.getAttribLocation(g_prog_main,'vtx_pos');
 	const aloc_vtx_idx   = g_gl.getAttribLocation(g_prog_main,'vtx_idx');
 	const aloc_ins_idx   = g_gl.getAttribLocation(g_prog_main,'ins_idx');
@@ -409,13 +409,13 @@ function setup_obj()
 	g_gl.bufferData(g_gl.ARRAY_BUFFER,g_modelbuff,g_gl.DYNAMIC_DRAW);
 	for(let i = 0;i < 4;++i)
 	{
-		//mat4 に関連付けるには4回に分ける
+		// Divide into 4 times to associate with mat4
 		g_gl.enableVertexAttribArray(aloc_obj_model+i);
 		g_gl.vertexAttribDivisor(aloc_obj_model+i,1);
 		g_gl.vertexAttribPointer(aloc_obj_model+i,4,g_gl.FLOAT,false,64,16*i);
 	}
 
-	//uniformデータの準備
+	// Preparation of uniform data
 	const uloc_x_div_num = g_gl.getUniformLocation(g_prog_main,'x_div_num');
 	const uloc_atex      = g_gl.getUniformLocation(g_prog_main,'atex');
 
@@ -426,7 +426,7 @@ function setup_obj()
 	g_gl.uniform1i(uloc_atex,0);
 	
 	
-	//テクスチャ配列を用意
+	// Prepare texture array
 	const tex_neko = document.getElementById("tex_neko");
 	const tex_tora = document.getElementById("tex_tora");
 	const texture = g_gl.createTexture();
@@ -437,7 +437,7 @@ function setup_obj()
 	g_gl.pixelStorei(g_gl.UNPACK_FLIP_Y_WEBGL,true);
 	g_gl.activeTexture(g_gl.TEXTURE0);
 	g_gl.bindTexture(g_gl.TEXTURE_2D_ARRAY,texture);
-	g_gl.texStorage3D	//texStorage3D()メソッドを使用してimmutableテクスチャを確保する
+	g_gl.texStorage3D	// Allocate immutable texture using texStorage3D() method
 	(	
 		g_gl.TEXTURE_2D_ARRAY,
     	1,g_gl.RGBA8,
@@ -457,7 +457,7 @@ function setup_obj()
 	}
 
 
-	//平面リングの位置情報を準備
+	// Prepare flat ring position info
 	g_pos = [];
 	const u_unit = 1.0 / X_DIV_NUM;
 	const w_unit = W_SCALE / X_DIV_NUM;
@@ -475,24 +475,24 @@ function setup_obj()
 function setup()
 {
 	
-	//準備
+	// Preparation
 		
-	//画面調整
+	// Screen Adjustment
 	adjust_screen();
 	
-	//WebGLの準備
+	// WebGL Preparation
 	g_gl = g_webgl_screen.getContext('webgl2');
 	
-	//シェーダの準備
+	// Preparation of shader
 	setup_shader();
 	
-	//カメラと射影行列の準備
+	// Preparation of Camera and Projection Matrix
 	setup_view_projection()
 	
-	//オブジェクトの準備
+	// Preparation of object
 	setup_obj();
 	
-	//最初の値を決める
+	// Determine initial value
 	g_next_S = SL.clamp(rnd(S_MAX+1),S_MIN,S_MAX);
 	reset();
 
@@ -501,7 +501,7 @@ function setup()
 function reset()
 {
 
-	//次の目標値を決める
+	// Determine next target value
 	
 	g_start_S = g_next_S;
 	
@@ -514,19 +514,19 @@ function reset()
 function draw_fps()
 {
 	
-	//FPS計測
+	// FPS Measurement
 	
-	//現在時刻を取得
+	// Get current time
 	let now_time = Date.now();
 	
 	if((now_time - g_last_fps_time) >= 1000)
 	{
-		//FPS履歴に追加
+		// Add to FPS history
 		g_fps_list.push(g_fps_count);
 		if(g_fps_list.length > 10)
 		{	
-			//先頭を削除して過去n回分までの
-			//FPSの平均とします(移動平均)
+			// Delete first and keep up to past n times
+			// Use average of FPS (moving average)
 			g_fps_list.shift();
 		}
 		let fps_ave = 0;
@@ -534,7 +534,7 @@ function draw_fps()
 		{	fps_ave += g_fps_list[i];	}
 		fps_ave /= g_fps_list.length;
 		
-		//FPS表示
+		// FPS Display
 		let fps_div = document.getElementById("fps");
 		let fps     = (fps_ave*(1000/(now_time - g_last_fps_time)));
 		fps_div.innerText = "FPS:"+fps;
@@ -550,16 +550,16 @@ function draw_fps()
 function draw()
 {
 
-	//描画コア
+	// Drawing Core
 	
-	//開始時刻保存
+	// Save start time
 	if(g_start_time  == 0)
 	{
 		g_start_time = g_time;
 		g_next_time  = g_time + MORPH_TIME;
 	}
 	
-	//メインシーンのレンダリング開始
+	// Start main scene rendering
 	const sc_w = g_game_width;
 	const sc_h = g_game_height;
 	g_gl.enable(g_gl.DEPTH_TEST);
@@ -567,10 +567,10 @@ function draw()
     g_gl.enable(g_gl.CULL_FACE);
 	g_gl.clearColor(0,0,0,1);
 	
-	//毎ターンの画面クリア
+	// Screen clear for every turn
 	g_gl.clear(g_gl.COLOR_BUFFER_BIT | g_gl.DEPTH_BUFFER_BIT);
 
-	//オブジェクトを動かす
+	// Move object
 	let mtx_scale   = new MatrixMan4();
 	let mtx_offset  = new MatrixMan4();
 	let mtx_rotateX = new MatrixMan4();
@@ -583,41 +583,41 @@ function draw()
 	if(time > 1.0){ time = 1.0; }
 	const e = Ease.easeInExpo(time**4);
 	
-	//オブジェクトのサイズを調整
+	// Adjust object size
 	const S = g_start_S + e * (g_next_S - g_start_S);
 	mtx_scale.scale(WS*S,HS*S,WS*S);
 	
-	//回転行列作成
+	// Create Rotation Matrix
 	const add_angle = g_dtime * ANGLE_PER_TIME;
 	g_angle_a +=  (add_angle * g_accel_a);
 	g_angle_b +=  (add_angle * g_accel_b);
 	mtx_rotateY.rotateY(rad(g_angle_a));
 	mtx_rotateZ.rotateZ(rad(g_angle_b));
 	
-	//平面リングを並べる
+	// Arrange flat rings
 	let idx     = 0;
 	for(let i = 0;i < g_pos.length;i+=1)
 	{
-		//位置情報取得
+		// Get position info
 		const pos = g_pos[i];
 		
-		//モデル変換行列の初期化
+		// Initialize model transformation matrix
 		mtx_model.initialize();
 		
-		//移動行列作成
+		// Create Translation Matrix
 		const x = pos.x*S;
 		const y = pos.y*S;
 		const z = 0.0;
 		mtx_pos.translate(x,y,z);
 
-		//拡大と移動と回転
+		// Scale, Translation, and Rotation
 		mtx_model.mul(mtx_scale);
 		mtx_model.mul(mtx_pos);
 		mtx_model.mul(mtx_offset);
 		mtx_model.mul(mtx_rotateY);
 		mtx_model.mul(mtx_rotateZ);
 		
-		//モデル変換行列のバッファに格納
+		// Store in buffer of model transformation matrix
 		const mtx_num   = mtx_model.m.length;
 		const model_pos = mtx_num * idx;
 		for(let m = 0;m < mtx_num;++m)
@@ -630,21 +630,21 @@ function draw()
 	g_gl.bindBuffer(g_gl.ARRAY_BUFFER,g_vbo_main.obj_model_buff);
 	g_gl.bufferSubData(g_gl.ARRAY_BUFFER,0,g_modelbuff);
     	
-	//インスタンスを描画
+	// Draw instance
 	g_gl.drawArraysInstanced(g_gl.TRIANGLES,0,6*4,X_DIV_NUM);
 	
 	g_gl.flush();
 	
 	
-	//WebGL用のcanvasから表示用の2Dcanvasに転送
+	// Transfer from WebGL canvas to display 2D canvas
 	const screen = document.getElementById("game-screen");
 	const ctx    = screen.getContext("2d");
 	ctx.drawImage(g_webgl_screen,0,0);
 	
-	//変形終了時刻チェック
+	// Deformation end time check
 	if(g_time >= g_next_time)
 	{
-		//次の区切り時刻を決めてリセット
+		// Determine next break time and reset
 		g_start_time = g_time;
 		g_next_time  = g_start_time + MORPH_TIME;
 		reset();
@@ -655,9 +655,9 @@ function draw()
 function render()
 {
 	
-	//毎ターンの描画処理
+	// Drawing processing for every turn
 	
-	//時間計算
+	// Time Calculation
 	const last_time = g_time;
 	g_time = (new Date).getTime();
 	if(last_time == 0)
@@ -665,13 +665,13 @@ function render()
 	else
 	{	g_dtime = g_time - last_time;	}
 	
-	//描画コア
+	// Drawing Core
 	draw();
 	
-	//FPS描画
+	// Draw FPS
 	draw_fps();
 	
-	//次の描画呼び出しを登録
+	// Register next drawing call
 	window.requestAnimationFrame(render);
 
 }

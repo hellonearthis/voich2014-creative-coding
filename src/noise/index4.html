@@ -1,23 +1,23 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-<title>パパのノイズ練習4</title>
+<title>Papa's Noise Practice 4</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=320, user-scalable=no, initial-scale=1.0">
 <meta http-equiv="Cache-Control" content="no-cache">
 <!--
 	
-	このデモは、パーリンノイズを使っての図形描画の練習になります。
+	This demo is practice for drawing shapes using Perlin Noise.
 	
-	今回は、こちらのサイトのサンプルを参考にしました。
-	ありがとうございます。
+	This time, I referenced the sample on this site.
+	Thank you.
 	https://thebookofshaders.com/edit.php#11/wood.frag
 
-	ここで実装するJavaScriptのクラスはぼいちが個人的に利用する
-	目的で移植したものなので、汎用的なライブラリを意識したもの
-	では無いため、ご利用は自己責任でお願いします。
+	The JavaScript classes implemented here are for Voich's personal use
+	Ported for the purpose, so intended as general-purpose library
+	Please use at your own risk as it is not.
 	
-	(C)2020 ぼいち(@voich2014)
+	(C)2020 Voich(@voich2014)
 
 -->
 <style type="text/css">
@@ -80,30 +80,30 @@
 -->
 </style>
 
-<!-- 自前ライブラリ群 -->
+<!-- Self-made Libraries -->
 <script type="text/javascript">
 
 function rad(deg)
 {
-	//度→ラジアン変換
+	// Degree -> Radian conversion
 	return deg * Math.PI / 180;
 }
 
 function rnd(x)
 {
-	//乱数取得
+	// Get random number
 	return Math.floor(Math.random() * x);
 }
 
 function max(a,b)
 {
-	//大きい方を返す
+	// Return larger one
 	return Math.max(a,b);
 }
 
 function min(a,b)
 {
-	//小さい方を返す
+	// Return smaller one
 	return Math.min(a,b);
 }
 
@@ -120,16 +120,16 @@ function lerpColor(col1,col2,x)
 
 function hsl2rgb(h,s,l)
 {
-	//HSLからRGBに変換
+	// Convert HSL to RGB
 	//
-	//  h(hue)       : 色相  0-359の値[度]
-	//  s(saturation): 彩度  0-1.0の値[%]
-	//  l(lightness) : 明度  0-1.0の値[%]
+	//  h(hue)       : Hue  Value from 0-359 [degrees]
+	//  s(saturation): Saturation  Value from 0-1.0 [%]
+	//  l(lightness) : Lightness  Value from 0-1.0 [%]
 	//
 	let max,min;
 	let r,g,b;
 	
-	//念のためHを補正
+	// Correct H just in case
 	h = h % 360;
 
 	if(l < 0.5)
@@ -187,16 +187,16 @@ function hsl2rgb(h,s,l)
 	return { r:r/255, g: g/255, b: b/255 };
 }
 
-//パーリンノイズクラス
+// Perlin Noise Class
 //https://gist.github.com/Flafla2/f0260a861be0ebdeef76
-//↑のC#のソースを参考に雑に移植しています。
-//ご利用は自己責任でお願いします。
+// ^ Roughly ported referring to the C# source above.
+// Please use at your own risk.
 class Perlin
 {
-	//コンストラクタ
+	// Constructor
 	constructor(repeat = -1)
 	{
-		//メンバの初期化
+		// Initialize members
 		this.repeat = repeat;
 		
 		const permutation =
@@ -267,7 +267,7 @@ class Perlin
 		return a + x * (b - a);
 	}
 	
-	//パーリンノイズ取得(0.0～1.0の値が返ります)
+	// Get Perlin Noise (Returns value 0.0-1.0)
 	perlin(x,y,z)
 	{
 		if(this.repeat > 0)
@@ -338,15 +338,15 @@ class Perlin
 	
 }
 
-//疑似シェーダ関数クラス
+// Pseudo Shader Function Class
 //https://www.khronos.org/registry/OpenGL-Refpages/gl4/
 //https://yrlab.zatunen.com/webgl/noise/noise.html
-//これらのサイトを参考にシェーダ内で利用できる関数を
-//模倣したものです。
-//ご利用は自己責任でお願いします。
+// Functions available in shader referring to these sites
+// It is an imitation.
+// Please use at your own risk.
 class SL
 {
-	//コンストラクタ
+	// Constructor
 	constructor()
 	{
 	}
@@ -378,7 +378,7 @@ class SL
 	
 	static random(x,y)
 	{
-		//0.0 ～ 1.0の乱数を返す
+		// Return random number 0.0 - 1.0
 		return this.fract(this.sin(this.dot(x,y,12.9898,78.233)) * 43758.5453);
 	}
 	
@@ -389,7 +389,7 @@ class SL
 	
 	static interpolation(f)
 	{
-		// 0.0 ～ 1.0の補間式、5次のものがアーティファクト少なくていいらしい
+		// Interpolation formula from 0.0 to 1.0, 5th order seems to have fewer artifacts
 		//return f * f * (3.0 - 2.0 * f);
 		return f * f * f * (f * (6.0 * f - 15.0) + 10.0);
 	}
@@ -411,7 +411,7 @@ class SL
 	
 	static mixCol(col1,col2,a)
 	{
-		//r,g,bは0.0～1.0
+		// r, g, b are 0.0-1.0
 		
 		const aa  = 1.0 - a;
 		const col =
@@ -426,7 +426,7 @@ class SL
 	
 	static rotate2d(angle,x,y)
 	{
-		//Z軸回転
+		// Z axis rotation
 		const rx =  x * Math.cos(angle) + y * Math.sin(angle);
 		const ry = -x * Math.sin(angle) + y * Math.cos(angle);
 		return { x:rx,y:ry };
@@ -434,7 +434,7 @@ class SL
 	
 	static smoothstep(edge0,edge1,x)
 	{
-		//Wikipediaより
+		// From Wikipedia
 	    // Scale, bias and saturate x to 0..1 range
 	    x = this.clamp((x - edge0) / (edge1 - edge0),0.0,1.0);
 	    // Evaluate polynomial
@@ -442,13 +442,13 @@ class SL
 	}
 }
 
-//ブロックノイズクラス
+// Block Noise Class
 //https://yrlab.zatunen.com/webgl/noise/noise.html
-//↑の記事を参考に実装しています。
-//ご利用は自己責任でお願いします。
+// ^ Implemented referring to the article above.
+// Please use at your own risk.
 class BlockNoise
 {
-	//コンストラクタ
+	// Constructor
 	constructor()
 	{
 	}
@@ -462,13 +462,13 @@ class BlockNoise
 	
 }
 
-//バリューノイズクラス
+// Value Noise Class
 //https://yrlab.zatunen.com/webgl/noise/noise.html
-//↑の記事を参考に実装しています。
-//ご利用は自己責任でお願いします。
+// ^ Implemented referring to the article above.
+// Please use at your own risk.
 class ValueNoise
 {
-	//コンストラクタ
+	// Constructor
 	constructor()
 	{
 	}
@@ -491,13 +491,13 @@ class ValueNoise
 	
 }
 
-//セルラーノイズクラス
+// Cellular Noise Class
 //https://yrlab.zatunen.com/webgl/noise/noise.html
-//↑の記事を参考に実装しています。
-//ご利用は自己責任でお願いします。
+// ^ Implemented referring to the article above.
+// Please use at your own risk.
 class CellularNoise
 {
-	//コンストラクタ
+	// Constructor
 	constructor()
 	{
 	}
@@ -524,20 +524,20 @@ class CellularNoise
 			}
 		}
 		
-		o = Math.min(Math.pow(o * 1.0,3.0),1.0);	//値の勾配を調整
+		o = Math.min(Math.pow(o * 1.0,3.0),1.0);	// Adjust gradient of value
 		
 		return o
 	}
 	
 }
 
-//反転セルラーノイズクラス
+// Inverted Cellular Noise Class
 //https://yrlab.zatunen.com/webgl/noise/noise.html
-//↑の記事を参考に実装しています。
-//ご利用は自己責任でお願いします。
+// ^ Implemented referring to the article above.
+// Please use at your own risk.
 class InverseCellularNoise
 {
-	//コンストラクタ
+	// Constructor
 	constructor()
 	{
 	}
@@ -549,16 +549,16 @@ class InverseCellularNoise
 	
 }
 
-//ドメインワーピングクラス
+// Domain Warping Class
 //https://qiita.com/edo_m18/items/e4d7a084cdbbfdc7863c
-//↑の記事を参考に実装しています。
-//ご利用は自己責任でお願いします。
+// ^ Implemented referring to the article above.
+// Please use at your own risk.
 class DomainWarping
 {
-	//コンストラクタ
+	// Constructor
 	constructor()
 	{
-		//メンバの初期化
+		// Initialize members
 		this.pn        = new Perlin();
 		this.noise     = this.perlin_noise;
 		this.octaves   = 5;
@@ -619,7 +619,7 @@ class DomainWarping
 	
 	getColor(x,y,t)
 	{
-		//x,y は 0.0 ～ 1.0
+		// x, y are 0.0 - 1.0
 		
 		let color = { r:0.0,g:0.0,b:0.0 };
 		
@@ -627,7 +627,7 @@ class DomainWarping
 		q.x = this.fbm(x,y);
 		q.y = this.fbm(x + 1.0,y + 1.0);
 		
-		//1.7や9.2は任意の数値です。特別な意味はないです。
+		// 1.7 and 9.2 are arbitrary numbers. No special meaning.
     	let r = { x:0,y:0 };
     	const add_qx  = (4.0 * q.x);
     	const add_qy  = (4.0 * q.y);
@@ -658,16 +658,16 @@ class DomainWarping
 
 }
 
-//ウッドテクスチャクラス
+// Wood Texture Class
 //https://thebookofshaders.com/edit.php#11/wood.frag
-//↑の記事を参考に実装しています。
-//ご利用は自己責任でお願いします。
+// ^ Implemented referring to the article above.
+// Please use at your own risk.
 class WoodTexture
 {
-	//コンストラクタ
+	// Constructor
 	constructor()
 	{
-		//メンバの初期化
+		// Initialize members
 		this.pn        = new Perlin();
 		this.mp        = { x:3.0,y:10.0 }; 
 		this.lp        = 0.5;
@@ -703,7 +703,7 @@ class WoodTexture
 	
 	getColor(x,y,t)
 	{
-		//x,y は 0.0 ～ 1.0
+		// x, y are 0.0 - 1.0
 		
 		let pos = { x:x * this.mp.x,y:y * this.mp.y };
 		
@@ -725,13 +725,13 @@ class WoodTexture
 
 }
 
-//イージング関数クラス
+// Easing Function Class
 //https://easings.net/ja#
-//↑のソースを参考に雑に移植しています。
-//ご利用は自己責任でお願いします。
+// ^ Roughly ported referring to the source above.
+// Please use at your own risk.
 class Ease
 {
-	//コンストラクタ
+	// Constructor
 	constructor()
 	{
 	}
@@ -948,14 +948,14 @@ class Ease
 
 
 
-//グローバルオブジェクト
+// Global Object
 let g_game_width    = 320;
 let g_game_height   = 500;
 
-let g_pn     = new Perlin();			//パーリンノイズ生成用
-let g_wt     = new WoodTexture();		//木目テクスチャ生成用
-let g_time   = 0;						//現在時刻[ms]
-let g_dtime  = 0;						//前回の描画からの経過時間[ms]
+let g_pn     = new Perlin();			// For generating Perlin Noise
+let g_wt     = new WoodTexture();		// For generating Wood Texture
+let g_time   = 0;						// Current time [ms]
+let g_dtime  = 0;						// Elapsed time since last drawing [ms]
 
 const MORPH_TIME    = 5000;
 
@@ -978,19 +978,19 @@ let g_cnt = 0;
 function init()
 {
 	
-	//初期化処理
+	// Initialization processing
 	
-	//準備
+	// Preparation
 	setup();
 	
-	//requestAnimationFrameの準備(各種ブラウザ対応)
+	// Preparation of requestAnimationFrame (compatible with various browsers)
 	let requestAnimationFrame = window.requestAnimationFrame       ||
                                 window.mozRequestAnimationFrame    ||
                                 window.webkitRequestAnimationFrame ||
                                 window.msRequestAnimationFrame;
     window.requestAnimationFrame = requestAnimationFrame;
     
-	//描画を登録
+	// Register drawing
 	window.requestAnimationFrame(render);
 	
 }
@@ -998,21 +998,21 @@ function init()
 function adjust_screen()
 {
 
-	//画面調整
+	// Screen Adjustment
 	
-	//ウインドウのサイズを取得
+	// Get window size
 	let window_w = window.innerWidth;
 	let window_h = window.innerHeight;
 	
-	//ウインドウ幅が十分に広い場合はPCだとして
-	//画面サイズを変更する
+	// Assuming it's a PC if window width is wide enough
+	// Change screen size
 	if((g_game_width * 2) <= window_w)
 	{
 		g_game_width  = 460;
 		g_game_height = 720;
 	}
 	
-	//ゲームスクリーンを中央に配置
+	// Place game screen in center
 	let screen  = document.getElementById("game-screen");
 	let game_x  = (window_w - g_game_width)  / 2;
 	let game_y  = (window_h - g_game_height) / 2;
@@ -1022,7 +1022,7 @@ function adjust_screen()
 	screen.width      = g_game_width;
 	screen.height     = g_game_height;
 
-	//オフスクリーン用のImageDataを作成
+	// Create ImageData for off-screen
 	//let ctx = screen.getContext("2d");
 	//g_offsc = ctx.createImageData(g_game_width,g_game_height);
 	
@@ -1031,7 +1031,7 @@ function adjust_screen()
 function setup_obj()
 {
 
-	//オブジェクトの準備
+	// Preparation of object
 
 	const win_w = window.innerWidth;
 	const win_h = window.innerHeight;
@@ -1042,7 +1042,7 @@ function setup_obj()
 	const sc_x  = (win_w - g_game_width)  / 2;
 	const sc_y  = (win_h - g_game_height) / 2;
 	
-	//ノイズの2次元テクスチャを生成
+	// Generate 2D texture of noise
 	const tex_cv  = document.getElementById("noise_texture");
 	const tex_ctx = tex_cv.getContext("2d");
 	const tex_w   = 256;
@@ -1056,12 +1056,12 @@ function setup_obj()
 	tex_cv.width      = tex_w;
 	tex_cv.height     = tex_h;
 	
-	//タイトルの位置合わせ
+	// Align title position
 	let title = document.getElementById("title");
 	title.style.left = (tex_x     ) + "px";
 	title.style.top  = (tex_y - 20) + "px";
 	
-	//スライダーの位置合わせ
+	// Align slider position
 	let slider_s  = document.getElementById("slider_s");
 	let slider_t  = document.getElementById("slider_t");
 	let slider_mx = document.getElementById("slider_mx");
@@ -1104,12 +1104,12 @@ function setup_obj()
 function setup()
 {
 	
-	//準備
+	// Preparation
 		
-	//画面調整
+	// Screen Adjustment
 	adjust_screen();
 	
-	//オブジェクトの準備
+	// Preparation of object
 	setup_obj();
 
 }
@@ -1117,19 +1117,19 @@ function setup()
 function draw_fps()
 {
 	
-	//FPS計測
+	// FPS Measurement
 	
-	//現在時刻を取得
+	// Get current time
 	let now_time = Date.now();
 	
 	if((now_time - g_last_fps_time) >= 1000)
 	{
-		//FPS履歴に追加
+		// Add to FPS history
 		g_fps_list.push(g_fps_count);
 		if(g_fps_list.length > 10)
 		{	
-			//先頭を削除して過去n回分までの
-			//FPSの平均とします(移動平均)
+			// Delete first and keep up to past n times
+			// Use average of FPS (moving average)
 			g_fps_list.shift();
 		}
 		let fps_ave = 0;
@@ -1137,7 +1137,7 @@ function draw_fps()
 		{	fps_ave += g_fps_list[i];	}
 		fps_ave /= g_fps_list.length;
 		
-		//FPS表示
+		// FPS Display
 		let fps_div = document.getElementById("fps");
 		let fps     = (fps_ave*(1000/(now_time - g_last_fps_time)));
 		fps_div.innerText = "FPS:"+fps;
@@ -1153,7 +1153,7 @@ function draw_fps()
 function update_texture()
 {
 	
-	//ノイズテクスチャの更新
+	// Update noise texture
 	
 	const tex_cv  = document.getElementById("noise_texture");
 	const tex_ctx = tex_cv.getContext("2d");
@@ -1163,16 +1163,16 @@ function update_texture()
 	let offsc = tex_ctx.createImageData(tex_w,tex_h);
 	offsc.data.fill(0);
 	
-	//経過時間決定
+	// Determine elapsed time
 	const timestep = 1.0/g_timestep;
 	const t        = (g_time / 1000) * timestep;
 	const h        = Math.floor(g_time / 100) % 360;
 	
-	//パラメータ設定
+	// Parameter setting
 	g_wt.setMultiParam(g_mx,g_my);
 	g_wt.setLineParam(g_lp);
 	
-	//色の準備
+	// Preparation of colors
 	const col = hsl2rgb(h,1.0,0.8);
 	g_wt.setBaseColor(col);
 			
@@ -1200,7 +1200,7 @@ function update_texture()
 function update_slide()
 {
 
-	//スライダーの値を反映
+	// Reflect slider value
 	
 	let slider_s  = document.getElementById("slider_s");
 	let slider_t  = document.getElementById("slider_t");
@@ -1239,9 +1239,9 @@ function update_slide()
 function draw()
 {
 
-	//描画コア
+	// Drawing Core
 	
-	//開始時刻保存
+	// Save start time
 	if(g_start_time  == 0)
 	{
 		g_start_time = g_time;
@@ -1258,9 +1258,9 @@ function draw()
 function render()
 {
 	
-	//毎ターンの描画処理
+	// Drawing processing for every turn
 	
-	//時間計算
+	// Time Calculation
 	const last_time = g_time;
 	g_time = (new Date).getTime();
 	if(last_time == 0)
@@ -1268,13 +1268,13 @@ function render()
 	else
 	{	g_dtime = g_time - last_time;	}
 	
-	//描画コア
+	// Drawing Core
 	draw();
 	
-	//FPS描画
+	// Draw FPS
 	draw_fps();
 	
-	//次の描画呼び出しを登録
+	// Register next drawing call
 	window.requestAnimationFrame(render);
 
 }
@@ -1284,7 +1284,7 @@ function render()
 <body onload="init()">
 	<div id="fps"></div>
 	<canvas id="game-screen"></canvas>
-	<span id="title">ウッドテクスチャ</span>
+	<span id="title">Wood Texture</span>
 	<canvas id="noise_texture"></canvas>
 	<input id="slider_s" class="slider" type="range" value="1" min="0.01" max="3" step="0.01"
      oninput="update_slide()"><span id="slider_s_value" class="slider_value"></span>

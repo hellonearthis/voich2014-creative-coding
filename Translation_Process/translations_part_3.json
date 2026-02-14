@@ -1,0 +1,582 @@
+[
+    {
+        "original": "// cvn = 4 の場合",
+        "translated": "// Case of cvn = 4"
+    },
+    {
+        "original": "// cvn角形の各頂点座標をY軸を中心に上から見て角度iaをivn分割する形になる",
+        "translated": "// Coordinates of each vertex of cvn-gon are formed by dividing angle ia into ivn parts looking from top around Y-axis"
+    },
+    {
+        "original": "// dst_color\t描画先にある色",
+        "translated": "// dst_color\tColor at the drawing destination"
+    },
+    {
+        "original": "// edge_color       境界線色(nullの場合は境界線を描かない)",
+        "translated": "// edge_color       Border color (If null, do not draw border)"
+    },
+    {
+        "original": "// edge_uv_list     頂点順番に対応した境界線UV座標リスト",
+        "translated": "// edge_uv_list     List of border UV coordinates corresponding to vertex order"
+    },
+    {
+        "original": "// http://colormind.io/api-access/ のサンプルを元に実装しています。",
+        "translated": "// Implemented based on the sample at http://colormind.io/api-access/ ."
+    },
+    {
+        "original": "// index_list\t\t頂点順番リスト",
+        "translated": "// index_list\t\tVertex order list"
+    },
+    {
+        "original": "// m3の中のデータ列(列優先のデータ順)",
+        "translated": "// Data sequence in m3 (column-major data order)"
+    },
+    {
+        "original": "// m4の中のデータ列(列優先のデータ順)",
+        "translated": "// Data sequence in m4 (column-major data order)"
+    },
+    {
+        "original": "// min以上max以下の乱数を生成する",
+        "translated": "// Generate a random number between min and max (inclusive)"
+    },
+    {
+        "original": "// moji … 解析する文字列",
+        "translated": "// moji ... String to analyze"
+    },
+    {
+        "original": "// n = 4 の場合",
+        "translated": "// Case of n = 4"
+    },
+    {
+        "original": "// n角形の各頂点座標をY軸を中心に上から見てn角形になるように回転させて",
+        "translated": "// Rotate coordinates of each vertex of n-gon around Y-axis to form an n-gon looking from the top"
+    },
+    {
+        "original": "// obj_nv      … オブジェクトの法線ベクトル(向いてる方向)",
+        "translated": "// obj_nv      ... Object's normal vector (facing direction)"
+    },
+    {
+        "original": "// obj_posv    … オブジェクトの中心位置",
+        "translated": "// obj_posv    ... Object's center position"
+    },
+    {
+        "original": "// p.39 トーラスの結び目",
+        "translated": "// p.39 Torus Knot"
+    },
+    {
+        "original": "// p.39 トーラス結び目",
+        "translated": "// p.39 Torus Knot"
+    },
+    {
+        "original": "// p.41 メビウスの帯",
+        "translated": "// p.41 Mobius Strip"
+    },
+    {
+        "original": "// primitive_count\tプリミティブの数",
+        "translated": "// primitive_count\tNumber of primitives"
+    },
+    {
+        "original": "// rv = 回転軸ベクトル",
+        "translated": "// rv = Rotation axis vector"
+    },
+    {
+        "original": "// src_color\t描画色",
+        "translated": "// src_color\tDrawing color"
+    },
+    {
+        "original": "// target_posv … 向きたい位置",
+        "translated": "// target_posv ... Position to face"
+    },
+    {
+        "original": "// texture_uv_list  頂点順番に対応したテクスチャUV座標リスト",
+        "translated": "// texture_uv_list  List of texture UV coordinates corresponding to vertex order"
+    },
+    {
+        "original": "// vertex_count\t\t頂点リストの個数",
+        "translated": "// vertex_count\t\tNumber of items in vertex list"
+    },
+    {
+        "original": "// vertex_list\t\tオブジェクトの頂点データリスト",
+        "translated": "// vertex_list\t\tObject vertex data list"
+    },
+    {
+        "original": "// { h:0.0～1.0, s:0.0～1.0, l:0.0～1.0 }",
+        "translated": "// { h:0.0-1.0, s:0.0-1.0, l:0.0-1.0 }"
+    },
+    {
+        "original": "// |  ／|",
+        "translated": "// |  ／|"
+    },
+    {
+        "original": "// |  ／|  ／|",
+        "translated": "// |  ／|  ／|"
+    },
+    {
+        "original": "// | 前  |  | 後  |",
+        "translated": "// | Front  |  | Back  |"
+    },
+    {
+        "original": "// | 前  |  | 後  |    ／|   左  |  |  右   | ＼",
+        "translated": "// | Front  |  | Back  |    ／|   Left  |  |  Right   | ＼"
+    },
+    {
+        "original": "// |／  |",
+        "translated": "// |／  |"
+    },
+    {
+        "original": "// |／  |／  |",
+        "translated": "// |／  |／  |"
+    },
+    {
+        "original": "// α値だけの操作としています。",
+        "translated": "// Operation is only for alpha value."
+    },
+    {
+        "original": "// θ = 回転角度",
+        "translated": "// θ = Rotation angle"
+    },
+    {
+        "original": "// ※lightDotを光線とポリゴン面に対しての光の当たり具合の比率とし、",
+        "translated": "// * lightDot is the ratio of light hitting the polygon surface relative to the light ray,"
+    },
+    {
+        "original": "// ※ちなみに図形は全てぼいちオリジナルです",
+        "translated": "// * By the way, all shapes are original by Voich"
+    },
+    {
+        "original": "// ※パースペクティブコレクトを行う場合、この判定は正しくない場合があるらしい…",
+        "translated": "// * When performing perspective correction, this judgment may not be correct..."
+    },
+    {
+        "original": "// ※内積値は保存してるけど、もう比較には使わないと思う",
+        "translated": "// * Dot product value is saved, but probably won't be used for comparison anymore"
+    },
+    {
+        "original": "// ああ、そうか。Z値チェックで負けても左上だった場合に上書きしちゃえば良いのか？",
+        "translated": "// Ah, I see. Even if it loses the Z value check, should I overwrite it if it was top-left?"
+    },
+    {
+        "original": "// あと、色の補間に使う重心座標(面積の比率)を使って、Z座標も補間してて、",
+        "translated": "// Also, interpolating Z coordinates using barycentric coordinates (area ratio) used for color interpolation,"
+    },
+    {
+        "original": "// あとは、ポリゴンが重なる共有したエッジに対する、左上のルールって言う",
+        "translated": "// The rest is the so-called top-left rule for shared edges where polygons overlap"
+    },
+    {
+        "original": "// あらかじめご了承下さい。",
+        "translated": "// Please be forewarned."
+    },
+    {
+        "original": "// ありがとうございます。",
+        "translated": "// Thank you."
+    },
+    {
+        "original": "// いるかどうかの判定に利用できます。",
+        "translated": "// Can be used to determine if it exists."
+    },
+    {
+        "original": "// おかしくなってしまうので、外向きのポリゴンの色を",
+        "translated": "// because it becomes strange, the color of the outward polygon"
+    },
+    {
+        "original": "// かつ、内側も描画されるように内向きのポリゴンも",
+        "translated": "// and inward polygons so that the inside is also drawn"
+    },
+    {
+        "original": "// からEdgeFunction(2次元の外積計算)を用いて、",
+        "translated": "// using EdgeFunction (2D cross product calculation) from"
+    },
+    {
+        "original": "// がn * 2個横につながっています。",
+        "translated": "// are connected horizontally by n * 2."
+    },
+    {
+        "original": "// があります。",
+        "translated": "// There are."
+    },
+    {
+        "original": "// が含まれる。",
+        "translated": "// is included."
+    },
+    {
+        "original": "// ここで、p=120,220だとして、",
+        "translated": "// Here, assuming p=120,220,"
+    },
+    {
+        "original": "// ここで内向きのポリゴンが優先されると、見た目に",
+        "translated": "// If inward polygons are prioritized here, visually"
+    },
+    {
+        "original": "// ここで現在時刻をリセット",
+        "translated": "// Reset current time here"
+    },
+    {
+        "original": "// こちらのサイトのサンプルコードを参考に実装しました。",
+        "translated": "// Implemented with reference to the sample code on this site."
+    },
+    {
+        "original": "// このUV座標での境界線判定は凸撃兵さん(@Stosstruppe)の",
+        "translated": "// This border detection using UV coordinates is from Totsugekihei-san (@Stosstruppe)'s"
+    },
+    {
+        "original": "// このあたりの話は、EdgeFunctionや重心座標系などで",
+        "translated": "// This topic is about EdgeFunction, barycentric coordinate system, etc."
+    },
+    {
+        "original": "// この変換をかけることによって、",
+        "translated": "// By applying this transformation,"
+    },
+    {
+        "original": "// この射影変換では、視点からの見える範囲(視錘台)で区切って座標を正規化",
+        "translated": "// In this projection transformation, coordinates are normalized by delimiting the visible range (frustum) from the viewpoint"
+    },
+    {
+        "original": "// この平面の中心を(x,y)=(0,0)の原点として",
+        "translated": "// With the center of this plane as the origin (x,y)=(0,0)"
+    },
+    {
+        "original": "// この平面の中心を(x,z)=(0,0)の原点として",
+        "translated": "// With the center of this plane as the origin (x,z)=(0,0)"
+    },
+    {
+        "original": "// この平面はXY平面なので、Z座標は全て0で扱います。",
+        "translated": "// Since this plane is the XY plane, all Z coordinates are treated as 0."
+    },
+    {
+        "original": "// この平面はXZ平面なので、Y座標は全て0で扱います。",
+        "translated": "// Since this plane is the XZ plane, all Y coordinates are treated as 0."
+    },
+    {
+        "original": "// この法則に基づいて、Aを頂上とする斜面のポリゴンの頂点順は",
+        "translated": "// Based on this rule, the vertex order of the polygon of the slope with A as the top is"
+    },
+    {
+        "original": "// この法則に基づいて、もうひとつの△BCDの手前に",
+        "translated": "// Based on this rule, in front of the other triangle BCD"
+    },
+    {
+        "original": "// この法則に基づいて、斜面のポリゴンの頂点順は",
+        "translated": "// Based on this rule, the vertex order of the polygon of the slope is"
+    },
+    {
+        "original": "// この球体を描く計算は、マット・ピアソン 著 [普及版]ジェネラティブ・アート",
+        "translated": "// The calculation to draw this sphere is from 'Generative Art [Popular Edition]' by Matt Pearson"
+    },
+    {
+        "original": "// これによって、見える範囲のX/Y/Zの値の範囲が-1.0～1.0に変換されるので、",
+        "translated": "// By this, the range of X/Y/Z values in the visible range is converted to -1.0 to 1.0,"
+    },
+    {
+        "original": "// これは、基本となるcvn角形をX-Y平面で作成し、X方向にir分平行移動させた後、",
+        "translated": "// This creates a basic cvn-gon on the X-Y plane, translates it by ir in the X direction, and then"
+    },
+    {
+        "original": "// これは、基本となるn角形をX-Y平面で作成し、X方向にin_radius分平行",
+        "translated": "// This creates a basic n-gon on the X-Y plane, translates it by in_radius in the X direction"
+    },
+    {
+        "original": "// これは、基本となるn角形をX-Y平面で作成し、X方向にn角形の直径分平行",
+        "translated": "// This creates a basic n-gon on the X-Y plane, translates it by the diameter of the n-gon in the X direction"
+    },
+    {
+        "original": "// したラインが左上判定で、左上じゃなかった時に描画しないってやればいいのか？",
+        "translated": "// Should I make it so that if the line is top-left check and not top-left, it won't be drawn?"
+    },
+    {
+        "original": "// します。",
+        "translated": "// do."
+    },
+    {
+        "original": "// することでViewPort変換ができます。",
+        "translated": "// ViewPort transformation is possible by doing."
+    },
+    {
+        "original": "// するように計算します。",
+        "translated": "// Calculate so that."
+    },
+    {
+        "original": "// ずつ横に進む形にします。",
+        "translated": "// Make it move horizontally by each."
+    },
+    {
+        "original": "// その補間されたZ値で比較してる。",
+        "translated": "// Comparing with that interpolated Z value."
+    },
+    {
+        "original": "// それより、いろんな判定にピクセル座標(スクリーン座標)に0.5を足して、",
+        "translated": "// Rather than that, add 0.5 to the pixel coordinates (screen coordinates) for various judgments,"
+    },
+    {
+        "original": "// ただし、上と下のフタは三角ポリゴンひとつになります。",
+        "translated": "// However, the top and bottom lids will be single triangle polygons."
+    },
+    {
+        "original": "// だが、描画先のCanvasの座標系はY方向のプラス方向が",
+        "translated": "// However, the coordinate system of the drawing destination Canvas has the positive Y direction"
+    },
+    {
+        "original": "// だった場合(以下の図参照)、△ABCの法線ベクトルは",
+        "translated": "// If it was (see figure below), the normal vector of triangle ABC is"
+    },
+    {
+        "original": "// つまり、+Z方向を向いている視線に対して見える面",
+        "translated": "// In other words, the face visible to the line of sight facing the +Z direction"
+    },
+    {
+        "original": "// つまり、Z = 1 / (1/Z) として計算する。",
+        "translated": "// In other words, calculate as Z = 1 / (1/Z)."
+    },
+    {
+        "original": "// でのカメラから見えている風景になるように座標を変換する",
+        "translated": "// Transform coordinates so that it becomes the scenery seen from the camera at"
+    },
+    {
+        "original": "// で塗りつぶすとすごく遅くなるので、仕方なく",
+        "translated": "// Filling with ... makes it very slow, so unavoidably"
+    },
+    {
+        "original": "// で表します",
+        "translated": "// Represented by"
+    },
+    {
+        "original": "// と、なり、w0,w1,w2が全て正の値なので、pはひとつ目の",
+        "translated": "// Then, w0, w1, w2 are all positive values, so p is the first"
+    },
+    {
+        "original": "// という範囲に変換されます。",
+        "translated": "// It is converted to the range."
+    },
+    {
+        "original": "// という視錐台の範囲でのクリッピング空間に変換されます。",
+        "translated": "// It is converted to clipping space within the frustum range."
+    },
+    {
+        "original": "// という関係が成り立つことがわかった。",
+        "translated": "// Found that the relationship holds."
+    },
+    {
+        "original": "// とがだいたい向き合っていることを表し、結果が正の値の場合は、視線ベクトル",
+        "translated": "// Represents that they are roughly facing each other, and if the result is a positive value, the view vector"
+    },
+    {
+        "original": "// として座標を設定します",
+        "translated": "// Set coordinates as"
+    },
+    {
+        "original": "// となります。",
+        "translated": "// It becomes."
+    },
+    {
+        "original": "// となる。",
+        "translated": "// It becomes."
+    },
+    {
+        "original": "// と思ったら、頂点の描画順はA,B,Cという順になる",
+        "translated": "// I thought so, but the vertex drawing order is A, B, C"
+    },
+    {
+        "original": "// と法線ベクトルがだいたい同じ方向を向いている、つまり、見えないことを表し",
+        "translated": "// and the normal vector are facing roughly the same direction, meaning it is invisible"
+    },
+    {
+        "original": "// なってしまい、先に描かれた方の色が優先されてしまう。",
+        "translated": "// and the color drawn first takes precedence."
+    },
+    {
+        "original": "// なります。",
+        "translated": "// It becomes."
+    },
+    {
+        "original": "// なんかね、OpenGLのラスタライズの解説(海外)を見てると、",
+        "translated": "// You know, looking at OpenGL rasterization explanations (overseas),"
+    },
+    {
+        "original": "// なんちゃってアンチエイリアスです（＾＾；",
+        "translated": "// It's fake anti-aliasing (^^;"
+    },
+    {
+        "original": "// になっていることに注意してください。",
+        "translated": "// Please note that it is."
+    },
+    {
+        "original": "// になり、裏面扱いとなります。",
+        "translated": "// and it is treated as the back side."
+    },
+    {
+        "original": "// のがあって、左上だった場合、描画するのか、しないのかがよく分からない。",
+        "translated": "// There is, and if it was top-left, I'm not sure if I should draw it or not."
+    },
+    {
+        "original": "// のポリゴンで頂点を共有している場合、Z値が同じに",
+        "translated": "// If vertices are shared in polygons of, Z values become the same"
+    },
+    {
+        "original": "// の各座標値を-1.0～1.0の範囲から画面の幅・高さの",
+        "translated": "// The coordinate values of ... from the range of -1.0 to 1.0 to the screen width/height"
+    },
+    {
+        "original": "// の場合、ABベクトルとACベクトルとの外積で計算します。",
+        "translated": "// In the case of, calculate with the cross product of AB vector and AC vector."
+    },
+    {
+        "original": "// の場合、ABベクトルとAEベクトルとの外積で計算します。",
+        "translated": "// In the case of, calculate with the cross product of AB vector and AE vector."
+    },
+    {
+        "original": "// の外積から直交するX方向ベクトル(通常+X)を算出し、さらにX方向",
+        "translated": "// Calculate orthogonal X direction vector (usually +X) from the cross product of, and further X direction"
+    },
+    {
+        "original": "// の描き方をアレンジして、角度による半径の長さを四角錐の表面に沿って制限",
+        "translated": "// Arrange the drawing method of, limit the radius length by angle along the surface of the square pyramid"
+    },
+    {
+        "original": "// ます。というわけで、向き合っているマイナスの値の場合のみ描画します。",
+        "translated": "// So, draw only if it's a negative value facing each other."
+    },
+    {
+        "original": "// またEdgeFunctionで得られる値は点pが内側になって",
+        "translated": "// Also, the value obtained by EdgeFunction means point p is inside"
+    },
+    {
+        "original": "// またZバッファでの前後判定に利用するZ値についても",
+        "translated": "// Also regarding the Z value used for front/back determination in Z buffer"
+    },
+    {
+        "original": "// また外積値の正負はポリゴンの表裏判定やポリゴンの内外判定に利用できます。",
+        "translated": "// Also, the sign of the cross product value can be used for polygon front/back determination and polygon inside/outside determination."
+    },
+    {
+        "original": "// やってる。けど、これは使わなくてもいいかもしれない。",
+        "translated": "// Doing it. But maybe I don't need to use this."
+    },
+    {
+        "original": "// ように回転させて扇形トーラス図形を完成させます",
+        "translated": "// Rotate so that to complete the sector torus shape"
+    },
+    {
+        "original": "// をした結果、",
+        "translated": "// As a result of doing,"
+    },
+    {
+        "original": "// を表として定義しなおします。",
+        "translated": "// Redefine as front."
+    },
+    {
+        "original": "// を表として扱っています。",
+        "translated": "// Treating as front."
+    },
+    {
+        "original": "// を返します。",
+        "translated": "// Returns."
+    },
+    {
+        "original": "// アウトラインの作成に時間がかかるので、",
+        "translated": "// Since it takes time to create the outline,"
+    },
+    {
+        "original": "// オブジェクトを作成します。",
+        "translated": "// Create object."
+    },
+    {
+        "original": "// クォータニオンの４要素 x,y,z,wから回転行列にする",
+        "translated": "// Convert 4 elements of quaternion x,y,z,w to rotation matrix"
+    },
+    {
+        "original": "// グモウスキー・ミラの写像",
+        "translated": "// Gumowski-Mira Map"
+    },
+    {
+        "original": "// ゴールが右下の角なので、左上半分の三角形のどこかにする",
+        "translated": "// Since the goal is the bottom right corner, set it somewhere in the top left half triangle"
+    },
+    {
+        "original": "// サイトのコードを利用しています。",
+        "translated": "// Using the site's code."
+    },
+    {
+        "original": "// シャッフルメソッドはp5.jsのリファレンスを参考に、下記の",
+        "translated": "// Shuffle method refers to p5.js reference, see below"
+    },
+    {
+        "original": "// テクスチャのUV座標はOpenGLに合わせて左下原点にしています。",
+        "translated": "// Texture UV coordinates are set to bottom-left origin to match OpenGL."
+    },
+    {
+        "original": "// テクスチャのパースペクティブコレクトの方法については、",
+        "translated": "// Regarding the texture perspective correction method,"
+    },
+    {
+        "original": "// テクスチャを用意して割当を分けます。",
+        "translated": "// Prepare textures and divide allocation."
+    },
+    {
+        "original": "// トーラス図形を完成させます",
+        "translated": "// Complete the torus figure"
+    },
+    {
+        "original": "// バラ曲線",
+        "translated": "// Rose curve"
+    },
+    {
+        "original": "// パラメータは -1.2 から +1.2 まで 0.1 刻みで",
+        "translated": "// Parameters are from -1.2 to +1.2 in 0.1 increments"
+    },
+    {
+        "original": "// パースを考慮した補正(perspective correction)で、",
+        "translated": "// With correction considering perspective (perspective correction),"
+    },
+    {
+        "original": "// ビューを回転して注視点に向けるためのベクトルが含まれる。",
+        "translated": "// Includes vector to rotate view to face gaze point."
+    },
+    {
+        "original": "// ピクセルの中心の位置を出して使っているのが気になる。",
+        "translated": "// I'm concerned about calculating and using the pixel center position."
+    },
+    {
+        "original": "// ピクセルの中心座標とポリゴンの各頂点の座標",
+        "translated": "// Pixel center coordinates and coordinates of each polygon vertex"
+    },
+    {
+        "original": "// ピクセル数に変換します。",
+        "translated": "// Convert to number of pixels."
+    },
+    {
+        "original": "// ブレンドもできると思いますが、ちゃんと背景色",
+        "translated": "// I think blending is possible, but proper background color"
+    },
+    {
+        "original": "// ブレンドをしますが、ここではα値だけを操作し、",
+        "translated": "// Blending is done, but here only manipulate alpha value,"
+    },
+    {
+        "original": "// ベクトル(通常+Y)を導きます。",
+        "translated": "// Derive vector (usually +Y)."
+    },
+    {
+        "original": "// ベクトルとAからCへ伸びるベクトルが共にプラス方向",
+        "translated": "// Vector and vector extending from A to C are both positive direction"
+    },
+    {
+        "original": "// ベクトルとZ方向ベクトルとの外積により、X-Z平面に直交するY方向",
+        "translated": "// By cross product of vector and Z direction vector, Y direction orthogonal to X-Z plane"
+    },
+    {
+        "original": "// ベクトルの外積の結果はベクトルで得られ、下記の式で計算されます。",
+        "translated": "// Cross product result of vectors is obtained as a vector, calculated by the following formula."
+    },
+    {
+        "original": "// ベジェ曲線の計算は下記のサイトを参考にしました。",
+        "translated": "// Calculation of Bezier curve referred to the following site."
+    },
+    {
+        "original": "// ポリゴン△v1,v2,v3の内側に存在すると言える。",
+        "translated": "// Can be said to exist inside polygon triangle v1,v2,v3."
+    },
+    {
+        "original": "// ポリゴンの境界線上で、内向きのポリゴンと外向き",
+        "translated": "// On the polygon boundary, inward polygon and outward"
+    }
+]

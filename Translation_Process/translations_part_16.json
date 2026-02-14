@@ -1,0 +1,722 @@
+[
+    {
+        "original": "まずは、ワイヤーフレームから。",
+        "translated": "First, starting with wireframe."
+    },
+    {
+        "original": "また、CSSでの額装にも挑戦しています。",
+        "translated": "Also, I am trying framing with CSS."
+    },
+    {
+        "original": "また、WebGLでインスタンシングのやり方については、",
+        "translated": "Also, regarding how to do instancing in WebGL,"
+    },
+    {
+        "original": "また、ソースは初心者の方でも見やすいように、なるべくひとつのhtmlファイルに",
+        "translated": "Also, the source is kept in one html file as much as possible so it is easy for beginners to read"
+    },
+    {
+        "original": "また、計算回数も拡大するに従って更に増やすようにしてみました。",
+        "translated": "Also, I tried increasing the number of calculations as it expands."
+    },
+    {
+        "original": "まとめるようにしています。",
+        "translated": "I try to keep them together."
+    },
+    {
+        "original": "みたものです。",
+        "translated": "It is something I tried."
+    },
+    {
+        "original": "みました。",
+        "translated": "I tried."
+    },
+    {
+        "original": "ような形になるように計算方法を変えてみました。",
+        "translated": "I changed the calculation method so that it becomes a shape like."
+    },
+    {
+        "original": "よくわかってないけど、面白そうなのでやってみます(*´ω｀*)",
+        "translated": "I don't understand it well, but it looks interesting so I'll try it (*´ω｀*)"
+    },
+    {
+        "original": "よくわからないので、下記のサイトの説明を参考に実装しました。",
+        "translated": "I don't understand it well, so I implemented it referencing the explanation on the site below."
+    },
+    {
+        "original": "よく使う共通の処理は `vlib/` フォルダにまとめています。",
+        "translated": "Commonly used processes are collected in the `vlib/` folder."
+    },
+    {
+        "original": "よりも、拡大の限界が早めに訪れてしまいました…",
+        "translated": "than expected, the limit of magnification came earlier..."
+    },
+    {
+        "original": "わかりやすい解説をして下さった繭さんに、圧倒的感謝を！！",
+        "translated": "Overwhelming thanks to Mayu-san for the easy-to-understand explanation!!"
+    },
+    {
+        "original": "をやってみたいと思います。",
+        "translated": "I would like to do."
+    },
+    {
+        "original": "をランダムに変化させてバリエーションを持たせたユニットを再帰型",
+        "translated": "units with variations by randomly changing"
+    },
+    {
+        "original": "を意識したものでは無いため、ご利用は自己責任でお願いします。",
+        "translated": "Please use at your own risk as it is not intended to be."
+    },
+    {
+        "original": "アイディア元のritocoさん(@t_ritoco)にも感謝！",
+        "translated": "Thanks also to ritoco-san (@t_ritoco) for the idea!"
+    },
+    {
+        "original": "イメージは、山田英春さん著の「奇妙で美しい石の世界」に出てくる、",
+        "translated": "The image is from \"The World of Strange and Beautiful Stones\" by Hideharu Yamada,"
+    },
+    {
+        "original": "イージング関数は下記のサイトを参考にしています。",
+        "translated": "Easing functions reference the site below."
+    },
+    {
+        "original": "オリジナル作者のJunKiyoshiさんに圧倒的感謝を！",
+        "translated": "Overwhelming thanks to the original author JunKiyoshi-san!"
+    },
+    {
+        "original": "オリジナル作者のchaosgrooveさんに圧倒的感謝を！",
+        "translated": "Overwhelming thanks to the original author chaosgroove-san!"
+    },
+    {
+        "original": "オリジナル作者のヤスハラユウジさんと凸撃兵さんに圧倒的感謝を！",
+        "translated": "Overwhelming thanks to the original authors Yasuhara Yuji-san and Stosstruppe-san!"
+    },
+    {
+        "original": "オリジナル作者のヤスハラユウジさんに圧倒的感謝を！",
+        "translated": "Overwhelming thanks to the original author Yasuhara Yuji-san!"
+    },
+    {
+        "original": "カワイイですね。",
+        "translated": "It's cute."
+    },
+    {
+        "original": "キラキラで無限大マークです(*´ω｀*)",
+        "translated": "It's an infinity mark with sparkles (*´ω｀*)"
+    },
+    {
+        "original": "キラキラの光らせ方をはぅ君さん(@Hau_kun)のこちらの作品からヒントを得て、",
+        "translated": "Getting hints from this work by Hau-kun-san (@Hau_kun) on how to make it sparkle,"
+    },
+    {
+        "original": "キラキラの花火も綺麗ですね(*´ω｀*)",
+        "translated": "Sparkling fireworks are also beautiful (*´ω｀*)"
+    },
+    {
+        "original": "キラキラ感は増すかも？と思ったので。",
+        "translated": "Because I thought the sparkling feeling might increase?"
+    },
+    {
+        "original": "シャワーと名付けました。",
+        "translated": "I named it Shower."
+    },
+    {
+        "original": "ジュリア集合(Wikipedia)",
+        "translated": "Julia Set (Wikipedia)"
+    },
+    {
+        "original": "ジュリア集合の漸化式(ぜんかしき)は、マンデルブロ集合と同じですが、",
+        "translated": "The recurrence formula for the Julia set is the same as the Mandelbrot set, but"
+    },
+    {
+        "original": "ジュリア集合はマンデルブロ集合と似てるようですが、以下のサイトに",
+        "translated": "Julia sets seem similar to Mandelbrot sets, but on the following site"
+    },
+    {
+        "original": "スクロールして無限に表示し続けるように改造したものです。",
+        "translated": "Modified to scroll and display infinitely."
+    },
+    {
+        "original": "タイトルの奇跡は、境地にたどり着いた奇跡とラインの軌跡を掛けています。",
+        "translated": "The miracle in the title is a pun on the miracle of reaching a state of mind and the trajectory (kiseki) of the line."
+    },
+    {
+        "original": "ダブルミーニングなんて、なんとも厨二病くさいｗ",
+        "translated": "Double meaning is somewhat chuunibyou-like lol"
+    },
+    {
+        "original": "テクスチャは下記のサイトからDLさせて頂きました。感謝！",
+        "translated": "Textures were downloaded from the site below. Thanks!"
+    },
+    {
+        "original": "テクスチャマッピングに挑戦してみました。",
+        "translated": "I tried texture mapping."
+    },
+    {
+        "original": "トーラストンネルはJunKiyoshiさん(@junkiyoshi)の作品を元ネタに",
+        "translated": "Torus Tunnel is based on JunKiyoshi-san's (@junkiyoshi) work"
+    },
+    {
+        "original": "ネオンにするのは、ギンさん(@gin_graphic)のこちらの作品を見て、ブロックも",
+        "translated": "Making it neon was inspired by seeing this work by Gin-san (@gin_graphic), and blocks too"
+    },
+    {
+        "original": "ノイズでの波形をたくさん重ねることでシースルー感を出しました。",
+        "translated": "Created a see-through feeling by overlapping many waveforms from noise."
+    },
+    {
+        "original": "バラ曲線(Wikipedia)",
+        "translated": "Rose Curve (Wikipedia)"
+    },
+    {
+        "original": "パパの練習1(円弧の華)",
+        "translated": "Papa's Practice 1 (Flower of Arcs)"
+    },
+    {
+        "original": "ヒントにさせて頂きました。ありがとうございます！",
+        "translated": "I used it as a hint. Thank you!"
+    },
+    {
+        "original": "プライベートホームページ上で公開していた  **ジェネラティブアート作品**を",
+        "translated": "**Generative Art Works** that were published on a private homepage"
+    },
+    {
+        "original": "ベースにしたのは、グモウスキー・ミラの写像です。",
+        "translated": "Based on the Gumowski-Mira map."
+    },
+    {
+        "original": "ベースにしたのは、バラ曲線です。",
+        "translated": "Based on the Rose Curve."
+    },
+    {
+        "original": "ベースはJunKiyoshiさん(@junkiyoshi)の以下の作品をヒントに作りました。",
+        "translated": "The base was made with hints from the following work by JunKiyoshi-san (@junkiyoshi)."
+    },
+    {
+        "original": "ペンローズの三角形(Wikipedia)",
+        "translated": "Penrose Triangle (Wikipedia)"
+    },
+    {
+        "original": "ポイントの表現を変えるだけで、なんか可愛くなるのが面白いですね(*´ω｀*)",
+        "translated": "It's interesting that just changing the point expression makes it kinda cute (*´ω｀*)"
+    },
+    {
+        "original": "ポイントの表現を変えるだけで、印象が変わるのが面白いですね(*´ω｀*)",
+        "translated": "It's interesting that just changing the point expression changes the impression (*´ω｀*)"
+    },
+    {
+        "original": "ポイントキラキラアートだったGumo2を□型に変えただけのものです。",
+        "translated": "It is just Gumo2, which was point sparkle art, changed to square shape."
+    },
+    {
+        "original": "ポイントキラキラアートだったGumo2を△型に変えただけのものです。",
+        "translated": "It is just Gumo2, which was point sparkle art, changed to triangle shape."
+    },
+    {
+        "original": "ポイントキラキラアートだったGumo2を☓型に変えただけのものです。",
+        "translated": "It is just Gumo2, which was point sparkle art, changed to X shape."
+    },
+    {
+        "original": "マット・ピアソンさんに圧倒的感謝を！",
+        "translated": "Overwhelming thanks to Matt Pearson-san!"
+    },
+    {
+        "original": "マンデルブロ集合(Wikipedia)",
+        "translated": "Mandelbrot Set (Wikipedia)"
+    },
+    {
+        "original": "マンデルブロ集合、難しいですね(*´ω｀*)",
+        "translated": "Mandelbrot set is difficult, isn't it (*´ω｀*)"
+    },
+    {
+        "original": "マンデルブロ集合とは、ある計算を繰り返した時に、発散しない",
+        "translated": "The Mandelbrot set is defined as the set of points that do not diverge when a certain calculation is repeated"
+    },
+    {
+        "original": "マンデルブロ集合の場合、X0とY0は0から始まり、aとbを変化させて",
+        "translated": "In the case of the Mandelbrot set, X0 and Y0 start from 0, and a and b cover"
+    },
+    {
+        "original": "マンデルブロ集合の色は、ある回数内の計算内で発散してしまうと判断",
+        "translated": "The color of the Mandelbrot set is determined by judging if it diverges within a certain number of calculations"
+    },
+    {
+        "original": "マンデルブロ集合は、Wikipediaによると、以下の漸化式(ぜんかしき)によって",
+        "translated": "According to Wikipedia, the Mandelbrot set is defined by the following recurrence formula"
+    },
+    {
+        "original": "モードも用意して、バリエーションを増やしました。",
+        "translated": "I also prepared a mode and increased variations."
+    },
+    {
+        "original": "レオナさんに圧倒的感謝を！",
+        "translated": "Overwhelming thanks to Reona-san!"
+    },
+    {
+        "original": "中にチカチカ光ってしまう挙動をなんとかしました！(かなり低減はできました)",
+        "translated": "I managed to fix the behavior of flickering inside! (Was able to reduce it significantly)"
+    },
+    {
+        "original": "中の「砂遊びシミュレーション」を参考にさせて頂きました。",
+        "translated": "I referenced \"Sand Play Simulation\" inside."
+    },
+    {
+        "original": "中の図形は、グラデーション円弧を組み合わせたものです。",
+        "translated": "The shape inside is a combination of gradient arcs."
+    },
+    {
+        "original": "主にtakawo shunsuke先生(@takawo)の作品を参考にしています(*´ω｀*)",
+        "translated": "Mainly referencing references works by takawo shunsuke-sensei (@takawo) (*´ω｀*)"
+    },
+    {
+        "original": "予めご了承下さい。",
+        "translated": "Please understand in advance."
+    },
+    {
+        "original": "今回の重ね合わせ編は、ねじおさん(@shirasu_nejio)さんのこちらの作品をヒント",
+        "translated": "This layering edition was hinted by this work of Nejio-san (@shirasu_nejio)"
+    },
+    {
+        "original": "今回は PCD Japan2021 2/18のお題「宇宙」で作りました(*´ω｀*)",
+        "translated": "This time I made it for PCD Japan 2021 2/18 theme \"Universe\" (*´ω｀*)"
+    },
+    {
+        "original": "今回は、JunKiyoshi(@junkiyoshi)さんの「ぐるぐる正方形」という作品を",
+        "translated": "This time, referencing JunKiyoshi(@junkiyoshi)-san's work \"Spinning Square\""
+    },
+    {
+        "original": "今回は、JunKiyoshi(@junkiyoshi)さんの「ねじれる輪」という作品を",
+        "translated": "This time, referencing JunKiyoshi(@junkiyoshi)-san's work \"Twisting Ring\""
+    },
+    {
+        "original": "今回は、JunKiyoshi(@junkiyoshi)さんの作品を元ネタにしてみました。",
+        "translated": "This time, I used JunKiyoshi(@junkiyoshi)-san's work as a base."
+    },
+    {
+        "original": "今回は、Koji Saitoさん(@KojiSaito)の note記事",
+        "translated": "This time, Koji Saito-san's (@KojiSaito) note article"
+    },
+    {
+        "original": "今回は、PCD2021 Sayamaさんのワークショップを参考に、パラメータ",
+        "translated": "This time, referencing Sayama-san's PCD2021 workshop, parameters"
+    },
+    {
+        "original": "今回は、Processing Community Japan (@PCD_Tokyo)で2022/2/1から開催された、",
+        "translated": "This time, held from 2022/2/1 at Processing Community Japan (@PCD_Tokyo),"
+    },
+    {
+        "original": "今回は、Yusuke Nakayaさん(@s14garnet)が紹介されていた、こちらの",
+        "translated": "This time, this introduced by Yusuke Nakaya-san (@s14garnet)"
+    },
+    {
+        "original": "今回は、ayatoさん(@dn0t_)に教えていただいた、",
+        "translated": "This time, taught by ayato-san (@dn0t_),"
+    },
+    {
+        "original": "今回は、ayatoさん(@dn0t_)の作品を真似っ子させて頂きました！",
+        "translated": "This time, I imitated ayato-san's (@dn0t_) work!"
+    },
+    {
+        "original": "今回は、chaosgroove(@chaosgroove)さんの作品を元ネタにしてみました。",
+        "translated": "This time, I used chaosgroove(@chaosgroove)-san's work as a base."
+    },
+    {
+        "original": "今回は、☓の直線の長さをノイズで変化させてみたバージョンです。",
+        "translated": "This time, a version where the length of the X line is changed by noise."
+    },
+    {
+        "original": "今回は、☓の直線の長さを一定にしたバージョンです。こちらはなんか",
+        "translated": "This time, a version where the length of the X line is constant. This one is somehow"
+    },
+    {
+        "original": "今回は、おかずさん(@okazz_)の呼びかけで花火大会をキラキラで表現しています。",
+        "translated": "This time, expressing a fireworks festival with sparkles at the call of Okazu-san (@okazz_)."
+    },
+    {
+        "original": "今回は、こちらのサイトのサンプルを参考にしました。",
+        "translated": "This time, I referenced the sample on this site."
+    },
+    {
+        "original": "今回は、せっかくテクスチャ貼れるようになったので、憧れだった球体への",
+        "translated": "This time, since I can apply textures now, onto the sphere I've always admired"
+    },
+    {
+        "original": "今回は、イージング関数のeaseOutBounceの動きが、落下物を表現するのに",
+        "translated": "This time, the movement of easing function easeOutBounce is for expressing falling objects"
+    },
+    {
+        "original": "今回は、キラキラした花の様な模様にしてみました。",
+        "translated": "This time, I made it into a pattern like a sparkling flower."
+    },
+    {
+        "original": "今回は、ギンさん(@gin_graphic)のブログ記事",
+        "translated": "This time, Gin-san's (@gin_graphic) blog article"
+    },
+    {
+        "original": "今回は、テクスチャを貼った簡単な車を走らせてみるのに挑戦しました。",
+        "translated": "This time, I challenged running a simple car with texture applied."
+    },
+    {
+        "original": "今回は、ベジェ曲線の計算を用いて、ワームホールみたいな図形を",
+        "translated": "This time, using Bezier curve calculations, a shape like a wormhole"
+    },
+    {
+        "original": "今回は、ベジェ曲線を回転させて、色々な形の壺を作ってみました。",
+        "translated": "This time, I tried making pots of various shapes by rotating Bezier curves."
+    },
+    {
+        "original": "今回は、マット・ピアソン 著 [普及版]ジェネラティブ・アート",
+        "translated": "This time, [Popular Edition] Generative Art by Matt Pearson"
+    },
+    {
+        "original": "今回は、ヤスハラユウジ(@dsedb)さんの作品を元ネタにしてみました。",
+        "translated": "This time, I used Yasuhara Yuji(@dsedb)-san's work as a base."
+    },
+    {
+        "original": "今回は、ヤスハラユウジ(@dsedb)さんの作品を大元にして、",
+        "translated": "This time, based on Yasuhara Yuji(@dsedb)-san's work,"
+    },
+    {
+        "original": "今回は、レオナさん(@reona396)の無限大の数式を真似っこさせて頂いて、",
+        "translated": "This time, imitating Reona-san's (@reona396) infinity formula,"
+    },
+    {
+        "original": "今回は、不可能図形の代表みたいな「ペンローズの三角形」を再現してみたい",
+        "translated": "This time, I want to reproduce \"Penrose Triangle\" which is like a representative of impossible figures"
+    },
+    {
+        "original": "今回は、円を移動させて描く球体をさらに回転させて合成しています。",
+        "translated": "This time, I am compositing by further rotating the sphere drawn by moving circles."
+    },
+    {
+        "original": "今回は、再帰型のレイアウトでたくさん並べてみました。",
+        "translated": "This time, I arranged many in a recursive layout."
+    },
+    {
+        "original": "今回は、回転して渦を巻いた銀河みたいなキラキラにしてみました。",
+        "translated": "This time, I made it into a sparkle like a galaxy rotating and swirling."
+    },
+    {
+        "original": "今回は、時折TwitterのTLで見かける脳がバグる図形を再現してみたいと思います。",
+        "translated": "This time, I want to reproduce the brain-bugging shapes occasionally seen on Twitter TL."
+    },
+    {
+        "original": "今回は、歩いてる感じのバリエーションです。",
+        "translated": "This time, a variation of walking feeling."
+    },
+    {
+        "original": "今回は、点で描く水晶をさらに回転させて合成しています。",
+        "translated": "This time, I am compositing by further rotating the crystal drawn with points."
+    },
+    {
+        "original": "今回は、瑞慶山香佳　著「数学デッサン教室 ―描いて楽しむ数学のかたち」",
+        "translated": "This time, Yoshika Zukeyama's \"Mathematical Drawing Classroom - Mathematical Shapes to Draw and Enjoy\""
+    },
+    {
+        "original": "今回は、立方体がテーマです。立方体の色々な組み合わせを楽しみます！",
+        "translated": "This time, the theme is cubes. Enjoy various combinations of cubes!"
+    },
+    {
+        "original": "今回は、螺旋状に配置してさらにノイズで起伏を作ったキラキラにして",
+        "translated": "This time, arranged spirally and made into sparkles with undulations created by noise"
+    },
+    {
+        "original": "今回もバリエーションになりますが、ブルームブロックを動かしてみました。",
+        "translated": "This time is also a variation, but I tried moving the bloom block."
+    },
+    {
+        "original": "今回もバリエーションになりますが、長方形ブロックだけにして、さらに",
+        "translated": "This time is also a variation, but only rectangular blocks, and further"
+    },
+    {
+        "original": "今回簡易版ではありますが、自作のアウトライン化関数を作ってやってみました。",
+        "translated": "Although it is a simple version this time, I made my own outlining function and tried it."
+    },
+    {
+        "original": "仕組みについては、「ペンローズの三角形」で動画を検索すると色々出てきます",
+        "translated": "Regarding the mechanism, if you search for videos with \"Penrose Triangle\", various things come up"
+    },
+    {
+        "original": "付けることで綺麗に見せるパターンを練習します。",
+        "translated": "I practice patterns that look beautiful by attaching."
+    },
+    {
+        "original": "作品にヒントを得てレンチキュラーレンズ的なものを作ってみました。",
+        "translated": "Getting hints from the work, I tried making something like a lenticular lens."
+    },
+    {
+        "original": "作品を作るっていうやつみたいです。",
+        "translated": "It seems to be the thing where you make a work."
+    },
+    {
+        "original": "便利そうだなと思って、サンプルとして小さい迷路を自動生成してみること",
+        "translated": "I thought it looked convenient, so I tried automatically generating a small maze as a sample"
+    },
+    {
+        "original": "個性ということでお願いしますｗ",
+        "translated": "Please accept it as individuality lol"
+    },
+    {
+        "original": "元ネタにしてみました。",
+        "translated": "Used as base material."
+    },
+    {
+        "original": "光らせたいなと思いました。ありがとうございます！",
+        "translated": "I wanted to make it shine. Thank you!"
+    },
+    {
+        "original": "具体的な数式は、tomoqさん(@TOMOQ8192)のツイートを参考にしています。",
+        "translated": "Specific formulas reference tomoq-san's (@TOMOQ8192) tweet."
+    },
+    {
+        "original": "写真素材は以下のサイトからお借りしました。",
+        "translated": "Photo materials were borrowed from the following site."
+    },
+    {
+        "original": "処理を軽くすることでcanvas版Bloomでもスマホで60FPSが出るようになりました。",
+        "translated": "By lightening the processing, canvas version Bloom now achieves 60FPS on smartphones."
+    },
+    {
+        "original": "凸撃兵(@Stosstruppe)さんがJavaScriptで移植を始められたのに刺激を受けて",
+        "translated": "Inspired by Stosstruppe-san (@Stosstruppe) starting to port in JavaScript"
+    },
+    {
+        "original": "凸撃兵(@Stosstruppe)さんの作品",
+        "translated": "Stosstruppe-san's (@Stosstruppe) work"
+    },
+    {
+        "original": "凸撃兵(@Stosstruppe)さんの発展作品を真似っ子させて頂きました。",
+        "translated": "I imitated Stosstruppe-san's (@Stosstruppe) developed work."
+    },
+    {
+        "original": "凸撃兵さん(@Stosstruppe)のドミノコースター を参考にさせて頂きました。",
+        "translated": "I referenced Stosstruppe-san's (@Stosstruppe) Domino Coaster."
+    },
+    {
+        "original": "凸撃兵さんのAA TRAIN  http://www.maroon.dti.ne.jp/lance/js/trial/aatrain5.html",
+        "translated": "Stosstruppe-san's AA TRAIN http://www.maroon.dti.ne.jp/lance/js/trial/aatrain5.html"
+    },
+    {
+        "original": "利用する\t目的で移植したものなので、汎用的なライブラリ",
+        "translated": "Ported for the purpose of using, so general-purpose library"
+    },
+    {
+        "original": "利用する目的で移植したものなので、汎用的なライブラリを意識",
+        "translated": "Ported for the purpose of using, so intended as general-purpose library"
+    },
+    {
+        "original": "半透明も使ったグラデーションを色々試してみました。",
+        "translated": "I tried various gradients using semi-transparency."
+    },
+    {
+        "original": "原理としては、こちらの安川ダンボール工業所さんの",
+        "translated": "As a principle, this Yasukawa Cardboard Industry's"
+    },
+    {
+        "original": "参考にさせたもらったのは、こちらのフローフィールドの解説記事です。",
+        "translated": "What I referenced is this flow field explanation article."
+    },
+    {
+        "original": "参考にしたBLACKWORKという書籍はこちら。",
+        "translated": "The book BLACKWORK I referenced is here."
+    },
+    {
+        "original": "参考にしてみました。",
+        "translated": "I referenced it."
+    },
+    {
+        "original": "同じで、配色方法も同じ様に考えられます。",
+        "translated": "Same, and the color scheme method can be thought of in the same way."
+    },
+    {
+        "original": "図形を極座標変換をして、円周上に並べてみることに挑戦します。",
+        "translated": "I challenge converting shapes to polar coordinates and arranging them on the circumference."
+    },
+    {
+        "original": "変更してみました。",
+        "translated": "I changed it."
+    },
+    {
+        "original": "定義されるとありますが…",
+        "translated": "It is written that it is defined..."
+    },
+    {
+        "original": "実装方法に関しては、下記のサイトの説明を参考に実装しました。",
+        "translated": "Regarding implementation method, I implemented referencing the explanation on the site below."
+    },
+    {
+        "original": "工夫しています。",
+        "translated": "Devising."
+    },
+    {
+        "original": "平方根の計算を省いて、(a*a+b*b) > 4 で判定します。",
+        "translated": "Omitting square root calculation, judge by (a*a+b*b) > 4."
+    },
+    {
+        "original": "式を用いて自分なりのストレンジアトラクターを表示してみたいと思います。",
+        "translated": "I would like to display my own Strange Attractor using the formula."
+    },
+    {
+        "original": "微調整を加えています。",
+        "translated": "Adding fine adjustments."
+    },
+    {
+        "original": "描いてみました。",
+        "translated": "I drew it."
+    },
+    {
+        "original": "整理・再公開していくための場所です。",
+        "translated": "A place for organizing and republishing."
+    },
+    {
+        "original": "文字の示す内容とグラフィックが近づくように工夫してください。」",
+        "translated": "Please devise so that the content indicated by the text and the graphic get closer.\""
+    },
+    {
+        "original": "時間を見つけて、今後新しい作品も追加予定です。",
+        "translated": "Finding time, I plan to add new works in the future."
+    },
+    {
+        "original": "模様としては同期させた方が綺麗だと思います。",
+        "translated": "As a pattern, I think it looks more beautiful if synchronized."
+    },
+    {
+        "original": "比較が掲載されていました。",
+        "translated": "A comparison was posted."
+    },
+    {
+        "original": "漸化式",
+        "translated": "Recurrence formula"
+    },
+    {
+        "original": "点の集合ということみたいです。",
+        "translated": "It seems to mean a set of points."
+    },
+    {
+        "original": "点をキラキラさせるのは、masataka hakozakiさん(@m_hakozaki)のこちらの作品を",
+        "translated": "Making points sparkle references this work by masataka hakozaki-san (@m_hakozaki)"
+    },
+    {
+        "original": "発散してるかどうかは、↑の解説サイトを参考にすると、",
+        "translated": "Whether it is diverging or not, referencing the explanation site above,"
+    },
+    {
+        "original": "発散しない場合、計算回数はMax値になります。",
+        "translated": "If it does not diverge, the calculation count becomes the Max value."
+    },
+    {
+        "original": "発散するかどうかの判断式(x^2+y^2) > 4)はマンデルブロ集合と",
+        "translated": "The judgment formula for divergence (x^2+y^2) > 4) is the same as the Mandelbrot set"
+    },
+    {
+        "original": "目的で移植したものなので、汎用的なライブラリを意識したもの",
+        "translated": "Ported for the purpose, so intended as general-purpose library"
+    },
+    {
+        "original": "簡易ブルームをかけることで、ネオンっぽい雰囲気にしてみました(*´ω｀*)",
+        "translated": "By applying simple bloom, I tried to make it look like neon (*´ω｀*)"
+    },
+    {
+        "original": "練習1では分割パターンを斜めにしてみました。",
+        "translated": "In Practice 1, I tried making the division pattern diagonal."
+    },
+    {
+        "original": "練習2ではmikuさん(@BaroqueEngine)のクリエイティブコーディングの教科書の",
+        "translated": "In Practice 2, miku-san's (@BaroqueEngine) Creative Coding Textbook's"
+    },
+    {
+        "original": "縞模様の瑪瑙の断面です。",
+        "translated": "It is a cross section of striped agate."
+    },
+    {
+        "original": "繭さんのnote「Processingでスリットアニメーションを作ってみたよ」",
+        "translated": "Mayu-san's note \"I tried making slit animation in Processing\""
+    },
+    {
+        "original": "自分でもやってみたいと思い、アルゴリズムを考えました。",
+        "translated": "I wanted to try it myself, so I thought about the algorithm."
+    },
+    {
+        "original": "表示しようという試みです。",
+        "translated": "It is an attempt to display."
+    },
+    {
+        "original": "複数パスのシェーダを実行するので、環境によってはドライバ対応の",
+        "translated": "Since it executes multi-pass shaders, depending on the environment, driver support"
+    },
+    {
+        "original": "複素数z = a+bi として、√(a*a+b*b) > 2 という条件のようですが、",
+        "translated": "It seems the condition is √(a*a+b*b) > 2, where complex number z = a+bi,"
+    },
+    {
+        "original": "解像度が高いとDataURIにした時にテキストサイズがすごく大きくなってしまう",
+        "translated": "If resolution is high, text size becomes very large when converted to DataURI"
+    },
+    {
+        "original": "記事にしてくださったKoji Saitoさんに圧倒的感謝を！(*´ω｀*)",
+        "translated": "Overwhelming thanks to Koji Saito-san for writing the article! (*´ω｀*)"
+    },
+    {
+        "original": "記事にしてくださったギンさんに圧倒的感謝を！(*´ω｀*)",
+        "translated": "Overwhelming thanks to Gin-san for writing the article! (*´ω｀*)"
+    },
+    {
+        "original": "質感がゼリービーンズみたいで好きです(*´ω｀*)",
+        "translated": "I like the texture, it's like jelly beans (*´ω｀*)"
+    },
+    {
+        "original": "車のテクスチャ以外のテクスチャは下記のサイトのものを利用しました。",
+        "translated": "For textures other than the car texture, I used those from the site below."
+    },
+    {
+        "original": "軽めのものに置き換えています。キラキラ控えめ。",
+        "translated": "Replaced with lighter ones. Sparkles are modest."
+    },
+    {
+        "original": "迷路の自動探索は、neko800さん(@nekohachi1)作品でされているのを見て、",
+        "translated": "I saw automatic maze solving being done in neko800-san's (@nekohachi1) work,"
+    },
+    {
+        "original": "迷路の自動生成については、クジラ飛行机さんの",
+        "translated": "Regarding automatic maze generation, Kujirahikouzukue-san's"
+    },
+    {
+        "original": "逆に発散しない値は、値が動かなかったり、+側と-側で行ったり来たり",
+        "translated": "Conversely, values that do not diverge do not move, or go back and forth between + and - sides"
+    },
+    {
+        "original": "部分を表したものということです。",
+        "translated": "It means it represents the part."
+    },
+    {
+        "original": "配色を工夫したり、拡大するに従って発散までの計算回数を増やし",
+        "translated": "Devised color schemes, and increased calculation count until divergence as it expands"
+    },
+    {
+        "original": "重ねることにより簡易ブルームとブラーを両方適用することに挑戦して",
+        "translated": "Challenging to apply both simple bloom and blur by layering"
+    },
+    {
+        "original": "関係で正常に動作しない可能性があります。",
+        "translated": "There is a possibility it may not work correctly due to relations."
+    },
+    {
+        "original": "額装の雰囲気は、中山 哲法さん(@tetunori_lego)の",
+        "translated": "The atmosphere of framing is from Tetsunori Nakayama-san (@tetunori_lego)"
+    },
+    {
+        "original": "（v1.5は多少余韻をもたせたバージョンです）",
+        "translated": "(v1.5 is a version with some lingering effect)"
+    },
+    {
+        "original": "（プライベートHPはプロバイダのHPサービス終了により公開停止されました）",
+        "translated": "(Private HP was closed due to termination of provider's HP service)"
+    },
+    {
+        "original": "（試行錯誤しながら少しずつ整理中です）",
+        "translated": "(Organizing little by little while experimenting)"
+    },
+    {
+        "original": "",
+        "translated": ""
+    }
+]

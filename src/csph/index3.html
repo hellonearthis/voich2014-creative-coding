@@ -1,32 +1,32 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-<title>パパの間違った球体R2(WebGL)</title>
+<title>Papa's Wrong Sphere R2 (WebGL)</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=320, user-scalable=no, initial-scale=1.0">
 <meta http-equiv="Cache-Control" content="no-cache">
 <!--
 
-	このデモは、JavaScriptでWebGLを使って、3Dのジェネラティブアート
-	に挑戦しています。
+	This demo uses JavaScript and WebGL to create 3D generative art
+	Challenging.
 	
-	今回は、マット・ピアソン 著 [普及版]ジェネラティブ・アート
-	Processingによる実践ガイドの「5.3.3 球を描く間違った方法」を
-	参考にしてみました。 
+	This time, [Popular Edition] Generative Art by Matt Pearson
+	Based on '5.3.3 The Wrong Way to Draw a Sphere' from the Processing Practical Guide
+	I referenced it. 
 
-	マット・ピアソンさんに圧倒的感謝を！
+	Overwhelming thanks to Matt Pearson-san!
 	
-	また、WebGLでインスタンシングのやり方については、
-	凸撃兵さん(@Stosstruppe)のドミノコースター を参考にさせて頂きました。
-	ありがとうございます！
+	Also, regarding how to do instancing in WebGL,
+	I referenced Stosstruppe-san's (@Stosstruppe) Domino Coaster.
+	Thank you!
 	https://twitter.com/Stosstruppe/status/1282870436561326080?s=20
 
-	このWebGL版R2では、Bloom処理を万華鏡キラキラで使ったcanvas版の処理の
-	軽めのものに置き換えています。キラキラ控えめ。
-	処理を軽くすることでcanvas版Bloomでもスマホで60FPSが出るようになりました。
-	でもオブジェクト数は360個から500個にパワーアップしています(*´ω｀*)
+	In this WebGL version R2, the Bloom processing uses the canvas version processing used in Kaleidoscope Sparkle
+	Replaced with lighter ones. Sparkles are modest.
+	By lightening the processing, canvas version Bloom now achieves 60FPS on smartphones.
+	But the number of objects has powered up from 360 to 500 (*´ω｀*)
 	
-	Copyright (c) 2020 ぼいち(@voich2014 in Twitter)
+	Copyright (c) 2020 Voich (@voich2014 in Twitter)
 	
 	Released under the MIT license.
  	see https://opensource.org/licenses/MIT
@@ -37,27 +37,27 @@
 <script type="text/javascript" src="./../vlib/vl_common_v1.5.0.js"></script>
 <script type="text/javascript" src="./../vlib/vl_3d_v1.1.0.js"></script>
 
-<!-- WebGLのシェーダ定義 -->
+<!-- WebGL Shader Definition -->
 <script id="vshader-main" type="x-shader/x-vertex">#version 300 es
-	//メインシーン頂点シェーダ
-	in vec3 vtx_pos;			//頂点の座標
-    in vec3 vtx_normal;			//頂点毎の法線
+	// Main Scene Vertex Shader
+	in vec3 vtx_pos;			// Vertex coordinates
+    in vec3 vtx_normal;			// Normal per vertex
     
-    in mat4 obj_model;			//インスタンス毎のモデル変換行列
-    in vec3 obj_color;			//インスタンス毎の色
+    in mat4 obj_model;			// Model transformation matrix per instance
+    in vec3 obj_color;			// Color per instance
     
-    out vec3 v_color;			//出力色
+    out vec3 v_color;			// Output color
     
-    uniform   mat4 view;		//ビュー変換行列
-	uniform   mat4 proj;		//射影変換行列
-	uniform   vec3 light_dir;	//光源の方向(正規化済み)
+    uniform   mat4 view;		// View transformation matrix
+	uniform   mat4 proj;		// Projection transformation matrix
+	uniform   vec3 light_dir;	// Light source direction (normalized)
 	
 	void main(void)
 	{
-		//頂点座標を変換して次につなげる
+		// Transform vertex coordinates and connect to next
 		gl_Position = proj * view * obj_model * vec4(vtx_pos,1.0);
 	    
-	    //光源と頂点の法線から頂点色を計算する
+	    // Calculate vertex color from light source and vertex normal
 	    vec3  normal  = normalize(mat3(obj_model) * vtx_normal);
 	    float diffuse = clamp(dot(normal,light_dir),0.1,1.0);
 	    v_color = clamp(obj_color * diffuse,0.0,1.0);
@@ -65,11 +65,11 @@
 </script>
 
 <script id="fshader-main" type="x-shader/x-fragment">#version 300 es
-    //メインシーンフラグメントシェーダ
+    // Main Scene Fragment Shader
     precision mediump float;
     
-    in  vec3 v_color;			//頂点シェーダからの出力色
-    out vec4 f_color;			//フラグメントシェーダとしての出力色
+    in  vec3 v_color;			// Output color from vertex shader
+    out vec4 f_color;			// Output color as fragment shader
     
     void main(void)
     {
@@ -79,7 +79,7 @@
 
 <script type="text/javascript">
 
-//グローバルオブジェクト
+// Global Object
 let g_game_width    = 320;
 let g_game_height   = 500;
 
@@ -87,16 +87,16 @@ let g_webgl_screen  = null;
 let g_gl            = null;
 let g_prog_main     = null;
 let g_vbo_main      = {};
-let g_modelbuff     = null;		//インスタンス毎のモデル変換行列バッファ
-let g_colorbuff     = null;		//インスタンス毎の色バッファ
-let g_bloom_offscs  = [];	//ブルーム処理用オフスクリーンcanvas
+let g_modelbuff     = null;		// Model transformation matrix buffer per instance
+let g_colorbuff     = null;		// Color buffer per instance
+let g_bloom_offscs  = [];	// Off-screen canvas for Bloom processing
 
-let g_time          = 0;		//現在時刻[ms]
-let g_dtime         = 0;		//前回の描画からの経過時間[ms]
+let g_time          = 0;		// Current time [ms]
+let g_dtime         = 0;		// Elapsed time since last drawing [ms]
 
 let g_pn = new Perlin();
 
-//Processing互換定数
+// Processing compatible constants
 const TAU = 2.0 * Math.PI;
 
 const CUBE_NUM       = 500;
@@ -140,24 +140,24 @@ let g_cnt            = 0;
 function init()
 {
 	
-	//初期化処理
+	// Initialization processing
 	
-	//準備
+	// Preparation
 	setup();
 	
-	//クリックorタップでFPSの表示ON/OFF
+	// Toggle FPS display ON/OFF with click or tap
 	toggle_fps_visible();
 	window.onmousedown = toggle_fps_visible;
 	window.ontouchdown = toggle_fps_visible;
 	
-	//requestAnimationFrameの準備(各種ブラウザ対応)
+	// Preparation of requestAnimationFrame (compatible with various browsers)
 	let requestAnimationFrame = window.requestAnimationFrame       ||
                                 window.mozRequestAnimationFrame    ||
                                 window.webkitRequestAnimationFrame ||
                                 window.msRequestAnimationFrame;
     window.requestAnimationFrame = requestAnimationFrame;
     
-	//描画を登録
+	// Register drawing
 	window.requestAnimationFrame(render);
 	
 }
@@ -165,21 +165,21 @@ function init()
 function adjust_screen()
 {
 
-	//画面調整
+	// Screen Adjustment
 	
-	//ウインドウのサイズを取得
+	// Get window size
 	let window_w = window.innerWidth;
 	let window_h = window.innerHeight;
 	
-	//ウインドウ幅が十分に広い場合はPCだとして
-	//画面サイズを変更する
+	// Assuming it's a PC if window width is wide enough
+	// Change screen size
 	if((g_game_width * 2) <= window_w)
 	{
 		g_game_width  = 1280;
 		g_game_height = 720;
 	}
 	
-	//ゲームスクリーンを中央に配置
+	// Place game screen in center
 	let screen  = document.getElementById("game-screen");
 	let game_x  = (window_w - g_game_width)  / 2;
 	let game_y  = (window_h - g_game_height) / 2;
@@ -189,7 +189,7 @@ function adjust_screen()
 	screen.width      = g_game_width;
 	screen.height     = g_game_height;
 
-	//WebGL用のCanvasもスクリーンと同じサイズで用意
+	// Prepare Canvas for WebGL with same size as screen
 	g_webgl_screen        = document.createElement("canvas");
 	g_webgl_screen.width  = g_game_width;
 	g_webgl_screen.height = g_game_height;
@@ -198,20 +198,20 @@ function adjust_screen()
 
 function create_shader(id,type)
 {
-	//シェーダ生成
+	// Shader Generation
 	let shader_src = document.getElementById(id);
 	let shader     = g_gl.createShader(type);
 	
-	//生成したシェーダにソースを割り当てる
+	// Assign source to generated shader
 	g_gl.shaderSource(shader,shader_src.text);
 	
-	//シェーダをコンパイルする
+	// Compile shader
 	g_gl.compileShader(shader);
 	
-	//コンパイルできたかをチェック
+	// Check if compiled successfully
 	if(!g_gl.getShaderParameter(shader,g_gl.COMPILE_STATUS))
 	{
-		//NGなのでログを表示
+		// Display log because it is NG
 		alert(g_gl.getShaderInfoLog(shader));
 	}
 	
@@ -220,38 +220,38 @@ function create_shader(id,type)
 
 function setup_shader()
 {
-	//シェーダ類の準備
+	// Preparation of shaders
 	
-	//深度テストとカリングを有効化
-	//クリア色設定
+	// Enable depth test and culling
+	// Set clear color
 	g_gl.enable(g_gl.DEPTH_TEST);
     g_gl.depthFunc(g_gl.LEQUAL);
     g_gl.enable(g_gl.CULL_FACE);
 	g_gl.clearColor(0,0,0,1);
 	
-	//頂点シェーダとフラグメントシェーダの生成(コンパイルまでしておく)
+	// Generation of Vertex Shader and Fragment Shader (compile as well)
 	let vs_main = create_shader('vshader-main',g_gl.VERTEX_SHADER);
 	let fs_main = create_shader('fshader-main',g_gl.FRAGMENT_SHADER);
 	
-	//プログラムオブジェクトの生成
+	// Generate program object
 	g_prog_main = g_gl.createProgram();
 	
-	//プログラムオブジェクトにシェーダを割り当てる
+	// Assign shader to program object
 	g_gl.attachShader(g_prog_main,vs_main);
 	g_gl.attachShader(g_prog_main,fs_main);
 
-	//シェーダをリンク
+	// Link shader
 	g_gl.linkProgram(g_prog_main);
 		
-	//リンクできたかをチェック
+	// Check if linked successfully
 	if(g_gl.getProgramParameter(g_prog_main,g_gl.LINK_STATUS))
 	{
-		//プログラムオブジェクトの利用開始
+		// Start using program object
 		g_gl.useProgram(g_prog_main);
 	}
 	else
     {
-		//NGなのでログを表示
+		// Display log because it is NG
 		alert(g_gl.getProgramInfoLog(g_prog_main));
     }
 
@@ -259,14 +259,14 @@ function setup_shader()
 
 function setup_view_projection()
 {
-	//カメラと射影行列の準備
+	// Preparation of Camera and Projection Matrix
 	const sc_w           = g_game_width;
 	const sc_h           = g_game_height;
 	const uloc_view      = g_gl.getUniformLocation(g_prog_main,'view');
 	const uloc_proj      = g_gl.getUniformLocation(g_prog_main,'proj');
 	const uloc_light_dir = g_gl.getUniformLocation(g_prog_main,'light_dir');
 	
-	//ビュー変換行列を準備
+	// Prepare View Transformation Matrix
 	let vFrom    = new VectorMan3(0.0,0.0,200.0);
 	let vTo      = new VectorMan3(0.0,0.0,0.0);
 	let vUp      = new VectorMan3(0.0,1.0,0.0);
@@ -274,33 +274,33 @@ function setup_view_projection()
 	mtx_view.view(vFrom,vTo,vUp);
 	g_gl.uniformMatrix4fv(uloc_view,false,mtx_view.m);
 
-	//射影変換行列を準備
+	// Prepare Projection Transformation Matrix
 	let mtx_projection = new MatrixMan4();
 	mtx_projection.projectionOpenGL(10,1000,rad(60),sc_w/sc_h);
 	g_gl.uniformMatrix4fv(uloc_proj,false,mtx_projection.m);
 	
-	//光源の情報を登録
+	// Register light source info
 	let light_dir = new VectorMan3(0,0,10.0);
 	light_dir.normalize();
 	g_gl.uniform3fv(uloc_light_dir,light_dir.exportSingleArray());
 	
-	//ViewPortを設定
+	// Set ViewPort
     g_gl.viewport(0,0,sc_w,sc_h);
 	
 }
 
 function create_cube(xscale,yscale,zscale)
 {
-	//立方体の頂点と法線リストを生成
+	// Generate vertex and normal list of cube
 	const u = 0.5;
 	let vertex = 
 	[
-		-u, u, u, -u,-u, u,  u, u, u,  u, u, u, -u,-u, u,  u,-u, u,		//正面
-		 u, u,-u,  u,-u,-u, -u, u,-u, -u, u,-u,  u,-u,-u, -u,-u,-u,		//背面
-		-u, u,-u, -u,-u,-u, -u, u, u, -u, u, u, -u,-u,-u, -u,-u, u,		//左側面
-		 u, u, u,  u,-u, u,  u, u,-u,  u, u,-u,  u,-u, u,  u,-u,-u,		//右側面
-		-u, u,-u, -u, u, u,  u, u,-u,  u, u,-u, -u, u, u,  u, u, u,		//天面
-		-u,-u, u, -u,-u,-u,  u,-u, u,  u,-u, u, -u,-u,-u,  u,-u,-u		//底面
+		-u, u, u, -u,-u, u,  u, u, u,  u, u, u, -u,-u, u,  u,-u, u,		//Front
+		 u, u,-u,  u,-u,-u, -u, u,-u, -u, u,-u,  u,-u,-u, -u,-u,-u,		//Back Face
+		-u, u,-u, -u,-u,-u, -u, u, u, -u, u, u, -u,-u,-u, -u,-u, u,		//Left side
+		 u, u, u,  u,-u, u,  u, u,-u,  u, u,-u,  u,-u, u,  u,-u,-u,		//Right Side
+		-u, u,-u, -u, u, u,  u, u,-u,  u, u,-u, -u, u, u,  u, u, u,		//Top
+		-u,-u, u, -u,-u,-u,  u,-u, u,  u,-u, u, -u,-u,-u,  u,-u,-u		//Bottom
 	];
 	for(let i = 0;i < vertex.length;i+=3)
 	{
@@ -311,12 +311,12 @@ function create_cube(xscale,yscale,zscale)
 	
 	let normal = 
 	[
-		 0, 0, 1,  0, 0, 1,  0, 0, 1,  0, 0, 1,  0, 0, 1,  0, 0, 1,		//正面
-		 0, 0,-1,  0, 0,-1,  0, 0,-1,  0, 0,-1,  0, 0,-1,  0, 0,-1,  	//背面
-		-1, 0, 0, -1, 0, 0, -1, 0, 0, -1, 0, 0, -1, 0, 0, -1, 0, 0,  	//左側面
-		 1, 0, 0,  1, 0, 0,  1, 0, 0,  1, 0, 0,  1, 0, 0,  1, 0, 0, 	//右側面
-		 0, 1, 0,  0, 1, 0,  0, 1, 0,  0, 1, 0,  0, 1, 0,  0, 1, 0,		//天面
-		 0,-1, 0,  0,-1, 0,  0,-1, 0,  0,-1, 0,  0,-1, 0,  0,-1, 0  	//底面
+		 0, 0, 1,  0, 0, 1,  0, 0, 1,  0, 0, 1,  0, 0, 1,  0, 0, 1,		//Front
+		 0, 0,-1,  0, 0,-1,  0, 0,-1,  0, 0,-1,  0, 0,-1,  0, 0,-1,  	//Back
+		-1, 0, 0, -1, 0, 0, -1, 0, 0, -1, 0, 0, -1, 0, 0, -1, 0, 0,  	//Left side
+		 1, 0, 0,  1, 0, 0,  1, 0, 0,  1, 0, 0,  1, 0, 0,  1, 0, 0, 	//Right Side
+		 0, 1, 0,  0, 1, 0,  0, 1, 0,  0, 1, 0,  0, 1, 0,  0, 1, 0,		//Top
+		 0,-1, 0,  0,-1, 0,  0,-1, 0,  0,-1, 0,  0,-1, 0,  0,-1, 0  	//Bottom
 	];
 	
 	return { vertex,normal };
@@ -324,14 +324,14 @@ function create_cube(xscale,yscale,zscale)
 
 function setup_obj()
 {
-	//オブジェクトの準備
+	// Preparation of object
 	
-	//Cubeオブジェクトの頂点と法線リストを生成
+	// Generate vertex and normal list of Cube object
 	let obj = create_cube(1,1,1);
 	
 	const inst_num = CUBE_NUM;
 	
-	//バッファオブジェクトとデータを準備しておく
+	// Prepare buffer object and data
 	g_vbo_main.vtx_pos_buff    = g_gl.createBuffer();
 	g_vbo_main.vtx_pos_data    = new Float32Array(obj.vertex);
 	g_vbo_main.vtx_normal_buff = g_gl.createBuffer();
@@ -342,7 +342,7 @@ function setup_obj()
 	g_modelbuff = new Float32Array(16 * inst_num);
 	g_colorbuff = new Float32Array(3 * inst_num);
 
-	//バッファオブジェクトを関連付ける
+	// Associate buffer object
 	const aloc_vtx_pos    = g_gl.getAttribLocation(g_prog_main,'vtx_pos');
 	const aloc_vtx_normal = g_gl.getAttribLocation(g_prog_main,'vtx_normal');
 	const aloc_obj_model  = g_gl.getAttribLocation(g_prog_main,'obj_model');
@@ -365,7 +365,7 @@ function setup_obj()
 	g_gl.bufferData(g_gl.ARRAY_BUFFER,g_modelbuff,g_gl.DYNAMIC_DRAW);
 	for(let i = 0;i < 4;++i)
 	{
-		//mat4 に関連付けるには4回に分ける
+		// Divide into 4 times to associate with mat4
 		g_gl.enableVertexAttribArray(aloc_obj_model+i);
 		g_gl.vertexAttribDivisor(aloc_obj_model+i,1);
 		g_gl.vertexAttribPointer(aloc_obj_model+i,4,g_gl.FLOAT,false,64,16*i);
@@ -382,7 +382,7 @@ function setup_obj()
 
 function setup_bloom()
 {
-	//ブルーム処理用の準備
+	// Preparation for Bloom Processing
 	const sc_w = g_game_width;
 	const sc_h = g_game_height;
 	
@@ -411,32 +411,32 @@ function setup_bloom()
 
 function do_bloom(ctx,webgl_screen)
 {
-	//ブルーム処理を実施
+	// Execute Bloom Processing
 	
-	//レンダリング後画像にフィルタをかける
+	// Apply filter to image after rendering
 	const sc_w = g_game_width;
 	const sc_h = g_game_height;
 	
 	//
-	// 簡易的なブルーム処理をやっています。
+	// Doing simple bloom processing.
 	//
-	// 高輝度部分だけ抜き出しではなく、全体が光って見えちゃうので、
-	// 本来のブルーム処理とはちょっと違うと思いますが、とりあえず
-	// 手軽に光らせたい場合には楽かも(*´ω｀*)
+	// Because it's not extracting only high luminance parts, but whole thing looks glowing,
+	// I think it's a bit different from original bloom processing, but anyway
+	// Might be easy if you want to make it glow easily (*´ω｀*)
 	//
 	
-	//複数段階の縦横2分の1ずつ解像度を下げたオフスクリーンキャンバスに
-	//CanvasのBlurフィルタをかけて、拡大して加算合成します
+	// To off-screen canvas with resolution lowered by half vertically and horizontally in multiple stages
+	// Apply Canvas Blur filter, enlarge and additive blend
 	const offsc_num = g_bloom_offscs.length;
 	let blur_w = [ 2,12,26 ];
 	for(let idx = 0;idx < offsc_num;++idx)
 	{
-		//画面に表示されているキャンバスから現在の状態を取得
+		// Get current state from canvas displayed on screen
 		let offsc = g_bloom_offscs[idx];
 		offsc.ctx.clearRect(0,0,offsc.cv_w,offsc.cv_h);
 		offsc.ctx.drawImage(webgl_screen,0,0,sc_w,sc_h,0,0,offsc.cv_w,offsc.cv_h);
 
-		//縮小された絵にフィルタをかけながら画面に反映(加算合成)
+		// Reflect on screen (additive blending) while applying filter to reduced image
 		ctx.save();
 		ctx.globalAlpha = 1.0;
 		ctx.globalCompositeOperation = 'lighter';
@@ -448,27 +448,27 @@ function do_bloom(ctx,webgl_screen)
 
 function setup()
 {
-	//準備
+	// Preparation
 	
-	//画面調整
+	// Screen Adjustment
 	adjust_screen();
 	
-	//WebGLの準備
+	// WebGL Preparation
 	g_gl = g_webgl_screen.getContext('webgl2');
 	
-	//シェーダの準備
+	// Preparation of shader
 	setup_shader();
 	
-	//カメラと射影行列の準備
+	// Preparation of Camera and Projection Matrix
 	setup_view_projection()
 	
-	//オブジェクトの準備
+	// Preparation of object
 	setup_obj();
 	
-	//ブルーム処理の準備
+	// Preparation for Bloom Processing
 	setup_bloom();
 
-	//最初の値を決める
+	// Determine initial value
 	g_next_S = SL.clamp(rnd(S_MAX+1),S_MIN,S_MAX);
 	g_next_D = SL.clamp(rnd(D_MAX+1),D_MIN,D_MAX);
 	g_next_r = SL.clamp(rnd(r_MAX+1),r_MIN,r_MAX);
@@ -481,7 +481,7 @@ function setup()
 function reset()
 {
 
-	//次の目標値を決める
+	// Determine next target value
 	
 	g_start_S = g_next_S;
 	g_start_D = g_next_D;
@@ -504,19 +504,19 @@ function reset()
 function draw_fps()
 {
 	
-	//FPS計測
+	// FPS Measurement
 	
-	//現在時刻を取得
+	// Get current time
 	let now_time = Date.now();
 	
 	if((now_time - g_last_fps_time) >= 1000)
 	{
-		//FPS履歴に追加
+		// Add to FPS history
 		g_fps_list.push(g_fps_count);
 		if(g_fps_list.length > 10)
 		{	
-			//先頭を削除して過去n回分までの
-			//FPSの平均とします(移動平均)
+			// Delete first and keep up to past n times
+			// Use average of FPS (moving average)
 			g_fps_list.shift();
 		}
 		let fps_ave = 0;
@@ -524,7 +524,7 @@ function draw_fps()
 		{	fps_ave += g_fps_list[i];	}
 		fps_ave /= g_fps_list.length;
 		
-		//FPS表示
+		// FPS Display
 		let fps_div = document.getElementById("fps");
 		let fps     = (fps_ave*(1000/(now_time - g_last_fps_time)));
 		fps_div.innerText = "FPS:"+fps;
@@ -539,12 +539,12 @@ function draw_fps()
 
 function toggle_fps_visible()
 {
-	//FPSの表示をON/OFFします
+	// Toggle FPS display ON/OFF
 	
-	//表示フラグを反転させる
+	// Invert display flag
 	g_fps_visible = !g_fps_visible;
 	
-	//表示フラグに合わせてvisible制御
+	// Control visible based on display flag
 	let fps_div  = document.getElementById("fps");
 	fps_div.style.display = g_fps_visible ? "block" : "none";
 	
@@ -552,19 +552,19 @@ function toggle_fps_visible()
 
 function draw()
 {
-	//描画コア
+	// Drawing Core
 	
-	//開始時刻保存
+	// Save start time
 	if(g_start_time  == 0)
 	{
 		g_start_time = g_time;
 		g_next_time  = g_time + MORPH_TIME;
 	}
 	
-	//毎ターンの画面クリア
+	// Screen clear for every turn
 	g_gl.clear(g_gl.COLOR_BUFFER_BIT | g_gl.DEPTH_BUFFER_BIT);
 
-	//オブジェクトを動かす
+	// Move object
 	let mtx_scale   = new MatrixMan4();
 	let mtx_nscale  = new MatrixMan4();
 	let mtx_rotateX = new MatrixMan4();
@@ -577,18 +577,18 @@ function draw()
 	if(time > 1.0){ time = 1.0; }
 	const e = Ease.easeInExpo(time**5);
 		
-	//オブジェクトのサイズを調整
+	// Adjust object size
 	const S = g_start_S + e * (g_next_S - g_start_S);
 	const D = g_start_D + e * (g_next_D - g_start_D);
 	mtx_scale.scale(S,S,S);
 	
-	//回転行列作成
+	// Create Rotation Matrix
 	const angle = g_time * ANGLE_PER_TIME;
 	mtx_rotateX.rotateX(rad(angle));
 	mtx_rotateY.rotateY(rad(angle));
 	mtx_rotateZ.rotateZ(rad(angle*3));
 	
-	//たくさんCubeを並べる
+	// Arrange many Cubes
 	const r     = g_start_r + e * (g_next_r - g_start_r);
 	const add_a = g_start_a + e * (g_next_a - g_start_a);
 	const add_b = g_start_b + e * (g_next_b - g_start_b);
@@ -598,15 +598,15 @@ function draw()
 	let idx     = 0;
 	for(let i = 0;i < CUBE_NUM;++i)
 	{
-		//モデル変換行列の初期化
+		// Initialize model transformation matrix
 		mtx_model.initialize();
 		
-		//ノイズによる乱れを付加
+		// Add disturbance by noise
 		const rr = (g_nr == 0) ? r   : (r * (1.0 - (g_pn.perlin(a,b,0) - 0.5) / 2));
 		const ns = (g_ns == 0) ? 1.0 : (1.0 + (g_pn.perlin(a,b,0) - 0.5) * 10.0);
 		mtx_nscale.scale(ns,ns,ns);
 		
-		//移動行列作成
+		// Create Translation Matrix
 		const x = rr * Math.cos(a) * Math.sin(b);
 		const y = rr * Math.sin(a) * Math.sin(b);
 		const z = rr * Math.cos(b);
@@ -615,14 +615,14 @@ function draw()
 		a += add_a;
 		b  = (b + add_b) % Math.PI;
 		
-		//拡大と移動と回転
+		// Scale, Translation, and Rotation
 		mtx_model.mul(mtx_scale);
 		mtx_model.mul(mtx_nscale);
 		mtx_model.mul(mtx_pos);
 		mtx_model.mul(mtx_rotateX);
 		mtx_model.mul(mtx_rotateZ);
 		
-		//モデル変換行列のバッファに格納
+		// Store in buffer of model transformation matrix
 		const mtx_num   = mtx_model.m.length;
 		const model_pos = mtx_num * idx;
 		for(let m = 0;m < mtx_num;++m)
@@ -630,11 +630,11 @@ function draw()
 			g_modelbuff[model_pos+m] = mtx_model.m[m];
 		}
 		
-		//色を決める
+		// Determine color
 		c = (g_c == 0)? c : ((a + b) / TAU * 360);
 		let col = hsl2rgb(Math.floor(c),0.9,0.55);
 		
-		//モデル色のバッファに格納
+		// Store in buffer of model color
 		const col_pos = 3 * idx;
 		g_colorbuff[col_pos+0] = col.r;
 		g_colorbuff[col_pos+1] = col.g;
@@ -647,24 +647,24 @@ function draw()
 	g_gl.bindBuffer(g_gl.ARRAY_BUFFER,g_vbo_main.obj_color_buff);
 	g_gl.bufferSubData(g_gl.ARRAY_BUFFER,0,g_colorbuff);
 	
-	//インスタンスを描画
+	// Draw instance
 	g_gl.drawArraysInstanced(g_gl.TRIANGLES,0,36,CUBE_NUM);
 	
 	g_gl.flush();
 	
 	
-	//WebGL用のcanvasから表示用の2Dcanvasに転送
+	// Transfer from WebGL canvas to display 2D canvas
 	const screen = document.getElementById("game-screen");
 	const ctx    = screen.getContext("2d");
 	ctx.drawImage(g_webgl_screen,0,0);
 	
-	//ブルーム処理
+	// Bloom Processing
 	do_bloom(ctx,g_webgl_screen);
 	
-	//変形終了時刻チェック
+	// Deformation end time check
 	if(g_time >= g_next_time)
 	{
-		//次の区切り時刻を決めてリセット
+		// Determine next break time and reset
 		g_start_time = g_time;
 		g_next_time  = g_start_time + MORPH_TIME;
 		reset();
@@ -675,9 +675,9 @@ function draw()
 function render()
 {
 	
-	//毎ターンの描画処理
+	// Drawing processing for every turn
 	
-	//時間計算
+	// Time Calculation
 	const last_time = g_time;
 	g_time = (new Date).getTime();
 	if(last_time == 0)
@@ -685,13 +685,13 @@ function render()
 	else
 	{	g_dtime = g_time - last_time;	}
 	
-	//描画コア
+	// Drawing Core
 	draw();
 	
-	//FPS描画
+	// Draw FPS
 	draw_fps();
 	
-	//次の描画呼び出しを登録
+	// Register next drawing call
 	window.requestAnimationFrame(render);
 
 }

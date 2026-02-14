@@ -1,0 +1,802 @@
+[
+    {
+        "original": "2,3,6,6,3,7,\t//右面",
+        "translated": "2,3,6,6,3,7,\t//Right Face"
+    },
+    {
+        "original": "2,6,3, 6,7,3\t//右面(裏)",
+        "translated": "2,6,3, 6,7,3\t//Right Face (Back)"
+    },
+    {
+        "original": "2,9,5,5,9,7,\t//底面",
+        "translated": "2,9,5,5,9,7,\t//Bottom Face"
+    },
+    {
+        "original": "2では、万華鏡キラキラでも使った、弱めの簡易Bloomを適用しています。",
+        "translated": "In 2, I'm applying a weak simple Bloom, which I also used in Kaleidoscope Kirakira."
+    },
+    {
+        "original": "3,10,6,6,10,7,\t//左面(後)",
+        "translated": "3,10,6,6,10,7,\t//Left Face (Back)"
+    },
+    {
+        "original": "3,2,7, 2,6,7\t//右面(裏)",
+        "translated": "3,2,7, 2,6,7\t//Right Face (Back)"
+    },
+    {
+        "original": "3,7,2, 2,7,6,\t//右面(表)",
+        "translated": "3,7,2, 2,7,6,\t//Right Face (Front)"
+    },
+    {
+        "original": "4,0,5, 0,1,5,\t//左面(裏)",
+        "translated": "4,0,5, 0,1,5,\t//Left Face (Back)"
+    },
+    {
+        "original": "4,0,6, 6,0,2,\t//上面(表)",
+        "translated": "4,0,6, 6,0,2,\t//Top Face (Front)"
+    },
+    {
+        "original": "4,0,6,6,0,2,\t//上面",
+        "translated": "4,0,6,6,0,2,\t//Top Face"
+    },
+    {
+        "original": "4,5,0, 0,5,1,\t//左面(表)",
+        "translated": "4,5,0, 0,5,1,\t//Left Face (Front)"
+    },
+    {
+        "original": "4,5,0,0,5,1,\t//左面",
+        "translated": "4,5,0,0,5,1,\t//Left Face"
+    },
+    {
+        "original": "4,5,3,3,5,10,\t//左面(前)",
+        "translated": "4,5,3,3,5,10,\t//Left Face (Front)"
+    },
+    {
+        "original": "4,6,0, 6,2,0,\t//上面(裏)",
+        "translated": "4,6,0, 6,2,0,\t//Top Face (Back)"
+    },
+    {
+        "original": "5,1,6, 6,1,2,\t//下面(表)",
+        "translated": "5,1,6, 6,1,2,\t//Bottom Face (Front)"
+    },
+    {
+        "original": "5,1,7, 7,1,3,\t//下面(裏)",
+        "translated": "5,1,7, 7,1,3,\t//Bottom Face (Back)"
+    },
+    {
+        "original": "5,6,1, 6,2,1,\t//下面(裏)",
+        "translated": "5,6,1, 6,2,1,\t//Bottom Face (Back)"
+    },
+    {
+        "original": "5,7,1, 7,3,1,\t//下面(表)",
+        "translated": "5,7,1, 7,3,1,\t//Bottom Face (Front)"
+    },
+    {
+        "original": "6, 7, 8, 9,10,11,\t//右前面",
+        "translated": "6, 7, 8, 9,10,11,\t//Front Right"
+    },
+    {
+        "original": "6,2,4, 4,2,0,\t//上面(裏)",
+        "translated": "6,2,4, 4,2,0,\t//Top Face (Back)"
+    },
+    {
+        "original": "6,7,2, 2,7,3\t//右面(裏)",
+        "translated": "6,7,2, 2,7,3\t//Right Face (Back)"
+    },
+    {
+        "original": "6,7,4,4,7,5,\t//背面(向こう側が表になる)",
+        "translated": "6,7,4,4,7,5,\t//Back face (far side becomes front)"
+    },
+    {
+        "original": "6,7,8,8,7,9,\t//背面(向こう側が表になる)",
+        "translated": "6,7,8,8,7,9,\t//Back face (far side becomes front)"
+    },
+    {
+        "original": "7,3,5, 5,3,1,\t//下面(表)",
+        "translated": "7,3,5, 5,3,1,\t//Bottom Face (Front)"
+    },
+    {
+        "original": "8,0,6,6,0,3,\t//天面",
+        "translated": "8,0,6,6,0,3,\t//Top Face"
+    },
+    {
+        "original": "8,9,0,0,9,11,\t//右面(後)",
+        "translated": "8,9,0,0,9,11,\t//Right Face (Back)"
+    },
+    {
+        "original": "800x80はこちらのサイトでなんか催されてる、800x80のGIFでジェネラティブアート",
+        "translated": "800x80 is generative art with 800x80 GIF being held on this site"
+    },
+    {
+        "original": "<!-- WebGLのシェーダ定義 -->",
+        "translated": "<!-- WebGL Shader Definition -->"
+    },
+    {
+        "original": "<!-- 自前ライブラリ群 -->",
+        "translated": "<!-- Self-made Libraries -->"
+    },
+    {
+        "original": "<option value=\"i\">反転</option>",
+        "translated": "<option value=\"i\">Invert</option>"
+    },
+    {
+        "original": "<option value=\"n\">ノーマル</option>",
+        "translated": "<option value=\"n\">Normal</option>"
+    },
+    {
+        "original": "<span id=\"title\">ウッドテクスチャ</span>",
+        "translated": "<span id=\"title\">Wood Texture</span>"
+    },
+    {
+        "original": "<span id=\"title\">スプラッターテクスチャ(失敗)</span>",
+        "translated": "<span id=\"title\">Splatter Texture (Failed)</span>"
+    },
+    {
+        "original": "<span id=\"title\">セルラーノイズ</span>",
+        "translated": "<span id=\"title\">Cellular Noise</span>"
+    },
+    {
+        "original": "<span id=\"title\">タービュランステクスチャ(失敗)</span>",
+        "translated": "<span id=\"title\">Turbulence Texture (Failed)</span>"
+    },
+    {
+        "original": "<span id=\"title\">リッジテクスチャ(失敗)</span>",
+        "translated": "<span id=\"title\">Ridge Texture (Failed)</span>"
+    },
+    {
+        "original": "<title>パパのAA Train</title>",
+        "translated": "<title>Papa's AA Train</title>"
+    },
+    {
+        "original": "<title>パパのAlphaLineCube</title>",
+        "translated": "<title>Papa's AlphaLineCube</title>"
+    },
+    {
+        "original": "<title>パパのAlphaWave2</title>",
+        "translated": "<title>Papa's AlphaWave2</title>"
+    },
+    {
+        "original": "<title>パパのAlphaWave2v2</title>",
+        "translated": "<title>Papa's AlphaWave2v2</title>"
+    },
+    {
+        "original": "<title>パパのAlphaWave2v3</title>",
+        "translated": "<title>Papa's AlphaWave2v3</title>"
+    },
+    {
+        "original": "<title>パパのAlphaWave2v4</title>",
+        "translated": "<title>Papa's AlphaWave2v4</title>"
+    },
+    {
+        "original": "<title>パパのAlphaWave2v5</title>",
+        "translated": "<title>Papa's AlphaWave2v5</title>"
+    },
+    {
+        "original": "<title>パパのGumo2 ver.Kawaii</title>",
+        "translated": "<title>Papa's Gumo2 ver.Kawaii</title>"
+    },
+    {
+        "original": "<title>パパのGumo2 ver.rect</title>",
+        "translated": "<title>Papa's Gumo2 ver.rect</title>"
+    },
+    {
+        "original": "<title>パパのGumo2 ver.triangle</title>",
+        "translated": "<title>Papa's Gumo2 ver.triangle</title>"
+    },
+    {
+        "original": "<title>パパのGumo2</title>",
+        "translated": "<title>Papa's Gumo2</title>"
+    },
+    {
+        "original": "<title>パパのL-System練習2</title>",
+        "translated": "<title>Papa's L-System Practice 2</title>"
+    },
+    {
+        "original": "<title>パパのぐるぐる正方形</title>",
+        "translated": "<title>Papa's Spinning Square</title>"
+    },
+    {
+        "original": "<title>パパのぐるぐる正方形２</title>",
+        "translated": "<title>Papa's Spinning Square 2</title>"
+    },
+    {
+        "original": "<title>パパのちっちゃい迷路</title>",
+        "translated": "<title>Papa's Tiny Maze</title>"
+    },
+    {
+        "original": "<title>パパのねじれトーラス</title>",
+        "translated": "<title>Papa's Twisted Torus</title>"
+    },
+    {
+        "original": "<title>パパのねじれトーラス２</title>",
+        "translated": "<title>Papa's Twisted Torus 2</title>"
+    },
+    {
+        "original": "<title>パパのねじれトーラス３</title>",
+        "translated": "<title>Papa's Twisted Torus 3</title>"
+    },
+    {
+        "original": "<title>パパののびるCube2</title>",
+        "translated": "<title>Papa's Stretching Cube 2</title>"
+    },
+    {
+        "original": "<title>パパののびるCube3</title>",
+        "translated": "<title>Papa's Stretching Cube 3</title>"
+    },
+    {
+        "original": "<title>パパののびるCube4</title>",
+        "translated": "<title>Papa's Stretching Cube 4</title>"
+    },
+    {
+        "original": "<title>パパののびるCube</title>",
+        "translated": "<title>Papa's Stretching Cube</title>"
+    },
+    {
+        "original": "<title>パパのキラキラの壺</title>",
+        "translated": "<title>Papa's Sparkling Jar</title>"
+    },
+    {
+        "original": "<title>パパのキラキラフラワー</title>",
+        "translated": "<title>Papa's Sparkling Flower</title>"
+    },
+    {
+        "original": "<title>パパのキラキラフラワーver.800x80</title>",
+        "translated": "<title>Papa's Sparkling Flower ver.800x80</title>"
+    },
+    {
+        "original": "<title>パパのキラキラロープ</title>",
+        "translated": "<title>Papa's Sparkling Rope</title>"
+    },
+    {
+        "original": "<title>パパのキラキラワームホール</title>",
+        "translated": "<title>Papa's Sparkling Wormhole</title>"
+    },
+    {
+        "original": "<title>パパのキラキラ反射文字</title>",
+        "translated": "<title>Papa's Sparkling Reflective Text</title>"
+    },
+    {
+        "original": "<title>パパのキラキラ回転水晶</title>",
+        "translated": "<title>Papa's Sparkling Rotating Crystal</title>"
+    },
+    {
+        "original": "<title>パパのキラキラ回転水晶v2.5</title>",
+        "translated": "<title>Papa's Sparkling Rotating Crystal v2.5</title>"
+    },
+    {
+        "original": "<title>パパのキラキラ回転水晶v2</title>",
+        "translated": "<title>Papa's Sparkling Rotating Crystal v2</title>"
+    },
+    {
+        "original": "<title>パパのキラキラ回転水晶v3</title>",
+        "translated": "<title>Papa's Sparkling Rotating Crystal v3</title>"
+    },
+    {
+        "original": "<title>パパのキラキラ回転球体</title>",
+        "translated": "<title>Papa's Sparkling Rotating Sphere</title>"
+    },
+    {
+        "original": "<title>パパのキラキラ回転球体v2</title>",
+        "translated": "<title>Papa's Sparkling Rotating Sphere v2</title>"
+    },
+    {
+        "original": "<title>パパのキラキラ宝石箱</title>",
+        "translated": "<title>Papa's Sparkling Jewel Box</title>"
+    },
+    {
+        "original": "<title>パパのキラキラ宝石箱v2</title>",
+        "translated": "<title>Papa's Sparkling Jewel Box v2</title>"
+    },
+    {
+        "original": "<title>パパのキラキラ渦巻き銀河</title>",
+        "translated": "<title>Papa's Sparkling Spiral Galaxy</title>"
+    },
+    {
+        "original": "<title>パパのキラキラ花火</title>",
+        "translated": "<title>Papa's Sparkling Fireworks</title>"
+    },
+    {
+        "original": "<title>パパのキラキラ花火v1.5</title>",
+        "translated": "<title>Papa's Sparkling Fireworks v1.5</title>"
+    },
+    {
+        "original": "<title>パパのジュリア集合(WebGL)</title>",
+        "translated": "<title>Papa's Julia Set (WebGL)</title>"
+    },
+    {
+        "original": "<title>パパのジュリア集合R(WebGL)</title>",
+        "translated": "<title>Papa's Julia Set R (WebGL)</title>"
+    },
+    {
+        "original": "<title>パパのストレンジアトラクター</title>",
+        "translated": "<title>Papa's Strange Attractor</title>"
+    },
+    {
+        "original": "<title>パパのスリットアニメ</title>",
+        "translated": "<title>Papa's Slit Animation</title>"
+    },
+    {
+        "original": "<title>パパのトーラス・トンネル2</title>",
+        "translated": "<title>Papa's Torus Tunnel 2</title>"
+    },
+    {
+        "original": "<title>パパのトーラス・トンネル3</title>",
+        "translated": "<title>Papa's Torus Tunnel 3</title>"
+    },
+    {
+        "original": "<title>パパのトーラス・トンネル</title>",
+        "translated": "<title>Papa's Torus Tunnel</title>"
+    },
+    {
+        "original": "<title>パパのノイズ練習2</title>",
+        "translated": "<title>Papa's Noise Practice 2</title>"
+    },
+    {
+        "original": "<title>パパのノイズ練習3</title>",
+        "translated": "<title>Papa's Noise Practice 3</title>"
+    },
+    {
+        "original": "<title>パパのノイズ練習4</title>",
+        "translated": "<title>Papa's Noise Practice 4</title>"
+    },
+    {
+        "original": "<title>パパのノイズ練習5</title>",
+        "translated": "<title>Papa's Noise Practice 5</title>"
+    },
+    {
+        "original": "<title>パパのノイズ練習6</title>",
+        "translated": "<title>Papa's Noise Practice 6</title>"
+    },
+    {
+        "original": "<title>パパのノイズ練習7</title>",
+        "translated": "<title>Papa's Noise Practice 7</title>"
+    },
+    {
+        "original": "<title>パパのノイズ練習</title>",
+        "translated": "<title>Papa's Noise Practice</title>"
+    },
+    {
+        "original": "<title>パパのバラ曲線2</title>",
+        "translated": "<title>Papa's Rose Curve 2</title>"
+    },
+    {
+        "original": "<title>パパのバラ曲線3</title>",
+        "translated": "<title>Papa's Rose Curve 3</title>"
+    },
+    {
+        "original": "<title>パパのバラ曲線4</title>",
+        "translated": "<title>Papa's Rose Curve 4</title>"
+    },
+    {
+        "original": "<title>パパのバラ曲線</title>",
+        "translated": "<title>Papa's Rose Curve</title>"
+    },
+    {
+        "original": "<title>パパのブルームブロック</title>",
+        "translated": "<title>Papa's Bloom Block</title>"
+    },
+    {
+        "original": "<title>パパのブロックシャワー</title>",
+        "translated": "<title>Papa's Block Shower</title>"
+    },
+    {
+        "original": "<title>パパのブロックシャワーv1.5</title>",
+        "translated": "<title>Papa's Block Shower v1.5</title>"
+    },
+    {
+        "original": "<title>パパのマンデルブロ集合(実験)</title>",
+        "translated": "<title>Papa's Mandelbrot Set (Experiment)</title>"
+    },
+    {
+        "original": "<title>パパのマンデルブロ集合</title>",
+        "translated": "<title>Papa's Mandelbrot Set</title>"
+    },
+    {
+        "original": "<title>パパのマンデルブロ集合R(WebGL)</title>",
+        "translated": "<title>Papa's Mandelbrot Set R (WebGL)</title>"
+    },
+    {
+        "original": "<title>パパのマンデルブロ集合R2(WebGL)</title>",
+        "translated": "<title>Papa's Mandelbrot Set R2 (WebGL)</title>"
+    },
+    {
+        "original": "<title>パパのマンデルブロ集合R3(WebGL)</title>",
+        "translated": "<title>Papa's Mandelbrot Set R3 (WebGL)</title>"
+    },
+    {
+        "original": "<title>パパのミニチュアぶーぶー</title>",
+        "translated": "<title>Papa's Miniature Vroom Vroom</title>"
+    },
+    {
+        "original": "<title>パパのレンチキュラー</title>",
+        "translated": "<title>Papa's Lenticular</title>"
+    },
+    {
+        "original": "<title>パパのレンチキュラーR(WebGL)</title>",
+        "translated": "<title>Papa's Lenticular R (WebGL)</title>"
+    },
+    {
+        "original": "<title>パパのワイヤーフレーム</title>",
+        "translated": "<title>Papa's Wireframe</title>"
+    },
+    {
+        "original": "<title>パパのワイヤーフレームっぽいの</title>",
+        "translated": "<title>Papa's Wireframe-ish Thing</title>"
+    },
+    {
+        "original": "<title>パパの不可能図形</title>",
+        "translated": "<title>Papa's Impossible Figure</title>"
+    },
+    {
+        "original": "<title>パパの刺繍円</title>",
+        "translated": "<title>Papa's Embroidery Circle</title>"
+    },
+    {
+        "original": "<title>パパの半透明トーラストンネル2</title>",
+        "translated": "<title>Papa's Translucent Torus Tunnel 2</title>"
+    },
+    {
+        "original": "<title>パパの半透明トーラストンネル</title>",
+        "translated": "<title>Papa's Translucent Torus Tunnel</title>"
+    },
+    {
+        "original": "<title>パパの数学デッサン2</title>",
+        "translated": "<title>Papa's Math Sketch 2</title>"
+    },
+    {
+        "original": "<title>パパの数学デッサン3</title>",
+        "translated": "<title>Papa's Math Sketch 3</title>"
+    },
+    {
+        "original": "<title>パパの数学デッサン</title>",
+        "translated": "<title>Papa's Math Sketch</title>"
+    },
+    {
+        "original": "<title>パパの無限ドミノ2</title>",
+        "translated": "<title>Papa's Infinite Domino 2</title>"
+    },
+    {
+        "original": "<title>パパの無限ドミノ3</title>",
+        "translated": "<title>Papa's Infinite Domino 3</title>"
+    },
+    {
+        "original": "<title>パパの無限ドミノ4</title>",
+        "translated": "<title>Papa's Infinite Domino 4</title>"
+    },
+    {
+        "original": "<title>パパの無限ドミノ5</title>",
+        "translated": "<title>Papa's Infinite Domino 5</title>"
+    },
+    {
+        "original": "<title>パパの無限ドミノ6</title>",
+        "translated": "<title>Papa's Infinite Domino 6</title>"
+    },
+    {
+        "original": "<title>パパの無限ドミノ</title>",
+        "translated": "<title>Papa's Infinite Domino</title>"
+    },
+    {
+        "original": "<title>パパの無限ワープ</title>",
+        "translated": "<title>Papa's Infinite Warp</title>"
+    },
+    {
+        "original": "<title>パパの無限大キラキラ</title>",
+        "translated": "<title>Papa's Infinite Sparkle</title>"
+    },
+    {
+        "original": "<title>パパの無限瑪瑙</title>",
+        "translated": "<title>Papa's Infinite Agate</title>"
+    },
+    {
+        "original": "<title>パパの球体テクスチャ</title>",
+        "translated": "<title>Papa's Sphere Texture</title>"
+    },
+    {
+        "original": "<title>パパの綺麗なやつ</title>",
+        "translated": "<title>Papa's Beautiful Thing</title>"
+    },
+    {
+        "original": "<title>パパの綺麗なやつv2</title>",
+        "translated": "<title>Papa's Beautiful Thing v2</title>"
+    },
+    {
+        "original": "<title>パパの綺麗なやつver.800x80</title>",
+        "translated": "<title>Papa's Beautiful Thing ver.800x80</title>"
+    },
+    {
+        "original": "<title>パパの綺麗な重ね合わせ</title>",
+        "translated": "<title>Papa's Beautiful Superposition</title>"
+    },
+    {
+        "original": "<title>パパの練習1(円弧の華)</title>",
+        "translated": "<title>Papa's Practice 1 (Flower of Arcs)</title>"
+    },
+    {
+        "original": "<title>パパの練習2(光る砂の滝)</title>",
+        "translated": "<title>Papa's Practice 2 (Glowing Sand Waterfall)</title>"
+    },
+    {
+        "original": "<title>パパの練習4(円弧の奇跡)</title>",
+        "translated": "<title>Papa's Practice 4 (Miracle of Arcs)</title>"
+    },
+    {
+        "original": "<title>パパの練習5(FlowField v2)</title>",
+        "translated": "<title>Papa's Practice 5 (FlowField v2)</title>"
+    },
+    {
+        "original": "<title>パパの練習5(FlowField)</title>",
+        "translated": "<title>Papa's Practice 5 (FlowField)</title>"
+    },
+    {
+        "original": "<title>パパの練習7(文字でキラキラ)</title>",
+        "translated": "<title>Papa's Practice 7 (Sparkling with Text)</title>"
+    },
+    {
+        "original": "<title>パパの脳がバグるやつ</title>",
+        "translated": "<title>Papa's Mind-Bending Thing</title>"
+    },
+    {
+        "original": "<title>パパの螺旋キラキラ</title>",
+        "translated": "<title>Papa's Spiral Sparkle</title>"
+    },
+    {
+        "original": "<title>パパの謎のいきものたち ver.Walk</title>",
+        "translated": "<title>Papa's Mysterious Creatures ver.Walk</title>"
+    },
+    {
+        "original": "<title>パパの謎のいきものたち</title>",
+        "translated": "<title>Papa's Mysterious Creatures</title>"
+    },
+    {
+        "original": "<title>パパの間違った球体</title>",
+        "translated": "<title>Papa's Wrong Sphere</title>"
+    },
+    {
+        "original": "<title>パパの間違った球体R(WebGL)</title>",
+        "translated": "<title>Papa's Wrong Sphere R (WebGL)</title>"
+    },
+    {
+        "original": "<title>パパの間違った球体R2(WebGL)</title>",
+        "translated": "<title>Papa's Wrong Sphere R2 (WebGL)</title>"
+    },
+    {
+        "original": "<title>円弧の華(スクロール版)</title>",
+        "translated": "<title>Flower of Arcs (Scroll Version)</title>"
+    },
+    {
+        "original": "= DEF_VERTEX_NUM_FOR_PRIMITIVE;\t//1プリミティブあたりの頂点数(通常3=三角形ポリゴン)",
+        "translated": "= DEF_VERTEX_NUM_FOR_PRIMITIVE;\t// Number of vertices per primitive (Usually 3 = Triangle Polygon)"
+    },
+    {
+        "original": "> ※準備が整い次第、以下に各作品の公開URLを追加していきます。",
+        "translated": "> * I will add public URLs for each work below as soon as they are ready."
+    },
+    {
+        "original": "AlphaWave2では、複数の波を重ねることでド派手にいきます！(*´ω｀*)",
+        "translated": "In AlphaWave2, I'm going flashy by layering multiple waves! (*´ω｀*)"
+    },
+    {
+        "original": "AltEdu2022 のお題、",
+        "translated": "AltEdu2022 Theme,"
+    },
+    {
+        "original": "Canvasの輪郭をCSSで変更するというアイディアはセンバクさん(@senbaku)の",
+        "translated": "The idea of changing Canvas outline with CSS is from Senbaku-san (@senbaku)"
+    },
+    {
+        "original": "Copyright (c) 2020 ぼいち(@voich2014 in Twitter)",
+        "translated": "Copyright (c) 2020 Voich (@voich2014 in Twitter)"
+    },
+    {
+        "original": "Copyright (c) 2020-2021 ぼいち(@voich2014 in Twitter)",
+        "translated": "Copyright (c) 2020-2021 Voich (@voich2014 in Twitter)"
+    },
+    {
+        "original": "Copyright (c) 2020-2022 ぼいち(@voich2014 in Twitter)",
+        "translated": "Copyright (c) 2020-2022 Voich (@voich2014 in Twitter)"
+    },
+    {
+        "original": "Copyright (c) 2021 ぼいち(@voich2014 in Twitter)",
+        "translated": "Copyright (c) 2021 Voich (@voich2014 in Twitter)"
+    },
+    {
+        "original": "Copyright (c) 2021-2025 ぼいち(@voich2014 in Twitter)",
+        "translated": "Copyright (c) 2021-2025 Voich (@voich2014 in Twitter)"
+    },
+    {
+        "original": "Copyright (c) 2022 ぼいち(@voich2014 in Twitter)",
+        "translated": "Copyright (c) 2022 Voich (@voich2014 in Twitter)"
+    },
+    {
+        "original": "Copyright (c) 2023 ぼいち(@voich2014 in Twitter)",
+        "translated": "Copyright (c) 2023 Voich (@voich2014 in Twitter)"
+    },
+    {
+        "original": "Cの値が固定で、Z0の初期値が0+0i固定ではなく変化する、という違いが",
+        "translated": "The difference is that C value is fixed and Z0 initial value changes instead of being fixed at 0+0i"
+    },
+    {
+        "original": "HTML / CSS / JavaScript などのWeb技術を用いた作品を、フォルダごとにまとめています。",
+        "translated": "Works using Web technologies such as HTML / CSS / JavaScript are organized by folder."
+    },
+    {
+        "original": "JavaScriptで作ってみました。",
+        "translated": "I tried making it with JavaScript."
+    },
+    {
+        "original": "JunKiyoshiさんに圧倒的感謝を！",
+        "translated": "Overwhelming thanks to JunKiyoshi-san!"
+    },
+    {
+        "original": "Processingによる実践ガイドの「5.3.3 球を描く間違った方法」を",
+        "translated": "Based on '5.3.3 The Wrong Way to Draw a Sphere' from the Processing Practical Guide"
+    },
+    {
+        "original": "R2では拡大の計算方法を変えたり、ピクセルの見せ方を変えたり、",
+        "translated": "In R2, I changed the calculation method for scaling, changed how pixels are shown,"
+    },
+    {
+        "original": "R3ではColormindから自動取得したパレット色を使って配色を",
+        "translated": "In R3, I used palette colors automatically obtained from Colormind to color"
+    },
+    {
+        "original": "RではColormindから自動取得したパレット色を使って配色を",
+        "translated": "In R, I used palette colors automatically obtained from Colormind to color"
+    },
+    {
+        "original": "SYM（サヤマ）さん(@hyappy717)、ワークショップありがとうございました！",
+        "translated": "SYM (Sayama)-san (@hyappy717), thank you for the workshop!"
+    },
+    {
+        "original": "Yusuke Nakayaさんと写真の撮影者のみなさんに圧倒的感謝を！",
+        "translated": "Overwhelming thanks to Yusuke Nakaya-san and all the photographers!"
+    },
+    {
+        "original": "[ \"綺麗\",\"流れ\",\"光る\",\"動く\",\"満足\",\"移動\",\"輝き\",\"流動\",\"感謝\" ];",
+        "translated": "[ \"Beautiful\",\"Flow\",\"Glow\",\"Move\",\"Satisfied\",\"Movement\",\"Sparkle\",\"Flux\",\"Gratitude\" ];"
+    },
+    {
+        "original": "[ [  1, 1, 1 ],[  1, 1,-1 ]                                        ],\t//右面上",
+        "translated": "[ [  1, 1, 1 ],[  1, 1,-1 ]                                        ],\t//Top Right"
+    },
+    {
+        "original": "[ [  1, 1,-1 ],[  1,-1,-1 ],[ -1,-1,-1 ],[ -1, 1,-1 ],[  1, 1,-1 ] ],\t//背面",
+        "translated": "[ [  1, 1,-1 ],[  1,-1,-1 ],[ -1,-1,-1 ],[ -1, 1,-1 ],[  1, 1,-1 ] ],\t//Back Face"
+    },
+    {
+        "original": "[ [  1,-1, 1 ],[  1,-1,-1 ]                                        ],\t//右面下",
+        "translated": "[ [  1,-1, 1 ],[  1,-1,-1 ]                                        ],\t//Bottom Right"
+    },
+    {
+        "original": "[ [ -1, 1, 1 ],[ -1, 1,-1 ]                                        ],\t//左面上",
+        "translated": "[ [ -1, 1, 1 ],[ -1, 1,-1 ]                                        ],\t//Top Left"
+    },
+    {
+        "original": "[ [ -1, 1, 1 ],[ -1,-1, 1 ],[  1,-1, 1 ],[  1, 1, 1 ],[ -1, 1, 1 ] ],\t//正面",
+        "translated": "[ [ -1, 1, 1 ],[ -1,-1, 1 ],[  1,-1, 1 ],[  1, 1, 1 ],[ -1, 1, 1 ] ],\t//Front Face"
+    },
+    {
+        "original": "[ [ -1,-1, 1 ],[ -1,-1,-1 ]                                        ],\t//左面下",
+        "translated": "[ [ -1,-1, 1 ],[ -1,-1,-1 ]                                        ],\t//Bottom Left"
+    },
+    {
+        "original": "[CC BY-NC-SA 4.0（表示・非営利・継承）](https://creativecommons.org/licenses/by-nc-sa/4.0/)",
+        "translated": "[CC BY-NC-SA 4.0 (Attribution-NonCommercial-ShareAlike)](https://creativecommons.org/licenses/by-nc-sa/4.0/)"
+    },
+    {
+        "original": "addAngle  = (rad(ia) / ivn);\t//扇形の角度増分値",
+        "translated": "addAngle  = (rad(ia) / ivn);\t// Sector angle increment value"
+    },
+    {
+        "original": "alpha = (x1 & 0xFFFF) >> 8;\t//0～FFFFを0～FFに変換",
+        "translated": "alpha = (x1 & 0xFFFF) >> 8;\t// Convert 0-FFFF to 0-FF"
+    },
+    {
+        "original": "alpha = (y1 & 0xFFFF) >> 8;\t//0～FFFFを0～FFに変換",
+        "translated": "alpha = (y1 & 0xFFFF) >> 8;\t// Convert 0-FFFF to 0-FF"
+    },
+    {
+        "original": "ayatoさんに圧倒的感謝を！",
+        "translated": "Overwhelming thanks to ayato-san!"
+    },
+    {
+        "original": "baseVectors = [];\t//もう使わない",
+        "translated": "baseVectors = [];\t// won't use anymore"
+    },
+    {
+        "original": "case \"A\":\t//葉",
+        "translated": "case \"A\":\t// Leaf"
+    },
+    {
+        "original": "case \"C\":\t//実",
+        "translated": "case \"C\":\t// Fruit"
+    },
+    {
+        "original": "case \"F\":\t//幹",
+        "translated": "case \"F\":\t// Trunk"
+    },
+    {
+        "original": "case 0:\t\t//パターンA",
+        "translated": "case 0:\t\t// Pattern A"
+    },
+    {
+        "original": "case 0:\t//ContextのLINE描画",
+        "translated": "case 0:\t// Context LINE drawing"
+    },
+    {
+        "original": "case 0:\t//デフォルトのLINE描画",
+        "translated": "case 0:\t// Default LINE drawing"
+    },
+    {
+        "original": "case 0:\t//フラットシェーディング描画",
+        "translated": "case 0:\t// Flat Shading Drawing"
+    },
+    {
+        "original": "case 1:\t\t//パターンB",
+        "translated": "case 1:\t\t// Pattern B"
+    },
+    {
+        "original": "case 1:\t//ContextのLINE描画",
+        "translated": "case 1:\t// Context LINE drawing"
+    },
+    {
+        "original": "case 1:\t//フラットシェーディング描画",
+        "translated": "case 1:\t// Flat Shading Drawing"
+    },
+    {
+        "original": "case 1:\t//ブレゼンハムLINE描画",
+        "translated": "case 1:\t// Bresenham LINE Drawing"
+    },
+    {
+        "original": "case 1:\t//木",
+        "translated": "case 1:\t// Tree"
+    },
+    {
+        "original": "case 2:\t\t//パターンC",
+        "translated": "case 2:\t\t// Pattern C"
+    },
+    {
+        "original": "case 2:\t//ContextのLINE描画",
+        "translated": "case 2:\t// Context LINE drawing"
+    },
+    {
+        "original": "case 2:\t//ダブルステップブレゼンハムLINE描画",
+        "translated": "case 2:\t// Double Step Bresenham LINE Drawing"
+    },
+    {
+        "original": "case 2:\t//ブレゼンハムLINE描画",
+        "translated": "case 2:\t// Bresenham LINE Drawing"
+    },
+    {
+        "original": "case 2: //看板",
+        "translated": "case 2: // Billboard"
+    },
+    {
+        "original": "case 3:\t\t//パターンD",
+        "translated": "case 3:\t\t// Pattern D"
+    },
+    {
+        "original": "case 3:\t//なんちゃってアンチエイリアス付きブレゼンハムLINE描画",
+        "translated": "case 3:\t// Fake Anti-aliased Bresenham LINE Drawing"
+    },
+    {
+        "original": "case 3:\t//アンチエイリアス付きブレゼンハムLINE描画",
+        "translated": "case 3:\t// Anti-aliased Bresenham LINE Drawing"
+    },
+    {
+        "original": "case 3:\t//ダブルステップブレゼンハムLINE描画",
+        "translated": "case 3:\t// Double Step Bresenham LINE Drawing"
+    },
+    {
+        "original": "case 4:\t\t//パターンE",
+        "translated": "case 4:\t\t// Pattern E"
+    },
+    {
+        "original": "case 4:\t//アンチエイリアス付きブレゼンハムLINE描画",
+        "translated": "case 4:\t// Anti-aliased Bresenham LINE Drawing"
+    },
+    {
+        "original": "case 4:\t//フラットシェーディング描画",
+        "translated": "case 4:\t// Flat Shading Drawing"
+    }
+]
